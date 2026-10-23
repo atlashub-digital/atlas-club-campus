@@ -104,4 +104,31 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
       await page.screenshot({path:'atlas-results/campus-'+width+'.png',fullPage:true})
     }
   })
+  test('two authenticated members synchronize a real board note',async ({page,browser}) => {
+    const board = await req<any>('POST','/boards/?org_id='+org.id,admin,{name:'Atelier colaborativo Atlas',public:false})
+    await req('POST','/boards/'+board.board_uuid+'/members',admin,{user_id:learnerId,role:'editor'})
+    const denied = await fetch(API_URL+'/boards/'+board.board_uuid,{headers:{Authorization:'Bearer '+other}})
+    expect([403,404]).toContain(denied.status)
+    await page.setViewportSize({width:1440,height:960})
+    await uiLogin(page,ADMIN_EMAIL,ADMIN_PASSWORD)
+    const peerContext = await browser.newContext({baseURL:API_URL.replace('/api/v1',''),viewport:{width:1440,height:960}})
+    const peer = await peerContext.newPage()
+    try {
+      await uiLogin(peer,emailA,password)
+      const route = '/board/'+board.board_uuid
+      await Promise.all([page.goto(route),peer.goto(route)])
+      await expect(page.locator('.board-enter-toolbar')).toBeVisible({timeout:30000})
+      await expect(peer.locator('.board-enter-toolbar')).toBeVisible({timeout:30000})
+      // Native toolbar order: select, pan, draw, card, frame, note.
+      await page.locator('.board-enter-toolbar .editor-tool-btn').nth(5).click()
+      await page.mouse.click(500,350)
+      await expect(page.getByText('New note',{exact:true})).toBeVisible()
+      await expect(peer.getByText('New note',{exact:true})).toBeVisible({timeout:15000})
+      await page.getByText('New note',{exact:true}).click()
+      await page.keyboard.press('End')
+      await page.keyboard.type(' - Atlas colaboração real')
+      await expect(peer.getByText('New note - Atlas colaboração real',{exact:true})).toBeVisible({timeout:15000})
+      await peer.screenshot({path:'atlas-results/collaboration-1440.png',fullPage:true})
+    } finally { await peerContext.close() }
+  })
 })
