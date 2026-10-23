@@ -4,7 +4,7 @@ import { uiLogin } from '../core/auth'
 import { ADMIN_EMAIL, ADMIN_PASSWORD, API_URL } from '../core/instance'
 
 test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () => {
-  let admin: string, learner: string, other: string
+  let admin: string, learner: string, other: string, learnerId: number
   let org: any, course: any, restricted: any, activity: any, community: any
   const password = 'OnlyDisposableTest!234'
   const emailA = 'learner-a@atlas-campus.example.com'
@@ -20,7 +20,7 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
   test.beforeAll(async () => {
     admin = await login(ADMIN_EMAIL, ADMIN_PASSWORD)
     org = await getOrg()
-    await createStudent(admin, org.id, {email:emailA,username:'atlas_learner_a',password})
+    learnerId = await createStudent(admin, org.id, {email:emailA,username:'atlas_learner_a',password})
     await createStudent(admin, org.id, {email:emailB,username:'atlas_learner_b',password})
     learner = await login(emailA,password)
     other = await login(emailB,password)
@@ -54,6 +54,27 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
     const otherTrail = await req<any>('GET','/trail/org/'+org.id+'/trail',other)
     expect(otherTrail.runs.flatMap((item:any)=>item.steps).some((item:any)=>item.activity_id===activity.id)).toBe(false)
   })
+  test('separate course editions keep the same learner progress independent', async () => {
+    const editions = []
+    for (const name of ['Genesis — Turma A', 'Atlas Laboratório — Turma B']) {
+      const edition = await createCourse(name,false)
+      const group = await req<any>('POST','/usergroups/',admin,{name,description:'Turma piloto isolada',org_id:org.id})
+      await req('POST','/usergroups/'+group.id+'/add_resources?resource_uuids='+edition.course_uuid,admin)
+      await req('POST','/usergroups/'+group.id+'/add_users?user_ids='+learnerId,admin)
+      const chapter = await req<any>('POST','/chapters/',admin,{name:'Atelier',description:'',org_id:org.id,course_id:edition.id})
+      const lesson = await req<any>('POST','/activities/',admin,{name:'Desafio da turma',chapter_id:chapter.id,published:true,activity_type:'TYPE_DYNAMIC',activity_sub_type:'SUBTYPE_DYNAMIC_PAGE',content:{type:'doc',content:[{type:'paragraph',content:[{type:'text',text:name}]}]}})
+      editions.push({edition,lesson})
+      const denied = await fetch(API_URL+'/activities/'+lesson.activity_uuid,{headers:{Authorization:'Bearer '+other}})
+      expect([403,404]).toContain(denied.status)
+      await req('POST','/trail/add_course/'+edition.course_uuid,learner)
+    }
+    await req('POST','/trail/add_activity/'+editions[0].lesson.activity_uuid,learner)
+    const trail = await req<any>('GET','/trail/org/'+org.id+'/trail',learner)
+    const a = trail.runs.find((run:any)=>run.course_id===editions[0].edition.id)
+    const b = trail.runs.find((run:any)=>run.course_id===editions[1].edition.id)
+    expect(a.steps.some((step:any)=>step.activity_id===editions[0].lesson.id && step.complete)).toBe(true)
+    expect(b.steps.some((step:any)=>step.complete)).toBe(false)
+  })
   test('discussion persists and another learner cannot edit the author post',async () => {
     const post = await req<any>('POST','/communities/'+community.community_uuid+'/discussions',learner,{title:'Meu primeiro projeto',content:'Quero transformar uma ideia em um projeto real.'})
     const readback = await req<any>('GET','/discussions/'+post.discussion_uuid,learner)
@@ -68,6 +89,7 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
     const editor = page.locator('.tiptap[contenteditable="true"]').first()
     await expect(editor).toBeVisible()
     await editor.fill('Evidência Atlas: conteúdo editado e persistido pela interface.')
+    await editor.press('ControlOrMeta+s')
     await expect.poll(async () => JSON.stringify((await req<any>('GET','/activities/'+activity.activity_uuid,admin)).content),{timeout:30000}).toContain('Evidência Atlas')
     await page.screenshot({path:'atlas-results/editor-1440.png',fullPage:true})
   })
