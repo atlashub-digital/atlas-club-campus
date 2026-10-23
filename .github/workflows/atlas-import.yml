@@ -44,4 +44,4 @@ jobs:
           done
           git commit -m "chore: import LearnHouse 1.4.2 with complete upstream history"
           git push origin HEAD:refs/heads/feat/clubos-bootstrap
-          git push origin refs/tags/1.4.2
+          # Original tag is recorded in upstream.lock.json; mirroring needs workflows permission.

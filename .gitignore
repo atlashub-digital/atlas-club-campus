@@ -72,3 +72,8 @@ apps/web/ee
 # Playwright MCP session artifacts
 .playwright-mcp/
 .demo-secrets
+
+# Atlas generated secrets, DB dumps and runtime evidence
+.atlas/
+apps/e2e/atlas-results/
+apps/e2e/atlas-report/
