@@ -26,6 +26,8 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
     other = await login(emailB,password)
     course = await createCourse('Comece por aqui — pessoas e IA',true)
     restricted = await createCourse('Laboratório reservado — instrutores',false)
+    const group = await req<any>('POST','/usergroups/',admin,{name:'Instrutores',description:'Acesso reservado',org_id:org.id})
+    await req('POST','/usergroups/'+group.id+'/add_resources?resource_uuids='+restricted.course_uuid,admin)
     const chapter = await req<any>('POST','/chapters/',admin,{name:'Primeiros passos',description:'',org_id:org.id,course_id:course.id})
     activity = await req<any>('POST','/activities/',admin,{
       name:'Uma ideia, um primeiro passo', chapter_id:chapter.id, published:true,
@@ -60,6 +62,7 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
     expect([403,404]).toContain(denied.status)
   })
   test('admin opens actual editor, changes content, and saves to PostgreSQL',async ({page}) => {
+    await page.setViewportSize({width:1440,height:960})
     await uiLogin(page,ADMIN_EMAIL,ADMIN_PASSWORD)
     await page.goto('/course/'+course.course_uuid.replace('course_','')+'/activity/'+activity.activity_uuid.replace('activity_','')+'/edit')
     const editor = page.locator('.tiptap[contenteditable="true"]').first()

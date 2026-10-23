@@ -2,7 +2,7 @@
 import React from 'react'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { useCourses } from '@/hooks/queries/useCourses'
-import LandingClassic from '@components/Landings/LandingClassic'
+import LandingClassic from '@components/Atlas/AtlasCampusHome'
 import LandingCustom from '@components/Landings/LandingCustom'
 import { JsonLd } from '@components/SEO/JsonLd'
 import { getUriWithOrg } from '@services/config/config'
@@ -11,7 +11,7 @@ import GeneralWrapperStyled from '@components/Objects/StyledElements/Wrappers/Ge
 
 export default function HomeClient({ orgslug }: { orgslug: string }) {
   const org = useOrg() as any
-  const { data: courses, isLoading: coursesLoading } = useCourses(orgslug)
+  const { data: courses, isLoading: coursesLoading, isError, refetch } = useCourses(orgslug)
 
   const landingConfig = org?.config?.config?.customization?.landing || org?.config?.config?.landing
   const hasCustomLanding = landingConfig?.enabled
@@ -49,6 +49,8 @@ export default function HomeClient({ orgslug }: { orgslug: string }) {
       </GeneralWrapperStyled>
     )
   }
+
+  if (!hasCustomLanding && isError) return <GeneralWrapperStyled><div role="alert" className="p-8"><h1>Não foi possível carregar as formações.</h1><button className="mt-4 underline" onClick={() => refetch()}>Tentar novamente</button></div></GeneralWrapperStyled>
 
   return (
     <div className="w-full">
