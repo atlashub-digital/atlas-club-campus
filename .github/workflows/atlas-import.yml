@@ -1,0 +1,47 @@
+name: Atlas upstream bootstrap
+on:
+  push:
+    branches: [feat/clubos-bootstrap]
+    paths: [.github/workflows/atlas-import.yml]
+permissions:
+  contents: write
+concurrency:
+  group: atlas-upstream-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Import pinned LearnHouse history without rewriting Atlas history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Atlas ClubOS Bootstrap"
+          git config user.email "atlashub.digital@gmail.com"
+          git remote add upstream https://github.com/learnhouse/learnhouse.git
+          git fetch upstream --tags
+          PIN=be390299e9f3b60b76f9f691cf0e226788f5b150
+          test "$(git rev-parse 'refs/tags/1.4.2^{commit}')" = "$PIN"
+          if git merge-base --is-ancestor "$PIN" HEAD; then
+            echo "Pinned upstream already imported"
+            exit 0
+          fi
+          git merge --allow-unrelated-histories --no-commit "$PIN" || {
+            test "$(git diff --name-only --diff-filter=U)" = "README.md"
+            git checkout --theirs README.md
+            git add README.md
+          }
+          # Retain upstream workflows as reference; do not enable its publishing,
+          # notifications or scheduled jobs under the Atlas account.
+          mkdir -p docs/atlas/upstream-workflows
+          for f in .github/workflows/*; do
+            [ "$(basename "$f")" = "atlas-import.yml" ] && continue
+            git mv "$f" "docs/atlas/upstream-workflows/$(basename "$f").disabled"
+          done
+          git commit -m "chore: import LearnHouse 1.4.2 with complete upstream history"
+          git push origin HEAD:refs/heads/feat/clubos-bootstrap
+          # Original tag is recorded in upstream.lock.json; mirroring needs workflows permission.
