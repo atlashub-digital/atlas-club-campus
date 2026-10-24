@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/learnhouse/learnhouse.git",
+  "tag": "1.4.2",
+  "tagObject": "78d0bfc4cf8800e92bf613d13ece5d33febe8e57",
+  "commit": "be390299e9f3b60b76f9f691cf0e226788f5b150",
+  "cliVersion": "1.5.1",
+  "bunVersion": "1.4.3",
+  "pythonRequirement": ">=3.14.7,<3.14.8",
+  "license": "AGPL-3.0; retain per-directory licenses",
+  "remoteTagStatus": "not mirrored: GitHub Actions token lacks workflows permission"
+}
