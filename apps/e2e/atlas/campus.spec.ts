@@ -6,7 +6,7 @@ import { ADMIN_EMAIL, ADMIN_PASSWORD, API_URL } from '../core/instance'
 
 test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () => {
   let admin: string, learner: string, other: string, learnerId: number
-  let org: any, course: any, restricted: any, activity: any, community: any
+  let org: any, course: any, restricted: any, activity: any, community: any, mediaPath: string, mediaBytes: string
   const password = 'OnlyDisposableTest!234'
   const emailA = 'learner-a@atlas-campus.example.com'
   const emailB = 'learner-b@atlas-campus.example.com'
@@ -132,6 +132,19 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
       await peer.screenshot({path:'atlas-results/collaboration-1440.png',fullPage:true})
     } finally { await peerContext.close() }
   })
+  test('native media upload is readable with identical bytes',async () => {
+    mediaBytes='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1cAAAAASUVORK5CYII='
+    const body=new FormData()
+    body.set('activity_uuid',activity.activity_uuid)
+    body.set('file_object',new Blob([Buffer.from(mediaBytes,'base64')],{type:'image/png'}),'atlas-persistence.png')
+    const response=await fetch(API_URL+'/blocks/image',{method:'POST',headers:{Authorization:'Bearer '+admin},body})
+    expect(response.ok,'media upload '+response.status).toBeTruthy()
+    const block=await response.json()
+    mediaPath='/content/orgs/'+org.org_uuid+'/courses/'+course.course_uuid+'/activities/'+activity.activity_uuid+'/dynamic/blocks/imageBlock/'+block.block_uuid+'/'+block.content.file_id+'.'+block.content.file_format
+    const stored=await fetch(API_URL.replace('/api/v1','')+mediaPath)
+    expect(stored.ok).toBeTruthy()
+    expect(Buffer.from(await stored.arrayBuffer()).toString('base64')).toBe(mediaBytes)
+  })
   test('Atlas member interfaces at 390 and 1440 pixels',async ({page}) => {
     await uiLogin(page,emailA,password)
     const screens = [
@@ -153,7 +166,7 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
         await page.screenshot({path:'atlas-results/'+name+'-'+width+'.png',fullPage:true})
       }
     }
-    writeFileSync('atlas-results/persistence.json',JSON.stringify({courseUuid:course.course_uuid,activityUuid:activity.activity_uuid,activityId:activity.id,orgId:org.id,email:emailA}))
+    writeFileSync('atlas-results/persistence.json',JSON.stringify({courseUuid:course.course_uuid,activityUuid:activity.activity_uuid,activityId:activity.id,orgId:org.id,email:emailA,mediaPath,mediaBytes}))
   })
   test('Atlas administration dashboard at 390 and 1440 pixels',async ({page}) => {
     await uiLogin(page,ADMIN_EMAIL,ADMIN_PASSWORD)

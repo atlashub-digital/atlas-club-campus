@@ -2,8 +2,12 @@ import { readFileSync } from 'node:fs'
 import {test,expect} from '../core/fixtures'
 import {login,req} from '../core/client'
 import {uiLogin} from '../core/auth'
+import {API_URL} from '../core/instance'
 test('course, edited content and learner progress survive full stack restart',async ({page})=>{
  const state=JSON.parse(readFileSync('atlas-results/persistence.json','utf8'))
+ const media=await fetch(API_URL.replace('/api/v1','')+state.mediaPath)
+ expect(media.ok).toBeTruthy()
+ expect(Buffer.from(await media.arrayBuffer()).toString('base64')).toBe(state.mediaBytes)
  const token=await login(state.email,'OnlyDisposableTest!234')
  const activity=await req<any>('GET','/activities/'+state.activityUuid,token)
  expect(JSON.stringify(activity.content)).toContain('Evidência Atlas')

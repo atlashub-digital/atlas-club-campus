@@ -159,12 +159,12 @@ export const OrgMenu = (props: any) => {
                   {org?.logo_image ? (
                     <img
                       src={`${getOrgLogoMediaDirectory(org.org_uuid, org?.logo_image)}`}
-                      alt="Learnhouse"
+                      alt={org?.name || 'Atlas ClubOS'}
                       style={{ width: 'auto', height: '100%' }}
                       className="rounded-md"
                     />
                   ) : (
-                    <LearnHouseLogo logoFilter={colors.logoFilter} />
+                    <span className="inline-flex items-center gap-2 font-semibold tracking-wide" aria-label="Atlas ClubOS"><span aria-hidden="true" className="text-2xl text-amber-600">△</span><span>ATLAS <span className="font-normal">CLUBOS</span></span></span>
                   )}
                 </div>
               </Link>

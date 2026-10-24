@@ -14,3 +14,7 @@ Branch: feat/clubos-bootstrap. Não promover enquanto CI e aceitação funcional
 
 ## Retorno necessário de Helena
 Host/capacidade aprovados, hostname e DNS/TLS, porta loopback livre, projeto/rede/volumes, store de segredos, backup/monitorização e responsável por rollback. Não enviar segredos em comentários. SSO é frente separada: não alterar Supabase Master, ARO, Club produtivo ou GWD.
+
+## Reinício coordenado e forwarding SSR
+
+No desenvolvimento HTTP em porta diferente de 80, o sidecar ssr-fwd partilha o namespace de rede de learnhouse-app. A CI Wave 2 40112087491 encontrou API/progresso intactos após restart simultâneo, mas /login passou a apresentar not-found. A hipótese operacional é o sidecar arrancar no namespace anterior da aplicação. O procedimento de validação passa a parar a stack sem remover volumes e usar up -d --wait, respeitando dependências. A correção precisa de CI verde; não interpretar health HTTP da API como prova do SSR. Em staging HTTPS seguir a topologia prevista e validar login, curso e media depois de cada reinício. Nunca usar down -v no staging persistente.

@@ -47,7 +47,7 @@ jobs:
           bunx playwright test --config atlas.config.ts
       - name: Restart all services preserving volumes
         run: |
-          docker compose -f .atlas/dev/docker-compose.yml --env-file .atlas/dev/.env restart
+          docker compose -f .atlas/dev/docker-compose.yml --env-file .atlas/dev/.env stop -t 30
           docker compose -f .atlas/dev/docker-compose.yml --env-file .atlas/dev/.env up -d --wait --wait-timeout 300
       - name: Verify persistence after restart
         env:

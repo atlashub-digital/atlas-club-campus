@@ -77,3 +77,6 @@ apps/web/ee
 .atlas/
 apps/e2e/atlas-results/
 apps/e2e/atlas-report/
+
+apps/e2e/atlas-restart-results/
+apps/e2e/atlas-restart-report/
