@@ -1,3 +1,4 @@
+import AtlasPage from '@components/Atlas/AtlasPage'
 import React from 'react'
 import { getUserByUsername } from '@services/users/users'
 import { Metadata } from 'next'
@@ -64,12 +65,12 @@ async function UserPage({ params }: UserPageProps) {
     ) : { sections: [] };
 
     return (
-      <div>
+      <AtlasPage title="Perfil na comunidade" description="Experiências e conhecimentos que aproximam pessoas.">
         <UserProfileClient
           userData={userData}
           profile={profile}
         />
-      </div>
+      </AtlasPage>
     )
   } catch (error) {
     console.error('Error fetching user data:', error)

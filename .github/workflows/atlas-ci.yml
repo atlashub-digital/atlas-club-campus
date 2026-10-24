@@ -45,6 +45,16 @@ jobs:
           echo "::add-mask::$E2E_ADMIN_PASSWORD"
           cd apps/e2e
           bunx playwright test --config atlas.config.ts
+      - name: Restart all services preserving volumes
+        run: |
+          docker compose -f .atlas/dev/docker-compose.yml --env-file .atlas/dev/.env restart
+          docker compose -f .atlas/dev/docker-compose.yml --env-file .atlas/dev/.env up -d --wait --wait-timeout 300
+      - name: Verify persistence after restart
+        env:
+          E2E_BASE_URL: http://localhost:8080
+          E2E_ORG_SLUG: atlas-club
+        working-directory: apps/e2e
+        run: bunx playwright test --config atlas-restart.config.ts
       - name: Restore educational data into separate DB
         run: bash scripts/atlas/backup-restore.sh
       - name: Upload sanitized acceptance evidence
@@ -55,6 +65,8 @@ jobs:
           path: |
             apps/e2e/atlas-results/
             apps/e2e/atlas-report/
+            apps/e2e/atlas-restart-results/
+            apps/e2e/atlas-restart-report/
             .atlas/evidence/restore.txt
           if-no-files-found: warn
           retention-days: 7

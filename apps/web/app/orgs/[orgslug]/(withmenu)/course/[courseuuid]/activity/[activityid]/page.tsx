@@ -1,3 +1,4 @@
+import AtlasPage from '@components/Atlas/AtlasPage'
 import { getActivityWithAuthHeader } from '@services/courses/activities'
 import { getCourseMetadata } from '@services/courses/courses'
 import ActivityClient from './activity'
@@ -108,13 +109,13 @@ const ActivityPage = async (params: any) => {
   const orgslug = (await params.params).orgslug
 
   return (
-    <ActivityClient
+    <AtlasPage compact title="Sala de aprendizagem" description="Um passo de cada vez. Aprenda, pratique e avance."><ActivityClient
       activityid={activityid}
       courseuuid={courseuuid}
       orgslug={orgslug}
       activity={null}
       course={null}
-    />
+    /></AtlasPage>
   )
 }
 

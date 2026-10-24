@@ -1,3 +1,4 @@
+import AtlasPage from '@components/Atlas/AtlasPage'
 import { getOrganizationContextInfo } from '@services/organizations/orgs'
 import { Metadata } from 'next'
 import { getServerSession } from '@/lib/auth/server'
@@ -101,11 +102,11 @@ const CommunitiesPage = async (params: any) => {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <CommunitiesClient
+      <AtlasPage title="Comunidade Atlas" description="Partilhe experiências, tire dúvidas e construa com outras pessoas."><CommunitiesClient
         communities={communities || []}
         orgslug={orgslug}
         org_id={org_id}
-      />
+      /></AtlasPage>
     </>
   )
 }

@@ -1,3 +1,4 @@
+import { writeFileSync } from 'node:fs'
 import { test, expect } from '../core/fixtures'
 import { login, req, getOrg, createStudent } from '../core/client'
 import { uiLogin } from '../core/auth'
@@ -130,5 +131,39 @@ test.describe.serial('Atlas Campus — real OSS engine, not SSO acceptance', () 
       await expect(peer.getByText('New note - Atlas colaboração real',{exact:true})).toBeVisible({timeout:15000})
       await peer.screenshot({path:'atlas-results/collaboration-1440.png',fullPage:true})
     } finally { await peerContext.close() }
+  })
+  test('Atlas member interfaces at 390 and 1440 pixels',async ({page}) => {
+    await uiLogin(page,emailA,password)
+    const screens = [
+      ['catalog','/courses','Academia Atlas'],
+      ['course','/course/'+course.course_uuid.replace('course_',''),'Sua formação'],
+      ['classroom','/course/'+course.course_uuid.replace('course_','')+'/activity/'+activity.activity_uuid.replace('activity_',''),'Sala de aprendizagem'],
+      ['communities','/communities','Comunidade Atlas'],
+      ['profile','/user/atlas_learner_a','Perfil na comunidade'],
+    ]
+    for(const width of [390,1440]) {
+      await page.setViewportSize({width,height:960})
+      for(const [name,route,title] of screens) {
+        await page.goto(route)
+        await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible()
+        if(name==='catalog') await expect(page.getByText(course.name,{exact:true}).first()).toBeVisible()
+        if(name==='classroom') await expect(page.getByText('Evidência Atlas: conteúdo editado e persistido pela interface.',{exact:true}).first()).toBeVisible()
+        if(name==='communities') await expect(page.getByText(community.name,{exact:true}).first()).toBeVisible()
+        expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
+        await page.screenshot({path:'atlas-results/'+name+'-'+width+'.png',fullPage:true})
+      }
+    }
+    writeFileSync('atlas-results/persistence.json',JSON.stringify({courseUuid:course.course_uuid,activityUuid:activity.activity_uuid,activityId:activity.id,orgId:org.id,email:emailA}))
+  })
+  test('Atlas administration dashboard at 390 and 1440 pixels',async ({page}) => {
+    await uiLogin(page,ADMIN_EMAIL,ADMIN_PASSWORD)
+    for(const width of [390,1440]) {
+      await page.setViewportSize({width,height:960})
+      await page.goto('/dash')
+      await expect(page.getByRole('heading',{name:'Gestão do Campus'})).toBeVisible()
+      await expect(page.getByRole('link',{name:'Criar formação',exact:true})).toBeVisible()
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
+      await page.screenshot({path:'atlas-results/dashboard-'+width+'.png',fullPage:true})
+    }
   })
 })

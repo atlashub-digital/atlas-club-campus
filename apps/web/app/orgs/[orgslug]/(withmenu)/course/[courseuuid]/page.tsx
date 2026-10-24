@@ -1,3 +1,4 @@
+import AtlasPage from '@components/Atlas/AtlasPage'
 import React from 'react'
 import CourseClient from './course'
 import { getCourseMetadata } from '@services/courses/courses'
@@ -107,12 +108,12 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
 const CoursePage = async (params: any) => {
   const { courseuuid, orgslug } = await params.params
   return (
-    <CourseClient
+    <AtlasPage compact title="Sua formação" description="Conheça o percurso e acompanhe os conteúdos desta edição."><CourseClient
       courseuuid={courseuuid}
       orgslug={orgslug}
       course={null}
       serverError={null}
-    />
+    /></AtlasPage>
   )
 }
 

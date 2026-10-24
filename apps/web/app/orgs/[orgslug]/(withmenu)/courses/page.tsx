@@ -1,3 +1,4 @@
+import AtlasPage from '@components/Atlas/AtlasPage'
 import React from 'react'
 import Courses from './courses'
 import { Metadata } from 'next'
@@ -69,7 +70,7 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
 
 const CoursesPage = async (params: any) => {
   const orgslug = (await params.params).orgslug
-  return <Courses orgslug={orgslug} />
+  return <AtlasPage title="Academia Atlas" description="Explore formações, encontre a sua edição e avance no seu percurso."><Courses orgslug={orgslug} /></AtlasPage>
 }
 
 export default CoursesPage
