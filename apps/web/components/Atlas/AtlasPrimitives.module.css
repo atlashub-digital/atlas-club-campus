@@ -1,0 +1,237 @@
+/* Atlas ClubOS — Primitives (Wave 2) */
+
+/* ----------------------------- Card ----------------------------- */
+.card {
+  border-radius: var(--atlas-radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+.cardDark {
+  background: var(--atlas-panel);
+  border: 1px solid var(--atlas-line);
+  color: var(--atlas-text);
+}
+.cardLight {
+  background: var(--atlas-light-panel);
+  border: 1px solid var(--atlas-light-line);
+  color: var(--atlas-light-text);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.05);
+}
+.cardInteractive {
+  transition: border-color var(--atlas-duration-normal) var(--atlas-ease),
+    transform var(--atlas-duration-normal) var(--atlas-ease),
+    box-shadow var(--atlas-duration-normal) var(--atlas-ease);
+}
+.cardInteractive:hover {
+  transform: translateY(-2px);
+}
+.cardDark.cardInteractive:hover {
+  border-color: var(--atlas-gold);
+  box-shadow: var(--atlas-shadow-card);
+}
+.cardLight.cardInteractive:hover {
+  border-color: var(--atlas-gold-soft);
+  box-shadow: 0 2px 4px rgba(16, 24, 40, 0.06), 0 12px 32px rgba(16, 24, 40, 0.08);
+}
+
+/* ----------------------------- Badge ---------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--atlas-fs-eyebrow);
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: var(--atlas-radius-pill);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  line-height: 1;
+}
+.badgeGold {
+  background: var(--atlas-gold);
+  color: var(--atlas-gold-ink);
+}
+.badgeBlue {
+  background: rgba(64, 123, 255, 0.14);
+  color: var(--atlas-blue-soft);
+  border-color: rgba(64, 123, 255, 0.35);
+}
+.badgeNeutral {
+  background: rgba(173, 185, 206, 0.1);
+  color: var(--atlas-muted);
+  border-color: var(--atlas-line-strong);
+}
+.badgeNeutralLight {
+  background: #eef2f8;
+  color: var(--atlas-light-muted);
+  border-color: var(--atlas-light-line);
+}
+.badgeSuccess {
+  background: rgba(78, 201, 168, 0.14);
+  color: var(--atlas-success);
+  border-color: rgba(78, 201, 168, 0.35);
+}
+.badgeDanger {
+  background: rgba(232, 117, 127, 0.14);
+  color: var(--atlas-danger);
+  border-color: rgba(232, 117, 127, 0.35);
+}
+.badgeMuted {
+  background: transparent;
+  color: var(--atlas-muted-2);
+  border-color: var(--atlas-line);
+}
+
+/* -------------------------- ProgressBar ------------------------- */
+.progress {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--atlas-radius-pill);
+  background: rgba(173, 185, 206, 0.16);
+  overflow: hidden;
+}
+.progressLight {
+  background: #e3e8f0;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--atlas-gold-soft), var(--atlas-gold));
+  border-radius: inherit;
+  transition: width var(--atlas-duration-slow) var(--atlas-ease);
+}
+
+/* --------------------------- EmptyState ------------------------- */
+.empty {
+  display: grid;
+  gap: 12px;
+  padding: 40px 28px;
+  border-radius: var(--atlas-radius-lg);
+  text-align: start;
+  align-content: center;
+  justify-items: start;
+}
+.emptyDark {
+  border: 1px dashed var(--atlas-line-strong);
+  background: rgba(17, 28, 48, 0.4);
+  color: var(--atlas-muted);
+}
+.emptyLight {
+  border: 1px dashed var(--atlas-light-line);
+  background: var(--atlas-light-panel-2);
+  color: var(--atlas-light-muted);
+}
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--atlas-radius-md);
+}
+.emptyDark .emptyIcon {
+  background: rgba(224, 186, 115, 0.1);
+  color: var(--atlas-gold);
+}
+.emptyLight .emptyIcon {
+  background: #f4ecdb;
+  color: var(--atlas-gold-soft);
+}
+.emptyTitle {
+  font-size: 17px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.emptyDark .emptyTitle {
+  color: var(--atlas-text-strong);
+}
+.emptyLight .emptyTitle {
+  color: var(--atlas-light-text);
+}
+.emptyDescription {
+  font-size: var(--atlas-fs-small);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 46ch;
+}
+.emptyAction {
+  margin-top: 4px;
+}
+
+/* ---------------------------- Skeleton -------------------------- */
+.skeleton {
+  display: block;
+  border-radius: var(--atlas-radius-sm);
+  animation: atlas-pulse-soft 1.6s ease-in-out infinite;
+}
+.skeletonDark {
+  background: linear-gradient(90deg, var(--atlas-panel) 0%, var(--atlas-panel-2) 50%, var(--atlas-panel) 100%);
+}
+.skeletonLight {
+  background: linear-gradient(90deg, #eef2f8 0%, #e3e8f0 50%, #eef2f8 100%);
+}
+
+/* ------------------------ SectionHeader ------------------------- */
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.sectionHeaderText {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.eyebrow {
+  font-size: var(--atlas-fs-eyebrow);
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.sectionHeaderDark .eyebrow {
+  color: var(--atlas-gold);
+}
+.sectionHeaderLight .eyebrow {
+  color: var(--atlas-gold-soft);
+}
+.sectionTitle {
+  font-size: var(--atlas-fs-h2);
+  font-weight: 550;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.15;
+}
+.sectionHeaderDark .sectionTitle {
+  color: var(--atlas-text-strong);
+}
+.sectionHeaderLight .sectionTitle {
+  color: var(--atlas-light-text);
+}
+.sectionDescription {
+  font-size: var(--atlas-fs-small);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 60ch;
+}
+.sectionHeaderDark .sectionDescription {
+  color: var(--atlas-muted);
+}
+.sectionHeaderLight .sectionDescription {
+  color: var(--atlas-light-muted);
+}
+.sectionAction {
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

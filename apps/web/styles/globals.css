@@ -5,6 +5,11 @@
 
 @import 'tailwindcss';
 
+/* Atlas ClubOS design tokens — Wave 2 visual system.
+   Orthogonal to the shadcn :root tokens; Atlas components opt in via
+   .atlas-surface / .atlas-surface-light or var(--atlas-*). */
+@import './atlas.css';
+
 /* EE components (apps/web/ee) are gitignored, so automatic source detection
    skips them. Scan them explicitly. */
 @source '../ee';

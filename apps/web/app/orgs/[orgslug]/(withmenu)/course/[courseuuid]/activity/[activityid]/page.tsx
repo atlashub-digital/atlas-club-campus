@@ -109,7 +109,12 @@ const ActivityPage = async (params: any) => {
   const orgslug = (await params.params).orgslug
 
   return (
-    <AtlasPage compact title="Sala de aprendizagem" description="Um passo de cada vez. Aprenda, pratique e avance."><ActivityClient
+    <AtlasPage
+      compact
+      title="Sala de aprendizagem"
+      eyebrow="ATLAS CLUBOS · AULA"
+      description="Um passo de cada vez. Aprenda, pratique e avance."
+    ><ActivityClient
       activityid={activityid}
       courseuuid={courseuuid}
       orgslug={orgslug}

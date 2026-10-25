@@ -1,1 +1,151 @@
-.page{--atlas-navy:#080e1c;--atlas-gold:#e0ba73;--atlas-muted:#b2bfd5;background:#f2f4f8;min-height:70vh}.header,.compact{background:radial-gradient(ellipse at 95% 0,#193a68 0,transparent 55%),var(--atlas-navy);color:#f5f7fc;border-bottom:3px solid var(--atlas-gold);padding:44px 24px 0}.inner{max-width:1200px;margin:auto}.eyebrow{font-size:10px;font-weight:650;letter-spacing:.2em;color:var(--atlas-gold);margin:0 0 14px}.header h1,.compact h1{font-size:clamp(30px,4vw,48px);line-height:1.12;letter-spacing:-.035em;font-weight:550;margin:0}.description{color:var(--atlas-muted);font-size:15px;line-height:1.7;max-width:720px;margin:16px 0 24px}.nav{display:flex;flex-wrap:wrap;gap:8px 28px}.nav a{font-size:13px;min-height:44px;display:flex;align-items:center;color:#e4eaf5;border-bottom:2px solid transparent;text-decoration:none}.nav a:hover{color:var(--atlas-gold);border-color:var(--atlas-gold)}.nav a:focus-visible{outline:3px solid #8bb7ff;outline-offset:3px}.content{padding:24px 0 40px}.compact{padding-top:20px}.compact h1{font-size:26px}.compact .description{margin:8px 0 12px;font-size:13px}@media(max-width:560px){.header,.compact{padding-left:18px;padding-right:18px}.header{padding-top:30px}.description{font-size:14px}.content{padding-top:16px}.nav{gap:8px 20px}}
+/* Atlas ClubOS — Page Shell (Wave 2) */
+.page {
+  --atlas-navy: #080e1c;
+  --atlas-gold: #e0ba73;
+  --atlas-muted: #b2bfd5;
+  background: var(--atlas-light-bg);
+  min-height: 70vh;
+}
+.header,
+.compact {
+  background: radial-gradient(ellipse at 95% 0%, #193a68 0%, transparent 55%), var(--atlas-navy);
+  color: var(--atlas-text);
+  border-block-end: 3px solid var(--atlas-gold);
+  padding: 44px 24px 0;
+}
+.inner {
+  max-width: var(--atlas-content-max);
+  margin: auto;
+}
+.eyebrow {
+  font-size: var(--atlas-fs-eyebrow);
+  font-weight: 650;
+  letter-spacing: 0.2em;
+  color: var(--atlas-gold);
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+.breadcrumbs {
+  margin: 0 0 14px;
+}
+.breadcrumbList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.breadcrumbLink {
+  color: var(--atlas-muted);
+  text-decoration: none;
+  transition: color var(--atlas-duration-fast) var(--atlas-ease);
+}
+.breadcrumbLink:hover {
+  color: var(--atlas-gold);
+}
+.breadcrumbCurrent {
+  color: var(--atlas-text);
+}
+.breadcrumbSep {
+  color: var(--atlas-muted-2, #7e8ba4);
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.titleCol {
+  min-width: 0;
+}
+.header h1,
+.compact h1 {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  font-weight: 550;
+  margin: 0;
+}
+.description {
+  color: var(--atlas-muted);
+  font-size: var(--atlas-fs-body);
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 16px 0 24px;
+}
+.actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+.nav a {
+  font-size: 13px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: #e4eaf5;
+  border-block-end: 2px solid transparent;
+  text-decoration: none;
+  transition: color var(--atlas-duration-fast) var(--atlas-ease),
+    border-color var(--atlas-duration-fast) var(--atlas-ease);
+}
+.nav a:hover {
+  color: var(--atlas-gold);
+  border-block-end-color: var(--atlas-gold);
+}
+.content {
+  padding: 24px 0 40px;
+}
+.compact {
+  padding-block-start: 20px;
+}
+.compact h1 {
+  font-size: 26px;
+}
+.compact .description {
+  margin: 8px 0 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .header,
+  .compact {
+    padding-inline: 18px;
+  }
+  .header {
+    padding-block-start: 30px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .content {
+    padding-block-start: 16px;
+  }
+  .nav {
+    gap: 8px 20px;
+  }
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .actions {
+    width: 100%;
+  }
+}

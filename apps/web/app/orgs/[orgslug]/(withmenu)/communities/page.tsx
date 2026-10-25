@@ -102,7 +102,12 @@ const CommunitiesPage = async (params: any) => {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <AtlasPage title="Comunidade Atlas" description="Partilhe experiências, tire dúvidas e construa com outras pessoas."><CommunitiesClient
+      <AtlasPage
+        title="Comunidade Atlas"
+        eyebrow="ATLAS CLUBOS · COMUNIDADE"
+        description="Partilhe experiências, tire dúvidas e construa com outras pessoas."
+        breadcrumbs={[{ label: 'Campus', href: '/' }, { label: 'Comunidade Atlas' }]}
+      ><CommunitiesClient
         communities={communities || []}
         orgslug={orgslug}
         org_id={org_id}

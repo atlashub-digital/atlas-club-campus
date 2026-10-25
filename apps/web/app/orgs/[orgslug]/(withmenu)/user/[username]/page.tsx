@@ -65,7 +65,12 @@ async function UserPage({ params }: UserPageProps) {
     ) : { sections: [] };
 
     return (
-      <AtlasPage title="Perfil na comunidade" description="Experiências e conhecimentos que aproximam pessoas.">
+      <AtlasPage
+        title="Perfil na comunidade"
+        eyebrow="ATLAS CLUBOS · PERFIL"
+        description="Experiências e conhecimentos que aproximam pessoas."
+        breadcrumbs={[{ label: 'Campus', href: '/' }, { label: 'Comunidade Atlas', href: '/communities' }, { label: 'Perfil na comunidade' }]}
+      >
         <UserProfileClient
           userData={userData}
           profile={profile}

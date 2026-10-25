@@ -70,7 +70,16 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
 
 const CoursesPage = async (params: any) => {
   const orgslug = (await params.params).orgslug
-  return <AtlasPage title="Academia Atlas" description="Explore formações, encontre a sua edição e avance no seu percurso."><Courses orgslug={orgslug} /></AtlasPage>
+  return (
+    <AtlasPage
+      title="Academia Atlas"
+      eyebrow="ATLAS CLUBOS · ACADEMIAS"
+      description="Explore formações, encontre a sua edição e avance no seu percurso."
+      breadcrumbs={[{ label: 'Campus', href: '/' }, { label: 'Academia Atlas' }]}
+    >
+      <Courses orgslug={orgslug} />
+    </AtlasPage>
+  )
 }
 
 export default CoursesPage

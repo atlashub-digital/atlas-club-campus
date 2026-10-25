@@ -108,7 +108,13 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
 const CoursePage = async (params: any) => {
   const { courseuuid, orgslug } = await params.params
   return (
-    <AtlasPage compact title="Sua formação" description="Conheça o percurso e acompanhe os conteúdos desta edição."><CourseClient
+    <AtlasPage
+      compact
+      title="Sua formação"
+      eyebrow="ATLAS CLUBOS · FORMAÇÃO"
+      description="Conheça o percurso e acompanhe os conteúdos desta edição."
+      breadcrumbs={[{ label: 'Campus', href: '/' }, { label: 'Academia Atlas', href: '/courses' }, { label: 'Sua formação' }]}
+    ><CourseClient
       courseuuid={courseuuid}
       orgslug={orgslug}
       course={null}
