@@ -1,0 +1,160 @@
+/*
+ * Atlas ClubOS — Design Token System (Wave 2)
+ * --------------------------------------------------
+ * Single source of truth for the Atlas Club visual identity.
+ * Consumed by:
+ *   - CSS modules under components/Atlas/*.module.css  (via var(--atlas-*))
+ *   - The dark campus surface (.atlas-surface)
+ *   - The light admin/catalog surface (.atlas-surface-light)
+ *
+ * Identity (per AGENTS.md / DESIGN_SYSTEM_BRIEF.md):
+ *   azul-marinho profundo, ouro suave, azul elétrico, superfícies premium.
+ *   Premium, accessible, responsive 360 → 1920.
+ *
+ * This file does NOT override the shadcn :root tokens in globals.css;
+ * it adds an orthogonal Atlas layer that Atlas components opt into.
+ */
+
+:root {
+  /* ---- Core palette ---- */
+  --atlas-ink: #080e1c;          /* deepest navy — campus background */
+  --atlas-ink-2: #0b1426;        /* navy raised */
+  --atlas-panel: #111c30;        /* card surface on navy */
+  --atlas-panel-2: #16243d;      /* elevated card surface */
+  --atlas-panel-3: #1c2d49;      /* hover / active surface */
+  --atlas-line: #243453;         /* hairline border on navy */
+  --atlas-line-strong: #344665;  /* emphasized border */
+
+  --atlas-gold: #e0ba73;         /* signature gold (CTA, accent) */
+  --atlas-gold-soft: #b9965a;    /* gold on light surfaces */
+  --atlas-gold-ink: #1a1408;     /* text on gold */
+
+  --atlas-blue: #407bff;         /* electric blue (focus, links) */
+  --atlas-blue-soft: #6b96ff;
+  --atlas-blue-deep: #1b3a6b;
+
+  --atlas-text: #f5f7fc;         /* primary text on navy */
+  --atlas-text-strong: #ffffff;
+  --atlas-muted: #adb9ce;        /* secondary text on navy */
+  --atlas-muted-2: #7e8ba4;      /* tertiary text on navy */
+
+  /* ---- Light surface tokens (admin / catalog body) ---- */
+  --atlas-light-bg: #f2f4f8;
+  --atlas-light-panel: #ffffff;
+  --atlas-light-panel-2: #f7f9fc;
+  --atlas-light-line: #e3e8f0;
+  --atlas-light-text: #14213d;
+  --atlas-light-muted: #5a6783;
+
+  /* ---- Status ---- */
+  --atlas-success: #4ec9a8;
+  --atlas-warning: #e7b35a;
+  --atlas-danger: #e8757f;
+  --atlas-info: var(--atlas-blue);
+
+  /* ---- Radii ---- */
+  --atlas-radius-sm: 8px;
+  --atlas-radius-md: 12px;
+  --atlas-radius-lg: 16px;
+  --atlas-radius-xl: 22px;
+  --atlas-radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --atlas-shadow-card: 0 1px 2px rgba(8, 14, 28, 0.4), 0 8px 24px rgba(8, 14, 28, 0.28);
+  --atlas-shadow-elevated: 0 2px 4px rgba(8, 14, 28, 0.45), 0 18px 48px rgba(8, 14, 28, 0.36);
+  --atlas-shadow-glow-gold: 0 0 0 1px rgba(224, 186, 115, 0.35), 0 12px 40px rgba(224, 186, 115, 0.18);
+  --atlas-shadow-glow-blue: 0 0 0 1px rgba(64, 123, 255, 0.4), 0 12px 40px rgba(64, 123, 255, 0.2);
+  --atlas-shadow-focus: 0 0 0 3px rgba(139, 183, 255, 0.55);
+
+  /* ---- Motion ---- */
+  --atlas-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --atlas-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --atlas-duration-fast: 140ms;
+  --atlas-duration-normal: 220ms;
+  --atlas-duration-slow: 380ms;
+
+  /* ---- Typography ---- */
+  --atlas-font-display: var(--font-default), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --atlas-fs-hero: clamp(36px, 4.6vw, 64px);
+  --atlas-fs-h1: clamp(28px, 3.2vw, 44px);
+  --atlas-fs-h2: clamp(22px, 2vw, 28px);
+  --atlas-fs-h3: 19px;
+  --atlas-fs-body: 15px;
+  --atlas-fs-small: 13px;
+  --atlas-fs-eyebrow: 10px;
+
+  /* ---- Layout ---- */
+  --atlas-content-max: 1200px;
+  --atlas-content-pad: 24px;
+}
+
+/* ---- Dark campus surface (member dashboard, home) ---- */
+.atlas-surface {
+  background: var(--atlas-ink);
+  color: var(--atlas-text);
+  font-family: var(--atlas-font-display);
+}
+.atlas-surface ::selection {
+  background: rgba(224, 186, 115, 0.28);
+  color: var(--atlas-text-strong);
+}
+
+/* ---- Light admin/catalog surface ---- */
+.atlas-surface-light {
+  background: var(--atlas-light-bg);
+  color: var(--atlas-light-text);
+  font-family: var(--atlas-font-display);
+}
+
+/* ---- Shared Atlas focus ring (keyboard a11y) ---- */
+.atlas-surface a:focus-visible,
+.atlas-surface button:focus-visible,
+.atlas-surface [tabindex]:focus-visible,
+.atlas-surface-light a:focus-visible,
+.atlas-surface-light button:focus-visible,
+.atlas-surface-light [tabindex]:focus-visible {
+  outline: 3px solid #8bb7ff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- Atlas premium scrollbar (dark surface only) ---- */
+.atlas-surface ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.atlas-surface ::-webkit-scrollbar-track {
+  background: var(--atlas-ink);
+}
+.atlas-surface ::-webkit-scrollbar-thumb {
+  background: var(--atlas-line-strong);
+  border-radius: 8px;
+  border: 2px solid var(--atlas-ink);
+}
+.atlas-surface ::-webkit-scrollbar-thumb:hover {
+  background: var(--atlas-gold-soft);
+}
+
+/* ---- Atlas motion utilities ---- */
+@keyframes atlas-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes atlas-pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.atlas-fade-in {
+  animation: atlas-fade-in var(--atlas-duration-slow) var(--atlas-ease) both;
+}
+.atlas-pulse {
+  animation: atlas-pulse-soft 1.6s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .atlas-fade-in,
+  .atlas-pulse {
+    animation: none;
+  }
+}
