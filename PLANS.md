@@ -41,3 +41,11 @@
 
 ## Updates por missão
 Preencher depois de cada PR: `Data | PR/Branch/SHA | Gate | Verificado | Bloqueador | Próximo passo | Owner`.
+
+### 24/10/2026 — Wave 2 visual (GLM)
+- **PR/Branch/SHA:** PR #2 (DRAFT) · `feat/clubos-visual-glm-w2` · `071c9627c2804ca98c91663ba1636b3178b28a79` · base `feat/clubos-bootstrap` (`a819a927`).
+- **Gate:** G4 (parcial) — design system consolidado + dashboard do membro + breadcrumbs de superfície; player/comunidade/admin premium adiados.
+- **Verificado:** `bun test --isolate ./tests` 498/498; `atlas-dashboard` 22/22; `eslint` (strict) 0 erros nos ficheiros tocados; `tsc --noEmit` 0 erros nos ficheiros Atlas (23 erros pré-existentes de `.png` alheios, resolvidos por `next build`); RTL guards 9/9; strings locked do e2e preservadas.
+- **Bloqueador:** CI da org por correr (commit pushed); screenshots em staging dependem da Helena; ARO (Free/Premium) é W3 — não fabricado.
+- **Próximo passo:** catálogo com `AtlasCourseCard` light + agrupamento por academia; player/comunidade Atlas; admin premium.
+- **Owner:** Codex Cloud (GLM).
