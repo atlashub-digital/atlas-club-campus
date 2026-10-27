@@ -80,7 +80,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
   // No-org platform copy (defaults mirror the platform login illustration).
   const noOrgTitle = atlasBrand ? 'Bem-vindo ao Atlas ClubOS.' : (title || 'Welcome back to LearnHouse.')
   const noOrgSubtitle =
-    (atlasBrand ? 'Aprende, cria e partilha na comunidade Atlas.' : 'Pick up where you left off. Your courses, students, and tools are waiting.')
+    subtitle || (atlasBrand ? 'Aprende, cria e partilha na comunidade Atlas.' : 'Pick up where you left off. Your courses, students, and tools are waiting.')
   // Treat the no-org illustration like a photo background: dark scrim, no
   // blueprint-grid overlay.
   const hasCustomBackground = noOrg || (background_type !== 'gradient' && background_image)
@@ -226,7 +226,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
               {/* Bottom spacer for visual balance */}
               {atlasBrand && (
-                <div className="absolute right-6 bottom-5 pointer-events-none">
+                <div className="absolute end-6 bottom-5 pointer-events-none">
                   <Image src="/atlas/atlas-avatar.webp" alt="Atlas, mascote do Club Atlas" width={104} height={104} unoptimized />
                 </div>
               )}
