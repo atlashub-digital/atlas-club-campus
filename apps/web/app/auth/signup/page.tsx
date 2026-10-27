@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const orgslug = await getAuthOrgSlug()
 
   if (!orgslug) {
-    return { title: 'Sign up | LearnHouse' }
+    return { title: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Registo | Atlas ClubOS' : 'Sign up | LearnHouse' }
   }
 
   let org: any = null
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: 'Sign up' + ` | ${org?.name || 'LearnHouse'}`,
+    title: 'Sign up' + ` | ${org?.name || (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas ClubOS' : 'LearnHouse')}`,
     robots: { index: false, follow: false },
   }
 }
