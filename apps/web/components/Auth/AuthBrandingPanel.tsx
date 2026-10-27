@@ -171,6 +171,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
                 <div className="mb-7 flex items-center gap-3">
                   <Image src="/atlas/atlas-clubos-mark.svg" width={52} height={52} alt="Símbolo Atlas ClubOS" unoptimized />
                   <span className="text-white text-lg font-semibold tracking-wide">ATLAS CLUBOS</span>
+                  <Image src="/atlas/atlas-avatar.webp" width={64} height={64} alt="Atlas, mascote do Club Atlas" unoptimized className="ms-auto" />
                 </div>
               )}
               <h1 className="font-black text-[28px] leading-tight tracking-tight">
