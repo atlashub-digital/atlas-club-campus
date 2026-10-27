@@ -1,0 +1,87 @@
+# LH-CLEAN-01 — LearnHouse upstream ORIGINAL (1.4.2, SHA be390299e9f3b60b76f9f691cf0e226788f5b150)
+# Projeto isolado: sem reutilizar volumes/config/segredos do clubos-staging.
+# Exposição: apenas loopback (127.0.0.1:3010) até testes verdes; Caddy depois.
+name: atlas-learnhouse-clean
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: lh-clean-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: learnhouse
+      POSTGRES_PASSWORD: ${LH_DB_PASSWORD}
+      POSTGRES_DB: learnhouse
+    volumes:
+      - lh_clean_pgdata:/var/lib/postgresql/data
+    networks: [lh_clean_internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U learnhouse -d learnhouse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: lh-clean-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - lh_clean_redis:/data
+    networks: [lh_clean_internal]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: atlas/learnhouse:1.4.2-be39029
+    container_name: lh-clean-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      LEARNHOUSE_SQL_CONNECTION_STRING: postgresql://learnhouse:${LH_DB_PASSWORD}@db:5432/learnhouse
+      LEARNHOUSE_REDIS_CONNECTION_STRING: redis://redis:6379/0
+      LEARNHOUSE_AUTH_JWT_SECRET_KEY: ${LH_JWT_SECRET}
+      LEARNHOUSE_DOMAIN: ${LH_DOMAIN}
+      LEARNHOUSE_FRONTEND_DOMAIN: ${LH_DOMAIN}
+      LEARNHOUSE_SSL: ${LH_SSL}
+      LEARNHOUSE_TENANCY: single
+      LEARNHOUSE_SELF_HOSTED: "true"
+      LEARNHOUSE_SITE_NAME: "LeveLab Academy (piloto)"
+      NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL: ${LH_PUBLIC_URL}
+      NEXT_PUBLIC_LEARNHOUSE_DOMAIN: ${LH_DOMAIN_LOCAL}
+      NEXT_PUBLIC_LEARNHOUSE_HTTPS: "false"
+      LEARNHOUSE_CONTENT_DELIVERY_TYPE: filesystem
+      COLLAB_INTERNAL_KEY: ${COLLAB_INTERNAL_KEY}
+      COLLAB_PORT: 4000
+    extra_hosts:
+      - "lh-pilot.local:host-gateway"
+      - "learnhouse-pilot.atlashub.si:host-gateway"
+    volumes:
+      - lh_clean_media:/app/api/content
+    ports:
+      - "127.0.0.1:3010:80"
+    networks: [lh_clean_internal, platform_edge]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://localhost/api/v1/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 6
+      start_period: 60s
+
+networks:
+  lh_clean_internal:
+    driver: bridge
+  platform_edge:
+    external: true
+
+volumes:
+  lh_clean_pgdata:
+  lh_clean_redis:
+  lh_clean_media:
