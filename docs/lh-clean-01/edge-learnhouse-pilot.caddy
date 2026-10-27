@@ -1,0 +1,15 @@
+# BEGIN LEARNHOUSE PILOT — LH-CLEAN-01 (isolated, upstream 1.4.2)
+learnhouse-pilot.atlashub.si {
+	encode zstd gzip
+	header -Server
+	reverse_proxy lh-clean-app:80 {
+		# O SelectiveGZipMiddleware do LearnHouse rebenta respostas de ficheiro
+		# (FileResponse -> 500) quando o pedido traz 'gzip' em Accept-Encoding.
+		# Forçamos identity no upstream; o Caddy comprime na mesma, do lado do cliente.
+		header_up Accept-Encoding identity
+		transport http {
+			compression off
+		}
+	}
+}
+# END LEARNHOUSE PILOT
