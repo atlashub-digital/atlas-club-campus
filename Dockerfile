@@ -27,6 +27,12 @@ RUN rm -f .env*
 ARG LEARNHOUSE_PUBLIC=false
 RUN if [ "$LEARNHOUSE_PUBLIC" = "true" ] || { [ -L /app/ee ] && [ ! -e /app/ee ]; }; then rm -rf /app/ee; fi
 
+# Atlas ClubOS brand flag — must be baked at build time: the flag is read as
+# process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND inside client components, and
+# Next.js inlines NEXT_PUBLIC_* literals into the client bundle at build time.
+ARG NEXT_PUBLIC_ATLAS_CLUBOS_BRAND=false
+ENV NEXT_PUBLIC_ATLAS_CLUBOS_BRAND=${NEXT_PUBLIC_ATLAS_CLUBOS_BRAND}
+
 RUN bun run build
 
 # ───────────────────────────────────────────────
