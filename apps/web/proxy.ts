@@ -357,15 +357,21 @@ export default async function proxy(req: NextRequest) {
   // -------------------------------------------------------------------------
   // 3. Auth pages: resolve tenant for cookie context, rewrite to /auth
   // -------------------------------------------------------------------------
+  // Portuguese aliases for the native auth routes. They must resolve to the SAME
+  // internal page, not to a separate top-level file: in single tenancy every
+  // unknown top-level path is rewritten into the org catch-all
+  // (/orgs/{slug}/...), so a standalone /registo route file 404s.
+  const AUTH_ALIASES: Record<string, string> = { '/registo': '/signup' }
   const authPaths = ['/login', '/signup', '/reset', '/forgot', '/verify-email']
-  if (authPaths.includes(pathname)) {
+  if (authPaths.includes(pathname) || pathname in AUTH_ALIASES) {
+    const authPath = AUTH_ALIASES[pathname] ?? pathname
     const hasSession = !!req.cookies.get('LH_session')?.value
 
     // A logged-in user has no business on /login, so bounce them to the hub (the
     // page itself re-verifies, so this is a best-effort UX shortcut). Not when
     // they arrive with a pending second factor: a sign-in link for another
     // account hands its 2FA step over here, and bouncing would drop it.
-    if (pathname === '/login' && hasSession && !req.nextUrl.searchParams.has('mfa_token')) {
+    if (authPath === '/login' && hasSession && !req.nextUrl.searchParams.has('mfa_token')) {
       return NextResponse.redirect(new URL('/home', req.url))
     }
 
@@ -377,7 +383,7 @@ export default async function proxy(req: NextRequest) {
     // picker instead, and silently threw away any ?inviteCode. So only send a
     // signed-in visitor to the hub when there is genuinely no org to join here:
     // the org-less apex, with no invite code in hand.
-    if (pathname === '/signup' && hasSession) {
+    if (authPath === '/signup' && hasSession) {
       const onOrgHost =
         instance.tenancy === 'single'
         || resolved.source === 'subdomain'
@@ -390,7 +396,7 @@ export default async function proxy(req: NextRequest) {
 
     const requestHeaders = tenantRequestHeaders(req, resolved, instance)
     const response = NextResponse.rewrite(
-      new URL(`/auth${pathname}${search}`, req.url),
+      new URL(`/auth${authPath}${search}`, req.url),
       { request: { headers: requestHeaders } },
     )
     setOrgCookies(response, resolved, instance)
