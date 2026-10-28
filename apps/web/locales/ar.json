@@ -236,7 +236,8 @@
     "move_up": "تحريك لأعلى",
     "move_down": "تحريك لأسفل",
     "less": "أقل",
-    "more": "المزيد"
+    "more": "المزيد",
+    "remove": "إزالة"
   },
   "banner": {
     "viewing_as_guest": "أنت تتصفح {{name}} كضيف.",
@@ -398,7 +399,8 @@
     "choose_sign_in_method": "اختر طريقة تسجيل الدخول التي تفضّلها.",
     "no_sign_in_method_available": "قيّدت هذه المؤسسة طرق تسجيل الدخول، ولا تتوفر أي من الطرق المسموح بها هنا. تواصل مع أحد المسؤولين.",
     "complete_profile": {
-      "title": "أكمل ملفك الشخصي"
+      "title": "أكمل ملفك الشخصي",
+      "subtitle": "يحتاج {{org}} إلى مزيد قليل من المعلومات قبل المتابعة."
     }
   },
   "verify_email": {
@@ -419,7 +421,10 @@
     "title_required": "العنوان مطلوب",
     "content_required": "المحتوى مطلوب",
     "invalid_number": "يجب أن يكون رقمًا",
-    "invalid_option": "اختر أحد الخيارات المتاحة"
+    "invalid_option": "اختر أحد الخيارات المتاحة",
+    "min_value": "يجب ألا يقل عن {{value}}",
+    "max_value": "يجب ألا يزيد عن {{value}}",
+    "too_long": "يجب ألا يتجاوز {{max}} حرفًا"
   },
   "courses": {
     "my_courses": "دوراتي",
@@ -1043,7 +1048,10 @@
     "grid_columns_4": "4 أعمدة",
     "add_card": "إضافة بطاقة",
     "ungroup_cards": "إلغاء تجميع البطاقات",
-    "group_into_grid": "تجميع في شبكة"
+    "group_into_grid": "تجميع في شبكة",
+    "video_embed_blocked": "لا يمكن تشغيل هذا الفيديو هنا",
+    "video_embed_blocked_hint": "حظر YouTube التضمين لهذا الحساب أو المنطقة. يمكنك فتح الفيديو مباشرة.",
+    "open_in_youtube": "فتح على YouTube"
   },
   "assignments": {
     "submit_assignment": "تسليم الواجب",
@@ -3499,7 +3507,8 @@
           "title": "أنجز المزيد مع خطة أعلى",
           "subtitle": "قم بالترقية لرفع حدودك وفتح المزيد من الميزات.",
           "popular": "الأكثر شيوعًا",
-          "compare": "قارن جميع الخطط"
+          "compare": "قارن جميع الخطط",
+          "upgrade_to": "الترقية إلى {{plan}}"
         }
       },
       "general": {
@@ -5195,7 +5204,8 @@
         "select_all_that_apply": "اختر كل ما ينطبق",
         "response_type_single": "إجابة واحدة",
         "response_type_multiple": "إجابات متعددة",
-        "no_correct_answer_warning": "لا توجد إجابة صحيحة، سيتم تخطي هذا السؤال"
+        "no_correct_answer_warning": "لا توجد إجابة صحيحة، سيتم تخطي هذا السؤال",
+        "generate_with_ai": "إنشاء بالذكاء الاصطناعي"
       },
       "math_block": {
         "templates": "القوالب",
@@ -5280,7 +5290,8 @@
       "simplify": "تبسيط",
       "title": "محرر الذكاء الاصطناعي",
       "translate": "ترجمة"
-    }
+    },
+    "unsaved_changes_warning": "لديك تغييرات غير محفوظة. المغادرة دون حفظ؟"
   },
   "embed": {
     "not_supported_description": "هذا النوع من النشاط يتطلب المصادقة ولا يمكن تضمينه.",
@@ -6330,7 +6341,8 @@
     "replace_resource": "استبدال",
     "remove_resource": "إزالة",
     "show_as_card": "عرض كبطاقة",
-    "show_inline": "عرض ضمن النص"
+    "show_inline": "عرض ضمن النص",
+    "delete_folder_title": "حذف المجلد \"{{name}}\"؟"
   },
   "media": {
     "media": "الوسائط",
@@ -6361,7 +6373,8 @@
     "url_required": "الرابط مطلوب",
     "upload_hint": "صور وفيديو وصوت وملفات PDF ومستندات Office وملفات ZIP",
     "remove": "إزالة",
-    "open_pdf": "فتح ملف PDF"
+    "open_pdf": "فتح ملف PDF",
+    "delete_media_title": "حذف الوسيط \"{{name}}\"؟"
   },
   "access": {
     "public": {
@@ -6540,7 +6553,9 @@
     "invoice_history": "سجل الفواتير",
     "view": "عرض",
     "checkout_settling": "تم استلام الدفعة، يجري تطبيق خطتك الجديدة وستظهر قريبًا.",
-    "checkout_settling_delayed": "تم استلام الدفعة، لكن لم يتم تحديث خطتك بعد. حدّث الصفحة بعد لحظات، وتواصل مع الدعم إذا استمرت المشكلة."
+    "checkout_settling_delayed": "تم استلام الدفعة، لكن لم يتم تحديث خطتك بعد. حدّث الصفحة بعد لحظات، وتواصل مع الدعم إذا استمرت المشكلة.",
+    "cancels_on": "سيُلغى اشتراكك في {{periodEnd}}. يستمر الوصول حتى ذلك الحين.",
+    "add_pack": "إضافة {{pack}}"
   },
   "hub_new": {
     "useType": {
@@ -6731,5 +6746,18 @@
       "per_month": "/ شهر",
       "per_year": "/ سنة"
     }
+  },
+  "demo": {
+    "badge": "تجريبي",
+    "reset_imminent": "في أي لحظة",
+    "banner_title": "أنت في العرض التجريبي المشترك.",
+    "banner_body_countdown": "كل ما هنا بيانات أمثلة، وأي تغييرات تجريها يُعاد ضبطها خلال {{countdown}}.",
+    "banner_body": "كل ما هنا بيانات أمثلة، وأي تغييرات تجريها يُعاد ضبطها بانتظام.",
+    "create_your_own": "أنشئ مؤسستك الخاصة",
+    "entry_busy": "يُعاد ضبط العرض التجريبي الآن. حاول بعد قليل.",
+    "entry_opening": "جارٍ فتح العرض التجريبي…",
+    "entry_title": "استكشف عرضًا تجريبيًا مباشرًا",
+    "entry_body": "أكاديمية كاملة بمقررات ومتعلمين وتقدم وتقييم، معبأة مسبقًا. مشتركة مع الجميع، وتُعاد إلى الحالة الأصلية كل {{interval}}.",
+    "entry_preparing": "قيد التحضير. حاول بعد قليل."
   }
 }
