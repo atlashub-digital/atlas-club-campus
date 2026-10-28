@@ -82,3 +82,15 @@
 .resume span { color: #526174; font-size: 14px; }
 .campus a:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
 @media (max-width: 639px) { .campus { padding: 24px 16px 40px; gap: 32px; } .hero { padding: 24px; } }
+
+.cover { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; width: 100%; height: 100%; min-width: 0; overflow: hidden; padding: 24px; background: var(--atlas-cover-paper, #edf0f4); color: var(--atlas-reader-ink, #172335); isolation: isolate; }
+.cover::before { content: ''; position: absolute; width: 65%; aspect-ratio: 1; right: -24%; top: -50%; border: 1px solid #c2cbd7; box-shadow: 0 0 0 24px #dfe5ec, 0 0 0 25px #c2cbd7; transform: rotate(35deg); z-index: -1; }
+.cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.coverKicker, .coverFooter { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.coverTitle { font-size: clamp(18px, 2vw, 28px); font-weight: 650; line-height: 1.2; letter-spacing: -.035em; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.coverFooter { display: flex; justify-content: space-between; }
+.coverHero.cover { aspect-ratio: 16/9; height: auto; min-height: 240px; padding: 40px; border: 0; }
+.coverHero .coverTitle { font-size: clamp(28px, 4vw, 48px); }
+.coverMini.cover { aspect-ratio: 16/9; width: 100px; height: auto; padding: 8px; gap: 4px; border-radius: 10px; }
+.coverMini .coverTitle { font-size: 12px; -webkit-line-clamp: 2; }
+.coverMini .coverKicker, .coverMini .coverFooter { display: none; }

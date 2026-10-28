@@ -9,3 +9,9 @@ Verificação: TypeScript passou após preparar next-env.d.ts local (ignorado pe
 Acessibilidade estática: um h1, seções nomeadas, ordem DOM igual à visual, links nativos, progress com nome do curso, foco 3px. Grade 1/2/3 colunas; títulos quebram palavras longas. Texto #172335 e secundário #526174 em branco; contraste calculado no relatório final. Sem evidência de browser, por restrição do brief.
 
 Lint web completo executado diretamente (o script `lint` mascara o exit code): 24 erros existentes em arquivos fora deste incremento. Nenhum erro novo; lint dos dois componentes alterados passou sem avisos após ajustes. Os erros legados não são tratados como aprovação verde do lint global.
+
+## Incremento 2 — Capas
+
+CourseCover reutilizável com título real e desenho geométrico em CSS, sem assets novos de marca. Imagem existente tem prioridade. Card em homepage/catálogo/admin, hero de fallback no curso e miniatura no admin. Não altera vídeo promocional nem upload/edição. TypeScript passou; lint dos arquivos alterados: zero erros, quatro avisos preexistentes. Testes rápidos de 404/inscrições: 4 passaram.
+
+Contrastes calculados pela luminância relativa WCAG: #172335/branco 15,81:1; #526174/branco 6,32:1; branco/#3268d6 5,14:1; #172335/#edf0f4 (capa) 13,83:1; #526174/#f5f6f8 5,85:1. Todos excedem 4,5:1. Capa decorativa não repete o nome acessível do link.

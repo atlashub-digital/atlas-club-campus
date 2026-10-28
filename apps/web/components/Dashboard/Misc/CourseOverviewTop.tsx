@@ -1,4 +1,5 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
 import { useCourse, useCourseDispatch } from '@components/Contexts/CourseContext'
 import { Breadcrumbs } from '@components/Objects/Breadcrumbs/Breadcrumbs'
 import SaveState from './SaveState'
@@ -157,7 +158,7 @@ export function CourseOverviewTop({
             href={getUriWithOrg(org?.slug, '') + `/course/${params.courseuuid}`}
             className="shrink-0"
           >
-            {courseStructure?.thumbnail_image ? (
+            {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? <CourseCover title={courseStructure.name} variant="mini" image={courseStructure.thumbnail_image ? getCourseThumbnailMediaDirectory(org?.org_uuid, courseStructure.course_uuid, courseStructure.thumbnail_image) : undefined} /> : courseStructure?.thumbnail_image ? (
               <img
                 className="w-[72px] sm:w-[100px] h-[41px] sm:h-[57px] rounded-md drop-shadow-md object-cover"
                 src={`${getCourseThumbnailMediaDirectory(

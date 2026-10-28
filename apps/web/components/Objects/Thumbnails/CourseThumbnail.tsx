@@ -1,4 +1,5 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
 import styles from '@components/Clubos/Surfaces.module.css'
 import { useOrg } from '@components/Contexts/OrgContext'
 import AuthenticatedClientElement from '@components/Security/AuthenticatedClientElement'
@@ -187,7 +188,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
 
       <Link prefetch={false} href={courseLink} onClick={handleCardOpen} aria-label={course.name} className="block relative aspect-video overflow-hidden bg-gray-50">
         {/* Hidden img gives the browser a real resource hint so it can fetch the background-image early as an LCP candidate */}
-        {isPriority && (
+        {!atlasBrand && isPriority && (
            
           <img
             src={thumbnailImage}
@@ -197,11 +198,13 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
             className="absolute w-0 h-0 opacity-0 pointer-events-none"
           />
         )}
+        {atlasBrand ? <CourseCover title={course.name} image={course.thumbnail_image ? thumbnailImage : undefined} priority={isPriority} /> : <>
         <div
           className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
           style={{ backgroundImage: `url(${thumbnailImage})` }}
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+        </>}
         {isDashboard && (
           <div className="absolute bottom-2 start-2">
             {course.published ? (

@@ -1,4 +1,5 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
 import styles from '@components/Clubos/Surfaces.module.css'
 import Link from 'next/link'
 import React, { useEffect, useState, Suspense } from 'react'
@@ -449,6 +450,7 @@ const CourseClient = (props: any) => {
                       </div>
                     );
                   } else {
+                    if (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true') return <CourseCover title={course.name} variant="hero" />;
                     return (
                       <div
                         className="inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl relative w-full h-[400px] bg-cover bg-center"
