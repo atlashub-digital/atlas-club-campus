@@ -7,26 +7,26 @@
 :root {
   --background: 220 64% 5%;
   --foreground: 210 20% 98%;
-  --card: 218 53% 9%;
+  --card: 215 48% 15%;
   --card-foreground: 210 20% 98%;
-  --popover: 219 48% 13%;
+  --popover: 213 43% 19%;
   --popover-foreground: 210 20% 98%;
   --primary: 211 100% 50%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 219 48% 13%;
+  --secondary: 213 43% 19%;
   --secondary-foreground: 213 27% 84%;
-  --muted: 219 48% 13%;
-  --muted-foreground: 215 20% 65%;
-  --accent: 219 48% 13%;
+  --muted: 214 39% 20%;
+  --muted-foreground: 214 25% 78%;
+  --accent: 214 46% 22%;
   --accent-foreground: 187 100% 50%;
-  --border: 217 31% 22%;
-  --input: 217 31% 22%;
+  --border: 212 33% 36%;
+  --input: 212 33% 36%;
   --ring: 217 96% 53%;
   --radius: 0.75rem;
 
   --ca-bg: #050b17;         --ca-bg-deep: #02060f;
-  --ca-surface: #0b1424;    --ca-surface-2: #111c31;
-  --ca-border: #23324b;     --ca-electric: #007bff;
+  --ca-surface: #172e4b;    --ca-surface-2: #203e5e;
+  --ca-border: #406182;     --ca-electric: #007bff;
   --ca-electric-ui: #0066ee;--ca-cyan: #00d4ff;
   --ca-gold: #ffc857;       --ca-violet: #8b5cf6;
   --ca-text: #f9fafb;       --ca-text-2: #cbd5e1;  --ca-text-3: #94a3b8;
@@ -36,12 +36,20 @@
 }
 
 html, body { background-color: var(--ca-bg) !important; color: var(--ca-text); }
-body { font-family: Inter, "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+body {
+  /* The Club portal uses navy as a canvas; real light/blue pools create depth. */
+  background-image:
+    radial-gradient(ellipse 52% 42% at 88% 2%, rgba(0,123,255,.19), transparent 75%),
+    radial-gradient(ellipse 60% 38% at 9% 38%, rgba(0,212,255,.09), transparent 78%),
+    linear-gradient(180deg, #071329 0%, #050b17 78%);
+  background-attachment: fixed;
+  font-family: Inter, "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
 /* ---------- Cabeçalho e navegação ---------- */
 header, nav[role="navigation"] { border-color: var(--ca-border) !important; }
 header {
-  background: color-mix(in srgb, var(--ca-bg-deep) 88%, transparent) !important;
+  background: color-mix(in srgb, #112540 92%, transparent) !important;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--ca-border) !important;
 }
@@ -61,13 +69,16 @@ button[type="submit"] {
 button[type="submit"]:hover { filter: brightness(1.12); }
 
 /* ---------- Cartões e superfícies ---------- */
+/* Atlas brand cards need a distinct elevation, not an all-black overlay. */
 [class*="rounded"][class*="bg-white"], article, .card {
-  background-color: var(--ca-surface) !important;
-  border-color: var(--ca-border) !important;
+  background: linear-gradient(152deg, #1a3657 0%, #142840 100%) !important;
+  border: 1px solid var(--ca-border) !important;
   border-radius: 18px !important;
-  box-shadow: var(--ca-shadow);
+  box-shadow: 0 14px 36px rgba(0,0,0,.23), 0 1px 0 rgba(135,199,255,.09) inset;
 }
 [class*="bg-white"] { background-color: var(--ca-surface) !important; }
+.group[class*="bg-white"]:hover { border-color: #4c9ad5 !important; box-shadow: 0 16px 42px rgba(0,123,255,.16); }
+
 
 /* ---------- Formulários ---------- */
 input:not([type="checkbox"]):not([type="radio"]), textarea, select {
@@ -92,7 +103,9 @@ hr, [role="separator"] { border-color: var(--ca-border) !important; }
 
 /* ---------- Estados e destaque ---------- */
 a { color: var(--ca-cyan); text-underline-offset: 2px; }
-[class*="text-black"], [class*="text-gray-9"], [class*="text-slate-9"] { color: var(--ca-text-2) !important; }
+/* Titles and primary labels retain AA contrast; low-emphasis copy is separate. */
+[class*="text-black"], [class*="text-gray-9"], [class*="text-slate-9"] { color: #f6faff !important; }
+[class*="text-black/4"], [class*="text-black/5"], [class*="text-black/6"], [class*="text-gray-5"], [class*="text-gray-6"] { color: #bdcfe4 !important; }
 
 /* ---------- Rodapé legal (atribuição preservada) ---------- */
 footer { border-top: 1px solid var(--ca-border) !important; }
@@ -101,4 +114,46 @@ footer, footer a { color: var(--ca-text-3) !important; }
 /* ---------- Barra de progresso ---------- */
 [role="progressbar"] > *, progress::-webkit-progress-value {
   background: var(--ca-grad-atlas) !important;
+}
+
+/* ---------- Atlas auth is purposefully luminous, not dark-on-dark ---------- */
+/* The native auth form uses dark-text utility classes originally made for a
+   white background. Keep it a bright, elevated workspace next to the navy
+   Atlas hero; do not darken every `bg-white` inside this subtree. */
+.atlas-auth-shell {
+  background: linear-gradient(118deg, #f3f8ff 0%, #e7f1fc 51%, #0c203b 51.1%, #050b17 100%) !important;
+}
+.atlas-auth-form {
+  background: #f3f8ff !important;
+  color: #162d49 !important;
+}
+.atlas-auth-form :is(h1,h2,h3,h4),
+.atlas-auth-form [class*="text-black"],
+.atlas-auth-form [class*="text-gray-9"],
+.atlas-auth-form [class*="text-slate-9"] {
+  color: #122943 !important;
+}
+.atlas-auth-form [class*="text-black/"],
+.atlas-auth-form [class*="text-gray-5"],
+.atlas-auth-form [class*="text-gray-6"] {
+  color: #536986 !important;
+}
+.atlas-auth-form input:not([type="checkbox"]):not([type="radio"]),
+.atlas-auth-form textarea,
+.atlas-auth-form select {
+  background: #fff !important;
+  color: #132a45 !important;
+  border: 1px solid #a7bdd7 !important;
+  box-shadow: 0 2px 6px rgba(7,30,65,.05);
+}
+.atlas-auth-form input::placeholder,
+.atlas-auth-form textarea::placeholder { color: #64748b !important; }
+.atlas-auth-form button[type="submit"] {
+  background: linear-gradient(110deg, #0066ee 0%, #007bff 75%, #009dff 100%) !important;
+  box-shadow: 0 8px 25px rgba(0,102,238,.23);
+}
+.atlas-auth-shell [class*="bg-white"] { background-color: transparent; }
+.atlas-auth-form [class*="bg-white"] { background-color: #fff !important; }
+@media (max-width: 1023px) {
+  .atlas-auth-shell { background: #f3f8ff !important; }
 }
