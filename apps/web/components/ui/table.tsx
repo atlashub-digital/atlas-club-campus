@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -9,7 +10,7 @@ const Table = React.forwardRef<
   <div className="relative w-full overflow-auto">
     <table
       ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
+      className={cn("w-full caption-bottom text-sm", className, process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && styles.table)}
       {...props}
     />
   </div>
@@ -74,7 +75,8 @@ const TableHead = React.forwardRef<
     ref={ref}
     className={cn(
       "h-10 px-2 text-start align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pe-0 [&>[role=checkbox]]:translate-y-[2px]",
-      className
+      className,
+      process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && styles.tableHead
     )}
     {...props}
   />
@@ -89,7 +91,8 @@ const TableCell = React.forwardRef<
     ref={ref}
     className={cn(
       "p-2 align-middle [&:has([role=checkbox])]:pe-0 [&>[role=checkbox]]:translate-y-[2px]",
-      className
+      className,
+      process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && styles.tableCell
     )}
     {...props}
   />
