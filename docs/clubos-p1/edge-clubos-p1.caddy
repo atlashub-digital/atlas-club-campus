@@ -1,0 +1,12 @@
+# BEGIN ATLAS CLUBOS P1 — homologação (projeto atlas-clubos-p1, isolado)
+clubos-p1.atlashub.si {
+	encode zstd gzip
+	header -Server
+	reverse_proxy p1-app:80 {
+		header_up Accept-Encoding identity
+		transport http {
+			compression off
+		}
+	}
+}
+# END ATLAS CLUBOS P1
