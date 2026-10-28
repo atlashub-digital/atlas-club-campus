@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import Link from 'next/link'
 import { Globe, Lock, Users, Pencil } from 'lucide-react'
@@ -15,9 +16,9 @@ interface PlaygroundCardProps {
 }
 
 const accessConfig = {
-  public: { icon: Globe, label: 'Public', className: 'bg-green-100 text-green-700' },
-  authenticated: { icon: Lock, label: 'Members', className: 'bg-blue-100 text-blue-700' },
-  restricted: { icon: Users, label: 'Restricted', className: 'bg-amber-100 text-amber-700' },
+  public: { icon: Globe, label: 'Público', className: 'bg-green-100 text-green-700' },
+  authenticated: { icon: Lock, label: 'Membros', className: 'bg-blue-100 text-blue-700' },
+  restricted: { icon: Users, label: 'Restrito', className: 'bg-amber-100 text-amber-700' },
 }
 
 export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit }: PlaygroundCardProps) {
@@ -46,12 +47,13 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
   const editLink = `/editor/playground/${playground.playground_uuid}/edit`
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.card : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"}>
       {/* Edit button: top right, appears on hover */}
       {canEdit && (
-        <div className="absolute top-2 end-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 end-2 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
           <Link
             href={editLink}
+            aria-label="Editar Playground"
             className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md flex items-center justify-center"
           >
             <Pencil className="w-3.5 h-3.5 text-gray-700" />
@@ -60,14 +62,14 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
       )}
 
       {/* Thumbnail */}
-      <Link href={playgroundLink} onClick={handleOpen} className="block relative aspect-video overflow-hidden bg-gray-50">
+      <Link href={playgroundLink} aria-label={playground.name} onClick={handleOpen} className="block relative aspect-video overflow-hidden bg-gray-50">
         {thumbnailUrl ? (
           <div
             className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
             style={{ backgroundImage: `url(${thumbnailUrl})` }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 transition-transform duration-500 group-hover:scale-105">
+          <div className="w-full h-full flex items-center justify-center bg-gray-50 transition-transform duration-500 group-hover:scale-105">
             <Cube size={36} className="text-gray-300" />
           </div>
         )}
@@ -75,13 +77,13 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
 
         {/* Badges, bottom left */}
         <div className="absolute bottom-2 start-2 flex items-center gap-1.5">
-          <span className={`flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-full ${access.className}`}>
+          <span className={`flex items-center gap-1 px-2 py-0.5 text-xs font-bold uppercase tracking-wide rounded-full ${access.className}`}>
             <AccessIcon className="w-2.5 h-2.5" />
             {access.label}
           </span>
           {!playground.published && (
-            <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-yellow-100 text-yellow-700 rounded-full">
-              Draft
+            <span className="px-2 py-0.5 text-xs font-bold uppercase tracking-wide bg-yellow-100 text-yellow-700 rounded-full">
+              Rascunho
             </span>
           )}
         </div>
@@ -107,9 +109,9 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
           <Link
             href={playgroundLink}
             onClick={handleOpen}
-            className="text-[10px] font-bold text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider"
+            className="text-xs font-bold text-gray-600 hover:text-gray-900 transition-colors uppercase tracking-wider"
           >
-            Open Playground →
+            Abrir Playground →
           </Link>
         </div>
       </div>

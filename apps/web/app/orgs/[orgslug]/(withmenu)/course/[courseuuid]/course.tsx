@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import Link from 'next/link'
 import React, { useEffect, useState, Suspense } from 'react'
 import { getUriWithOrg } from '@services/config/config'
@@ -93,6 +94,7 @@ const CourseClient = (props: any) => {
   if (!initialCourse && !serverError && courseLoading) {
     return (
       <GeneralWrapperStyled>
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.course : undefined}>
         <div className="animate-pulse">
           {/* Breadcrumb placeholder */}
           <div className="pb-4 flex items-center gap-2">
@@ -160,7 +162,8 @@ const CourseClient = (props: any) => {
             </div>
           </div>
         </div>
-      </GeneralWrapperStyled>
+      </div>
+          </GeneralWrapperStyled>
     )
   }
 
@@ -326,6 +329,7 @@ const CourseClient = (props: any) => {
       {!course || !org ? null : (
         <>
           <GeneralWrapperStyled>
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.course : undefined}>
             <div className="pb-4">
               <Breadcrumbs items={[
                 { label: t('courses.courses'), href: getUriWithOrg(orgslug, '/courses'), icon: <BookCopy size={14} /> },
@@ -675,6 +679,7 @@ const CourseClient = (props: any) => {
             <Suspense fallback={<div className="animate-pulse h-48 bg-gray-100 rounded-lg mt-4" />}>
               <CourseCommunitySection courseUuid={course.course_uuid} orgslug={orgslug} />
             </Suspense>
+          </div>
           </GeneralWrapperStyled>
 
           {/* Mobile Actions Box */}

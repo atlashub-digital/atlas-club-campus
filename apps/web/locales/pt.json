@@ -1,5 +1,7 @@
 {
   "common": {
+    "clear_search": "Limpar pesquisa",
+    "page_of": "Página {{current}} de {{total}}",
     "hello": "Olá",
     "home": "Início",
     "back_to_home": "Voltar para o Início",

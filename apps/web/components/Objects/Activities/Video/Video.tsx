@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import YouTube from 'react-youtube'
 import { useRouter } from 'next/navigation'
@@ -148,7 +149,7 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
     })
 
   return (
-    <div className="w-full max-w-full">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.reader : "w-full max-w-full"}>
       {activity && (
         <>
           {activity.activity_sub_type === 'SUBTYPE_VIDEO_HOSTED' && (

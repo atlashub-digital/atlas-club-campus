@@ -22,6 +22,7 @@ import { getAllowedAuthMethods } from '@services/auth/authMethods'
 
 interface LoginClientProps {
   org: any
+  googleConfigured?: boolean
 }
 
 const LoginClient = (props: LoginClientProps) => {
@@ -46,7 +47,7 @@ const LoginClient = (props: LoginClientProps) => {
   )
   const passwordAllowed = allowedMethods.has('password')
   const magicLoginAllowed = allowedMethods.has('magic_login')
-  const googleAllowed = allowedMethods.has('google')
+  const googleAllowed = allowedMethods.has('google') && (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' || props.googleConfigured === true)
   const ssoAllowed = allowedMethods.has('sso')
   // SSO counts only once it is actually configured for the org (ssoEnabled).
   const hasAlternativeMethods = googleAllowed || magicLoginAllowed || (ssoAllowed && ssoEnabled)

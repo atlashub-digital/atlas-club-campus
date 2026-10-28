@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import FormLayout, {
   FormField,
   FormLabelAndMessage,
@@ -171,7 +172,7 @@ function EditCourseGeneral(props: EditCourseStructureProps) {
 
   if (isLoading || !courseStructure) {
     return (
-      <div className="h-full">
+      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.admin : "h-full"}>
         <div className="h-6" />
         <div className="px-10 pb-10">
           <div className="bg-white rounded-xl shadow-xs p-6">
@@ -223,7 +224,7 @@ function EditCourseGeneral(props: EditCourseStructureProps) {
   }
 
   return (
-    <div className="h-full">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.admin : "h-full"}>
       <div className="h-6" />
       <div className="px-4 sm:px-10 pb-10">
         <div className="bg-white rounded-xl shadow-xs">

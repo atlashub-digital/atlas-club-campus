@@ -30,7 +30,7 @@
     "name": "login",
     "width": 390,
     "url": "http://localhost:3210/login",
-    "title": "Login | Atlas ClubOS",
+    "title": "Entrar | Atlas ClubOS",
     "overflow": false,
     "lang": "pt",
     "violations": []
@@ -39,7 +39,7 @@
     "name": "login",
     "width": 768,
     "url": "http://localhost:3210/login",
-    "title": "Login | Atlas ClubOS",
+    "title": "Entrar | Atlas ClubOS",
     "overflow": false,
     "lang": "pt",
     "violations": []
@@ -48,7 +48,7 @@
     "name": "login",
     "width": 1440,
     "url": "http://localhost:3210/login",
-    "title": "Login | Atlas ClubOS",
+    "title": "Entrar | Atlas ClubOS",
     "overflow": false,
     "lang": "pt",
     "violations": []
@@ -76,6 +76,42 @@
     "width": 1440,
     "url": "http://localhost:3210/courses",
     "title": "Courses | Atlas ClubOS",
+    "overflow": false,
+    "lang": "pt",
+    "violations": []
+  },
+  {
+    "name": "library",
+    "width": 390,
+    "url": "http://localhost:3210/library",
+    "title": "Library | Atlas ClubOS",
+    "overflow": false,
+    "lang": "pt",
+    "violations": []
+  },
+  {
+    "name": "library",
+    "width": 768,
+    "url": "http://localhost:3210/library",
+    "title": "Library | Atlas ClubOS",
+    "overflow": false,
+    "lang": "pt",
+    "violations": []
+  },
+  {
+    "name": "library",
+    "width": 1440,
+    "url": "http://localhost:3210/library",
+    "title": "Library | Atlas ClubOS",
+    "overflow": false,
+    "lang": "pt",
+    "violations": []
+  },
+  {
+    "name": "communities",
+    "width": 390,
+    "url": "http://localhost:3210/communities",
+    "title": "Comunidades | Atlas ClubOS",
     "overflow": false,
     "lang": "pt",
     "violations": []

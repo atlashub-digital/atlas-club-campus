@@ -61,6 +61,7 @@ const validate = (values: any, t: any, customFields: SignupFieldItem[]) => {
 interface InviteOnlySignUpProps {
   inviteCode: string
   org?: any
+  googleConfigured?: boolean
 }
 
 function InviteOnlySignUpComponent(props: InviteOnlySignUpProps) {
@@ -361,6 +362,7 @@ function InviteOnlySignUpComponent(props: InviteOnlySignUpProps) {
           </Form.Submit>
         </FormLayout>
 
+        {(process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' || props.googleConfigured === true) && <>
         {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
@@ -381,6 +383,7 @@ function InviteOnlySignUpComponent(props: InviteOnlySignUpProps) {
           <span>{t('auth.sign_in_with_google')}</span>
         </button>
 
+        </>}
         {/* Login Link */}
         <p className="text-center text-sm text-black/35 mt-6">
           {t('auth.already_have_account')}{' '}

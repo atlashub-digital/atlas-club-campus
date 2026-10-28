@@ -1,0 +1,50 @@
+/* Presentation only. Each class is applied by its owning component under the brand flag. */
+.card {
+  position: relative; display: flex; flex-direction: column; height: 100%;
+  background: #fff; border: 1px solid #e3e7ec; border-radius: 16px;
+  overflow: hidden; box-shadow: 0 3px 12px #17233506;
+  transition: box-shadow .2s, border-color .2s;
+}
+.card:hover, .card:focus-within { border-color: #7c8898; box-shadow: 0 8px 24px #1723350d; }
+.card > div:last-child { padding: 20px; gap: 8px; flex: 1; }
+.card p { font-size: 14px; line-height: 1.6; color: #526174; }
+.card > div:last-child > a { font-size: 18px; line-height: 1.4; }
+.card > div:last-child > div:last-child { margin-top: auto; padding-top: 16px; }
+.card a:focus-visible { outline: 3px solid #3268d6; outline-offset: -3px; }
+.card time, .card > div:last-child span { color: #526174; }
+.catalog { display: flex; flex-direction: column; gap: 24px; padding: 16px 0 40px; }
+.catalog > div:first-child { gap: 16px; flex-wrap: wrap; }
+.grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.search { width: 100%; padding: 12px 40px; background: #fff; color: #172335; border: 1px solid #7c8898; border-radius: 12px; font-size: 14px; }
+.search::placeholder { color: #526174; }
+.search:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.empty { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 64px 24px; background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; }
+.empty p { color: #526174; max-width: 420px; line-height: 1.6; }
+.empty h1, .empty h2 { color: #172335; font-size: 24px; }
+.primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; color: white; background: #3268d6; border: 1px solid #3268d6; border-radius: 10px; font-size: 14px; font-weight: 600; }
+.primary:hover { background: #2856b4; }
+.primary:disabled { opacity: .6; cursor: wait; }
+.course { color: #172335; }
+.course h1 { font-size: clamp(28px,4vw,42px); letter-spacing: -.035em; line-height: 1.2; }
+.course > div { margin-bottom: 24px; }
+.course h2 { color: #172335; }
+.reader { padding: 16px; background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; color: #172335; }
+.pdf { position: relative; margin: 24px; padding-top: 56px; background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; overflow: hidden; }
+.pdf iframe { background: #fff; }
+.pdfControls { position: absolute; top: 8px; right: 12px; display: flex; gap: 8px; }
+.pdfButton { padding: 10px; border: 1px solid #526174; border-radius: 10px; color: #172335; background: #fff; }
+.pdfButton:hover { background: #edf2fc; }
+.pdfButton svg { color: #172335; }
+.admin { color: #172335; background: #f5f6f8; }
+.admin table { width: 100%; background: #fff; border-collapse: collapse; font-size: 14px; }
+.admin thead { background: #f5f6f8; color: #526174; }
+.admin th { padding: 16px 24px; font-weight: 600; text-align: start; }
+.admin td { padding: 20px 24px; border-top: 1px solid #e3e7ec; }
+.admin tbody tr:hover { background: #f8faff; }
+.admin input:not([type=checkbox]), .admin textarea, .admin select { min-height: 44px; background: #fff; color: #172335; border: 1px solid #7c8898; border-radius: 10px; }
+.admin input::placeholder, .admin textarea::placeholder { color: #526174; }
+.admin label { color: #172335; font-weight: 600; }
+.admin input:focus-visible, .admin select:focus-visible, .admin textarea:focus-visible, .admin button:focus-visible, .admin a:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+@media (max-width: 1023px) { .grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 639px) { .grid { grid-template-columns: minmax(0,1fr); gap: 20px; } .pdf { margin: 12px 0; } .reader { padding: 8px; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }

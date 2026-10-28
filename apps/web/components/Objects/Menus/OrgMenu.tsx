@@ -294,7 +294,7 @@ export const OrgMenu = (props: any) => {
             )}
 
             {/* Help Dropdown - Only visible to admins/maintainers/instructors */}
-            {session?.status === 'authenticated' && rights?.dashboard?.action_access && (
+            {!atlasBrand && session?.status === 'authenticated' && rights?.dashboard?.action_access && (
               <div className="hidden md:flex">
                 <DropdownMenu>
                   <TooltipProvider delayDuration={0}>

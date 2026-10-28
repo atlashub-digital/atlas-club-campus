@@ -35,7 +35,7 @@ function TypeOfContentTitle({ title, type }: TypeOfContentTitleProps) {
       <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white nice-shadow">
         {getIcon()}
       </div>
-      <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+      <h1 className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? "text-3xl sm:text-4xl font-bold text-[#172335] tracking-tight" : "text-xl font-bold text-gray-900 tracking-tight"}>
         {title}
       </h1>
     </div>

@@ -20,6 +20,7 @@ import * as Form from '@radix-ui/react-form'
 
 interface SignUpClientProps {
   org: any
+  googleConfigured?: boolean
 }
 
 function SignUpClient(props: SignUpClientProps) {
@@ -79,7 +80,7 @@ function SignUpClient(props: SignUpClientProps) {
       {session.status !== 'loading' && joinMethod == 'open' &&
         (isAuthenticated ? (
           hasOrgToJoin ? (
-            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} />
+            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
           ) : (
             // Signed in on the org-less apex; the effect above redirects to /home.
             <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
@@ -88,16 +89,16 @@ function SignUpClient(props: SignUpClientProps) {
           )
         ) : (
           <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
-            <OpenSignUpComponent org={props.org} />
+            <OpenSignUpComponent org={props.org} googleConfigured={props.googleConfigured} />
           </div>
         ))}
       {session.status !== 'loading' && joinMethod == 'inviteOnly' &&
         (inviteCode ? (
           session.status == 'authenticated' ? (
-            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} />
+            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
           ) : (
             <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
-              <InviteOnlySignUpComponent inviteCode={inviteCode} org={props.org} />
+              <InviteOnlySignUpComponent inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
             </div>
           )
         ) : (
