@@ -76,6 +76,9 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
   const router = useRouter()
   const { t } = useTranslation()
   const [videoEl, setVideoEl] = React.useState<HTMLVideoElement | null>(null)
+  // Set when the YouTube player reports it cannot play the embed here (owner
+  // disallows embedding, region/age gate). Drives the "Abrir no YouTube" fallback.
+  const [embedBlocked, setEmbedBlocked] = React.useState(false)
   const chapters = React.useMemo(() => resolveActivityChapters(activity), [activity])
   const resolvedOrgUuid = orgUuid || org?.org_uuid
   const [videoId, setVideoId] = React.useState('')
@@ -238,8 +241,55 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
                       event.target.seekTo(activity.details.startTime, true)
                     }
                   }}
+                  onError={(event) => {
+                    // YouTube refuses the embed for this video/context: 2 invalid
+                    // id, 5 HTML5 player error, 100 removed/private, 101 and 150
+                    // embedding disallowed by the owner. We never try to work
+                    // around the restriction — we surface it and hand the learner
+                    // a direct link to the video on YouTube.
+                    setEmbedBlocked(true)
+                    console.warn('[video] YouTube embed refused', event?.data)
+                  }}
                 />
               </div>
+              {embedBlocked && (
+                <div className="mt-4 rounded-[16px] border border-white/10 bg-white/5 p-4 text-sm">
+                  <p className="font-semibold text-white">
+                    {t(
+                      'activities.video_embed_blocked',
+                      'Este vídeo não permite ser reproduzido aqui'
+                    )}
+                  </p>
+                  <p className="mt-1 text-white/70">
+                    {t(
+                      'activities.video_embed_blocked_hint',
+                      'O YouTube recusou a incorporação para esta conta ou região. Podes abrir o vídeo diretamente.'
+                    )}
+                  </p>
+                  {activity.content?.uri && (
+                    <a
+                      href={activity.content.uri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex items-center gap-2 rounded-[10px] bg-[--ca-electric-ui,#0066ee] px-4 py-2 font-medium text-white transition hover:brightness-110"
+                    >
+                      {t('activities.open_in_youtube', 'Abrir no YouTube')}
+                    </a>
+                  )}
+                </div>
+              )}
+              {!embedBlocked && activity.content?.uri && (
+                <p className="mt-3 text-xs text-white/50">
+                  <a
+                    href={activity.content.uri}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-white/80"
+                  >
+                    {t('activities.open_in_youtube', 'Abrir no YouTube')}
+                  </a>
+                </p>
+              )}
             </div>
           )}
         </>
