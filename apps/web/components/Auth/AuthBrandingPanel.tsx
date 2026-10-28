@@ -45,6 +45,12 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
   const getBackgroundStyle = (): React.CSSProperties => {
     if (noOrg) {
+      if (atlasBrand) {
+        return {
+          background:
+            'radial-gradient(ellipse at 75% 22%, rgba(0,212,255,.33), transparent 54%), radial-gradient(ellipse at 18% 78%, rgba(0,123,255,.38), transparent 60%), linear-gradient(135deg, #102c54, #050b17)',
+        }
+      }
       return {
         backgroundImage: 'url(/auth-default.png)',
         backgroundSize: 'cover',
@@ -52,9 +58,10 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
       }
     }
     if (background_type === 'gradient' || !background_image) {
-      // Keep the original black gradient
       return {
-        background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+        background: atlasBrand
+          ? 'radial-gradient(circle at 75% 25%, rgba(0,212,255,.32), transparent 52%), linear-gradient(135deg, #173a65, #071429 85%)'
+          : 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
       }
     }
     if (background_type === 'custom' && background_image) {
@@ -148,10 +155,10 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
               and for the no-org apex panel (platform shows no logo on the image). */}
           {!isEnterprise && !noOrg && (
             <div className="login-topbar">
-              <Link prefetch href="https://learnhouse.app" target="_blank">
+              <Link prefetch href={atlasBrand ? getUriWithOrg(org?.slug, '/') : "https://learnhouse.app"} target={atlasBrand ? "_self" : "_blank"}>
                 <img
-                  src="/lrn.svg"
-                  alt="LearnHouse"
+                  src={atlasBrand ? "/atlas/atlas-clubos-mark.svg" : "/lrn.svg"}
+                  alt={atlasBrand ? "Atlas ClubOS" : "LearnHouse"}
                   width={30}
                   height={30}
                   className={cn(
@@ -177,7 +184,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
               <h1 className="font-black text-[28px] leading-tight tracking-tight">
                 {noOrgTitle}
               </h1>
-              <p className="mt-3 text-white/55 text-base font-medium leading-relaxed">
+              <p className="mt-3 text-white/85 text-base font-medium leading-relaxed">
                 {noOrgSubtitle}
               </p>
             </div>
@@ -192,26 +199,28 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
                   {/* Organization logo */}
                   <Link prefetch href={getUriWithOrg(org?.slug, '/')}>
                     <div className="w-24 h-24 rounded-2xl ring-1 ring-inset ring-white/10 bg-white flex items-center justify-center overflow-hidden">
-                      <OrgSquareLogo
-                        org={org}
-                        wideInsetClassName="p-3"
-                        fallback={
-                          <Image
-                            quality={100}
-                            width={96}
-                            height={96}
-                            src={atlasBrand ? '/atlas/atlas-clubos-mark.svg' : learnhouseIcon}
-                            alt={atlasBrand ? 'Atlas ClubOS' : 'LearnHouse'}
-                            className="object-contain"
-                          />
-                        }
-                      />
+                      {atlasBrand ? (
+                        <Image
+                          src="/atlas/atlas-clubos-mark.svg"
+                          alt="Atlas ClubOS"
+                          width={96}
+                          height={96}
+                          className="object-contain p-3"
+                          unoptimized
+                        />
+                      ) : (
+                        <OrgSquareLogo
+                          org={org}
+                          wideInsetClassName="p-3"
+                          fallback={<Image quality={100} width={96} height={96} src={learnhouseIcon} alt="LearnHouse" className="object-contain" />}
+                        />
+                      )}
                     </div>
                   </Link>
 
                   {/* Text content */}
                   <div className="space-y-1">
-                    <h1 className="font-black text-3xl tracking-tight">{org?.name || 'LearnHouse'}</h1>
+                    <h1 className="font-black text-3xl tracking-tight">{atlasBrand ? 'Atlas ClubOS' : (org?.name || 'LearnHouse')}</h1>
                     {displayMessage && (
                       <p className={cn(
                         "text-lg max-w-sm leading-relaxed",

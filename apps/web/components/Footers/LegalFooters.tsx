@@ -15,9 +15,30 @@ import { getPlatformUrl } from '@services/config/config'
 
 const TERMS_URL = getPlatformUrl('/terms') || 'https://www.learnhouse.io/terms'
 const PRIVACY_URL = getPlatformUrl('/privacy') || 'https://www.learnhouse.io/privacy'
+const ATLAS_PRIVACY_DRAFT_URL = 'https://club.atlashub.si/privacidade'
+const ATLAS_LICENSE_URL = 'https://github.com/atlashub-digital/atlas-club-campus/blob/main/LICENSE'
 
 export function AuthFooter({ className = '' }: { className?: string }) {
   const { t } = useTranslation()
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  if (atlasBrand) {
+    // The Club privacy document is a DRAFT. Do not present it as approved legal
+    // terms or silently bind users to the original software vendor's contracts.
+    return (
+      <div className={`pb-7 pt-5 text-center px-6 ${className}`}>
+        <p className="mx-auto max-w-lg text-[12px] leading-relaxed font-medium text-[#536986]">
+          Atlas ClubOS em beta por convite. O aviso de privacidade ainda está em revisão.{' '}
+          <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-[#075bb2] hover:text-[#003e89]">
+            Consultar minuta informativa
+          </Link>{' '}
+          ·{' '}
+          <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-[#075bb2] hover:text-[#003e89]">
+            Licença e código-fonte
+          </Link>
+        </p>
+      </div>
+    )
+  }
   return (
     <div className={`pb-8 pt-6 text-center px-6 ${className}`}>
       <p className="text-[13px] text-black/30 font-medium">
@@ -56,6 +77,21 @@ export function CopyrightFooter({
   tone?: 'light' | 'dark'
 }) {
   const { t } = useTranslation()
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  if (atlasBrand) {
+    return (
+      <footer className={`w-full py-6 px-6 ${className}`}>
+        <div className="flex flex-col items-center gap-2 text-center text-[12px] text-[#a8bdd8]">
+          <p>© {year} Atlas ClubOS · AtlasHub</p>
+          <nav aria-label="Informação legal" className="flex flex-wrap items-center justify-center gap-4">
+            <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Privacidade (minuta)</Link>
+            <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Licenças e atribuições do software</Link>
+          </nav>
+          <p className="text-[#8199ba]">Motor de código aberto com atribuição ao projeto LearnHouse (AGPL-3.0).</p>
+        </div>
+      </footer>
+    )
+  }
   const base = tone === 'dark' ? 'text-white/40' : 'text-black/35'
   const link = tone === 'dark' ? 'text-white/60 hover:text-white/80' : 'text-black/55 hover:text-black/75'
   return (

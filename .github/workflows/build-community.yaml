@@ -43,7 +43,8 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: learnhouse/app
+  # Forks publish to a namespace they own; never push into upstream GHCR.
+  IMAGE_NAME: ${{ github.repository_owner }}/atlas-clubos
 
 jobs:
   build:
