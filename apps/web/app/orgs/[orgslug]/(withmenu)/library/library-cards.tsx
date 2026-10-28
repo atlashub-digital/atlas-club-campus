@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
@@ -76,19 +77,9 @@ export function FolderCard({ folder, orgslug }: { folder: any; orgslug: string }
     ? getFolderThumbnailMediaDirectory(org?.org_uuid, folder.folder_uuid, folder.thumbnail_image)
     : null
   return (
-    <Link href={getUriWithOrg(orgslug, `/library/folder/${removeFolderPrefix(folder.folder_uuid)}`)} className={CARD}>
-      <button
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          shareFolderLink(orgslug, folder.folder_uuid, folder.name, t('library.link_copied'), t('library.link_copy_error'))
-        }}
-        aria-label={t('library.share')}
-        title={t('library.share')}
-        className="absolute top-2 end-2 z-10 p-1 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
-      >
-        <LinkSimple size={16} />
-      </button>
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `group ${styles.folder}` : CARD}>
+      <Link href={getUriWithOrg(orgslug, `/library/folder/${removeFolderPrefix(folder.folder_uuid)}`)}>
+
       <div className="flex items-center gap-3 pe-6">
         {thumb ? (
           <div className="w-10 h-10 rounded-lg bg-cover bg-center flex-shrink-0 ring-1 ring-inset ring-black/5" style={{ backgroundImage: `url(${thumb})` }} />
@@ -102,7 +93,20 @@ export function FolderCard({ folder, orgslug }: { folder: any; orgslug: string }
           <span className="text-xs text-gray-400">{count} {t('library.items')}</span>
         </div>
       </div>
-    </Link>
+      </Link>
+      <button
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          shareFolderLink(orgslug, folder.folder_uuid, folder.name, t('library.link_copied'), t('library.link_copy_error'))
+        }}
+        aria-label={t('library.share')}
+        title={t('library.share')}
+        className="absolute top-2 end-2 z-10 p-1 rounded-md text-[#526174] hover:text-gray-900 hover:bg-gray-100 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+      >
+        <LinkSimple size={16} />
+      </button>
+    </div>
   )
 }
 
@@ -136,7 +140,7 @@ export function LibraryItemCard({ item, orgslug }: { item: any; orgslug: string 
           <Icon size={46} weight="fill" />
         </div>
       )}
-      <div className="p-3 flex flex-col space-y-1.5">
+      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.libraryBody : "p-3 flex flex-col space-y-1.5"}>
         <h3 className="text-base font-bold text-gray-900 leading-tight line-clamp-1">{name}</h3>
         <div className="pt-1.5 flex items-center justify-between border-t border-gray-100">
           <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{t(`library.tabs.${type}`)}</span>
@@ -151,7 +155,7 @@ export function LibraryItemCard({ item, orgslug }: { item: any; orgslug: string 
     </>
   )
 
-  const BIG = 'group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all hover:bg-gray-50/40'
+  const BIG = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.card : 'group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all hover:bg-gray-50/40'
   // Media opens in-app rather than sending the learner off to the raw file.
   if (type === 'media') {
     return (

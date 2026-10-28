@@ -24,7 +24,7 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
     : null
   const imageUrl = ogImageUrl || getOrgThumbnailMediaDirectory(org?.org_uuid, org?.thumbnail_image)
   const canonical = await getServerCanonicalUrl(params.orgslug, '/courses')
-  const title = buildPageTitle('Courses', org.name, seoConfig)
+  const title = buildPageTitle(process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Cursos' : 'Courses', org.name, seoConfig)
   const description = org.description || seoConfig.default_meta_description || ''
 
   return {

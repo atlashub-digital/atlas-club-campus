@@ -31,6 +31,7 @@
       if (qs) return qs;
     } catch { /* malformed query string */ }
 
+    if (document.documentElement.lang === 'pt-BR') return 'pt-BR';
     return (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
   }
 

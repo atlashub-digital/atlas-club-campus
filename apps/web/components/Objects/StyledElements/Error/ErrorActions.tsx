@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { getPlatformUrl, getUriWithoutOrg } from '@services/config/config'
 import { signOut } from '@components/Contexts/AuthContext'
 import { openFeedbackDialog, isReportingAvailable } from '@lib/errors/report'
@@ -38,7 +39,7 @@ function ActionButton({
   variant?: Variant
   disabled?: boolean
 }) {
-  const cls = `flex space-x-2 items-center rounded-full px-4 py-1.5 transition-all ease-linear shadow-sm disabled:opacity-50 ${VARIANT_CLASSES[variant]}`
+  const cls = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? (variant === 'primary' ? styles.primary : styles.secondary) : `flex space-x-2 items-center rounded-full px-4 py-1.5 transition-all ease-linear shadow-sm disabled:opacity-50 ${VARIANT_CLASSES[variant]}`
   if (href) {
     return (
       <a href={href} className={cls}>
@@ -73,6 +74,7 @@ export interface ErrorActionsProps {
  * boundary (which renders outside providers) has its own inlined buttons.
  */
 export default function ErrorActions({ resolutions, reset, eventId, loginNext }: ErrorActionsProps) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const router = useRouter()
   const [signingOut, setSigningOut] = useState(false)
 
@@ -108,38 +110,38 @@ export default function ErrorActions({ resolutions, reset, eventId, loginNext }:
         switch (kind) {
           case 'retry':
             return (
-              <ActionButton key={kind} onClick={retry} variant="primary" label="Retry"
+              <ActionButton key={kind} onClick={retry} variant="primary" label={atlasBrand ? 'Tentar novamente' : 'Retry'}
                 icon={<RefreshCcw size={16} />} />
             )
           case 'reload':
             return (
-              <ActionButton key={kind} onClick={() => window.location.reload()} variant="primary" label="Reload"
+              <ActionButton key={kind} onClick={() => window.location.reload()} variant="primary" label={atlasBrand ? 'Recarregar' : 'Reload'}
                 icon={<RefreshCcw size={16} />} />
             )
           case 'login':
             return (
-              <ActionButton key={kind} href={loginHref} variant="primary" label="Log back in"
+              <ActionButton key={kind} href={loginHref} variant="primary" label={atlasBrand ? 'Entrar novamente' : 'Log back in'}
                 icon={<LogIn size={16} />} />
             )
           case 'home':
             return (
-              <ActionButton key={kind} href={getUriWithoutOrg('/home')} variant="neutral" label="Home"
+              <ActionButton key={kind} href={getUriWithoutOrg('/home')} variant="neutral" label={atlasBrand ? 'Voltar ao Campus' : 'Home'}
                 icon={<HomeIcon size={16} />} />
             )
           case 'signout':
             return (
               <ActionButton key={kind} onClick={doSignOut} disabled={signingOut} variant="ghost"
-                label={signingOut ? 'Signing out…' : 'Sign out'} icon={<LogOut size={16} />} />
+                label={atlasBrand ? (signingOut ? 'Saindo…' : 'Sair') : (signingOut ? 'Signing out…' : 'Sign out')} icon={<LogOut size={16} />} />
             )
           case 'report':
             if (!isReportingAvailable()) return null
             return (
               <ActionButton key={kind} onClick={() => openFeedbackDialog({ eventId })} variant="danger"
-                label="Report this problem" icon={<MessageSquareWarning size={16} />} />
+                label={atlasBrand ? 'Relatar problema' : 'Report this problem'} icon={<MessageSquareWarning size={16} />} />
             )
           case 'contact_support':
             return (
-              <ActionButton key={kind} href={supportHref} variant="ghost" label="Contact support"
+              <ActionButton key={kind} href={supportHref} variant="ghost" label={atlasBrand ? 'Contatar suporte' : 'Contact support'}
                 icon={<LifeBuoy size={16} />} />
             )
           case 'wait':

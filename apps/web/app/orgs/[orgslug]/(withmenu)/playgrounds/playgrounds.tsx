@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@components/Clubos/Surfaces.module.css'
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation'
@@ -71,7 +72,7 @@ export default function PlaygroundsClient({
 
   const handleCreate = async () => {
     if (!access_token || isCreating) return
-    const name = newName.trim() || 'Untitled Playground'
+    const name = newName.trim() || t('playgrounds.new_playground')
     setIsCreating(true)
     setShowNameModal(false)
     try {
@@ -99,14 +100,14 @@ export default function PlaygroundsClient({
     <FeatureGate feature="playgrounds" orgslug={orgslug} context="public">
       <div className="w-full">
         <GeneralWrapperStyled>
-          <div className="flex flex-col space-y-2 mb-2">
+          <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.catalog : "flex flex-col space-y-2 mb-2"}>
             <div className="flex items-center justify-between">
               <TypeOfContentTitle title={t('common.playgrounds')} type="pg" />
               {isUserAdmin && (
                 <button
                   onClick={openCreateModal}
                   disabled={isCreating}
-                  className="rounded-lg bg-black transition-all duration-100 ease-linear antialiased p-2 px-5 my-auto font text-xs font-bold text-white nice-shadow flex space-x-2 items-center hover:scale-105 disabled:opacity-50"
+                  className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "rounded-lg bg-black transition-all duration-100 ease-linear antialiased p-2 px-5 my-auto font text-xs font-bold text-white nice-shadow flex space-x-2 items-center hover:scale-105 disabled:opacity-50"}
                 >
                   <div>{t('playgrounds.new_playground')}</div>
                   <div className="text-md bg-neutral-800 px-1 rounded-full">+</div>
@@ -118,19 +119,20 @@ export default function PlaygroundsClient({
             {playgrounds.length > 0 && (
               <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <div className="relative w-full sm:w-80">
-                  <Search className="absolute start-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Search className="absolute start-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    aria-label="Search playgrounds"
+                    aria-label={t('playgrounds.search_placeholder')}
                     placeholder={t('playgrounds.search_placeholder')}
-                    className="w-full ps-10 pe-10 py-2.5 bg-white nice-shadow rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 border-0"
+                    className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.search : "w-full ps-10 pe-10 py-2.5 bg-white nice-shadow rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 border-0"}
                   />
                   {searchQuery && (
                     <button
-                      onClick={() => setSearchQuery('')}
-                      className="absolute end-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      aria-label={t('common.clear_search')}
+                    onClick={() => setSearchQuery('')}
+                      className="absolute end-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-600"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -142,18 +144,18 @@ export default function PlaygroundsClient({
             {/* Search results info */}
             {searchQuery && (
               <div className="mb-2 text-sm text-gray-500">
-                {filtered.length} result{filtered.length !== 1 ? 's' : ''} for &quot;{searchQuery}&quot;
+                {t('courses.search_results', { count: filtered.length, query: searchQuery })}
               </div>
             )}
 
             {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.grid : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
               {paginated.map((pg) => (
                 <PlaygroundCard
                   key={pg.playground_uuid}
                   playground={pg}
                   orgslug={orgslug}
-                  canEdit={true}
+                  canEdit={Boolean(isUserAdmin)}
                 />
               ))}
 
@@ -161,24 +163,24 @@ export default function PlaygroundsClient({
                 <div className="col-span-full flex flex-col justify-center items-center py-12 px-4">
                   <Search className="w-12 h-12 text-gray-300 mb-4" />
                   <h2 className="text-xl font-semibold text-gray-600 mb-2">{t('playgrounds.no_results_for')} &quot;{searchQuery}&quot;</h2>
-                  <p className="text-gray-400">{t('playgrounds.try_different_search')}</p>
+                  <p className="text-gray-600">{t('playgrounds.try_different_search')}</p>
                 </div>
               )}
 
               {playgrounds.length === 0 && !searchQuery && (
-                <div className="col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30">
+                <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.empty : "col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30"}>
                   <div className="p-4 bg-white rounded-full nice-shadow mb-4">
                     <Cube className="w-8 h-8 text-gray-300" />
                   </div>
-                  <h1 className="text-xl font-bold text-gray-600 mb-2">{t('playgrounds.no_playgrounds_yet')}</h1>
-                  <p className="text-md text-gray-400 mb-6 max-w-xs text-center">
+                  <h2 className="text-xl font-bold text-gray-600 mb-2">{t('playgrounds.no_playgrounds_yet')}</h2>
+                  <p className="text-md text-gray-600 mb-6 max-w-xs text-center">
                     {t('playgrounds.playgrounds_description')}
                   </p>
                   {isUserAdmin && (
                     <button
                       onClick={openCreateModal}
                       disabled={isCreating}
-                      className="rounded-lg bg-black transition-all duration-100 ease-linear antialiased p-2 px-5 my-auto font text-xs font-bold text-white nice-shadow flex space-x-2 items-center hover:scale-105 disabled:opacity-50"
+                      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "rounded-lg bg-black transition-all duration-100 ease-linear antialiased p-2 px-5 my-auto font text-xs font-bold text-white nice-shadow flex space-x-2 items-center hover:scale-105 disabled:opacity-50"}
                     >
                       <div>{t('playgrounds.new_playground')}</div>
                       <div className="text-md bg-neutral-800 px-1 rounded-full">+</div>
@@ -193,14 +195,14 @@ export default function PlaygroundsClient({
               totalPages={totalPages}
               pageNumbers={pageNumbers}
               onPageChange={goToPage}
-              previousLabel="Previous"
-              nextLabel="Next"
+              previousLabel={t('common.previous')}
+              nextLabel={t('common.next')}
               className="mt-8"
             />
 
             {totalPages > 1 && (
               <div className="mt-2 text-center text-sm text-gray-500">
-                Page {currentPage} of {totalPages}
+                {t('common.page_of', { current: currentPage, total: totalPages })}
               </div>
             )}
           </div>
@@ -211,17 +213,18 @@ export default function PlaygroundsClient({
     {/* Create name modal */}
     {showNameModal && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" onClick={() => setShowNameModal(false)}>
-        <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4" onClick={(e) => e.stopPropagation()}>
-          <h2 className="text-base font-bold text-gray-900 mb-1">{t('playgrounds.new_playground_modal_title')}</h2>
-          <p className="text-xs text-gray-400 mb-4">{t('playgrounds.new_playground_modal_desc')}</p>
+        <div role="dialog" aria-modal="true" aria-labelledby="playground-create-title" className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4" onClick={(e) => e.stopPropagation()}>
+          <h2 id="playground-create-title" className="text-base font-bold text-gray-900 mb-1">{t('playgrounds.new_playground_modal_title')}</h2>
+          <p className="text-xs text-gray-600 mb-4">{t('playgrounds.new_playground_modal_desc')}</p>
           <input
             autoFocus
             type="text"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); if (e.key === 'Escape') setShowNameModal(false) }}
-            placeholder="e.g. Photosynthesis Quiz"
-            className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-black focus:border-transparent mb-4"
+            aria-label={t('playgrounds.new_playground_modal_title')}
+            placeholder={t('playgrounds.new_playground_modal_title')}
+            className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `${styles.field} mb-4` : "w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-black focus:border-transparent mb-4"}
           />
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowNameModal(false)} className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
@@ -230,7 +233,7 @@ export default function PlaygroundsClient({
             <button
               onClick={handleCreate}
               disabled={isCreating}
-              className="px-4 py-2 bg-black text-white text-sm font-bold rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+              className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "px-4 py-2 bg-black text-white text-sm font-bold rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"}
             >
               {isCreating ? t('playgrounds.creating') : t('playgrounds.create')}
             </button>

@@ -1,4 +1,6 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
+import styles from '@components/Clubos/Surfaces.module.css'
 import Link from 'next/link'
 import React, { useEffect, useState, Suspense } from 'react'
 import { getUriWithOrg } from '@services/config/config'
@@ -93,6 +95,7 @@ const CourseClient = (props: any) => {
   if (!initialCourse && !serverError && courseLoading) {
     return (
       <GeneralWrapperStyled>
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.course : undefined}>
         <div className="animate-pulse">
           {/* Breadcrumb placeholder */}
           <div className="pb-4 flex items-center gap-2">
@@ -160,7 +163,8 @@ const CourseClient = (props: any) => {
             </div>
           </div>
         </div>
-      </GeneralWrapperStyled>
+      </div>
+          </GeneralWrapperStyled>
     )
   }
 
@@ -326,6 +330,7 @@ const CourseClient = (props: any) => {
       {!course || !org ? null : (
         <>
           <GeneralWrapperStyled>
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.course : undefined}>
             <div className="pb-4">
               <Breadcrumbs items={[
                 { label: t('courses.courses'), href: getUriWithOrg(orgslug, '/courses'), icon: <BookCopy size={14} /> },
@@ -396,7 +401,7 @@ const CourseClient = (props: any) => {
                     );
                   } else if (showImage && course.thumbnail_image) {
                     return (
-                      <div className="relative inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl w-full h-[200px] md:h-[400px] bg-cover bg-center"
+                      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? "relative w-full aspect-video rounded-2xl overflow-hidden border border-[#e3e7ec]" : "relative inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl w-full h-[200px] md:h-[400px] bg-cover bg-center"}
                         style={{
                           backgroundImage: `url(${getCourseThumbnailMediaDirectory(
                             org?.org_uuid,
@@ -405,6 +410,7 @@ const CourseClient = (props: any) => {
                           )})`,
                         }}
                       >
+                        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && <CourseCover title={course.name} image={getCourseThumbnailMediaDirectory(org?.org_uuid, course.course_uuid, course.thumbnail_image)} priority />}
                         {/* Hidden img with fetchpriority="high" so the browser fetches this LCP image immediately */}
                         { }
                         <img
@@ -445,6 +451,7 @@ const CourseClient = (props: any) => {
                       </div>
                     );
                   } else {
+                    if (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true') return <CourseCover title={course.name} variant="hero" />;
                     return (
                       <div
                         className="inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl relative w-full h-[400px] bg-cover bg-center"
@@ -529,7 +536,7 @@ const CourseClient = (props: any) => {
                               rel="noopener noreferrer"
                               className="text-blue-500 hover:underline text-sm"
                             >
-                              <span className="sr-only">Link to {learningText}</span>
+                              <span className="sr-only">{learningText}</span>
                               <ArrowRight size={14} />
                             </a>
                           )}
@@ -549,7 +556,17 @@ const CourseClient = (props: any) => {
                   return (
                     <div key={chapter.chapter_uuid || `chapter-${chapter.name}`} className="">
                       <div 
-                        className="flex items-start py-4 px-4 outline outline-1 outline-neutral-200/40 font-bold bg-neutral-50 text-neutral-600 cursor-pointer hover:bg-neutral-100 transition-colors"
+                        className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.chapterToggle : "flex items-start py-4 px-4 outline outline-1 outline-neutral-200/40 font-bold bg-neutral-50 text-neutral-600 cursor-pointer hover:bg-neutral-100 transition-colors"}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={isExpanded}
+                        aria-label={chapter.name}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault()
+                            setExpandedChapters(prev => ({ ...prev, [chapter.chapter_uuid]: !isExpanded }))
+                          }
+                        }}
                         onClick={() => setExpandedChapters(prev => ({
                           ...prev,
                           [chapter.chapter_uuid]: !isExpanded
@@ -581,7 +598,7 @@ const CourseClient = (props: any) => {
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center space-x-1 text-sm text-neutral-400 font-normal">
+                          <div className="flex items-center space-x-1 text-sm text-[#526174] font-normal">
                             <Layers size={16} className="me-1" />
                             <span>{chapter.activities.length} {t('activities.activities')}</span>
                           </div>
@@ -624,7 +641,7 @@ const CourseClient = (props: any) => {
                                       </div>
                                     )}
                                   </div>
-                                  <div className="flex items-center space-x-1.5 mt-0.5 text-neutral-400">
+                                  <div className="flex items-center space-x-1.5 mt-0.5 text-[#526174]">
                                     {getActivityTypeIcon(activity.activity_type, activity.activity_sub_type, 10)}
                                     <span className="text-xs font-medium">{getActivityTypeLabel(activity.activity_type, activity.activity_sub_type)}</span>
                                   </div>
@@ -675,6 +692,7 @@ const CourseClient = (props: any) => {
             <Suspense fallback={<div className="animate-pulse h-48 bg-gray-100 rounded-lg mt-4" />}>
               <CourseCommunitySection courseUuid={course.course_uuid} orgslug={orgslug} />
             </Suspense>
+          </div>
           </GeneralWrapperStyled>
 
           {/* Mobile Actions Box */}

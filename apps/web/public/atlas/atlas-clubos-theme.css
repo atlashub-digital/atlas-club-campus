@@ -1,168 +1,36 @@
-/*
- * Atlas ClubOS — tema do Campus (tokens do portal canónico).
- * Fonte: atlashub-digital/atlashub-club · src/styles/tokens.css (v1.0)
- * Opt-in por build (NEXT_PUBLIC_ATLAS_CLUBOS_BRAND). Não altera o núcleo:
- * só variáveis e apresentação. Licença e atribuição LearnHouse/AGPL preservadas.
- */
+/* Atlas ClubOS Light — loaded only with NEXT_PUBLIC_ATLAS_CLUBOS_BRAND. */
 :root {
-  --background: 220 64% 5%;
-  --foreground: 210 20% 98%;
-  --card: 215 48% 15%;
-  --card-foreground: 210 20% 98%;
-  --popover: 213 43% 19%;
-  --popover-foreground: 210 20% 98%;
-  --primary: 211 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 213 43% 19%;
-  --secondary-foreground: 213 27% 84%;
-  --muted: 214 39% 20%;
-  --muted-foreground: 214 25% 78%;
-  --accent: 214 46% 22%;
-  --accent-foreground: 187 100% 50%;
-  --border: 212 33% 36%;
-  --input: 212 33% 36%;
-  --ring: 217 96% 53%;
-  --radius: 0.75rem;
-
-  --ca-bg: #050b17;         --ca-bg-deep: #02060f;
-  --ca-surface: #172e4b;    --ca-surface-2: #203e5e;
-  --ca-border: #406182;     --ca-electric: #007bff;
-  --ca-electric-ui: #0066ee;--ca-cyan: #00d4ff;
-  --ca-gold: #ffc857;       --ca-violet: #8b5cf6;
-  --ca-text: #f9fafb;       --ca-text-2: #cbd5e1;  --ca-text-3: #94a3b8;
-  --ca-grad-atlas: linear-gradient(115deg, #0b3bff 0%, #007bff 45%, #00d4ff 100%);
-  --ca-shadow: 0 18px 50px rgba(0,0,0,.35);
-  --ca-glow-blue: 0 0 26px rgba(0,123,255,.35);
+  color-scheme: light;
+  --atlas-reader-ink: #172335; --atlas-reader-muted: #526174;
+  --atlas-reader-border: #e3e7ec; --atlas-reader-surface: #ffffff;
+  --atlas-nav-marker: #3268d6;
+  --atlas-nav-ink: #172335; --atlas-nav-muted: #526174;
+  --atlas-nav-hover: #edf2fc; --atlas-nav-surface: #ffffff;
+  --background: 220 18% 97%; --foreground: 216 39% 15%;
+  --card: 0 0% 100%; --card-foreground: 216 39% 15%;
+  --popover: 0 0% 100%; --popover-foreground: 216 39% 15%;
+  --primary: 220 67% 52%; --primary-foreground: 0 0% 100%;
+  --secondary: 220 18% 97%; --secondary-foreground: 216 39% 15%;
+  --muted: 220 18% 97%; --muted-foreground: 214 15% 43%;
+  --accent: 220 18% 97%; --accent-foreground: 220 67% 52%;
+  --border: 213 19% 91%; --input: 213 19% 91%;
+  --ring: 220 67% 52%; --radius: .75rem;
 }
-
-html, body { background-color: var(--ca-bg) !important; color: var(--ca-text); }
-body {
-  /* The Club portal uses navy as a canvas; real light/blue pools create depth. */
-  background-image:
-    radial-gradient(ellipse 52% 42% at 88% 2%, rgba(0,123,255,.19), transparent 75%),
-    radial-gradient(ellipse 60% 38% at 9% 38%, rgba(0,212,255,.09), transparent 78%),
-    linear-gradient(180deg, #071329 0%, #050b17 78%);
-  background-attachment: fixed;
-  font-family: Inter, "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+body { background: #f5f6f8; color: #172335; }
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #3268d6; outline-offset: 3px;
 }
-
-/* ---------- Cabeçalho e navegação ---------- */
-header, nav[role="navigation"] { border-color: var(--ca-border) !important; }
-header {
-  background: color-mix(in srgb, #112540 92%, transparent) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--ca-border) !important;
+.atlas-nav { background: #fff; border-bottom: 1px solid #e3e7ec; }
+.atlas-menu { display: flex; gap: 4px; flex-wrap: wrap; }
+.atlas-menu a { display: block; padding: 8px 12px; border-radius: 10px; color: #526174; font-size: 14px; font-weight: 600; }
+.atlas-menu a:hover { background: #f5f6f8; color: #172335; }
+.atlas-menu a[aria-current=page] { color: #2856b4; background: #edf2fc; }
+.atlas-auth-shell, .atlas-auth-form { background: #fff; color: #172335; }
+@media (max-width: 767px) {
+  .atlas-menu { flex-direction: column; width: 100%; }
 }
-nav a, header a { color: var(--ca-text-2); transition: color .18s ease; }
-nav a:hover, header a:hover { color: var(--ca-cyan); }
-
-/* ---------- Botões ---------- */
-button[type="submit"], a[role="button"], .btn-primary {
-  border-radius: 999px !important;
-}
-button[type="submit"] {
-  background-color: var(--ca-electric-ui) !important;
-  color: #fff !important;
-  box-shadow: var(--ca-glow-blue);
-  transition: filter .18s ease, transform .18s ease;
-}
-button[type="submit"]:hover { filter: brightness(1.12); }
-
-/* ---------- Cartões e superfícies ---------- */
-/* Atlas brand cards need a distinct elevation, not an all-black overlay. */
-[class*="rounded"][class*="bg-white"], article, .card {
-  background: linear-gradient(152deg, #1a3657 0%, #142840 100%) !important;
-  border: 1px solid var(--ca-border) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 14px 36px rgba(0,0,0,.23), 0 1px 0 rgba(135,199,255,.09) inset;
-}
-[class*="bg-white"] { background-color: var(--ca-surface) !important; }
-.group[class*="bg-white"]:hover { border-color: #4c9ad5 !important; box-shadow: 0 16px 42px rgba(0,123,255,.16); }
-
-
-/* ---------- Formulários ---------- */
-input:not([type="checkbox"]):not([type="radio"]), textarea, select {
-  background-color: var(--ca-surface-2) !important;
-  border: 1px solid var(--ca-border) !important;
-  color: var(--ca-text) !important;
-  border-radius: 12px !important;
-}
-input::placeholder, textarea::placeholder { color: var(--ca-text-3) !important; }
-input:focus, textarea:focus, select:focus {
-  border-color: var(--ca-cyan) !important;
-  box-shadow: 0 0 0 3px rgba(0,212,255,.18) !important;
-}
-:where(a, button, input, select, textarea):focus-visible {
-  outline: 2px solid var(--ca-cyan); outline-offset: 2px;
-}
-
-/* ---------- Tabelas e separadores ---------- */
-table { border-color: var(--ca-border) !important; }
-th { color: var(--ca-text-2) !important; }
-hr, [role="separator"] { border-color: var(--ca-border) !important; }
-
-/* ---------- Estados e destaque ---------- */
-a { color: var(--ca-cyan); text-underline-offset: 2px; }
-/* Titles and primary labels retain AA contrast; low-emphasis copy is separate. */
-[class*="text-black"], [class*="text-gray-9"], [class*="text-slate-9"] { color: #f6faff !important; }
-[class*="text-black/4"], [class*="text-black/5"], [class*="text-black/6"], [class*="text-gray-5"], [class*="text-gray-6"] { color: #bdcfe4 !important; }
-
-/* ---------- Rodapé legal (atribuição preservada) ---------- */
-footer { border-top: 1px solid var(--ca-border) !important; }
-footer, footer a { color: var(--ca-text-3) !important; }
-
-/* ---------- Barra de progresso ---------- */
-[role="progressbar"] > *, progress::-webkit-progress-value {
-  background: var(--ca-grad-atlas) !important;
-}
-
-/* ---------- Atlas auth is purposefully luminous, not dark-on-dark ---------- */
-/* The native auth form uses dark-text utility classes originally made for a
-   white background. Keep it a bright, elevated workspace next to the navy
-   Atlas hero; do not darken every `bg-white` inside this subtree. */
-.atlas-auth-shell {
-  background: linear-gradient(118deg, #f3f8ff 0%, #e7f1fc 51%, #0c203b 51.1%, #050b17 100%) !important;
-}
-.atlas-auth-form {
-  background: #f3f8ff !important;
-  color: #162d49 !important;
-}
-.atlas-auth-form :is(h1,h2,h3,h4),
-.atlas-auth-form [class*="text-black"],
-.atlas-auth-form [class*="text-gray-9"],
-.atlas-auth-form [class*="text-slate-9"] {
-  color: #122943 !important;
-}
-.atlas-auth-form [class*="text-black/"],
-.atlas-auth-form [class*="text-gray-5"],
-.atlas-auth-form [class*="text-gray-6"] {
-  color: #536986 !important;
-}
-.atlas-auth-form input:not([type="checkbox"]):not([type="radio"]),
-.atlas-auth-form textarea,
-.atlas-auth-form select {
-  background: #fff !important;
-  color: #132a45 !important;
-  border: 1px solid #a7bdd7 !important;
-  box-shadow: 0 2px 6px rgba(7,30,65,.05);
-}
-.atlas-auth-form input::placeholder,
-.atlas-auth-form textarea::placeholder { color: #64748b !important; }
-.atlas-auth-form button[type="submit"] {
-  background: linear-gradient(110deg, #0066ee 0%, #007bff 75%, #009dff 100%) !important;
-  box-shadow: 0 8px 25px rgba(0,102,238,.23);
-}
-.atlas-auth-shell [class*="bg-white"] { background-color: transparent; }
-.atlas-auth-form [class*="bg-white"] { background-color: #fff !important; }
-.atlas-auth-form [class*="rounded"][class*="bg-white"] {
-  background: #fff !important;
-  color: #122943 !important;
-  border-color: #c6d7ea !important;
-  box-shadow: 0 4px 18px rgba(16,42,79,.08);
-}
-.atlas-auth-form [class*="text-white"] { color: #122943; }
-.atlas-auth-form button[type="submit"] [class*="text-white"] { color: #fff; }
-
-@media (max-width: 1023px) {
-  .atlas-auth-shell { background: #f3f8ff !important; }
-}
+@media (prefers-reduced-motion: reduce) { .animate-fade-in { animation: none; } }
+/* Desktop navigation has its own row so search and account actions keep room. */
+.atlas-desktop-nav { background: #fff; border-bottom: 1px solid #e3e7ec; }
+.atlas-desktop-nav nav { max-width: 1440px; margin: auto; padding: 8px 32px; }
+.atlas-menu a { min-height: 44px; display: flex; align-items: center; }

@@ -64,9 +64,10 @@ interface OpenSignUpComponentProps {
   // the instance default org server-side and passes it down here. Prefer it over
   // the (possibly null) context so the POST always targets a real org_id.
   org?: any
+  googleConfigured?: boolean
 }
 
-function OpenSignUpComponent({ org: propOrg }: OpenSignUpComponentProps = {}) {
+function OpenSignUpComponent({ org: propOrg, googleConfigured }: OpenSignUpComponentProps = {}) {
   const { t } = useTranslation()
   const { track } = useLHAnalytics('public')
   const [isSubmitting, setIsSubmitting] = React.useState(false)
@@ -85,7 +86,7 @@ function OpenSignUpComponent({ org: propOrg }: OpenSignUpComponentProps = {}) {
   // both, so offering them here would only surface a 403.
   const allowedMethods = React.useMemo(() => getAllowedAuthMethods(org), [org])
   const passwordAllowed = allowedMethods.has('password')
-  const googleAllowed = allowedMethods.has('google')
+  const googleAllowed = allowedMethods.has('google') && (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' || googleConfigured === true)
 
   // Field definitions ship with the org config the page already loaded, so no
   // extra request is needed to render them.

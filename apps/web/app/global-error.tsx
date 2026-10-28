@@ -1,5 +1,6 @@
 "use client";
 
+import { campusErrorCopy } from '@components/Clubos/errorCopy'
 import * as Sentry from "@sentry/nextjs";
 import '../styles/globals.css'
 import { classifyError } from '@lib/errors/classify'
@@ -32,6 +33,8 @@ export default function GlobalError({
   )
 
   const { category, detail, status } = classifyError(error)
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const [campusTitle, campusDescription] = campusErrorCopy(category.kind)
 
   useEffect(() => {
     const msg = error?.message || ''
@@ -80,37 +83,37 @@ export default function GlobalError({
   const btn = 'flex items-center gap-2 px-5 py-2 rounded-full font-bold text-sm transition-colors shadow-sm'
 
   return (
-    <html lang="en" dir={dir} suppressHydrationWarning>
+    <html lang={atlasBrand ? 'pt-BR' : 'en'} dir={dir} suppressHydrationWarning>
       <body className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
         <div className="flex flex-col items-center space-y-6 max-w-xl text-center">
           <div className="bg-rose-100 p-4 rounded-2xl">
             <AlertTriangle className="text-rose-700" size={44} />
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-rose-700">{category.title}</h2>
-            <span className="text-[11px] uppercase tracking-wide font-semibold text-rose-400">
-              {category.kind.replace(/_/g, ' ')}
+            <h2 className="text-2xl md:text-3xl font-bold text-rose-700">{atlasBrand ? campusTitle : category.title}</h2>
+            <span className="text-[11px] uppercase tracking-wide font-semibold text-rose-700">
+              {atlasBrand ? 'Atlas ClubOS / Campus' : category.kind.replace(/_/g, ' ')}
             </span>
           </div>
-          <p className="text-gray-600">{category.description}</p>
+          <p className="text-gray-600">{atlasBrand ? campusDescription : category.description}</p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button onClick={() => reset()} className={`${btn} text-white bg-rose-700 hover:bg-rose-800`}>
               <RefreshCcw size={16} />
-              <span>Try again</span>
+              <span>{atlasBrand ? 'Tentar novamente' : 'Try again'}</span>
             </button>
             <a href="/home" className={`${btn} text-gray-100 bg-gray-700 hover:bg-gray-800`}>
               <Home size={16} />
-              <span>Home</span>
+              <span>{atlasBrand ? 'Voltar ao Campus' : 'Home'}</span>
             </a>
             <button onClick={doSignOut} disabled={signingOut} className={`${btn} text-gray-600 bg-gray-100 hover:bg-gray-200 disabled:opacity-50`}>
               <LogOut size={16} />
-              <span>{signingOut ? 'Signing out…' : 'Sign out'}</span>
+              <span>{atlasBrand ? (signingOut ? 'Saindo…' : 'Sair') : (signingOut ? 'Signing out…' : 'Sign out')}</span>
             </button>
             {Sentry.isInitialized() && (
               <button onClick={report} className={`${btn} text-rose-700 bg-rose-100 hover:bg-rose-200`}>
                 <MessageSquareWarning size={16} />
-                <span>Report this problem</span>
+                <span>{atlasBrand ? 'Relatar problema' : 'Report this problem'}</span>
               </button>
             )}
           </div>
@@ -119,10 +122,10 @@ export default function GlobalError({
             <div className="w-full max-w-lg">
               <button
                 onClick={() => setShowDetails((s) => !s)}
-                className="flex items-center gap-1 mx-auto text-xs font-semibold text-gray-400 hover:text-gray-600 transition-colors"
+                className="flex items-center gap-1 mx-auto text-xs font-semibold text-gray-600 hover:text-gray-900 transition-colors"
               >
                 {showDetails ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                <span>{showDetails ? 'Hide technical details' : 'Show technical details'}</span>
+                <span>{atlasBrand ? (showDetails ? 'Ocultar detalhes técnicos' : 'Mostrar detalhes técnicos') : (showDetails ? 'Hide technical details' : 'Show technical details')}</span>
               </button>
               {showDetails && (
                 <div className="mt-3 bg-gray-100 border border-gray-200 rounded-xl p-4 text-start text-xs font-mono text-gray-700 break-all space-y-1.5">

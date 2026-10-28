@@ -92,6 +92,18 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
   // blueprint-grid overlay.
   const hasCustomBackground = noOrg || (background_type !== 'gradient' && background_image)
 
+  if (atlasBrand) return (
+    <aside className="h-full bg-[#f5f6f8] border-s border-[#e3e7ec] flex flex-col justify-between p-16 text-[#172335]">
+      <Image src="/atlas/brand/01-portico/horizontal-light.svg" width={290} height={48} alt="Atlas ClubOS" unoptimized />
+      <div className="max-w-md">
+        <p className="text-sm font-semibold text-[#526174] mb-4">CAMPUS ATLAS</p>
+        <h2 className="text-4xl font-bold tracking-tight leading-tight">Seu espaço para aprender e compartilhar.</h2>
+        <p className="mt-6 text-lg leading-relaxed text-[#526174]">Acesse seus cursos, acompanhe sua aprendizagem e participe da comunidade.</p>
+      </div>
+      <p className="text-sm text-[#526174]">AtlasHub · Formação e comunidade</p>
+    </aside>
+  )
+
   return (
     <div className="relative h-full w-full">
       {/* Inset rounded card (platform-style) */}

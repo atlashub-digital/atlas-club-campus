@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { Plus, Trash2, GripVertical, ImageIcon, Link as LinkIcon, Award, Edit, TextIcon, Briefcase, GraduationCap, MapPin, BookOpen } from 'lucide-react'
@@ -348,7 +349,7 @@ const UserProfileBuilder = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl nice-shadow">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.profile : "bg-white rounded-xl nice-shadow"}>
       <div className="flex flex-col gap-0">
         {/* Header */}
         <div className="flex items-center justify-between bg-gray-50 px-5 py-3 mx-3 my-3 rounded-md">
@@ -372,7 +373,7 @@ const UserProfileBuilder = () => {
         <div className="mx-5 mb-5 space-y-6">
 
         {/* Main Content */}
-        <div className="grid grid-cols-4 gap-6">
+        <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.profileGrid : "grid grid-cols-4 gap-6"}>
           {/* Sections Panel */}
           <div className="col-span-1 border-e pe-4">
             <h3 className="font-medium mb-4">{t('user.settings.profile_builder.sections')}</h3>

@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import * as Form from '@radix-ui/react-form'
 import { Info } from 'lucide-react'
@@ -54,7 +55,7 @@ FormLabel.displayName = 'FormLabel'
 
 export const FormMessage = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<typeof Form.Message>>(
   ({ className, ...props }, ref) => (
-    <Form.Message ref={ref} className={`text-[13px] text-white opacity-80 ${className || ''}`} {...props} />
+    <Form.Message ref={ref} className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `${styles.formMessage} ${className || ''}` : `text-[13px] text-white opacity-80 ${className || ''}`} {...props} />
   )
 )
 FormMessage.displayName = 'FormMessage'
@@ -70,7 +71,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
   ({ className, ...props }, ref) => (
     <input
       ref={ref}
-      className={`box-border w-full inline-flex items-center justify-center rounded h-[35px] leading-none px-2.5 text-[15px] text-[#7c7c7c] bg-[#fbfdff] shadow-[0_0_0_1px_#edeeef] hover:shadow-[0_0_0_1px_#edeeef] focus:shadow-[0_0_0_2px_#edeeef] selection:bg-black selection:text-white border-none outline-none ${className || ''}`}
+      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `${styles.field} ${className || ''}` : `box-border w-full inline-flex items-center justify-center rounded h-[35px] leading-none px-2.5 text-[15px] text-[#7c7c7c] bg-[#fbfdff] shadow-[0_0_0_1px_#edeeef] hover:shadow-[0_0_0_1px_#edeeef] focus:shadow-[0_0_0_2px_#edeeef] selection:bg-black selection:text-white border-none outline-none ${className || ''}`}
       {...props}
     />
   )
@@ -81,7 +82,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
   ({ className, ...props }, ref) => (
     <textarea
       ref={ref}
-      className={`box-border w-full inline-flex items-center justify-center rounded resize-none p-2.5 text-[15px] text-[#7c7c7c] bg-[#fbfdff] shadow-[0_0_0_1px_#edeeef] hover:shadow-[0_0_0_1px_#edeeef] focus:shadow-[0_0_0_2px_#edeeef] selection:bg-black selection:text-white border-none outline-none ${className || ''}`}
+      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `${styles.field} ${className || ''}` : `box-border w-full inline-flex items-center justify-center rounded resize-none p-2.5 text-[15px] text-[#7c7c7c] bg-[#fbfdff] shadow-[0_0_0_1px_#edeeef] hover:shadow-[0_0_0_1px_#edeeef] focus:shadow-[0_0_0_2px_#edeeef] selection:bg-black selection:text-white border-none outline-none ${className || ''}`}
       {...props}
     />
   )

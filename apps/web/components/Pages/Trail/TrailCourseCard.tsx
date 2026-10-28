@@ -1,4 +1,6 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { getUriWithOrg } from '@services/config/config'
 import { removeCourse } from '@services/courses/activity'
@@ -30,6 +32,7 @@ interface TrailCourseCardProps {
 }
 
 function TrailCourseCard(props: TrailCourseCardProps) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { t } = useTranslation()
   const org = useOrg() as any
   const session = useLHSession() as any;
@@ -109,12 +112,12 @@ function TrailCourseCard(props: TrailCourseCardProps) {
   const courseLink = getUriWithOrg(props.orgslug, '/course/' + courseid)
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]" onMouseEnter={handleMouseEnter}>
+    <div className={atlasBrand ? styles.card : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"} onMouseEnter={handleMouseEnter}>
       {/* Dropdown Menu */}
       <div className="absolute top-2 end-2 z-20">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
+            <button aria-label={atlasBrand ? `Opções de ${course.name}` : `Options for ${course.name}`} className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
               <MoreVertical size={18} className="text-gray-700" />
             </button>
           </DropdownMenuTrigger>
@@ -140,9 +143,10 @@ function TrailCourseCard(props: TrailCourseCardProps) {
       {/* Thumbnail */}
       <Link
         href={courseLink}
+        aria-label={course.name}
         className="block relative aspect-video overflow-hidden bg-gray-50"
       >
-        {props.course.thumbnail_image && org?.org_uuid ? (
+        {atlasBrand ? <CourseCover title={course.name} image={course.thumbnail_image && org?.org_uuid ? getCourseThumbnailMediaDirectory(org.org_uuid, course.course_uuid, course.thumbnail_image) : undefined} /> : props.course.thumbnail_image && org?.org_uuid ? (
           <img
             src={getCourseThumbnailMediaDirectory(
               org.org_uuid,
@@ -158,7 +162,7 @@ function TrailCourseCard(props: TrailCourseCardProps) {
           </div>
         )}
         {/* Progress overlay */}
-        <div className="absolute bottom-0 start-0 end-0 h-1.5 bg-gray-200/80">
+        <div aria-hidden="true" className="absolute bottom-0 start-0 end-0 h-1.5 bg-gray-200/80">
           <div
             className={`h-full ${course_progress === 100 ? 'bg-green-500' : 'bg-teal-500'}`}
             style={{ width: `${course_progress}%` }}
@@ -167,7 +171,7 @@ function TrailCourseCard(props: TrailCourseCardProps) {
       </Link>
 
       {/* Content */}
-      <div className="p-3 flex flex-col space-y-1.5">
+      <div className={atlasBrand ? styles.trailBody : "p-3 flex flex-col space-y-1.5"}>
         <Link
           href={courseLink}
           className="text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"

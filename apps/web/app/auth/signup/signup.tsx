@@ -20,6 +20,7 @@ import * as Form from '@radix-ui/react-form'
 
 interface SignUpClientProps {
   org: any
+  googleConfigured?: boolean
 }
 
 function SignUpClient(props: SignUpClientProps) {
@@ -88,7 +89,7 @@ function SignUpClient(props: SignUpClientProps) {
           )
         ) : (
           <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
-            <OpenSignUpComponent org={props.org} />
+            <OpenSignUpComponent org={props.org} googleConfigured={props.googleConfigured} />
           </div>
         ))}
       {session.status !== 'loading' && joinMethod == 'inviteOnly' &&
@@ -97,7 +98,7 @@ function SignUpClient(props: SignUpClientProps) {
             <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} />
           ) : (
             <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
-              <InviteOnlySignUpComponent inviteCode={inviteCode} org={props.org} />
+              <InviteOnlySignUpComponent inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
             </div>
           )
         ) : (

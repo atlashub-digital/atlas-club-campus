@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import learnhouseIcon from 'public/black_logo.png'
+import styles from '@components/Clubos/Surfaces.module.css'
 
 // Rendered per request, not prerendered. Next 16 answers an unknown Server
 // Action posted to a missing path from the static 404 entry, finds a text/plain
@@ -9,6 +10,17 @@ import learnhouseIcon from 'public/black_logo.png'
 export const dynamic = 'force-dynamic'
 
 export default function NotFound() {
+  if (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true') return (
+    <main className={styles.errorPage}>
+      <div className={styles.errorPanel}>
+        <Image src="/atlas/atlas-clubos-mark.svg" alt="" width={48} height={48} />
+        <p className={styles.eyebrow}>Atlas ClubOS / Campus · 404</p>
+        <h1>Página não encontrada</h1>
+        <p>Este endereço pode ter mudado ou a página não está mais disponível.</p>
+        <Link className={styles.primary} href="/">Voltar ao Campus <ArrowRight size={18} aria-hidden="true" /></Link>
+      </div>
+    </main>
+  )
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center 
    bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-200 to-slate-300">

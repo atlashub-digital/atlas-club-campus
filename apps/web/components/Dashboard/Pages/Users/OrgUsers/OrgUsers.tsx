@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { useLHSession } from '@components/Contexts/LHSessionContext'
 import { useOrg } from '@components/Contexts/OrgContext'
 import useAdminStatus from '@components/Hooks/useAdminStatus'
@@ -273,7 +274,7 @@ function OrgUsers() {
   }
 
   return (
-    <div>
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.admin : undefined}>
       <Toast></Toast>
       <div className="h-6"></div>
       <div className="mx-4 sm:mx-10 bg-white rounded-xl nice-shadow">
@@ -319,7 +320,7 @@ function OrgUsers() {
                     </ToolTip>
                   )}
                 <div className="relative">
-                  <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                   <input
                     placeholder={t('dashboard.users.active_users.search_placeholder') || 'Search users...'}
                     className="ps-10 pe-4 py-2 w-full sm:w-[220px] border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
@@ -342,7 +343,7 @@ function OrgUsers() {
 
             {/* Filter Bar */}
             <div className="flex flex-wrap items-center gap-2 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50/30">
-              <Filter className="w-4 h-4 text-gray-400" />
+              <Filter className="w-4 h-4 text-gray-600" />
               <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Filters</span>
 
               {/* Role filter */}
@@ -482,9 +483,9 @@ function OrgUsers() {
                 <div className="py-16 text-center">
                   <div className="flex flex-col items-center gap-3">
                     <div className="bg-gray-100 p-4 rounded-full">
-                      <User className="w-8 h-8 text-gray-400" />
+                      <User className="w-8 h-8 text-gray-600" />
                     </div>
-                    <p className="text-gray-400 text-sm font-medium">
+                    <p className="text-gray-600 text-sm font-medium">
                       {searchValue || hasActiveFilters
                         ? t('dashboard.users.active_users.no_results') || 'No users found matching your filters'
                         : t('dashboard.users.active_users.no_users') || 'No users in this organization yet'
@@ -594,7 +595,7 @@ function OrgUsers() {
                                 </span>
                               </div>
                               {user.user.email && (
-                                <span className="text-xs text-gray-400 truncate">
+                                <span className="text-xs text-gray-600 truncate">
                                   {user.user.email}
                                 </span>
                               )}
@@ -618,7 +619,7 @@ function OrgUsers() {
                               ))}
                             </div>
                           ) : (
-                            <span className="text-xs text-gray-400">n/a</span>
+                            <span className="text-xs text-gray-600">n/a</span>
                           )}
                         </td>
 
@@ -660,7 +661,7 @@ function OrgUsers() {
                               )}
                             </div>
                             {user.user.last_login_at && (
-                              <span className="text-xs text-gray-400">
+                              <span className="text-xs text-gray-600">
                                 Last login: {formatShortDate(user.user.last_login_at)}
                               </span>
                             )}

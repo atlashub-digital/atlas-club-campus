@@ -58,6 +58,7 @@ export function LearnHouseEmail({
   transition,
   cta,
 }: LearnHouseEmailProps) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   return (
     <Html>
       <Head />
@@ -68,7 +69,7 @@ export function LearnHouseEmail({
           <div style={{ height: 6, backgroundColor: accentColor }} />
 
           <Section style={{ padding: '32px 40px 8px' }}>
-            <Img src={LOGO_URL} alt="LearnHouse" height={28} style={{ marginBottom: 24 }} />
+            {atlasBrand ? <Text style={{ color: '#172335', fontSize: 22, fontWeight: 700, marginBottom: 24 }}>Atlas ClubOS</Text> : <Img src={LOGO_URL} alt="LearnHouse" height={28} style={{ marginBottom: 24 }} />}
             <Heading style={{ fontSize: 24, fontWeight: 800, color: '#171717', margin: '0 0 8px', lineHeight: 1.25 }}>
               {heading}
             </Heading>
@@ -133,7 +134,7 @@ export function LearnHouseEmail({
           <Hr style={{ borderColor: '#eee', margin: '24px 40px 0' }} />
           <Section style={{ padding: '16px 40px 32px' }}>
             <Text style={{ fontSize: 12, color: '#a3a3a3', margin: 0 }}>
-              LearnHouse, the open-source learning platform.
+              {atlasBrand ? 'Atlas ClubOS · AtlasHub. Software baseado em LearnHouse (AGPL-3.0).' : 'LearnHouse, the open-source learning platform.'}
             </Text>
           </Section>
         </Container>

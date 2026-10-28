@@ -1,0 +1,81 @@
+"""Gera os SVGs autorais e o comparativo. Execute a partir de qualquer pasta.
+PNG: node docs/clubos-rebrand-light/brand/render-favicons.cjs [rota]
+"""
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[3]
+PUBLIC = ROOT / 'apps/web/public/atlas/brand'
+DOCS = Path(__file__).resolve().parent
+ROUTES = {
+ '01-portico': ('Pórtico', 'M8 40V16L24 6l16 10v24H29V23H19v17H8Z', 'Uma entrada para o conhecimento compartilhado.', 'A silhueta arquitetônica preserva o desenho em uso: cobertura angular, dois pilares e vão central. A abertura é o elemento de reconhecimento, sem detalhes decorativos.', 'Grade de 48 unidades; eixo em 24; largura de 32; vão de 10; pilares de 11. O topo em 6 e a base em 40 compensam o peso visual.', 'Marca institucional, navegação do campus e ambientes em que estabilidade e acolhimento são prioritários.'),
+ '02-vinculo': ('Vínculo', 'M8 8h18v8H16v16h10v8H8V8Zm32 0v32H28v-8h4V16h-4V8h12ZM20 20h8v8h-8Z', 'O espaço comum nasce do encontro.', 'Dois colchetes se voltam para um núcleo compartilhado. Os intervalos de respiro mantêm as partes reconhecíveis: comunidade como aproximação, com autonomia individual.', 'Grade de 48 unidades; limites em 8 e 40; hastes de 8; núcleo de 8 × 8; intervalos de 4. A assimetria entre os braços cria um encaixe próprio.', 'Comunidades, encontros, programas de mentoria e experiências de colaboração.'),
+ '03-trilha': ('Trilha', 'M8 40V26h12V14h12V8h8v14H28v12H16v6H8Z', 'Cada conquista abre o próximo trecho.', 'Uma faixa contínua sobe por três patamares. O vazio entre os degraus revela o percurso e diferencia a marca de uma seta ou de um gráfico de barras.', 'Grade de 48 unidades; faixa de 8; avanços de 12; extremos em 8 e 40. Cantos retos e terminais planos preservam a leitura em tamanhos pequenos.', 'Trilhas de aprendizagem, evolução de competências e comunicação de jornadas.'),
+}
+
+def svg(key, kind, theme, size=None):
+    name, path, *_ = ROUTES[key]
+    ink = '#172335' if theme == 'light' else '#FFFFFF'
+    w,h = (290,48) if kind == 'horizontal' else (240,112) if kind == 'vertical' else (size or 48,size or 48)
+    vb = f'0 0 {w} {h}' if kind in ('horizontal','vertical') else '0 0 48 48'
+    transform = ' transform="translate(96 0)"' if kind == 'vertical' else ''
+    text = ''
+    if kind in ('horizontal','vertical'):
+        pos = 'x="62" y="33"' if kind == 'horizontal' else 'x="120" y="88" text-anchor="middle"'
+        text = f'<text {pos} font-family="Inter, Manrope, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="-0.6" fill="{ink}">Atlas ClubOS</text>'
+    return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="{vb}" role="img" aria-label="Atlas ClubOS — {name}"><path{transform} d="{path}" fill="{ink}"/>{text}</svg>'
+
+
+def generate(key):
+    folder = PUBLIC / key
+    folder.mkdir(parents=True, exist_ok=True)
+    for theme in ('light','dark'):
+        for kind in ('horizontal','vertical','symbol','favicon'):
+            (folder / f'{kind}-{theme}.svg').write_text(svg(key,kind,theme), encoding='utf-8')
+        for size in (24,32,48):
+            (folder / f'app-{size}-{theme}.svg').write_text(svg(key,'app',theme,size), encoding='utf-8')
+    name, _, concept, geometry, grid, usage = ROUTES[key]
+    (DOCS / f'{key}.md').write_text(f'''# {name} — Atlas ClubOS
+
+**Conceito.** {concept} {geometry}
+
+**Geometria.** {grid}
+
+**Melhor aplicação.** {usage}
+
+## Uso e arquivos
+
+Arquivos em `apps/web/public/atlas/brand/{key}/`:
+- `horizontal-{{light,dark}}.svg` e `vertical-{{light,dark}}.svg`: assinaturas com texto editável em Inter/Manrope (Arial como fallback).
+- `symbol-{{light,dark}}.svg`: símbolo isolado com respiro na própria prancheta.
+- `favicon-{{light,dark}}.svg` e PNGs de 16, 32 e 48 px para cada fundo.
+- `app-{{24,32,48}}-{{light,dark}}.svg`: ícones nas dimensões nominais.
+
+`light` usa #172335 sobre fundo claro; `dark` usa branco sobre #172335. Todos têm fundo transparente. Azul #3268D6 fica reservado às ações da interface, mantendo a marca sóbria. Não esticar, rotacionar, acrescentar sombras ou reduzir o símbolo abaixo de 16 px. Manter ao redor pelo menos 4/48 da largura do símbolo; nas assinaturas, preservar as proporções fornecidas.
+
+Os PNGs são rasterizados diretamente dos favicons SVG pelo script local com sharp. Os desenhos são vetores próprios; nenhuma imagem raster é incorporada aos SVGs. Para fidelidade tipográfica nas assinaturas, disponibilizar Inter ou Manrope no ambiente de apresentação.
+''', encoding='utf-8')
+
+if __name__ == '__main__':
+    for key in sys.argv[1:] or ROUTES:
+        generate(key)
+
+    css = '''
+*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:#172335;font-family:Inter,Manrope,Arial,sans-serif;font-size:14px;line-height:1.6}main{max-width:1512px;margin:auto;padding:56px 32px}h1{font-size:48px;letter-spacing:-2px;line-height:1.1;margin:16px 0}h2{font-size:28px;letter-spacing:-1px;margin:4px 0}h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 16px;color:#526174}p{margin:8px 0 20px}.intro{max-width:780px;margin-bottom:40px}.eyebrow{color:#3268d6;font-size:12px;letter-spacing:2px;font-weight:700}.routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.route{min-width:0}.route-head{min-height:162px}.badge{font-size:11px;border:1px solid #d4dbe5;border-radius:20px;padding:4px 9px;margin-left:8px;vertical-align:middle;letter-spacing:0}.panel{background:white;border:1px solid #e3e7ec;border-radius:16px;padding:20px;margin:16px 0;overflow:hidden}.browser{border:1px solid #e3e7ec;border-radius:10px;overflow:hidden}.tabs{background:#edf0f4;padding:10px 10px 0;display:flex}.tab{background:white;display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:7px 7px 0 0;font-size:11px}.tab svg{width:16px;height:16px}.address{font-size:10px;color:#526174;border-bottom:1px solid #e3e7ec;padding:8px 12px}.home-header{padding:14px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e3e7ec}.home-header svg{width:155px;height:auto}.nav{font-size:10px;color:#526174}.hero{padding:24px 16px 28px}.hero strong{display:block;font-size:27px;line-height:1.15;letter-spacing:-1px;margin:8px 0 12px}.hero p{color:#526174;font-size:11px}.cta{display:inline-block;background:#3268d6;color:white;border-radius:7px;padding:8px 12px;font-size:11px;font-weight:700}.symbols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.swatch{height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#f5f6f8;border-radius:10px;font-size:10px;color:#526174}.swatch svg{width:48px;height:48px}.dark{background:#172335;color:white}.small{display:flex;gap:16px;align-items:center;min-height:60px}.small span{display:flex;align-items:center;gap:5px;font-size:10px;color:#526174}.small svg{display:block}.mobile-viewport{overflow-x:auto;padding-bottom:8px}.phone{width:390px;max-width:none;border:1px solid #d4dbe5;border-radius:28px;background:#f5f6f8;overflow:hidden;margin:0 auto}.status{padding:10px 22px;font-size:11px;display:flex;justify-content:space-between;background:white}.mobile-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;background:white;border-bottom:1px solid #e3e7ec}.mobile-header svg{width:190px;height:auto}.mobile-content{padding:24px 20px}.mobile-content h4{font-size:28px;line-height:1.15;letter-spacing:-1px;margin:8px 0 12px}.muted{color:#526174}.lesson{background:white;border:1px solid #e3e7ec;border-radius:12px;padding:20px;margin:20px 0}.lesson-top{display:flex;justify-content:space-between;font-size:11px;color:#526174}.lesson h5{font-size:20px;margin:16px 0 8px}.progress{height:5px;background:#e3e7ec;border-radius:5px;margin:20px 0 8px}.progress span{display:block;width:60%;height:100%;background:#3268d6;border-radius:5px}.mobile-nav{display:flex;justify-content:space-around;padding:16px 8px;background:white;border-top:1px solid #e3e7ec;font-size:11px}.active{color:#3268d6;font-weight:700}.vertical{display:flex;justify-content:center;padding:12px}.vertical svg{width:240px;height:112px}.rationale{font-size:13px;color:#526174;min-height:190px}.rationale b{color:#172335}footer{margin-top:40px;border-top:1px solid #d4dbe5;padding-top:20px;font-size:12px;color:#526174}@media(min-width:1400px){.panel{padding:24px}}@media(max-width:1100px){.routes{grid-template-columns:1fr}.route{max-width:680px;width:100%;margin:auto}.route-head{min-height:0}h1{font-size:36px}}@media(max-width:460px){main{padding:32px 12px}.panel{padding:12px}.phone{margin:0}.intro{padding:0 8px}}@media print{main{padding:12px}.routes{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{break-inside:avoid}.mobile-viewport{zoom:.8}h1{font-size:32px}}
+'''
+    sections = []
+    for key, (name, path, concept, geometry, grid, usage) in ROUTES.items():
+        number = key[:2]
+        logo = svg(key,'horizontal','light')
+        mark = svg(key,'symbol','light')
+        samples = ''.join(f'<span>{svg(key,"app","light",s)}{s}px</span>' for s in (24,32,48))
+        badge = '<span class="badge">Em uso na UI</span>' if number == '01' else '<span class="badge">Proposta</span>'
+        sections.append(f'''<article class="route" aria-labelledby="route-{number}">
+<div class="route-head"><span class="eyebrow">ROTA {number}</span><h2 id="route-{number}">{name}{badge}</h2><p>{concept}</p></div>
+<div class="panel"><h3>01 / Homepage + favicon de 16px</h3><div class="browser"><div class="tabs"><div class="tab">{mark}<span>Atlas ClubOS · Campus</span><span aria-hidden="true">×</span></div></div><div class="address">atlas.club / campus</div><div class="home-header">{logo}<span class="nav">Campus · Entrar</span></div><div class="hero"><span class="eyebrow">SEU PRÓXIMO PASSO</span><strong>Conhecimento que<br>aproxima e transforma.</strong><p>Aprenda com intenção. Troque com a comunidade.<br>Construa o que vem a seguir.</p><span class="cta">Explorar o campus →</span></div></div></div>
+<div class="panel"><h3>02 / Símbolo · claro e escuro</h3><div class="symbols"><div class="swatch">{mark}<span>#172335 / claro</span></div><div class="swatch dark">{svg(key,'symbol','dark')}<span>Branco / #172335</span></div></div><div class="small">{samples}</div></div>
+<div class="panel"><h3>03 / Assinatura vertical</h3><div class="vertical">{svg(key,'vertical','light')}</div></div>
+<div class="panel"><h3>04 / Campus mobile · frame 390px</h3><div class="mobile-viewport"><div class="phone"><div class="status"><b>9:41</b><span>5G ▰</span></div><div class="mobile-header">{logo}<span aria-label="Menu">☰</span></div><div class="mobile-content"><span class="eyebrow">MEU CAMPUS</span><h4>Seu próximo passo<br>começa aqui.</h4><p class="muted">Bom dia, Marina. Vamos continuar?</p><div class="lesson"><div class="lesson-top"><span>EM ANDAMENTO</span><span>03 / 05</span></div><h5>Ideias que viram projetos</h5><p class="muted">Da descoberta ao primeiro protótipo.</p><div class="progress"><span></span></div><p class="muted">60% da trilha concluída</p><span class="cta">Continuar aprendendo →</span></div><b>Uma comunidade para crescer</b><p class="muted">Encontre pessoas, compartilhe descobertas e amplie suas conexões.</p></div><div class="mobile-nav"><span class="active">Campus</span><span>Cursos</span><span>Comunidade</span><span>Perfil</span></div></div></div></div>
+<div class="panel rationale"><h3>Por que esta rota</h3><p>{geometry}</p><p><b>Funciona melhor em:</b> {usage}</p><p><b>Construção:</b> {grid}</p></div></article>''')
+    (DOCS / 'comparacao.html').write_text(f'''<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Atlas ClubOS — três rotas de identidade</title><style>{css}</style></head><body><main><header class="intro"><span class="eyebrow">ATLAS CLUBOS / ESTUDO DE IDENTIDADE</span><h1>Três formas de pertencer.<br>Uma mesma ambição.</h1><p>Pórtico, Vínculo e Trilha aplicados ao mesmo campus, com conteúdo, escala e paleta constantes para facilitar a comparação da Direção.</p><p class="muted">Pórtico permanece na UI até validação. As aplicações abaixo são estudos estáticos. SVGs inline, sem rede ou JavaScript; a tipografia usa Inter/Manrope quando disponíveis e Arial como fallback.</p></header><section class="routes" aria-label="Comparação das três rotas">{''.join(sections)}</section><footer>Atlas ClubOS · Direção de marca · Paleta: #172335 / #3268D6 / branco e cinza.<br>Os frames mobile têm exatamente 390px de largura; em telas menores, a área permite rolagem horizontal. Kits vetoriais e PNGs em apps/web/public/atlas/brand/. Racionais e scripts junto deste documento.</footer></main></body></html>''', encoding='utf-8')

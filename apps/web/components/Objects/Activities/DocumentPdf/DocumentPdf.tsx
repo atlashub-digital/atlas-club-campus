@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { getActivityMediaDirectory } from '@services/media/media'
 import { ArrowsOut, ArrowsIn, DownloadSimple } from '@phosphor-icons/react'
@@ -102,13 +103,14 @@ function DocumentPdfActivity({
     if (pdfUrl) window.open(pdfUrl, '_blank', 'noopener,noreferrer')
   }
 
-  const controlClass =
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const controlClass = atlasBrand ? styles.pdfButton :
     'p-2 outline-none bg-black/50 hover:bg-black/70 focus-visible:ring-2 focus-visible:ring-white rounded-lg transition-colors'
 
   return (
     <div
       ref={containerRef}
-      className={`group relative ${className ?? 'm-0 sm:m-8 bg-zinc-900 sm:rounded-md mt-0 sm:mt-14'} ${isFullscreen ? 'bg-zinc-900' : ''}`}
+      className={`group relative ${atlasBrand ? `${styles.pdf} ${className || ''}` : className ?? 'm-0 sm:m-8 bg-[var(--atlas-reader-surface,#18181b)] sm:rounded-md mt-0 sm:mt-14'} ${isFullscreen ? 'bg-[var(--atlas-reader-surface,#18181b)]' : ''}`}
     >
       <iframe
         className={className || isFullscreen ? 'w-full h-full' : 'sm:rounded-lg w-full h-[85vh] sm:h-[900px]'}
@@ -116,13 +118,13 @@ function DocumentPdfActivity({
         title={activity?.name || t('editor.blocks.pdf_block.document_title')}
       />
       {/* Always visible on touch screens, where there is no hover to reveal them. */}
-      <div className="absolute top-2 end-2 flex gap-1 transition-opacity [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus-within:opacity-100">
+      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.pdfControls : "absolute top-2 end-2 flex gap-1 transition-opacity [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus-within:opacity-100"}>
         <button
           type="button"
           onClick={handleFullscreen}
           className={controlClass}
-          title={t('editor.blocks.pdf_block.expand_pdf')}
-          aria-label={t('editor.blocks.pdf_block.expand_pdf')}
+          title={isFullscreen && atlasBrand ? 'Sair da tela cheia' : t('editor.blocks.pdf_block.expand_pdf')}
+          aria-label={isFullscreen && atlasBrand ? 'Sair da tela cheia' : t('editor.blocks.pdf_block.expand_pdf')}
         >
           {isFullscreen ? (
             <ArrowsIn weight="duotone" className="w-4 h-4 text-white" />

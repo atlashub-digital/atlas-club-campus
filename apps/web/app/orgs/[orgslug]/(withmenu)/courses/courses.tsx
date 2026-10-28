@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import CreateCourseModal from '@components/Objects/Modals/Course/Create/CreateCourse'
 import Modal from '@components/Objects/StyledElements/Modal/Modal'
 import React, { useState, useMemo, useEffect } from 'react'
@@ -151,7 +152,7 @@ function Courses(props: CourseProps) {
     return (
       <div className="w-full animate-pulse">
         <GeneralWrapperStyled>
-          <div className="flex flex-col space-y-2 mb-2">
+          <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.catalog : "flex flex-col space-y-2 mb-2"}>
             {/* Header row: title + button placeholder */}
             <div className="flex items-center justify-between mb-2">
               <div className="h-7 bg-gray-200 rounded w-28" />
@@ -160,7 +161,7 @@ function Courses(props: CourseProps) {
             {/* Search bar placeholder */}
             <div className="h-10 bg-gray-200 rounded-lg w-full sm:w-80 mb-4" />
             {/* Course card grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.grid : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="rounded-xl overflow-hidden">
                   {/* Thumbnail area */}
@@ -183,7 +184,7 @@ function Courses(props: CourseProps) {
     <FeatureGate feature="courses" orgslug={orgslug} context="public">
     <div className="w-full">
       <GeneralWrapperStyled>
-        <div className="flex flex-col space-y-2 mb-2">
+        <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.catalog : "flex flex-col space-y-2 mb-2"}>
           <div className="flex items-center justify-between">
             <TypeOfContentTitle title={t('courses.courses')} type="cou" />
             <AuthenticatedClientElement
@@ -218,19 +219,20 @@ function Courses(props: CourseProps) {
           {allCourses.length > 0 && (
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <div className="relative w-full sm:w-80">
-                <Search className="absolute start-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Search className="absolute start-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   aria-label={t('courses.search_courses')}
                   placeholder={t('courses.search_courses')}
-                  className="w-full ps-10 pe-10 py-2.5 bg-white nice-shadow rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 border-0"
+                  className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.search : "w-full ps-10 pe-10 py-2.5 bg-white nice-shadow rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 border-0"}
                 />
                 {searchQuery && (
                   <button
+                    aria-label={t('common.clear_search')}
                     onClick={() => setSearchQuery('')}
-                    className="absolute end-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute end-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-600"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -241,7 +243,7 @@ function Courses(props: CourseProps) {
               {usergroupsAvailable && usergroups.length > 0 && (
                 <div className="relative flex items-center gap-1.5">
                   <div className="relative">
-                    <Users className="absolute start-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
+                    <Users className="absolute start-2.5 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4 pointer-events-none" />
                     <select
                       value={selectedUsergroupId}
                       onChange={(e) => handleUsergroupChange(e.target.value)}
@@ -257,7 +259,7 @@ function Courses(props: CourseProps) {
                   </div>
                   <button
                     onClick={() => setShowUsergroupInfo(!showUsergroupInfo)}
-                    className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors rounded-md hover:bg-gray-100"
+                    className="p-1.5 text-gray-600 hover:text-gray-600 transition-colors rounded-md hover:bg-gray-100"
                   >
                     <Info className="w-3.5 h-3.5" />
                   </button>
@@ -279,7 +281,7 @@ function Courses(props: CourseProps) {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.grid : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
             {paginatedCourses.map((course: any, index: number) => (
               <div key={course.course_uuid} className="">
                 <CourseThumbnail course={course} orgslug={orgslug} isPriority={currentPage === 1 && index < 3} />
@@ -291,13 +293,13 @@ function Courses(props: CourseProps) {
                 <h2 className="text-xl font-semibold text-gray-600 mb-2">
                   {t('courses.no_search_results')}
                 </h2>
-                <p className="text-gray-400">
+                <p className="text-gray-600">
                   {t('courses.try_different_search')}
                 </p>
               </div>
             )}
             {allCourses.length === 0 && !searchQuery && (
-              <div className="col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30">
+              <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.empty : "col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30"}>
                 <div className="p-4 bg-white rounded-full nice-shadow mb-4">
                   {isAuthenticated ? (
                     <BookCopy className="w-8 h-8 text-gray-300" strokeWidth={1.5} />
@@ -310,7 +312,7 @@ function Courses(props: CourseProps) {
                     ? t('courses.no_courses')
                     : t('courses.sign_in_to_see_courses', 'Log in to see your courses')}
                 </h1>
-                <p className="text-md text-gray-400 mb-6 text-center max-w-xs">
+                <p className="text-md text-gray-600 mb-6 text-center max-w-xs">
                   {!isAuthenticated ? (
                     t(
                       'courses.sign_in_to_see_courses_description',

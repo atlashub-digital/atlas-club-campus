@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import CampusHome from '@components/Clubos/CampusHome'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { useCourses } from '@/hooks/queries/useCourses'
 import LandingClassic from '@components/Landings/LandingClassic'
@@ -10,6 +11,7 @@ import { getOrgLogoMediaDirectory } from '@services/media/media'
 import GeneralWrapperStyled from '@components/Objects/StyledElements/Wrappers/GeneralWrapper'
 
 export default function HomeClient({ orgslug }: { orgslug: string }) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const org = useOrg() as any
   const { data: courses, isLoading: coursesLoading } = useCourses(orgslug)
 
@@ -53,7 +55,9 @@ export default function HomeClient({ orgslug }: { orgslug: string }) {
   return (
     <div className="w-full">
       {orgJsonLd && <JsonLd data={orgJsonLd} />}
-      {hasCustomLanding ? (
+      {atlasBrand ? (
+        <CampusHome org={org} orgslug={orgslug} courses={courses || []} />
+      ) : hasCustomLanding ? (
         <LandingCustom landing={landingConfig} orgslug={orgslug} />
       ) : (
         <LandingClassic

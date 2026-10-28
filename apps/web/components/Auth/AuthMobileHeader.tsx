@@ -54,6 +54,10 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
 
   const hasCustomBackground = background_type !== 'gradient' && background_image
 
+  if (atlasBrand) return <header className="flex items-center border-b border-[#e3e7ec] bg-white px-6 py-5">
+    <Link href={getUriWithOrg(org?.slug, '/')}><Image src="/atlas/brand/01-portico/horizontal-light.svg" width={218} height={36} alt="Atlas ClubOS" unoptimized /></Link>
+  </header>
+
   return (
     <div
       className="relative flex items-center gap-4 px-5 py-4 rounded-b-2xl overflow-hidden"

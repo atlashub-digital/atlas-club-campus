@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@components/Clubos/Surfaces.module.css'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import AuthenticatedClientElement from '@components/Security/AuthenticatedClientElement'
@@ -32,7 +33,7 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
   return (
     <FeatureGate feature="communities" orgslug={orgslug} context="public">
     <GeneralWrapperStyled>
-      <div className="flex flex-col space-y-2 mb-6">
+      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.catalog : "flex flex-col space-y-2 mb-6"}>
         <div className="flex items-center justify-between">
           <TypeOfContentTitle title={t('communities.title')} type="col" />
           <AuthenticatedClientElement
@@ -43,7 +44,7 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
           >
             <button
               onClick={() => setIsCreateModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-black/90 text-white rounded-lg transition-colors text-sm font-medium"
+              className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "flex items-center gap-2 px-4 py-2 bg-black hover:bg-black/90 text-white rounded-lg transition-colors text-sm font-medium"}
             >
               <Plus size={16} />
               {t('communities.new_community')}
@@ -51,7 +52,7 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
           </AuthenticatedClientElement>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.grid : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
           {communities.map((community: Community) => (
             <div key={community.community_uuid}>
               <CommunityCard
@@ -63,14 +64,14 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
             </div>
           ))}
           {communities.length === 0 && (
-            <div className="col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30">
+            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.empty : "col-span-full flex flex-col justify-center items-center py-12 px-4 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30"}>
               <div className="p-4 bg-white rounded-full nice-shadow mb-4">
                 <Users className="w-8 h-8 text-gray-300" strokeWidth={1.5} />
               </div>
-              <h1 className="text-xl font-bold text-gray-600 mb-2">
+              <h2 className="text-xl font-bold text-gray-600 mb-2">
                 {t('communities.no_communities')}
-              </h1>
-              <p className="text-md text-gray-400 mb-6 text-center max-w-xs">
+              </h2>
+              <p className="text-md text-gray-600 mb-6 text-center max-w-xs">
                 <ContentPlaceHolderIfUserIsNotAdmin
                   text={t('communities.no_communities_description')}
                 />
@@ -84,7 +85,7 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
                 >
                   <button
                     onClick={() => setIsCreateModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-black/90 text-white rounded-lg transition-colors text-sm font-medium"
+                    className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "flex items-center gap-2 px-4 py-2 bg-black hover:bg-black/90 text-white rounded-lg transition-colors text-sm font-medium"}
                   >
                     <Plus size={16} />
                     {t('communities.new_community')}

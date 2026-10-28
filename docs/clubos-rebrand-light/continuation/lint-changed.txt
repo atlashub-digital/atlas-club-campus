@@ -1,0 +1,109 @@
+
+/tmp/acc/apps/web/app/auth/signup/signup.tsx
+  57:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/acc/apps/web/app/auth/signup/signup.tsx:57:7
+  55 |         ? config?.admin_toggles?.members?.signup_mode
+  56 |         : config?.features?.members?.signup_mode
+> 57 |       setJoinMethod(signupMode || 'open')
+     |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  58 |     }
+  59 |     if (inviteCodeParam) {
+  60 |       setInviteCode(inviteCodeParam)  react-hooks/set-state-in-effect
+
+/tmp/acc/apps/web/app/orgs/[orgslug]/(withmenu)/course/[courseuuid]/course.tsx
+  81:5  warning  Error: Cannot access variable before it is declared
+
+`getLearningTags` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/tmp/acc/apps/web/app/orgs/[orgslug]/(withmenu)/course/[courseuuid]/course.tsx:81:5
+  79 |     if (!course) return
+  80 |
+> 81 |     getLearningTags(course)
+     |     ^^^^^^^^^^^^^^^ `getLearningTags` accessed before it is declared
+  82 |
+  83 |     if (course?.chapters) {
+  84 |       const totalActivities = course.chapters.reduce((sum: number, chapter: any) => sum + (chapter.activities?.length || 0), 0)
+
+/tmp/acc/apps/web/app/orgs/[orgslug]/(withmenu)/course/[courseuuid]/course.tsx:178:3
+  176 |   }
+  177 |
+> 178 |   function getLearningTags(courseData: any) {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 179 |     if (!courseData?.learnings) {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 180 |       setLearnings([])
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 203 |     setLearnings(learningItems)
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 204 |   }
+      | ^^^^ `getLearningTags` is declared here
+  205 |
+  206 |   const getActivityTypeLabel = (activityType: string, activitySubType?: string) => {
+  207 |     if (activitySubType === 'SUBTYPE_DYNAMIC_MARKDOWN') return t('activities.markdown')  react-hooks/immutability
+  89:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/acc/apps/web/app/orgs/[orgslug]/(withmenu)/course/[courseuuid]/course.tsx:89:7
+  87 |         defaultExpanded[chapter.chapter_uuid] = idx === 0 ? true : totalActivities <= 5
+  88 |       })
+> 89 |       setExpandedChapters(defaultExpanded)
+     |       ^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  90 |     }
+  91 |   }, [course])
+  92 |                                                                                                                                                                                                                                                                  react-hooks/set-state-in-effect
+
+/tmp/acc/apps/web/components/Objects/Activities/Video/Video.tsx
+   95:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/acc/apps/web/components/Objects/Activities/Video/Video.tsx:95:7
+  93 |     if (activity?.content?.uri) {
+  94 |       var getYouTubeID = require('get-youtube-id')
+> 95 |       setVideoId(getYouTubeID(activity.content.uri))
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  96 |     }
+  97 |   }, [activity, org])
+  98 |  react-hooks/set-state-in-effect
+  252:21  warning  Unexpected console statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-console
+
+/tmp/acc/apps/web/components/Objects/Menus/OrgMenu.tsx
+  107:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/acc/apps/web/components/Objects/Menus/OrgMenu.tsx:107:7
+  105 |     if (typeof window !== 'undefined' && pathname?.includes('/activity/')) {
+  106 |       const saved = localStorage.getItem('globalFocusMode');
+> 107 |       setIsFocusMode(saved === 'true');
+      |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  108 |     } else {
+  109 |       setIsFocusMode(false);
+  110 |     }  react-hooks/set-state-in-effect
+
+/tmp/acc/apps/web/components/Objects/StyledElements/Form/Form.tsx
+  8:14  warning  'e' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+✖ 7 problems (0 errors, 7 warnings)
+

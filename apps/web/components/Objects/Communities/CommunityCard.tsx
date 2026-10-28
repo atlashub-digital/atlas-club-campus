@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { useLHSession } from '@components/Contexts/LHSessionContext'
 import AuthenticatedClientElement from '@components/Security/AuthenticatedClientElement'
@@ -34,6 +35,7 @@ const removeCommunityPrefix = (communityid: string) => {
 }
 
 function CommunityCard(props: PropsType) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { t } = useTranslation()
   const org = useOrg() as any
   const communityId = removeCommunityPrefix(props.community.community_uuid)
@@ -46,7 +48,7 @@ function CommunityCard(props: PropsType) {
 
   return (
     <div
-      className="group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"
+      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `group ${styles.card}` : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"}
     >
       {variant === 'dashboard' && (
         <CommunityAdminEditsArea
@@ -60,6 +62,7 @@ function CommunityCard(props: PropsType) {
 
       <Link
         href={communityLink}
+        aria-label={props.community.name}
         className="block relative aspect-video overflow-hidden bg-gray-50"
       >
         {props.community.thumbnail_image && org?.org_uuid ? (
@@ -79,24 +82,24 @@ function CommunityCard(props: PropsType) {
         )}
       </Link>
 
-      <div className="p-3 flex flex-col space-y-1.5">
+      <div className={atlasBrand ? styles.cardBody : "p-3 flex flex-col space-y-1.5"}>
         <Link
           href={communityLink}
-          className="text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"
+          className={atlasBrand ? styles.cardTitle : "text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"}
         >
           {props.community.name}
         </Link>
 
         {props.community.description && (
-          <p className="text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]">
+          <p className={atlasBrand ? styles.cardDescription : "text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]"}>
             {props.community.description}
           </p>
         )}
 
-        <div className="pt-1.5 flex items-center justify-between border-t border-gray-100">
+        <div className={atlasBrand ? styles.cardFooter : "pt-1.5 flex items-center justify-between border-t border-gray-100"}>
           <div className="flex items-center gap-1.5 text-gray-500">
             <MessageCircle size={12} />
-            <span className="text-[10px] font-bold uppercase tracking-wider">
+            <span className="text-xs font-bold uppercase tracking-wider">
               {props.community.public ? t('courses.public') : t('courses.private')}
             </span>
           </div>
@@ -104,14 +107,14 @@ function CommunityCard(props: PropsType) {
           {variant === 'dashboard' ? (
             <Link
               href={getUriWithOrg(props.orgslug, `/dash/communities/${communityId}/general`)}
-              className="text-[10px] font-bold text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider"
+              className="text-xs font-bold text-gray-600 hover:text-gray-900 transition-colors uppercase tracking-wider"
             >
               {t('dashboard.courses.communities.card.open_settings')}
             </Link>
           ) : (
             <Link
               href={communityLink}
-              className="text-[10px] font-bold text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider"
+              className="text-xs font-bold text-gray-600 hover:text-gray-900 transition-colors uppercase tracking-wider"
             >
               {t('dashboard.courses.communities.card.view_community')}
             </Link>
@@ -146,7 +149,7 @@ const CommunityAdminEditsArea = (props: any) => {
       <div className="absolute top-2 end-2 z-20">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button aria-label="Community actions" className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
+            <button aria-label="Ações da comunidade" className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
               <MoreVertical size={18} className="text-gray-700" />
             </button>
           </DropdownMenuTrigger>

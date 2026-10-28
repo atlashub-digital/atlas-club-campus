@@ -50,7 +50,7 @@ const SignUp = async () => {
   return (
     <>
       <Suspense fallback={<PageLoading />}>
-        <SignUpClient org={org} />
+        <SignUpClient org={org} googleConfigured={Boolean(process.env.LEARNHOUSE_GOOGLE_CLIENT_ID && process.env.LEARNHOUSE_GOOGLE_CLIENT_SECRET)} />
       </Suspense>
     </>
   )

@@ -1,4 +1,6 @@
 'use client'
+import CourseCover from '@components/Clubos/CourseCover'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { useOrg } from '@components/Contexts/OrgContext'
 import AuthenticatedClientElement from '@components/Security/AuthenticatedClientElement'
 import ConfirmationModal from '@components/Objects/StyledElements/ConfirmationModal/ConfirmationModal'
@@ -64,6 +66,7 @@ type PropsType = {
 export const removeCoursePrefix = (course_uuid: string) => course_uuid.replace('course_', '')
 
 function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isSelected = false, onToggleSelect, isPriority = false }: PropsType) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { t, i18n } = useTranslation()
   const org = useOrg() as any
   const session = useLHSession() as any
@@ -155,14 +158,14 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
   const courseLink = customLink ? customLink : getUriWithOrg(orgslug, `/course/${removeCoursePrefix(course.course_uuid)}`)
 
   return (
-    <div onMouseEnter={handleMouseEnter} className={`group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01] ${isSelected ? 'ring-2 ring-black ring-offset-2' : ''}`}>
+    <div onMouseEnter={handleMouseEnter} className={`${process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `group ${styles.card}` : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"} ${isSelected ? 'ring-2 ring-black ring-offset-2' : ''}`}>
       {/* Selection checkbox - visible on hover or when selected (dashboard only) */}
       {isDashboard && onToggleSelect && (
         <button
           onClick={handleSelectClick}
-          aria-label={isSelected ? 'Deselect course' : 'Select course'}
+          aria-label={atlasBrand ? (isSelected ? 'Desmarcar curso' : 'Selecionar curso') : (isSelected ? 'Deselect course' : 'Select course')}
           className={`absolute top-2 start-2 z-20 p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md ${
-            isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            isSelected ? 'opacity-100' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100'
           }`}
         >
           {isSelected ? (
@@ -183,9 +186,9 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
         isDashboard={isDashboard}
       />
 
-      <Link prefetch={false} href={courseLink} onClick={handleCardOpen} className="block relative aspect-video overflow-hidden bg-gray-50">
+      <Link prefetch={false} href={courseLink} onClick={handleCardOpen} aria-label={course.name} className="block relative aspect-video overflow-hidden bg-gray-50">
         {/* Hidden img gives the browser a real resource hint so it can fetch the background-image early as an LCP candidate */}
-        {isPriority && (
+        {!atlasBrand && isPriority && (
            
           <img
             src={thumbnailImage}
@@ -195,19 +198,21 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
             className="absolute w-0 h-0 opacity-0 pointer-events-none"
           />
         )}
+        {atlasBrand ? <CourseCover title={course.name} image={course.thumbnail_image ? thumbnailImage : undefined} priority={isPriority} /> : <>
         <div
           className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
           style={{ backgroundImage: `url(${thumbnailImage})` }}
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+        </>}
         {isDashboard && (
           <div className="absolute bottom-2 start-2">
             {course.published ? (
-              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-green-100 text-green-700 rounded-full">
+              <span className="px-2 py-0.5 text-xs font-bold uppercase tracking-wide bg-green-100 text-green-700 rounded-full">
                 {t('courses.published')}
               </span>
             ) : (
-              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-yellow-100 text-yellow-700 rounded-full">
+              <span className="px-2 py-0.5 text-xs font-bold uppercase tracking-wide bg-yellow-100 text-yellow-700 rounded-full">
                 {t('courses.unpublished')}
               </span>
             )}
@@ -215,29 +220,29 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
         )}
       </Link>
 
-      <div className="p-3 flex flex-col space-y-1.5">
+      <div className={atlasBrand ? styles.cardBody : "p-3 flex flex-col space-y-1.5"}>
         <div className="flex items-start justify-between">
           <Link
             prefetch={false}
             href={courseLink}
             onClick={handleCardOpen}
-            className="text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"
+            className={atlasBrand ? styles.cardTitle : "text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"}
            dir="auto">
             {course.name}
           </Link>
         </div>
         
         {course.description && (
-          <p className="text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]">
+          <p className={atlasBrand ? styles.cardDescription : "text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]"}>
             {course.description}
           </p>
         )}
 
-        <div className="pt-1.5 flex items-center justify-between border-t border-gray-100">
+        <div className={atlasBrand ? styles.cardFooter : "pt-1.5 flex items-center justify-between border-t border-gray-100"}>
           <div className="flex items-center gap-2">
             {displayedAuthors.length > 0 && (
               <div className="flex -space-x-2 items-center">
-                {displayedAuthors.map((author, index) => (
+                {displayedAuthors.filter(author => !atlasBrand || author.user.avatar_image).map((author, index) => (
                   <div 
                     key={author.user.user_uuid} 
                     className="relative"
@@ -265,7 +270,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
             )}
             
             {course.update_date && (
-              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+              <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">
                 {formatDate(course.update_date, i18n.language, { dateStyle: undefined, month: 'short', day: 'numeric' })}
               </span>
             )}
@@ -275,9 +280,9 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
             prefetch={false}
             href={courseLink}
             onClick={handleCardOpen}
-            className="text-[10px] font-bold text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider"
+            className="text-xs font-bold text-gray-600 hover:text-gray-900 transition-colors uppercase tracking-wider"
           >
-            {t('courses.start_learning')}
+            {atlasBrand ? (course.public ? 'Acesso público' : 'Acesso restrito') : t('courses.start_learning')}
           </Link>
         </div>
       </div>
@@ -305,11 +310,11 @@ const AdminEditOptions = ({ course, orgSlug, deleteCourse, cloneCourse, exportCo
       orgId={course.org_id}
     >
       <div className={`absolute top-2 end-2 z-20 transition-opacity ${
-        isDashboard && !isOpen ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
+        isDashboard && !isOpen ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100' : 'opacity-100'
       }`}>
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
-            <button aria-label="Course actions"className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
+            <button aria-label="Ações do curso"className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-md">
               <MoreVertical size={18} className="text-gray-700" />
             </button>
           </DropdownMenuTrigger>

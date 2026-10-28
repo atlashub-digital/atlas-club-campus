@@ -23,24 +23,9 @@ function Watermark() {
     const showWatermark = plan === 'free' || watermarkConfig !== false
     if (!showWatermark) return null
 
-    // Keep an always-accessible source/attribution link for the Atlas-branded
-    // AGPL fork without treating LearnHouse as the product's commercial brand.
-    // A full attribution and copyright notice is also present in OrgFooter.
-    if (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true') {
-        return (
-            <div className="fixed bottom-3 end-3 z-40">
-                <Link
-                    href="https://github.com/atlashub-digital/atlas-club-campus"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Código-fonte, licença e créditos de software"
-                    className="inline-flex items-center rounded-full border border-[#406182] bg-[#132640]/95 px-3 py-1.5 text-[10px] font-semibold text-[#cbdff2] shadow-lg backdrop-blur-sm hover:text-white"
-                >
-                    Código e licenças
-                </Link>
-            </div>
-        )
-    }
+    // Source and attribution remain accessible in the legal footer.
+    if (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true') return null
+
 
     return (
         <div className='fixed bottom-8 end-8 z-50'>

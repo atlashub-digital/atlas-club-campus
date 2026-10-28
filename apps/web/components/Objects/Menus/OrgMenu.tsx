@@ -55,6 +55,8 @@ export const OrgMenu = (props: any) => {
   const _access_token = session?.data?.tokens?.access_token;
   const org = useOrg() as any;
   const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const mobileMenuRef = React.useRef<HTMLDivElement>(null)
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [isFocusMode, setIsFocusMode] = useState(false)
   const pathname = usePathname()
@@ -87,7 +89,7 @@ export const OrgMenu = (props: any) => {
 
   // Get primary color from org config (v2: customization.general.color, v1: general.color)
   const config = org?.config?.config
-  const primaryColor = config?.customization?.general?.color || config?.general?.color || ''
+  const primaryColor = atlasBrand ? '' : config?.customization?.general?.color || config?.general?.color || ''
   const colors = getMenuColorClasses(primaryColor)
 
   // Filter dashboard menu items by resolved_features from API
@@ -131,6 +133,15 @@ export const OrgMenu = (props: any) => {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    if (!isMenuOpen) return
+    mobileMenuRef.current?.querySelector<HTMLElement>('input, a, button')?.focus()
+    const desktop = window.matchMedia('(min-width: 1280px)')
+    const closeOnDesktop = () => { if (desktop.matches) setIsMenuOpen(false) }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [isMenuOpen])
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -144,8 +155,8 @@ export const OrgMenu = (props: any) => {
     <>
       <div className="backdrop-blur-lg h-[60px] blur-3xl" style={{ zIndex: 'var(--z-behind)', marginTop: topOffset }}></div>
       <nav
-        aria-label="Top navigation"
-        className={`backdrop-blur-lg fixed start-0 end-0 h-[60px] ${!primaryColor ? 'bg-white/90 nice-shadow' : ''}`}
+        aria-label={atlasBrand ? "Navegação principal" : "Top navigation"}
+        className={`backdrop-blur-lg fixed start-0 end-0 h-[60px] ${atlasBrand ? 'atlas-nav' : ''} ${!primaryColor ? 'bg-white/90 nice-shadow' : ''}`}
         style={{
           zIndex: 'var(--z-nav)',
           backgroundColor: primaryColor || undefined,
@@ -160,7 +171,7 @@ export const OrgMenu = (props: any) => {
                   {atlasBrand ? (
                     <span className="inline-flex items-center gap-2.5 whitespace-nowrap" aria-label="Atlas ClubOS">
                       <Image src="/atlas/atlas-clubos-mark.svg" alt="" width={34} height={34} unoptimized className="h-8 w-8 object-contain" />
-                      <span className="text-[12px] font-black tracking-[.13em] text-[#edf7ff]">ATLAS <span className="text-[#00d4ff]">CLUBOS</span></span>
+                      <span className="text-[12px] font-black tracking-[.13em] text-[#172335]">ATLAS <span className="text-[#3268d6]">CLUBOS</span></span>
                     </span>
                   ) : org?.logo_image ? (
                     <img
@@ -175,7 +186,7 @@ export const OrgMenu = (props: any) => {
                 </div>
               </Link>
             </div>
-            <div className="hidden md:flex">
+            <div className={atlasBrand ? "hidden" : "hidden xl:flex"}>
               <MenuLinks orgslug={orgslug} primaryColor={primaryColor} />
             </div>
           </div>
@@ -293,7 +304,7 @@ export const OrgMenu = (props: any) => {
             )}
 
             {/* Help Dropdown - Only visible to admins/maintainers/instructors */}
-            {session?.status === 'authenticated' && rights?.dashboard?.action_access && (
+            {!atlasBrand && session?.status === 'authenticated' && rights?.dashboard?.action_access && (
               <div className="hidden md:flex">
                 <DropdownMenu>
                   <TooltipProvider delayDuration={0}>
@@ -377,7 +388,11 @@ export const OrgMenu = (props: any) => {
               <HeaderProfileBox primaryColor={primaryColor} />
             </div>
             <button
-              className={`md:hidden focus:outline-hidden ${colors.text}`}
+              ref={menuButtonRef}
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="campus-mobile-menu"
+              className={`xl:hidden min-h-11 min-w-11 flex items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3268d6] ${colors.text}`}
               onClick={toggleMenu}
             >
               {isMenuOpen ? (
@@ -393,8 +408,16 @@ export const OrgMenu = (props: any) => {
           </div>
         </div>
       </nav>
+      {atlasBrand && <div className="atlas-desktop-nav hidden xl:block"><nav aria-label="Seções do Campus"><MenuLinks orgslug={orgslug} /></nav></div>}
       <div
-        className={`fixed inset-x-0 bg-white/80 backdrop-blur-lg md:hidden shadow-lg transition-all duration-300 ease-in-out ${
+        ref={mobileMenuRef}
+        id="campus-mobile-menu"
+        role="navigation"
+        aria-label="Navegação do Campus"
+        hidden={!isMenuOpen}
+        onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setIsMenuOpen(false) }}
+        onKeyDown={(event) => { if (event.key === "Escape") { setIsMenuOpen(false); menuButtonRef.current?.focus() } }}
+        className={`fixed inset-x-0 max-h-[calc(100dvh-60px)] overflow-y-auto bg-white xl:hidden shadow-lg transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'opacity-100' : '-top-full opacity-0'
         }`}
         style={{
@@ -410,6 +433,11 @@ export const OrgMenu = (props: any) => {
           <div className='py-4'>
             <MenuLinks orgslug={orgslug} />
           </div>
+          {session?.status === 'authenticated' && rights?.dashboard?.action_access && (
+            <nav aria-label="Administração" className="w-full border-t border-[#e3e7ec] pt-4">
+              <ul className="atlas-menu">{visibleDashboardItems.map(item => <li key={item.id}><Link href={item.href}>{t(item.labelKey)}</Link></li>)}</ul>
+            </nav>
+          )}
           <div className="border-t border-gray-200">
             <HeaderProfileBox />
           </div>
@@ -507,13 +535,13 @@ const CopilotMenuButton = ({
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <ChatCircleDots size={14} weight="fill" className="shrink-0 text-neutral-400" />
-                  <span className="truncate text-sm">{s.title || 'Untitled'}</span>
+                  <span className="truncate text-sm">{s.title || 'Sem título'}</span>
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem key={s.aichat_uuid} asChild>
                   <Link href={getUriWithOrg(orgslug, `/copilot?chat=${s.aichat_uuid}`)} className="flex items-center gap-2">
                     <ChatCircleDots size={14} weight="fill" className="shrink-0 text-neutral-400" />
-                    <span className="truncate text-sm">{s.title || 'Untitled'}</span>
+                    <span className="truncate text-sm">{s.title || 'Sem título'}</span>
                   </Link>
                 </DropdownMenuItem>
               )
@@ -522,7 +550,7 @@ const CopilotMenuButton = ({
           </>
         ) : (
           <div className="px-2 py-3 text-center">
-            <p className="text-xs text-neutral-400">No conversations yet</p>
+            <p className="text-xs text-neutral-400">Nenhuma conversa ainda</p>
           </div>
         )}
 
@@ -533,13 +561,13 @@ const CopilotMenuButton = ({
             className="flex items-center gap-2 font-medium cursor-pointer"
           >
             <ChatCircle size={14} weight="fill" className="text-violet-500" />
-            <span>{recentSessions.length > 0 ? 'New conversation' : 'Start a conversation'}</span>
+            <span>{recentSessions.length > 0 ? 'Nova conversa' : 'Iniciar conversa'}</span>
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem asChild>
             <Link href={getUriWithOrg(orgslug, '/copilot')} className="flex items-center gap-2 font-medium">
               <ChatCircle size={14} weight="fill" className="text-violet-500" />
-              <span>{recentSessions.length > 0 ? 'View all conversations' : 'Start a conversation'}</span>
+              <span>{recentSessions.length > 0 ? 'Ver todas as conversas' : 'Iniciar conversa'}</span>
             </Link>
           </DropdownMenuItem>
         )}
@@ -552,7 +580,7 @@ const CopilotMenuButton = ({
           className="w-full flex items-center justify-between px-2 py-2 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
         >
           <span className="text-xs text-neutral-500 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
-            Open in bubble
+            Abrir em janela flutuante
           </span>
           <span
             className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors flex-shrink-0 ${

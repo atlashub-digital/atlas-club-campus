@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: 'Login' + ` | ${org?.name || (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas ClubOS' : 'LearnHouse')}`,
+    title: (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Entrar' : 'Login') + ` | ${org?.name || (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas ClubOS' : 'LearnHouse')}`,
     robots: { index: false, follow: false },
   }
 }
@@ -50,7 +50,7 @@ const Login = async () => {
 
   return (
     <div>
-      <LoginClient org={org}></LoginClient>
+      <LoginClient org={org} googleConfigured={Boolean(process.env.LEARNHOUSE_GOOGLE_CLIENT_ID && process.env.LEARNHOUSE_GOOGLE_CLIENT_SECRET)}></LoginClient>
     </div>
   )
 }

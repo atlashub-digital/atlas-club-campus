@@ -4,6 +4,8 @@ import { Books, FolderSimple, ChatsCircle, Headphones, Cube, ShoppingBag } from 
 import { menuIcon } from '@components/Objects/Menus/menuIcons'
 import Link from 'next/link'
 import React from 'react'
+import { usePathname } from 'next/navigation'
+import { useLHSession } from '@components/Contexts/LHSessionContext'
 import { useTranslation } from 'react-i18next'
 import { getMenuColorClasses } from '@services/utils/ts/colorUtils'
 
@@ -22,6 +24,9 @@ const BUILTIN: Record<string, Builtin> = {
 const DEFAULT_ORDER = ['courses', 'library', 'podcasts', 'communities', 'playgrounds', 'store']
 
 function MenuLinks(props: { orgslug: string; primaryColor?: string }) {
+  const pathname = usePathname()
+  const session = useLHSession()
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { t } = useTranslation()
   const org = useOrg() as any
   const colors = getMenuColorClasses(props.primaryColor || '')
@@ -64,6 +69,17 @@ function MenuLinks(props: { orgslug: string; primaryColor?: string }) {
       }
     })
     .filter(Boolean) as any[]
+
+  if (atlasBrand) {
+    const labels: Record<string, string> = { courses: 'Cursos', library: 'Biblioteca', communities: 'Comunidades', playgrounds: 'Playgrounds' }
+    const links = [
+      { key: 'home', label: 'Início', href: getUriWithOrg(props.orgslug, '/') },
+      ...['courses', 'library', 'communities', 'playgrounds'].flatMap(key => rendered.filter(it => it.key === key).map(it => ({ ...it, label: labels[key] }))),
+      ...rendered.filter(it => !['courses', 'library', 'communities', 'playgrounds'].includes(it.key)),
+      ...(session?.status === 'authenticated' && isEnabled('courses') ? [{ key: 'trail', label: 'Minha aprendizagem', href: getUriWithOrg(props.orgslug, '/trail') }] : []),
+    ]
+    return <ul className="atlas-menu">{links.map(it => <li key={it.key}><Link href={it.href} aria-current={(pathname === new URL(it.href, 'https://campus.local').pathname || (it.key !== 'home' && pathname?.startsWith(new URL(it.href, 'https://campus.local').pathname + '/'))) ? 'page' : undefined}>{it.label}</Link></li>)}</ul>
+  }
 
   return (
     <div className="ps-1">

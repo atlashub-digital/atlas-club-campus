@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getUriWithOrg } from '@services/config/config'
 import { useRouter } from 'next/navigation'
@@ -38,7 +39,7 @@ const NavigationButtons = memo(({
   const isLastActivity =
     allActivities.length > 0 && currentIndex === allActivities.length - 1;
   return (
-    <div className="flex items-center space-x-2 sm:space-x-3">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.readerNav : "flex items-center space-x-2 sm:space-x-3"}>
       <button
         onClick={() => navigateToActivity(prevActivity)}
         className={`flex items-center space-x-1 sm:space-x-2 py-1.5 px-1.5 sm:px-2 rounded-md transition-all duration-200 ${
@@ -47,6 +48,7 @@ const NavigationButtons = memo(({
             : dark ? 'text-white/25 cursor-not-allowed' : 'text-gray-300 cursor-not-allowed'
         }`}
         disabled={!prevActivity}
+        aria-label={prevActivity ? `${t('common.previous')}: ${prevActivity.name}` : t('activities.no_previous_activity')}
         title={prevActivity ? `${t('common.previous')}: ${prevActivity.name}` : t('activities.no_previous_activity')}
       >
         <ChevronLeft size={16} className="shrink-0 sm:w-5 sm:h-5" />
@@ -66,6 +68,7 @@ const NavigationButtons = memo(({
         onClick={() => navigateToActivity(nextActivity)}
         className={`flex items-center space-x-1 sm:space-x-2 py-1.5 px-1.5 sm:px-2 rounded-md transition-all duration-200 ${dark ? 'text-white/85 hover:bg-white/10' : ''}`}
         disabled={!nextActivity && !isLastActivity}
+        aria-label={nextActivity ? `${t('common.next')}: ${nextActivity.name}` : isLastActivity ? t('course.finish_course', 'Finish course') : t('activities.no_next_activity')}
         title={
           nextActivity
             ? `${t('common.next')}: ${nextActivity.name}`

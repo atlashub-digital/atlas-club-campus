@@ -26,7 +26,7 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
     ? getOrgOgImageMediaDirectory(org?.org_uuid, seoConfig.default_og_image)
     : null
   const imageUrl = ogImageUrl || getOrgThumbnailMediaDirectory(org?.org_uuid, org?.thumbnail_image)
-  const title = buildPageTitle('Communities', org.name, seoConfig)
+  const title = buildPageTitle(process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Comunidades' : 'Communities', org.name, seoConfig)
   const description = seoConfig.default_meta_description || `Discussion communities from ${org.name}`
   const canonical = await getServerCanonicalUrl(params.orgslug, '/communities')
 

@@ -22,6 +22,7 @@ import { getAllowedAuthMethods } from '@services/auth/authMethods'
 
 interface LoginClientProps {
   org: any
+  googleConfigured?: boolean
 }
 
 const LoginClient = (props: LoginClientProps) => {
@@ -46,7 +47,7 @@ const LoginClient = (props: LoginClientProps) => {
   )
   const passwordAllowed = allowedMethods.has('password')
   const magicLoginAllowed = allowedMethods.has('magic_login')
-  const googleAllowed = allowedMethods.has('google')
+  const googleAllowed = allowedMethods.has('google') && (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' || props.googleConfigured === true)
   const ssoAllowed = allowedMethods.has('sso')
   // SSO counts only once it is actually configured for the org (ssoEnabled).
   const hasAlternativeMethods = googleAllowed || magicLoginAllowed || (ssoAllowed && ssoEnabled)
@@ -528,7 +529,7 @@ const LoginClient = (props: LoginClientProps) => {
                 <h1 className="text-[28px] md:text-[32px] font-black text-black tracking-tight leading-tight">
                   {t('auth.mfa_title', { defaultValue: 'Two-step verification' })}
                 </h1>
-                <p className="mt-2 text-black/45 text-[15px] font-medium">
+                <p className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'mt-2 text-[#526174] text-[15px] font-medium' : 'mt-2 text-black/45 text-[15px] font-medium'}>
                   {useBackupCode
                     ? t('auth.mfa_subtitle_backup', { defaultValue: 'Enter one of the backup codes you saved.' })
                     : t('auth.mfa_subtitle', { defaultValue: 'Enter the 6-digit code from your authenticator app.' })}
@@ -612,7 +613,7 @@ const LoginClient = (props: LoginClientProps) => {
                         turnstileRef.current?.reset()
                       }}
                       disabled={mfaSubmitting}
-                      className="text-sm text-black/35 hover:text-black/60 disabled:opacity-50"
+                      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'text-sm text-[#526174] hover:text-black/60 disabled:opacity-50' : 'text-sm text-black/35 hover:text-black/60 disabled:opacity-50'}
                     >
                       {t('auth.mfa_back_to_login', { defaultValue: 'Back to sign in' })}
                     </button>
@@ -634,7 +635,7 @@ const LoginClient = (props: LoginClientProps) => {
                       <h2 className="mt-4 text-lg font-bold text-black">
                         {t('auth.magic_sent_title', { defaultValue: 'Check your email' })}
                       </h2>
-                      <p className="mt-2 text-black/45 text-[15px] font-medium max-w-sm">
+                      <p className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'mt-2 text-[#526174] text-[15px] font-medium max-w-sm' : 'mt-2 text-black/45 text-[15px] font-medium max-w-sm'}>
                         {t('auth.magic_sent_body', {
                           defaultValue:
                             'If an account exists for {{email}}, we just sent it a secure link to sign in. It expires shortly, so use it soon.',
@@ -650,7 +651,7 @@ const LoginClient = (props: LoginClientProps) => {
                           setMagicSent(false)
                           setMagicError('')
                         }}
-                        className="text-sm text-black/35 hover:text-black/60"
+                        className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'text-sm text-[#526174] hover:text-black/60' : 'text-sm text-black/35 hover:text-black/60'}
                       >
                         {t('auth.magic_back_to_login', { defaultValue: 'Back to sign in' })}
                       </button>
@@ -658,7 +659,7 @@ const LoginClient = (props: LoginClientProps) => {
                   </>
                 ) : (
                   <>
-                    <p className="mt-2 text-black/45 text-[15px] font-medium">
+                    <p className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'mt-2 text-[#526174] text-[15px] font-medium' : 'mt-2 text-black/45 text-[15px] font-medium'}>
                       {t('auth.magic_subtitle', {
                         defaultValue:
                           'Enter your email and we’ll send you a link that signs you in, no password needed.',
@@ -720,7 +721,7 @@ const LoginClient = (props: LoginClientProps) => {
                           setMagicError('')
                         }}
                         disabled={magicSubmitting}
-                        className="text-sm text-black/35 hover:text-black/60 disabled:opacity-50"
+                        className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'text-sm text-[#526174] hover:text-black/60 disabled:opacity-50' : 'text-sm text-black/35 hover:text-black/60 disabled:opacity-50'}
                       >
                         {t('auth.magic_use_password', {
                           defaultValue: 'Sign in with a password instead',
@@ -734,7 +735,7 @@ const LoginClient = (props: LoginClientProps) => {
               <>
             {/* Header */}
             <h1 className="text-[28px] md:text-[32px] font-black text-black tracking-tight leading-tight">{t('auth.welcome_back')}</h1>
-            <p className="mt-2 text-black/45 text-[15px] font-medium">
+            <p className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'mt-2 text-[#526174] text-[15px] font-medium' : 'mt-2 text-black/45 text-[15px] font-medium'}>
               {passwordAllowed
                 ? t('auth.enter_credentials')
                 : t('auth.choose_sign_in_method', {
@@ -761,7 +762,7 @@ const LoginClient = (props: LoginClientProps) => {
                       onBlur={formik.handleBlur}
                       value={formik.values.email}
                       type="email"
-                      className="box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-neutral-200 inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-black/25 text-sm"
+                      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-[#7c8898] inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-[#526174] text-sm' : 'box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-neutral-200 inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-black/25 text-sm'}
                     />
                   </Form.Control>
                 </FormField>
@@ -789,7 +790,7 @@ const LoginClient = (props: LoginClientProps) => {
                       value={formik.values.password}
                       type="password"
                       autoComplete="current-password"
-                      className="box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-neutral-200 inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-black/25 text-sm"
+                      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-[#7c8898] inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-[#526174] text-sm' : 'box-border w-full bg-neutral-50 text-black rounded-lg px-4 border border-neutral-200 inline-flex h-[44px] appearance-none items-center focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-neutral-400 transition-all placeholder:text-black/25 text-sm'}
                     />
                   </Form.Control>
                 </FormField>
@@ -825,7 +826,7 @@ const LoginClient = (props: LoginClientProps) => {
                     <div className="w-full border-t border-neutral-200" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-3 text-black/30 bg-white text-xs font-medium">{t('common.or')}</span>
+                    <span className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'px-3 text-[#526174] bg-white text-xs font-medium' : 'px-3 text-black/30 bg-white text-xs font-medium'}>{t('common.or')}</span>
                   </div>
                 </div>
               )}
@@ -882,7 +883,7 @@ const LoginClient = (props: LoginClientProps) => {
               )}
 
               {/* Sign Up Link */}
-              <p className="text-center text-sm text-black/35 mt-6">
+              <p className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'text-center text-sm text-[#526174] mt-6' : 'text-center text-sm text-black/35 mt-6'}>
                 {t('auth.no_account')}{' '}
                 <Link href="/signup" className="text-black font-semibold hover:underline">
                   {t('auth.sign_up')}

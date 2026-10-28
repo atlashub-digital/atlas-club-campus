@@ -1,4 +1,5 @@
 'use client'
+import styles from '@components/Clubos/Surfaces.module.css'
 import Link from 'next/link'
 import { getUriWithOrg } from '@services/config/config'
 import { BookOpenCheck, CheckCircle, ChevronLeft, ChevronRight, MessageSquare, UserRoundPen, Edit2, Loader2, Maximize2, Minimize2, Trophy, Sparkles, XCircle, Lock, RotateCcw, Infinity as InfinityIcon } from 'lucide-react'
@@ -450,7 +451,7 @@ function ActivityClient(props: ActivityClientProps) {
       setBgColor('');
     }
     else {
-      setBgColor(isFocusMode ? 'bg-zinc-950' : 'bg-zinc-950 nice-shadow');
+      setBgColor(process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'bg-white' : isFocusMode ? 'bg-zinc-950' : 'bg-zinc-950 nice-shadow');
     }
   }
     , [activity, pathname, isFocusMode])
@@ -540,6 +541,7 @@ function ActivityClient(props: ActivityClientProps) {
             )}
             <Link
               href={getUriWithOrg(orgslug, '') + `/course/${courseuuid}`}
+                                aria-label={course.name}
               className="inline-flex items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors"
             >
               {t('course.back_to_course', 'Back to course')}
@@ -632,6 +634,7 @@ function ActivityClient(props: ActivityClientProps) {
                           <div className="flex">
                             <Link
                               href={getUriWithOrg(orgslug, '') + `/course/${courseuuid}`}
+                                aria-label={course.name}
                             >
                               <img
                                 className="w-[60px] h-[34px] rounded-md drop-shadow-md"
@@ -826,6 +829,7 @@ function ActivityClient(props: ActivityClientProps) {
                             <div className="flex shrink-0">
                               <Link
                                 href={getUriWithOrg(orgslug, '') + `/course/${courseuuid}`}
+                                aria-label={course.name}
                               >
                                 <img
                                   className="w-[60px] h-[34px] sm:w-[100px] sm:h-[57px] rounded-md drop-shadow-md"
@@ -1004,7 +1008,7 @@ function ActivityClient(props: ActivityClientProps) {
                             <PaidCourseActivityDisclaimer course={course} />
                           ) : (
                             // Video activities sit on a dark theater band (theater.css).
-                            <div className={activity.activity_type === 'TYPE_VIDEO' ? 'lh-theater-band py-8 sm:py-12' : ''}>
+                            <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.reader : activity.activity_type === 'TYPE_VIDEO' ? 'lh-theater-band py-8 sm:py-12' : ''}>
                             {activity.activity_type === 'TYPE_VIDEO' && (
                               <button
                                 onClick={() => setIsFocusMode(true)}
@@ -1056,7 +1060,7 @@ function ActivityClient(props: ActivityClientProps) {
                               course={course}
                               currentActivityId={activity.id}
                               orgslug={orgslug}
-                              dark={activity.activity_type === 'TYPE_VIDEO'}
+                              dark={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' && activity.activity_type === 'TYPE_VIDEO'}
                             />
                           </div>
                           <div className="flex items-center justify-between sm:justify-end space-x-2 order-2 sm:order-none">
@@ -1068,13 +1072,13 @@ function ActivityClient(props: ActivityClientProps) {
                               assignment={assignment}
                               showNavigation={false}
                               trailData={trailData}
-                              dark={activity.activity_type === 'TYPE_VIDEO'}
+                              dark={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' && activity.activity_type === 'TYPE_VIDEO'}
                             />
                             <NextActivityButton
                               course={course}
                               currentActivityId={activity.id}
                               orgslug={orgslug}
-                              dark={activity.activity_type === 'TYPE_VIDEO'}
+                              dark={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' && activity.activity_type === 'TYPE_VIDEO'}
                             />
                           </div>
                         </div>
@@ -1087,7 +1091,7 @@ function ActivityClient(props: ActivityClientProps) {
                           currentActivityId={activityid}
                           orgslug={orgslug}
                           activity={activity}
-                          dark={activity.activity_type === 'TYPE_VIDEO'}
+                          dark={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND !== 'true' && activity.activity_type === 'TYPE_VIDEO'}
                         />
                       )}
                       

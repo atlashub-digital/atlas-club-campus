@@ -1,7 +1,9 @@
 import '../styles/globals.css'
 import React from 'react'
 import Providers from '@components/Providers'
-import { Wix_Madefor_Text, Tajawal } from 'next/font/google'
+import { Wix_Madefor_Text, Tajawal, Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-atlas' })
 
 const wixMadeforText = Wix_Madefor_Text({
   subsets: ['latin'],
@@ -35,15 +37,16 @@ export default function RootLayout({
 }) {
   // `dir` is deliberately absent from the <html> below. React only reconciles
   // attributes present in its virtual tree, so leaving it out means React never
-  // clobbers what dir-init.js wrote before paint. `lang="en"` stays as the
+  // clobbers what dir-init.js wrote before paint. `lang={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'pt-BR' : 'en'}` stays as the
   // no-JS baseline for crawlers; the script overwrites it for everyone else.
   return (
     <html
-      className={`${wixMadeforText.variable} ${tajawal.variable}`}
-      lang="en"
+      className={`${wixMadeforText.variable} ${tajawal.variable} ${inter.variable}`}
+      lang={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'pt-BR' : 'en'}
       suppressHydrationWarning
     >
       <head>
+        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && <link rel="icon" href="/atlas/brand/01-portico/favicon-light.svg" type="image/svg+xml" />}
         {/* Synchronous script: sets <html lang/dir> before body paints so an
             RTL locale never flashes an LTR layout. Must run first. */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
@@ -63,7 +66,7 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/embed-bg.js" />
       </head>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning style={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? { fontFamily: 'var(--font-atlas), sans-serif' } : undefined}>
         <Providers>
           <main className="animate-fade-in">
             {children}
