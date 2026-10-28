@@ -28,6 +28,12 @@ const tajawal = Tajawal({
   variable: '--font-arabic',
 })
 
+export const metadata = {
+  title: { default: 'Atlas Club', template: '%s | Atlas Club' },
+  applicationName: 'Atlas Club',
+  icons: { icon: '/favicon.ico' },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -52,9 +58,8 @@ export default function RootLayout({
             Next.js <Script strategy="beforeInteractive"> is not truly blocking in all browsers (Safari). */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/runtime-config.js" />
-        {/* Atlas ClubOS design tokens (opt-in per build). Loaded only when the
-            brand flag is on, so other LearnHouse tenants keep the stock theme. */}
-        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && (
+        {/* Optional legacy Campus theme. Branding alone keeps the original UI. */}
+        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_THEME === 'true' && (
           // eslint-disable-next-line @next/next/no-css-tags
           <link rel="stylesheet" href="/atlas/atlas-clubos-theme.css" />
         )}
