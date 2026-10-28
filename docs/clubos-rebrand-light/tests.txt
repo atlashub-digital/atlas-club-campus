@@ -1,0 +1,614 @@
+$ bun test --isolate ./tests
+bun test v1.4.4 (38afee6c8)
+
+tests/embed-sanitize.test.mjs:
+(pass) iframeSandboxFor > known embed providers keep their own origin [1.12ms]
+(pass) iframeSandboxFor > unknown, look-alike and non-https hosts get the base sandbox [1.25ms]
+(pass) iframeSandboxFor > relative or missing src gets the base sandbox [0.91ms]
+(pass) urlEmbedSandboxFor > an external site keeps its origin but never gets top navigation [0.10ms]
+(pass) urlEmbedSandboxFor > an external site can open links in a normal tab and download files [0.02ms]
+(pass) urlEmbedSandboxFor > a URL on our own origin loses allow-same-origin [0.02ms]
+(pass) urlEmbedSandboxFor > an unparseable src gets the base sandbox [0.01ms]
+
+tests/activity-create-modals.test.mjs:
+(pass) activity create modals > DynamicActivityModal does not ask for a description it never saves [2.90ms]
+(pass) activity create modals > MarkdownActivityModal does not ask for a description it never saves [0.04ms]
+(pass) activity create modals > EmbedActivityModal does not ask for a description it never saves [0.01ms]
+
+tests/sso-continue-url.test.mjs:
+(pass) ssoContinueUrl > follows an https callback URL on the login host [0.35ms]
+(pass) ssoContinueUrl > allows http only when the page itself is on http [0.03ms]
+(pass) ssoContinueUrl > refuses anything that isn't the SSO callback [0.04ms]
+(pass) ssoContinueUrl > ignores other errors and a missing URL [0.02ms]
+
+tests/certification-enabled.test.mjs:
+(pass) getCourseCertificationStatus > reports enabled when the course has a certification row [0.04ms]
+(pass) getCourseCertificationStatus > reports disabled when the course has no certification row [0.01ms]
+(pass) getCourseCertificationStatus > reports unknown when the request failed [0.01ms]
+(pass) getCourseCertificationStatus > reports unknown when a 200 carries something other than a list [0.01ms]
+(pass) getCourseCertificationStatus > reports unknown when there is no answer yet [0.01ms]
+
+tests/admin-ee-gate.test.mjs:
+(pass) isSuperadminSurfaceBlocked > blocks OSS [0.02ms]
+(pass) isSuperadminSurfaceBlocked > never blocks SaaS
+(pass) isSuperadminSurfaceBlocked > never blocks self-hosted EE
+(pass) isSuperadminSurfaceBlocked > fails open when the mode is unknown
+
+tests/billing-internal-key.test.mjs:
+[updateOrgConfig] Updating org 4242 to plan "pro"
+(pass) updateOrganizationConfigInternally: internal key resolution > sends the key when only CLOUD_INTERNAL_KEY is set [4.85ms]
+[updateOrgConfig] Updating org 4242 to plan "pro"
+(pass) updateOrganizationConfigInternally: internal key resolution > sends the key when only LEARNHOUSE_CLOUD_INTERNAL_KEY is set [0.12ms]
+[updateOrgConfig] Updating org 4242 to plan "pro"
+(pass) updateOrganizationConfigInternally: internal key resolution > prefers the unprefixed name the API itself validates [0.08ms]
+[updateOrgConfig] Updating org 4242 to plan "pro"
+(pass) updateOrganizationConfigInternally: internal key resolution > throws before calling the API when neither name is set [1.04ms]
+[updateOrgConfig] Updating org 4242 to plan "pro"
+(pass) updateOrganizationConfigInternally: internal key resolution > an empty-string key is treated as unset, never sent [0.09ms]
+[updateOrgConfig] Updating org 4242 to plan "standard"
+(pass) updateOrganizationConfigInternally: internal key resolution > sends the plan to the cloud_internal endpoint and bounds the call [0.43ms]
+[updateOrgConfig] Updating org 4242 to plan "pro"
+[updateOrgConfig] Failed: 403  {"detail":"Invalid internal API key"}
+(pass) updateOrganizationConfigInternally: internal key resolution > a non-2xx response throws rather than reporting success [0.98ms]
+
+tests/url-security.test.mjs:
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "javascript:alert(1)" [1.18ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "JaVaScRiPt:alert(1)" [0.23ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "java\tscript:alert(1)"
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "java\nscript:alert(1)"
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "\u0000javascript:alert(1)" [0.02ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "vbscript:msgbox(1)" [0.03ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "data:text/html,<script>alert(1)</script>" [0.03ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "//attacker.example/path" [0.02ms]
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "/\\attacker.example/path"
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "\\attacker.example/path"
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "/\n/attacker.example/path"
+(pass) URL parsing at links, images and navigation sinks > rejects browser-normalized unsafe input "https://school.example@attacker.example/path" [0.03ms]
+(pass) URL parsing at links, images and navigation sinks > keeps ordinary links and query strings intact [0.12ms]
+(pass) URL parsing at links, images and navigation sinks > image previews retain object URLs and raster data without allowing HTML or SVG [0.07ms]
+(pass) URL parsing at links, images and navigation sinks > internal path builders cannot be turned into external navigation [0.06ms]
+(pass) organization and authentication redirects > preserves same-origin paths and sibling organization navigation [0.20ms]
+(pass) organization and authentication redirects > rejects external hosts, suffix tricks, ports and HTTPS downgrade [0.52ms]
+(pass) organization and authentication redirects > keeps custom-domain and localhost authentication working [0.07ms]
+(pass) organization and authentication redirects > malformed cookies do not crash authentication [0.02ms]
+(pass) organization and authentication redirects > organization links validate the slug and the path before building a hostname [0.39ms]
+(pass) organization and authentication redirects > SSO refuses a script URL returned by the upstream API [0.93ms]
+(pass) organization and authentication redirects > SSO accepts configured providers on other hosts [0.13ms]
+
+tests/custom-domain-org.test.mjs:
+(pass) getCustomDomainOrgId > a registered custom domain resolves to its org id [0.51ms]
+(pass) getCustomDomainOrgId > an unregistered host is not a custom domain [0.06ms]
+(pass) getCustomDomainOrgId > platform apex and subdomains never reach the backend [0.17ms]
+(pass) getCustomDomainOrgId > a 200 without a numeric org id is not trusted [0.07ms]
+
+tests/billing-interval.test.mjs:
+(pass) billing interval helpers > offers without a stored period are monthly [0.03ms]
+(pass) billing interval helpers > yearly is recognised [0.06ms]
+(pass) billing interval helpers > monthly labels [0.01ms]
+(pass) billing interval helpers > labels go through the translator when one is given [15.01ms]
+
+tests/active-user-billing.test.mjs:
+(pass) completeMonthsBefore > returns the prior months oldest first, never the current one [0.51ms]
+(pass) completeMonthsBefore > crosses the year boundary [0.02ms]
+(pass) completeMonthsBefore > an annual lookback covers the full preceding year [0.06ms]
+(pass) completeMonthsBefore > uses UTC, not the runner's local timezone [0.01ms]
+(pass) intervalMonths > monthly bills one month per invoice [0.05ms]
+(pass) intervalMonths > annual has to reconcile twelve [0.01ms]
+(pass) intervalMonths > multi-interval prices multiply out [0.01ms]
+(pass) intervalMonths > sub-monthly intervals and unknown shapes fall back to one month [0.02ms]
+(pass) invoiceSubscriptionId > reads the pre-Basil top-level field [0.02ms]
+(pass) invoiceSubscriptionId > reads the Basil parent.subscription_details shape
+(pass) invoiceSubscriptionId > unwraps an expanded subscription object
+(pass) invoiceSubscriptionId > returns undefined for a one-off invoice [0.01ms]
+(pass) periodKey / monthStartUnix > pads the month so periods sort and match exactly [0.03ms]
+(pass) periodKey / monthStartUnix > month start is the first UTC second of that month [0.48ms]
+
+tests/landing-sections.test.mjs:
+(pass) isSectionVisible > sections saved before the field existed show to everyone [0.13ms]
+(pass) isSectionVisible > logged_in sections show only to authenticated visitors [0.03ms]
+(pass) isSectionVisible > logged_out sections show only to anonymous visitors [0.01ms]
+(pass) isSectionVisible > audience-restricted sections wait for the session to settle [0.01ms]
+(pass) resolveLandingVideo > known hosts become embeds [1.07ms]
+(pass) resolveLandingVideo > other http(s) URLs are played as files, never framed [0.04ms]
+(pass) resolveLandingVideo > empty and non-http values render nothing [0.02ms]
+(pass) course end config > reads v2 then v1 locations, defaulting to empty [0.05ms]
+(pass) course end config > defaults to the course catalog [0.04ms]
+(pass) course end config > keeps internal paths and absolute URLs [0.03ms]
+(pass) course end config > unsafe links fall back to the default [0.06ms]
+(pass) section style > a section saved before styles existed needs no frame and keeps py-16 [0.18ms]
+(pass) section style > hidden sections never render, whatever the audience [0.03ms]
+(pass) section style > backgrounds [0.07ms]
+(pass) section style > anchors become safe ids [0.03ms]
+(pass) section style > links [0.09ms]
+(pass) templates > templates are non-empty and never repeat an anchor [0.40ms]
+(pass) scheduling and devices > no bounds, or unparseable bounds, mean always on [0.04ms]
+(pass) scheduling and devices > window is inclusive of the start and exclusive of the end [0.05ms]
+(pass) scheduling and devices > a scheduled section is filtered out of the page [0.03ms]
+(pass) scheduling and devices > device classes [0.06ms]
+(pass) scheduling and devices > the new style options need a frame, their defaults do not [0.03ms]
+(pass) embeds > allowed hosts are framed, known providers are rewritten [0.13ms]
+(pass) embeds > everything else renders nothing [0.09ms]
+(pass) countdown > splits the remaining time [0.09ms]
+(pass) countdown > past or invalid targets are done, never negative [0.02ms]
+(pass) landing import > accepts an export and keeps settings [0.12ms]
+(pass) landing import > rejects anything the renderer would not understand [0.19ms]
+(pass) landing import > templates only use importable types [0.05ms]
+(pass) pricing plans linked to store offers > an unlinked plan is untouched, with or without offers loaded [0.24ms]
+(pass) pricing plans linked to store offers > a linked plan takes price, checkout link and empty fields from the offer [0.09ms]
+(pass) pricing plans linked to store offers > typed name, description and features win over the offer's; the price never does [0.04ms]
+(pass) pricing plans linked to store offers > pay-what-you-want offers flag the price as a minimum [0.02ms]
+(pass) pricing plans linked to store offers > a linked subscription takes its billing period from the offer, not the typed period [0.04ms]
+(pass) pricing plans linked to store offers > one-time offers keep the typed period and carry no billing period [0.03ms]
+(pass) pricing plans linked to store offers > loading shows no price; an offer missing from the listing drops the plan [0.03ms]
+
+tests/rtl-guard.test.mjs:
+(pass) RTL language set > dir-init.js matches RTL_LANGUAGES in lib/direction.ts [0.66ms]
+(pass) RTL language set > Arabic and Persian are RTL [0.08ms]
+(pass) language registry > every language declares a direction [0.06ms]
+(pass) language registry > ar and fa are the RTL entries [0.06ms]
+(pass) language registry > registry and lazy loaders agree [0.14ms]
+(pass) globals.css > every physical declaration is justified [1.17ms]
+(pass) globals.css > RTL affordances are present [0.12ms]
+(pass) globals.css > RTL rules survive compilation [708.17ms]
+(pass) Arabic translations > ar.json covers every en.json key [6.42ms]
+
+tests/google-oauth-bounce.test.mjs:
+(pass) platformOrgSlug > returns the label of a direct org subdomain [0.12ms]
+(pass) platformOrgSlug > rejects the apex, deeper hosts, other ports and other domains [0.03ms]
+(pass) oauthBounceCheckUrl > a platform subdomain must belong to an existing org [0.08ms]
+(pass) oauthBounceCheckUrl > any other host must be a verified custom domain still pointing at us [0.03ms]
+
+tests/billing-platform-key.test.mjs:
+(pass) platformApiKey > returns the configured key [0.04ms]
+(pass) platformApiKey > throws when unset instead of returning an empty key [0.07ms]
+(pass) platformApiKey > treats an empty string as unset [0.02ms]
+
+tests/course-updates-feed.test.mjs:
+(pass) course updates RSS feed > renders the course's updates as RSS items with escaped text [1.10ms]
+(pass) course updates RSS feed > links use the host the feed was fetched on, custom domains included [0.21ms]
+(pass) course updates RSS feed > hides courses the anonymous API call may not read [0.28ms]
+(pass) course updates RSS feed > unknown orgs and courses of another org are not found [0.15ms]
+(pass) course updates RSS feed > requires the org context the proxy injects [0.06ms]
+
+tests/format-locale.test.mjs:
+(pass) intlLocale > keeps valid tags and forces Latin digits for ar/fa [0.53ms]
+(pass) intlLocale > repairs underscore tags instead of throwing [0.03ms]
+(pass) intlLocale > falls back to English for missing or malformed tags [0.03ms]
+(pass) formatters never throw on a bad locale > formatDate [13.58ms]
+(pass) formatters never throw on a bad locale > formatNumber [0.15ms]
+(pass) intlLocale cache > returns the same answer on repeat calls [0.04ms]
+(pass) intlLocale cache > stays correct after many distinct inputs [0.87ms]
+
+tests/linkify.test.mjs:
+(pass) splitLinks > turns a bare https URL inside a sentence into a link segment [0.34ms]
+(pass) splitLinks > keeps paths and query strings but drops sentence punctuation [0.06ms]
+(pass) splitLinks > prefixes www. hosts with https [0.03ms]
+(pass) splitLinks > ignores non-web schemes [0.01ms]
+(pass) splitLinks > handles several links and multi-line text [0.08ms]
+(pass) splitLinks > keeps a balanced closing parenthesis that is part of the URL [0.03ms]
+(pass) splitLinks > stops at Arabic and CJK punctuation [0.06ms]
+(pass) splitLinks > stays linear on long adversarial input [4.64ms]
+(pass) splitLinks > returns nothing for empty input [0.04ms]
+
+tests/billing-webhook.test.mjs:
+Webhook signature verification failed: No signatures found matching the expected signature
+(pass) signature verification > an unsigned or mis-signed payload is rejected without touching the plan [0.55ms]
+(pass) checkout.session.completed > upgrades the org when the subscription is present [0.58ms]
+(pass) checkout.session.completed > retries a briefly-deferred subscription instead of dropping the upgrade [1004.53ms]
+Webhook processing error for checkout.session.completed (evt_test_4): 149 | 
+150 |   if (!subscription) {
+151 |     // Subscription still not materialized after retries: transient. Throw so
+152 |     // Stripe redelivers (and customer.subscription.created will also cover it),
+153 |     // rather than acking with a 200 that permanently drops the upgrade.
+154 |     throw new Error(
+                    ^
+error: checkout.session.completed: subscription not yet available for session cs_test
+      at handleCheckoutCompleted (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:154:15)
+      at async POST (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:88:13)
+
+(pass) checkout.session.completed > asks Stripe to redeliver when the subscription never materializes [2003.95ms]
+Webhook processing error for checkout.session.completed (evt_test_5): 189 |       // The session belongs to us (it carries org_id) but its price maps to no
+190 |       // known plan, almost always a missing STRIPE_PRICE_* env on this
+191 |       // deployment. Throw: acking here would drop a paid upgrade on the floor
+192 |       // for a config gap that is fixable, and Stripe's retries buy time to fix
+193 |       // it. Silent config gaps are exactly how paid orgs end up on free.
+194 |       throw new Error(
+                      ^
+error: checkout.session.completed: could not resolve plan for session cs_test (org 4242, price price_unmapped): is the matching STRIPE_PRICE_* env set?
+      at handleCheckoutCompleted (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:194:17)
+      at async POST (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:88:13)
+
+(pass) checkout.session.completed > asks Stripe to redeliver when the price maps to no known plan [0.40ms]
+checkout.session.completed: no org_id in subscription metadata cs_test
+(pass) checkout.session.completed > acks a foreign checkout carrying no org_id [0.16ms]
+(pass) customer.subscription.created > upgrades the org: it is the recovery path when checkout.session.completed is dropped [0.42ms]
+(pass) customer.subscription.updated / deleted > an active subscription reconciles to the price's plan [0.10ms]
+(pass) customer.subscription.updated / deleted > deletion downgrades to free [0.11ms]
+(pass) idempotency > a redelivery of a successful event is not applied twice [0.14ms]
+Webhook processing error for checkout.session.completed (evt_test_11): 149 | 
+150 |   if (!subscription) {
+151 |     // Subscription still not materialized after retries: transient. Throw so
+152 |     // Stripe redelivers (and customer.subscription.created will also cover it),
+153 |     // rather than acking with a 200 that permanently drops the upgrade.
+154 |     throw new Error(
+                    ^
+error: checkout.session.completed: subscription not yet available for session cs_test
+      at handleCheckoutCompleted (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:154:15)
+      at async POST (/tmp/acc/apps/web/app/api/billing/webhook/route.ts:88:13)
+
+(pass) idempotency > a redelivery after a FAILED delivery is reprocessed, not called a duplicate [2003.42ms]
+
+tests/course-structure-translatable-text.test.mjs:
+(pass) course structure labels are translation-safe > ActivityElement.tsx has no bare text sibling after an element [0.48ms]
+(pass) course structure labels are translation-safe > ChapterElement.tsx has no bare text sibling after an element [0.19ms]
+(pass) course structure labels are translation-safe > LockPopover.tsx has no bare text sibling after an element [0.14ms]
+
+tests/copilot-sources.test.mjs:
+(pass) sourcePath > opens a video at the cited moment [0.25ms]
+(pass) sourcePath > opens a document at the cited page [0.03ms]
+(pass) sourcePath > course and chapter text open the course page [0.02ms]
+(pass) sourcePath > history saved before locators still links to the activity [0.01ms]
+(pass) sourcePath > no course, no link
+(pass) sourceLocation > time and page [0.03ms]
+(pass) sourceLocation > ignores missing or malformed locators [0.02ms]
+(pass) sourceTitle > falls back from activity to chapter to course [0.05ms]
+(pass) formatTimestamp > minutes and hours [0.14ms]
+(pass) positiveIntParam > accepts only positive integers [0.14ms]
+
+tests/third-party-relay.test.mjs:
+(pass) isThirdPartyRelayPath > matches the relay prefixes [0.07ms]
+(pass) isThirdPartyRelayPath > leaves look-alike app paths alone [0.03ms]
+(pass) withoutCredentialHeaders > drops cookie and authorization, keeps the rest [0.05ms]
+(pass) withoutCredentialHeaders > the proxy response tells Next to drop them before the rewrite [0.18ms]
+
+tests/auth-proxy-hardening.test.mjs:
+(pass) refresh token exposure > sets the refresh cookie but strips it from the JSON body [3.50ms]
+(pass) refresh token exposure > strips a top-level refresh_token too [0.38ms]
+(pass) login CSRF > rejects a cross-site POST without calling the backend [0.25ms]
+(pass) login CSRF > rejects a cross-site POST that carries no Origin [0.48ms]
+(pass) login CSRF > allows a same-origin POST [0.32ms]
+(pass) client host forwarding > tells the backend which host the browser signed in on [0.22ms]
+(pass) client host forwarding > prefers the ingress's forwarded host over the pod's Host [0.20ms]
+(pass) 2FA session rotation > turning 2FA on stores the rotated pair in this site's cookies [0.28ms]
+
+tests/assignment-task-order.test.mjs:
+(pass) sortTasksByOrder > follows the stored order, not creation order [0.09ms]
+(pass) sortTasksByOrder > puts unordered legacy rows last, in id order [0.03ms]
+(pass) sortTasksByOrder > does not mutate its input and tolerates missing data [0.03ms]
+(pass) moveTask > moves a task down and renumbers [0.06ms]
+(pass) moveTask > moves a task up [0.02ms]
+(pass) moveTask > leaves the original list untouched [0.02ms]
+(pass) moveTask > ignores an out-of-range source
+
+tests/signup-gateway.test.mjs:
+(pass) client IP relay > forwards X-Forwarded-For and X-Real-IP to the backend [0.93ms]
+(pass) client IP relay > sends no IP headers the caller didn't have [0.14ms]
+(pass) Turnstile on custom domains > platform host: a missing token is rejected [0.10ms]
+(pass) Turnstile on custom domains > custom domain: signing up into the domain's own org skips the challenge [0.11ms]
+(pass) Turnstile on custom domains > custom domain: an org-less signup still needs the challenge [0.08ms]
+(pass) Turnstile on custom domains > custom domain: a signup into a different org still needs the challenge [0.11ms]
+
+tests/video-source.test.mjs:
+(pass) resolveActivityCaptions > returns only ready tracks with built URLs [0.17ms]
+(pass) resolveActivityCaptions > empty when disabled, absent, or ids missing [0.04ms]
+(pass) isActivityHlsReady > true only when hls status is 'ready' [0.02ms]
+(pass) isActivityHlsReady > false for processing/failed/missing metadata [0.02ms]
+(pass) resolveActivityVideoSource > empty when there is no filename [0.05ms]
+(pass) resolveActivityVideoSource > empty for whitespace-only filename [0.01ms]
+(pass) resolveActivityVideoSource > empty when any id is missing (never emits 'undefined' in the URL) [0.02ms]
+(pass) resolveActivityVideoSource > no double slash regardless of backend trailing slash [0.04ms]
+(pass) resolveActivityVideoSource > uses the MP4 stream endpoint when HLS is not ready [0.02ms]
+(pass) resolveActivityVideoSource > uses the HLS master playlist when ready [0.02ms]
+(pass) resolveHlsThumbnails > builds an absolute sprite URL and passes config through [0.09ms]
+(pass) resolveHlsThumbnails > null when thumbnails metadata is missing or incomplete [0.02ms]
+(pass) resolveHlsThumbnails > null for negative/zero/NaN numeric fields [0.05ms]
+(pass) resolveHlsThumbnails > null when an id is missing [0.01ms]
+(pass) resolveHlsThumbnails > defaults rows to 1 when omitted or non-positive [0.04ms]
+(pass) shouldSendHlsCredentials > credentials only for our API playlist endpoint [0.02ms]
+(pass) shouldSendHlsCredentials > no credentials for presigned R2 segment URLs
+(pass) shouldSendHlsCredentials > never sends credentials to a presigned URL even if it contains the API path
+(pass) buildThumbnailsVtt > emits one cropped cue per sprite cell with an absolute URL [0.22ms]
+(pass) buildThumbnailsVtt > formats hours in cue timestamps [0.04ms]
+(pass) buildThumbnailsVtt > rejects a broken grid [0.02ms]
+(pass) buildThumbnailsVtt > defaults missing rows to a single row [0.05ms]
+(pass) resolveAdjacentActivities > flattens chapters and skips unpublished neighbours [0.13ms]
+(pass) resolveAdjacentActivities > returns nulls at the edges and for unknown ids [0.04ms]
+(pass) sprite frames > spriteFrameStyle picks a frame by fraction in percent units [0.09ms]
+(pass) sprite frames > spriteFrameAt maps seconds to the frame grid and clamps [0.27ms]
+(pass) chapters > resolveActivityChapters keeps valid ready chapters, sorted [0.15ms]
+(pass) chapters > buildChaptersVtt chains cue ends and escapes titles [0.19ms]
+(pass) chapters > chapterIndexAt finds the playing chapter [0.31ms]
+(pass) chapters > formatClock and parseClock round-trip [0.15ms]
+
+tests/feature-gate-lockout.test.mjs:
+(pass) resolveGateReason: admin-disabled features > blocks with the disabled reason by default [0.11ms]
+(pass) resolveGateReason: admin-disabled features > lets a host surface through when it opts in [0.02ms]
+(pass) resolveGateReason: admin-disabled features > lets a self-hosted org back in [0.01ms]
+(pass) resolveGateReason: the escape hatch is not a paywall bypass > still demands an upgrade when the plan is too low [0.04ms]
+(pass) resolveGateReason: the escape hatch is not a paywall bypass > prefers the plan reason when the feature is both locked and off [0.01ms]
+(pass) resolveGateReason: granted features > returns no reason when the plan is met and the feature is on [0.02ms]
+(pass) resolveGateReason: granted features > treats a feature the backend never resolved as enabled [0.02ms]
+(pass) resolveGateReason: the catalog fallback > holds off while the org has not loaded [0.01ms]
+(pass) resolveGateReason: the catalog fallback > gates by the catalog tier once the org has loaded without the feature [0.01ms]
+(pass) resolveGateReason: the catalog fallback > ignores catalog tiers that gate nothing [0.03ms]
+(pass) resolveGateReason: the catalog fallback > defers to the backend's required plan over the catalog [0.02ms]
+(pass) Organization AI settings page > the page still hosts the AI toggle [0.01ms]
+(pass) Organization AI settings page > any gate on the ai feature opts out of the disabled branch [0.06ms]
+(pass) FeatureGate > declares the opt-out prop [0.02ms]
+(pass) FeatureGate > forwards the opt-out into the resolved-feature hook [0.03ms]
+
+tests/editor-unsaved-changes.test.mjs:
+(pass) editor unsaved changes guard > does not block unload when the editor is clean [0.05ms]
+(pass) editor unsaved changes guard > blocks unload when the editor has unsaved changes [0.03ms]
+(pass) editor unsaved changes guard > detects content changes against the last saved snapshot [0.13ms]
+(pass) editor unsaved changes guard > guards a same-tab in-app navigation click [0.03ms]
+(pass) editor unsaved changes guard > does not guard clicks without an anchor
+(pass) editor unsaved changes guard > does not guard target=_blank, downloads, or modified/non-left clicks [0.04ms]
+(pass) editor unsaved changes guard > does not guard external-origin links (beforeunload already covers them) [0.01ms]
+(pass) getEditorContentSnapshot: H5P height > a host-reported height change alone does not make the doc dirty [0.07ms]
+(pass) getEditorContentSnapshot: H5P height > a real edit alongside the height change still counts [0.03ms]
+(pass) getEditorContentSnapshot: H5P height > a node type that collides with Object.prototype does not crash [0.04ms]
+(pass) getEditorContentSnapshot: H5P height > a height an author dragged does make the doc dirty [0.03ms]
+(pass) getEditorContentSnapshot: H5P height > a preset size still counts the height it pinned [0.05ms]
+(pass) getEditorContentSnapshot: H5P height > an explicit auto is as volatile as a missing sizeMode [0.05ms]
+(pass) getEditorContentSnapshot: H5P height > height is ignored only on blockH5P [0.03ms]
+
+tests/admin-authorization-denial.test.mjs:
+(pass) every dash section is gated > /dash itself is gated [0.02ms]
+(pass) every dash section is gated > /dash/analytics is gated [0.02ms]
+(pass) every dash section is gated > /dash/assignments is gated [0.01ms]
+(pass) every dash section is gated > /dash/boards is gated
+(pass) every dash section is gated > /dash/communities is gated
+(pass) every dash section is gated > /dash/courses is gated
+(pass) every dash section is gated > /dash/developers is gated
+(pass) every dash section is gated > /dash/library is gated
+(pass) every dash section is gated > /dash/onboarding is gated
+(pass) every dash section is gated > /dash/org is gated
+(pass) every dash section is gated > /dash/payments is gated
+(pass) every dash section is gated > /dash/playgrounds is gated
+(pass) every dash section is gated > /dash/podcasts is gated
+(pass) every dash section is gated > /dash/users is gated
+(pass) every dash section is gated > paths outside the dashboard are untouched [0.03ms]
+(pass) denial explains itself instead of bouncing > the page-mode branch contains no redirect [0.03ms]
+(pass) denial explains itself instead of bouncing > an unauthenticated visitor is still redirected to login
+(pass) denial explains itself instead of bouncing > renders the shared error surface, not a bare heading
+(pass) denial explains itself instead of bouncing > the error it passes classifies as a permission problem [0.21ms]
+(pass) the denial surface cannot paint before the decision is made > authorization starts undecided rather than denied [0.02ms]
+(pass) the denial surface cannot paint before the decision is made > undecided shows the loader, and only in page mode [0.01ms]
+(pass) the denial surface cannot paint before the decision is made > only a decided false reaches ErrorUI [0.02ms]
+(pass) the denial surface cannot paint before the decision is made > a signed-out visitor is never told they lack permission [0.02ms]
+
+tests/not-found-and-enrollments.test.mjs:
+(pass) root not-found page > is rendered per request [0.11ms]
+(pass) getUserEnrollments > treats an org without payments (403) as no purchases [0.22ms]
+(pass) getUserEnrollments > still throws on other failures [0.07ms]
+(pass) getUserEnrollments > returns enrollments on success [0.10ms]
+
+tests/billing-fulfill-switch.test.mjs:
+[fulfillCheckout] Updating org 4242 to plan pro
+(pass) fulfillCheckoutSession > applies the plan for the caller's own active subscription [0.64ms]
+[fulfillCheckout] Session cs_test does not belong to org 4242
+(pass) fulfillCheckoutSession > refuses a session that belongs to another org [0.07ms]
+(pass) fulfillCheckoutSession > refuses a subscription that is no longer in good standing [2003.40ms]
+[fulfillCheckout] Updating org 4242 to plan standard
+(pass) fulfillCheckoutSession > derives the plan from the live price, not stale metadata [0.27ms]
+(pass) fulfillCheckoutSession > never turns a pack session into a plan [0.09ms]
+(pass) fulfillCheckoutSession > an unpaid session is not fulfilled [0.05ms]
+(pass) switchSubscriptionPlan upgrade > upgrades an active subscription immediately [0.87ms]
+(pass) switchSubscriptionPlan upgrade > refuses to upgrade a past_due subscription [0.13ms]
+(pass) switchSubscriptionPlan upgrade > refuses to upgrade a unpaid subscription [0.03ms]
+(pass) switchSubscriptionPlan upgrade > a past_due subscription can still schedule a downgrade [0.19ms]
+(pass) switchSubscriptionPlan upgrade > refuses to schedule a 'downgrade' to a higher plan [0.18ms]
+(pass) switchSubscriptionPlan upgrade > a scheduled downgrade applies the promotion code, not its bare coupon [0.32ms]
+
+tests/stripe-connect-callback.test.mjs:
+(pass) stripeCallbackStep > waits while the session is loading [0.05ms]
+(pass) stripeCallbackStep > waits for a token even once authenticated [0.01ms]
+(pass) stripeCallbackStep > submits once there is a session and a token [0.01ms]
+(pass) stripeCallbackStep > never submits twice [0.02ms]
+(pass) stripeCallbackStep > asks a signed-out visitor to sign in instead of submitting
+(pass) orgIdFromConnectState > reads org_id from a signed state [1.10ms]
+(pass) orgIdFromConnectState > decodes base64url payloads that need padding or use - and _ [0.10ms]
+(pass) orgIdFromConnectState > reads the legacy org_id=<id> form [0.02ms]
+(pass) orgIdFromConnectState > rejects anything else [0.25ms]
+(pass) readStripeCallbackParams > is ready with a code and a readable state [0.31ms]
+(pass) readStripeCallbackParams > reports a cancel on Stripe's screen [0.03ms]
+(pass) readStripeCallbackParams > is invalid without a code or a usable state [0.05ms]
+
+tests/community-rich-content.test.mjs:
+(pass) extractYoutubeVideoId > accepts https://www.youtube.com/watch?v=dQw4w9WgXcQ [0.77ms]
+(pass) extractYoutubeVideoId > accepts https://youtube.com/watch?v=dQw4w9WgXcQ&t=42s [0.03ms]
+(pass) extractYoutubeVideoId > accepts https://m.youtube.com/watch?v=dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > accepts https://youtu.be/dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > accepts https://youtu.be/dQw4w9WgXcQ?si=abc
+(pass) extractYoutubeVideoId > accepts https://www.youtube.com/embed/dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > accepts https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > accepts https://www.youtube.com/shorts/dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > accepts   https://www.youtube.com/watch?v=dQw4w9WgXcQ  
+(pass) extractYoutubeVideoId > rejects %s [0.03ms]
+(pass) extractYoutubeVideoId > rejects %s
+(pass) extractYoutubeVideoId > rejects 
+(pass) extractYoutubeVideoId > rejects not a url [0.01ms]
+(pass) extractYoutubeVideoId > rejects https://vimeo.com/123456
+(pass) extractYoutubeVideoId > rejects https://example.com/watch?v=dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > rejects https://youtube.com.evil.example/watch?v=dQw4w9WgXcQ
+(pass) extractYoutubeVideoId > rejects javascript:alert(1)
+(pass) extractYoutubeVideoId > rejects https://www.youtube.com/watch?v=short
+(pass) extractYoutubeVideoId > rejects https://www.youtube.com/
+(pass) extractYoutubeVideoId > youtubeWatchUrl builds the canonical form [0.03ms]
+(pass) isRichContentAllowed > defaults to false [0.04ms]
+(pass) isRichContentAllowed > is true only when the flag is explicitly on [0.01ms]
+(pass) stripRichContent > replaces embeds with a linked paragraph, including nested ones [0.20ms]
+(pass) stripRichContent > drops embeds without a src [0.03ms]
+(pass) stripRichContent > does not mutate the input [0.03ms]
+(pass) stripRichContent > passes through non-document values [0.02ms]
+(pass) hasRichContent > detects embeds at any depth [0.05ms]
+
+tests/api-response-shape.test.mjs:
+(pass) asArray > passes an array straight through [0.03ms]
+(pass) asArray > unwraps the metadata envelope [0.02ms]
+(pass) asArray > returns an empty list for an error body [0.03ms]
+(pass) getResponseMetadata > reports success for any 2xx [0.20ms]
+(pass) getResponseMetadata > reports failure without throwing on a body that is not JSON [0.06ms]
+(pass) safePlay > swallows a rejected play() [0.10ms]
+(pass) safePlay > is a no-op without an element [0.01ms]
+(pass) safePlay > tolerates a play() that returns nothing (older elements) [0.01ms]
+
+tests/ai-editor-content.test.mjs:
+(pass) unwrapAIContent > strips content markers, including a missing end marker [0.13ms]
+(pass) unwrapAIContent > unwraps a code fence around the whole payload [0.04ms]
+(pass) unwrapAIContent > leaves a fence inside a code block alone
+(pass) unwrapAIContent > unwraps a JSON string literal [0.51ms]
+(pass) unwrapAIContent > drops control characters but keeps tabs and newlines [0.02ms]
+(pass) repairJson > escapes newlines only inside string literals [0.13ms]
+(pass) repairJson > removes trailing commas and closes truncated structures [0.06ms]
+(pass) repairJson > does not touch commas or brackets inside strings [0.02ms]
+(pass) parseAIContentJson > returns undefined for prose [0.06ms]
+(pass) parseAIContentJson > parses valid, repaired, and embedded JSON [0.07ms]
+(pass) text helpers > extractTextFromTiptap flattens nested nodes [0.07ms]
+(pass) text helpers > textToParagraphs splits blank lines into paragraphs and newlines into hard breaks [0.14ms]
+(pass) text helpers > transformContentForInsertion unwraps paragraphs inside direct-text blocks [0.07ms]
+(pass) normalizeAINodes > unwraps a doc wrapper and keeps known nodes [0.07ms]
+(pass) normalizeAINodes > downgrades unknown node types to paragraphs with their text [0.04ms]
+(pass) normalizeAINodes > keeps a bare text node so selections can be replaced inline [0.01ms]
+(pass) prepareAIContent > turns prose into paragraphs [0.40ms]
+(pass) prepareAIContent > handles fenced, quoted, and pretty-printed replies [0.11ms]
+(pass) prepareAIContent > refuses to turn broken TipTap JSON into prose [0.06ms]
+(pass) prepareAIContent > recovers a reply truncated mid-string [0.05ms]
+(pass) addStreamingMarks > marks ordinary text but skips text with an exclusive mark [0.26ms]
+(pass) addStreamingMarks > skips text inside nodes that forbid marks and inside special blocks [0.05ms]
+(pass) addStreamingMarks > produces content the schema accepts [0.96ms]
+(pass) insertAIContent > inserts the reported payload block by block without dumping JSON [47.02ms]
+(pass) insertAIContent > keeps going when one node is invalid and keeps its text [8.76ms]
+(pass) insertAIContent > streaming marks can be removed from the inserted range afterwards [13.35ms]
+(pass) markdown replies > plain text keeps the paragraph and hard break behaviour [0.09ms]
+(pass) markdown replies > headings, lists, quotes, rules and code fences become nodes [0.23ms]
+(pass) markdown replies > inline bold, italic, code and links become marks [0.07ms]
+(pass) markdown replies > a markdown reply is inserted as formatted content, not literal markdown [6.85ms]
+
+tests/catalog-pagination.test.mjs:
+(pass) getCatalogPageNumbers > returns no pages when there are no results [0.07ms]
+(pass) getCatalogPageNumbers > returns every page when the list fits in the visible window [0.02ms]
+(pass) getCatalogPageNumbers > keeps the first pages visible near the beginning [0.02ms]
+(pass) getCatalogPageNumbers > keeps the current page centered in the middle
+(pass) getCatalogPageNumbers > keeps the last pages visible near the end [0.01ms]
+
+tests/library-sort.test.mjs:
+(pass) sortLibrary > name_asc sorts folders and items alphabetically [1.80ms]
+(pass) sortLibrary > name_asc is the default for an unknown mode [0.05ms]
+(pass) sortLibrary > name_desc reverses the alphabetical order [0.03ms]
+(pass) sortLibrary > name sorting is case-insensitive across name and title fields [0.04ms]
+(pass) sortLibrary > newest puts the most recently created first [0.06ms]
+(pass) sortLibrary > oldest puts the earliest created first [0.02ms]
+(pass) sortLibrary > newest uses the resource's creation date, not its last update [0.05ms]
+(pass) sortLibrary > update_date is only used when no creation date exists [0.02ms]
+(pass) sortLibrary > date sorting falls back to name when timestamps tie [0.02ms]
+(pass) sortLibrary > manual returns the input arrays untouched [0.06ms]
+(pass) sortLibrary > sorting does not mutate the arrays it is given [0.02ms]
+(pass) sortLibrary > a numbered module list sorts the way an admin expects [0.03ms]
+
+tests/h5p-protocol.test.mjs:
+(pass) parseH5PMessage: the shapes H5P sends > hello [0.08ms]
+(pass) parseH5PMessage: the shapes H5P sends > prepareResize carries both heights [0.04ms]
+(pass) parseH5PMessage: the shapes H5P sends > resize carries the content height [0.01ms]
+(pass) parseH5PMessage: the shapes H5P sends > a JSON-string payload is parsed [0.03ms]
+(pass) parseH5PMessage: everything else is ignored > another library's messages [0.01ms]
+(pass) parseH5PMessage: everything else is ignored > unknown h5p actions [0.01ms]
+(pass) parseH5PMessage: everything else is ignored > non-numeric or non-positive heights [0.02ms]
+(pass) parseH5PMessage: everything else is ignored > garbage [0.03ms]
+(pass) shouldPrepareResize: the anti-oscillation guard > stays silent once frame, content and scroll heights agree [0.02ms]
+(pass) shouldPrepareResize: the anti-oscillation guard > answers while the content is taller than the frame
+(pass) shouldPrepareResize: the anti-oscillation guard > answers while the content has shrunk below the frame
+(pass) clampHeight > keeps realistic content heights untouched [0.04ms]
+(pass) clampHeight > rounds and bounds absurd values [0.01ms]
+(pass) replyTarget > replies to the sender's origin [0.01ms]
+(pass) replyTarget > a sandboxed frame reports 'null', which postMessage rejects [0.01ms]
+(pass) SIZE_MODES > is exactly the picker's six buttons, in order
+(pass) SIZE_MODES > 'custom' is deliberately not a button: dragging produces it [0.03ms]
+(pass) normalizeSizeMode > keeps every mode the picker can produce [0.05ms]
+(pass) normalizeSizeMode > a document written before sizing existed reads as auto [0.02ms]
+(pass) normalizeSizeMode > isAutoSized follows it [0.02ms]
+(pass) resolveManualHeight > auto leaves the height to the content [0.04ms]
+(pass) resolveManualHeight > ratio modes follow the block's width [0.02ms]
+(pass) resolveManualHeight > a ratio falls back to the stored height until the block has a width [0.01ms]
+(pass) resolveManualHeight > fixed modes ignore both the width and the stored height [0.01ms]
+(pass) resolveManualHeight > custom is whatever was dragged, within bounds [0.01ms]
+(pass) resolveManualHeight > a missing stored height does not reach a style attribute as NaN [0.01ms]
+
+tests/callout-lists.test.mjs:
+(pass) callout content > a saved legacy callout is invalid for the new schema as is [18.28ms]
+(pass) callout content > normalizing wraps legacy text in a paragraph and keeps marks and attrs [5.66ms]
+(pass) callout content > normalizing fills an empty legacy callout and leaves new callouts alone [0.09ms]
+(pass) callout content > a bullet list can be created inside a callout [18.09ms]
+(pass) callout content > an ordered list can be created inside a callout [4.86ms]
+(pass) callout content > typing '- ' at the start of a callout line starts a bullet list [9.13ms]
+(pass) callout content > a callout keeps several paragraphs, and Enter on an empty last line leaves it [11.81ms]
+(pass) callout content > the toolbar and slash command insert a valid empty callout [3.73ms]
+
+tests/saas-mode-source.test.mjs:
+(pass) isSaaSMode > ignores a forged LH_mode=oss cookie [0.21ms]
+
+tests/embed-url.test.mjs:
+(pass) toEmbedUrl: Vimeo private-link hash > player URL keeps its ?h= hash [0.20ms]
+(pass) toEmbedUrl: Vimeo private-link hash > share link carries the hash as the segment after the id [0.04ms]
+(pass) toEmbedUrl: Vimeo private-link hash > share link with tracking params still forwards only the hash [0.02ms]
+(pass) toEmbedUrl: Vimeo private-link hash > public video stays hash-free [0.03ms]
+(pass) toEmbedUrl: Vimeo private-link hash > channel URL does not mistake a word segment for a hash [0.01ms]
+(pass) toEmbedUrl: Vimeo private-link hash > a hash with URL-breaking characters is dropped [0.03ms]
+(pass) toEmbedUrl: other providers unchanged > YouTube [0.01ms]
+(pass) toEmbedUrl: other providers unchanged > unknown URLs pass through [0.01ms]
+
+tests/quiz-modes.test.mjs:
+(pass) resolveQuizResponseType > infers single from a lone correct option [0.05ms]
+(pass) resolveQuizResponseType > infers multiple from two or more correct options [0.07ms]
+(pass) resolveQuizResponseType > infers single when no option is correct
+(pass) resolveQuizResponseType > an explicit value wins over inference [0.02ms]
+(pass) resolveQuizResponseType > an unknown value falls back to inference [0.02ms]
+(pass) resolveQuizGradingMode > defaults to all-or-nothing [0.03ms]
+(pass) resolveQuizGradingMode > reads partial credit when it is set
+(pass) scoreQuizQuestion: all or nothing > an exact set match is full credit [0.15ms]
+(pass) scoreQuizQuestion: all or nothing > a partial selection earns nothing [0.02ms]
+(pass) scoreQuizQuestion: all or nothing > a superset earns nothing [0.03ms]
+(pass) scoreQuizQuestion: all or nothing > a question with no correct option scores zero [0.01ms]
+(pass) scoreQuizQuestion: partial credit > an exact set match is still full credit [0.04ms]
+(pass) scoreQuizQuestion: partial credit > half the correct options earns half [0.01ms]
+(pass) scoreQuizQuestion: partial credit > a wrong pick cancels a right pick [0.01ms]
+(pass) scoreQuizQuestion: partial credit > both correct plus one wrong earns half [0.01ms]
+(pass) scoreQuizQuestion: partial credit > selecting everything earns nothing [0.03ms]
+(pass) scoreQuizQuestion: partial credit > the score is clamped at zero [0.02ms]
+(pass) scoreQuizQuestion: partial credit > three correct of five with two wrong picks [0.03ms]
+(pass) scoreQuizQuestion: partial credit > single-response questions stay all-or-nothing [0.02ms]
+
+tests/h5p-url.test.mjs:
+(pass) normalizeH5PUrl: H5P.com > content page URL becomes its embed form [0.27ms]
+(pass) normalizeH5PUrl: H5P.com > trailing slash on the content page is handled [0.04ms]
+(pass) normalizeH5PUrl: H5P.com > already-embed URL passes through unchanged [0.02ms]
+(pass) normalizeH5PUrl: H5P.com > query string on a content URL is preserved [0.03ms]
+(pass) normalizeH5PUrl: self-hosted shapes > Drupal/standalone /h5p/embed/<id> passes through [0.03ms]
+(pass) normalizeH5PUrl: self-hosted shapes > Moodle /h5p/embed.php passes through [0.01ms]
+(pass) normalizeH5PUrl: self-hosted shapes > WordPress admin-ajax h5p_embed passes through [0.01ms]
+(pass) normalizeH5PUrl: self-hosted shapes > ?embed=1 style passes through [0.01ms]
+(pass) normalizeH5PUrl: self-hosted shapes > http is kept as-is, not upgraded [0.01ms]
+(pass) normalizeH5PUrl: self-hosted shapes > an unrecognised https URL is passed through rather than mangled [0.01ms]
+(pass) normalizeH5PUrl: iframe snippets > extracts src from a full iframe snippet [0.09ms]
+(pass) normalizeH5PUrl: iframe snippets > decodes &amp; inside a snippet src [0.05ms]
+(pass) normalizeH5PUrl: iframe snippets > a snippet pointing at a content page is still normalized to /embed [0.02ms]
+(pass) normalizeH5PUrl: iframe snippets > extractIframeSrc returns null for a plain URL
+(pass) normalizeH5PUrl: iframe snippets > a javascript: src inside a snippet is still rejected [0.03ms]
+(pass) normalizeH5PUrl: rejections > javascript: is rejected
+(pass) normalizeH5PUrl: rejections > data: is rejected
+(pass) normalizeH5PUrl: rejections > file: is rejected
+(pass) normalizeH5PUrl: rejections > empty and whitespace-only input is rejected [0.02ms]
+(pass) normalizeH5PUrl: rejections > garbage input is rejected [0.06ms]
+(pass) normalizeH5PUrl: schemeless input > schemeless host gets https:// [0.02ms]
+(pass) normalizeH5PUrl: schemeless input > protocol-relative input gets https: [0.01ms]
+(pass) normalizeH5PUrl: schemeless input > surrounding whitespace is trimmed [0.01ms]
+(pass) normalizeH5PUrl: schemeless input > schemeless host with a port is not mistaken for a scheme [0.03ms]
+(pass) normalizeH5PUrl: schemeless input > a scheme followed by digits never reaches the frame as that scheme [0.01ms]
+(pass) normalizeH5PUrl: schemeless input > prose with a colon is still rejected, not saved as a dead embed [0.01ms]
+
+ 476 pass
+ 0 fail
+ 1150 expect() calls
+Ran 476 tests across 42 files. [8.63s]
+EXIT_CODE=0

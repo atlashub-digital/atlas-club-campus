@@ -1,0 +1,2 @@
+$ eslint .
+error: script "lint:strict" was terminated by signal SIGTERM (Polite quit request)
