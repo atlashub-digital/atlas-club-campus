@@ -236,7 +236,8 @@
     "move_up": "Move up",
     "move_down": "Move down",
     "less": "Less",
-    "more": "More"
+    "more": "More",
+    "remove": "Remove"
   },
   "banner": {
     "viewing_as_guest": "You're viewing {{name}} as a guest.",
@@ -398,7 +399,8 @@
     "choose_sign_in_method": "Choose how you’d like to sign in.",
     "no_sign_in_method_available": "This organization has restricted how members sign in, and none of the allowed methods are available here. Contact an administrator.",
     "complete_profile": {
-      "title": "Complete your profile"
+      "title": "Complete your profile",
+      "subtitle": "{{org}} needs a little more information before you continue."
     }
   },
   "validation": {
@@ -409,7 +411,10 @@
     "title_required": "Title is required",
     "content_required": "Content is required",
     "invalid_number": "Must be a number",
-    "invalid_option": "Choose one of the available options"
+    "invalid_option": "Choose one of the available options",
+    "min_value": "Must be at least {{value}}",
+    "max_value": "Must be at most {{value}}",
+    "too_long": "Must be {{max}} characters or fewer"
   },
   "courses": {
     "my_courses": "My Courses",
@@ -1331,7 +1336,8 @@
     "replace_resource": "Replace",
     "remove_resource": "Remove",
     "show_as_card": "Show as card",
-    "show_inline": "Show inline"
+    "show_inline": "Show inline",
+    "delete_folder_title": "Delete folder \"{{name}}\"?"
   },
   "media": {
     "media": "Media",
@@ -1362,7 +1368,8 @@
     "url_required": "A URL is required",
     "upload_hint": "Images, video, audio, PDF, Office docs & ZIP",
     "remove": "Remove",
-    "open_pdf": "Open PDF"
+    "open_pdf": "Open PDF",
+    "delete_media_title": "Delete media \"{{name}}\"?"
   },
   "folders": {
     "folder": "Folder",
@@ -1479,7 +1486,10 @@
     "group_into_grid": "Group into Grid",
     "markdown": "Markdown",
     "custom": "Custom",
-    "scorm": "SCORM"
+    "scorm": "SCORM",
+    "video_embed_blocked": "This video cannot be played here",
+    "video_embed_blocked_hint": "YouTube blocked embedding for this account or region. You can open the video directly.",
+    "open_in_youtube": "Open on YouTube"
   },
   "embed": {
     "not_supported_title": "This activity is not supported",
@@ -3937,7 +3947,8 @@
           "title": "Do more with a higher plan",
           "subtitle": "Upgrade to raise your limits and unlock more features.",
           "popular": "Popular",
-          "compare": "Compare all plans"
+          "compare": "Compare all plans",
+          "upgrade_to": "Upgrade to {{plan}}"
         }
       },
       "general": {
@@ -5622,7 +5633,8 @@
         "select_all_that_apply": "Select all that apply",
         "response_type_single": "Single answer",
         "response_type_multiple": "Multiple answers",
-        "no_correct_answer_warning": "No correct answer: this question is skipped"
+        "no_correct_answer_warning": "No correct answer: this question is skipped",
+        "generate_with_ai": "Generate with AI"
       },
       "math_block": {
         "templates": "Templates",
@@ -5713,7 +5725,8 @@
       "library": "Library",
       "flipcard_grid": "Flashcard Grid",
       "divider": "Divider"
-    }
+    },
+    "unsaved_changes_warning": "You have unsaved changes. Leave without saving?"
   },
   "analytics": {
     "title": "Analytics",
@@ -6529,7 +6542,9 @@
     "invoice_history": "Invoice history",
     "view": "View",
     "checkout_settling": "Payment received. Your new plan is being applied and will appear shortly.",
-    "checkout_settling_delayed": "Payment received, but your plan has not updated yet. Refresh in a moment, and contact support if it persists."
+    "checkout_settling_delayed": "Payment received, but your plan has not updated yet. Refresh in a moment, and contact support if it persists.",
+    "cancels_on": "Your subscription will cancel on {{periodEnd}}. Access continues until then.",
+    "add_pack": "Add {{pack}}"
   },
   "hub_new": {
     "useType": {
@@ -6712,5 +6727,18 @@
       "per_month": "/ month",
       "per_year": "/ year"
     }
+  },
+  "demo": {
+    "badge": "Demo",
+    "reset_imminent": "any moment",
+    "banner_title": "You are in the shared demo.",
+    "banner_body_countdown": "Everything here is example data, and anything you change is put back in {{countdown}}.",
+    "banner_body": "Everything here is example data, and anything you change is put back regularly.",
+    "create_your_own": "Create your own organization",
+    "entry_busy": "The demo is being refreshed. Try again in a moment.",
+    "entry_opening": "Opening the demo…",
+    "entry_title": "Explore a live demo",
+    "entry_body": "A full academy with courses, learners, progress and grading, already filled in. Shared with everyone, and reset every {{interval}}.",
+    "entry_preparing": "Being prepared. Try again in a moment."
   }
 }

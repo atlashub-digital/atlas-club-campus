@@ -228,7 +228,16 @@
     "leave_organization_title": "Sair da organização?",
     "leave_organization_desc": "Você perderá o acesso a {{org}} e será removido dos membros. Poderá entrar novamente depois se receber um convite.",
     "leave_organization_error": "Não foi possível sair desta organização. Tente novamente.",
-    "leaving": "Saindo…"
+    "leaving": "Saindo…",
+    "select": "Selecione…",
+    "continue": "Continuar",
+    "dismiss": "Dispensar",
+    "sign_out": "Sair",
+    "move_up": "Mover para cima",
+    "move_down": "Mover para baixo",
+    "less": "Menos",
+    "more": "Mais",
+    "remove": "Remover"
   },
   "banner": {
     "viewing_as_guest": "Você está visualizando {{name}} como convidado.",
@@ -368,7 +377,31 @@
     "image_subtitle_verify": "Um passo rápido para proteger a sua conta e começar.",
     "turnstile_failed": "Verificação falhou. Tente novamente.",
     "resend_verification": "Não recebeu? Reenviar email",
-    "magic_send": "Receber link de acesso por email"
+    "magic_send": "Receber link de acesso por email",
+    "no_sign_up_method_available": "Esta organização restringiu as formas de acesso dos membros, por isso não é possível criar contas aqui. Entre em contato com um administrador.",
+    "continue_to_dashboard": "Continuar para o painel",
+    "mfa_invalid_code": "O código está incorreto. Verifique se o relógio do dispositivo está no modo automático e tente o próximo código.",
+    "mfa_title": "Verificação em duas etapas",
+    "mfa_subtitle_backup": "Digite um dos códigos de recuperação que você salvou.",
+    "mfa_subtitle": "Digite o código de 6 dígitos do seu aplicativo autenticador.",
+    "mfa_backup_code": "Código de recuperação",
+    "mfa_code": "Código de verificação",
+    "mfa_verify": "Verificar",
+    "mfa_use_authenticator": "Usar o aplicativo autenticador",
+    "mfa_use_backup": "Usar um código de recuperação",
+    "mfa_back_to_login": "Voltar para entrar",
+    "magic_title": "Entrar com um link",
+    "magic_sent_title": "Confira seu e-mail",
+    "magic_sent_body": "Se houver uma conta para {{email}}, enviamos um link seguro para entrar. Ele expira em breve, então use-o logo.",
+    "magic_back_to_login": "Voltar para entrar",
+    "magic_subtitle": "Digite seu e-mail e enviaremos um link para você entrar sem precisar de senha.",
+    "magic_use_password": "Entrar com uma senha",
+    "choose_sign_in_method": "Escolha como deseja entrar.",
+    "no_sign_in_method_available": "Esta organização restringiu as formas de acesso dos membros, e nenhum dos métodos permitidos está disponível aqui. Entre em contato com um administrador.",
+    "complete_profile": {
+      "title": "Complete seu perfil",
+      "subtitle": "{{org}} precisa de mais algumas informações antes de você continuar."
+    }
   },
   "validation": {
     "required": "Obrigatório",
@@ -376,7 +409,12 @@
     "password_min_length": "A senha deve ter pelo menos 8 caracteres",
     "username_min_length": "O nome de usuário deve ter pelo menos 4 caracteres",
     "title_required": "O título é obrigatório",
-    "content_required": "O conteúdo é obrigatório"
+    "content_required": "O conteúdo é obrigatório",
+    "invalid_number": "Deve ser um número",
+    "invalid_option": "Escolha uma das opções disponíveis",
+    "min_value": "Deve ser pelo menos {{value}}",
+    "max_value": "Deve ser no máximo {{value}}",
+    "too_long": "Deve ter no máximo {{max}} caracteres"
   },
   "courses": {
     "my_courses": "Meus Cursos",
@@ -666,7 +704,10 @@
     "no_image_in_clipboard": "Nenhuma imagem encontrada na área de transferência",
     "clipboard_read_error": "Não foi possível ler a área de transferência",
     "sign_in_to_see_courses": "Entre para ver seus cursos",
-    "sign_in_to_see_courses_description": "Os cursos desta academia podem ficar visíveis apenas após o login."
+    "sign_in_to_see_courses_description": "Os cursos desta academia podem ficar visíveis apenas após o login.",
+    "rss_feed": "Feed RSS de atualizações do curso",
+    "keep_going_description_no_certificate": "Você está indo bem! Conclua as atividades restantes para finalizar o curso.",
+    "browse_all_courses": "Explorar todos os cursos"
   },
   "communities": {
     "title": "Comunidades",
@@ -786,7 +827,11 @@
       "title_min_length": "O título deve ter pelo menos 5 caracteres",
       "title_max_length": "O título deve ter menos de 200 caracteres",
       "content_not_allowed": "Sua discussão contém conteúdo não permitido.",
-      "failed_to_create": "Falha ao criar a discussão. Por favor, tente novamente."
+      "failed_to_create": "Falha ao criar a discussão. Por favor, tente novamente.",
+      "rich_content_hint": "Cole um link do YouTube para incorporar o vídeo ou use a barra de ferramentas para formatar o texto.",
+      "embed_video_title": "Incorporar vídeo do YouTube",
+      "embed_video_prompt": "Cole um link de vídeo do YouTube",
+      "embed_video_invalid": "Só é possível incorporar links de vídeos do YouTube."
     },
     "edit_discussion": {
       "title": "Editar discussão",
@@ -986,7 +1031,17 @@
     "save_answers": "Salvar respostas",
     "markdown": "Markdown",
     "custom": "Personalizado",
-    "scorm": "SCORM"
+    "scorm": "SCORM",
+    "video_chapters": "Capítulos",
+    "grid_columns_2": "2 colunas",
+    "grid_columns_3": "3 colunas",
+    "grid_columns_4": "4 colunas",
+    "add_card": "Adicionar cartão",
+    "ungroup_cards": "Desagrupar cartões",
+    "group_into_grid": "Agrupar em grade",
+    "video_embed_blocked": "Este vídeo não permite reprodução aqui",
+    "video_embed_blocked_hint": "O YouTube bloqueou a incorporação para esta conta ou região. Você pode abrir o vídeo diretamente.",
+    "open_in_youtube": "Abrir no YouTube"
   },
   "assignments": {
     "submit_assignment": "Enviar Tarefa",
@@ -1017,7 +1072,18 @@
     },
     "quiz": {
       "correct_answer": "Correta",
-      "incorrect_answer": "Incorreta"
+      "incorrect_answer": "Incorreta",
+      "select_one": "Selecione uma resposta",
+      "select_all_that_apply": "Selecione todas as opções que se aplicam",
+      "response_type_single": "Resposta única",
+      "response_type_multiple": "Múltiplas respostas",
+      "no_correct_option_warning": "Nenhuma opção correta: esta questão é ignorada na correção",
+      "question_fallback_label": "Questão",
+      "grading_mode_label": "Correção",
+      "grading_all_or_nothing": "Tudo ou nada",
+      "grading_partial_credit": "Pontuação parcial",
+      "grading_all_or_nothing_hint": "A questão só recebe pontos quando as respostas selecionadas correspondem exatamente ao gabarito.",
+      "grading_partial_credit_hint": "Questões com múltiplas respostas recebem pontuação parcial; cada seleção incorreta anula uma correta."
     },
     "quick_grade": {
       "full": "Total",
@@ -1039,7 +1105,18 @@
     "no_task_submission_to_grade": "Este aluno ainda não enviou um arquivo para esta tarefa.",
     "past_due": "Prazo encerrado",
     "past_due_description": "O prazo desta tarefa era {{date}}. Não é mais possível salvar respostas ou enviá-las para avaliação.",
-    "past_due_title": "Prazo encerrado"
+    "past_due_title": "Prazo encerrado",
+    "ungraded_badge": "Sem nota",
+    "hand_in": "Entregar meu trabalho",
+    "hand_in_title": "Entregue seu trabalho",
+    "hand_in_confirm": "Seu trabalho será entregue ao professor. Ele não receberá nota.",
+    "handed_in": "Entregue",
+    "solution_title": "Resposta modelo",
+    "solution_download": "Baixar a resposta modelo",
+    "solution_locked_title": "Resposta modelo bloqueada",
+    "solution_locked_on_submission": "Entregue seu trabalho para desbloquear a resposta modelo imediatamente.",
+    "solution_locked_after_grading": "A resposta modelo será desbloqueada após a correção do seu trabalho.",
+    "retry_assignment_confirm_ungraded": "Sua entrega atual será reiniciada para você começar de novo, e a resposta modelo será bloqueada até a próxima entrega."
   },
   "certificate": {
     "certificate": "Certificado",
@@ -1127,7 +1204,12 @@
     "benefits": "Benefícios:",
     "min_price": "Preço Mínimo:",
     "choose_price": "Escolha seu preço",
-    "stripe_denied": "A conexão com o Stripe foi cancelada."
+    "stripe_denied": "A conexão com o Stripe foi cancelada.",
+    "billing_per_month": "por mês",
+    "billing_per_year": "por ano",
+    "billing_suffix_month": "/ mês",
+    "billing_suffix_year": "/ ano",
+    "stripe_login_required": "Você não está conectado ao Atlas Club neste navegador. Entre e inicie a conexão novamente nas configurações de pagamentos."
   },
   "account": {
     "title": "Conta",
@@ -1230,7 +1312,13 @@
           "industry": "Indústria",
           "expertise": "Especialização",
           "community": "Comunidade"
-        }
+        },
+        "current_password": "Senha atual",
+        "current_password_hint": "Digite sua senha atual para confirmar esta alteração de e-mail",
+        "mfa_code": "Código de dois fatores",
+        "mfa_code_hint": "Digite um código do seu aplicativo autenticador para confirmar esta alteração de e-mail",
+        "update_failed": "Não foi possível atualizar o perfil",
+        "signin_again": "Entre novamente"
       },
       "password": {
         "title": "Alterar Senha",
@@ -1241,7 +1329,8 @@
         "updating": "Atualizando...",
         "password_updated": "Senha atualizada com sucesso",
         "relogin_message": "Por favor, faça login novamente com sua nova senha",
-        "logout_warning": "Você será desconectado após alterar sua senha"
+        "logout_warning": "Você será desconectado após alterar sua senha",
+        "update_failed": "Não foi possível atualizar a senha. Entre novamente."
       },
       "profile_builder": {
         "title": "Construtor de Perfil",
@@ -1381,7 +1470,61 @@
         "current_session_title": "Sessão atual",
         "current_session_subtitle": "O dispositivo em que você está conectado agora.",
         "this_device": "Este dispositivo",
-        "sign_out": "Sair"
+        "sign_out": "Sair",
+        "mfa": {
+          "rate_limited": "Muitas tentativas. Aguarde um momento e tente novamente.",
+          "status_error": "Não foi possível carregar suas configurações de dois fatores.",
+          "copy_failed": "Não foi possível copiar. Selecione o texto e copie manualmente.",
+          "codes_file_header": "Códigos de recuperação de dois fatores do Atlas Club. Cada código pode ser usado uma vez.",
+          "already_enabled": "A autenticação de dois fatores já está ativada nesta conta.",
+          "setup_failed": "Não foi possível iniciar a configuração de dois fatores. Tente novamente.",
+          "enabled_toast": "A autenticação de dois fatores foi ativada.",
+          "invalid_code": "Esse código não é válido. Tente novamente.",
+          "regenerate_failed": "Não foi possível gerar novos códigos de recuperação. Tente novamente.",
+          "disabled_toast": "A autenticação de dois fatores foi desativada.",
+          "disable_failed": "Não foi possível desativar a autenticação de dois fatores. Tente novamente.",
+          "retry_in": "Você pode tentar novamente em {{seconds}}s.",
+          "code_label": "Código de autenticação",
+          "code_hint": "Digite o código de 6 dígitos exibido no seu aplicativo autenticador.",
+          "title": "Autenticação de dois fatores",
+          "subtitle": "Solicite um código de uso único do seu aplicativo autenticador sempre que entrar.",
+          "retry": "Tentar novamente",
+          "codes_once_title": "Estes códigos só serão exibidos agora.",
+          "codes_once_body": "Salve-os em um lugar seguro agora. Cada código pode ser usado uma vez para entrar se você perder o acesso ao aplicativo autenticador. Ao sair desta tela, não será possível recuperá-los; você precisará gerar novos códigos.",
+          "copied": "Copiado",
+          "copy_all": "Copiar todos",
+          "download": "Baixar .txt",
+          "codes_ack": "Salvei estes códigos em um lugar seguro.",
+          "done": "Concluir",
+          "step_password_title": "Confirme sua senha",
+          "step_password_body": "Para sua segurança, digite sua senha atual para continuar.",
+          "continue": "Continuar",
+          "step_scan_title": "Escaneie com seu aplicativo autenticador",
+          "step_scan_body": "Abra um aplicativo autenticador (1Password, Google Authenticator, Authy, …) e escaneie o código abaixo.",
+          "qr_alt": "Código QR para configurar a autenticação de dois fatores",
+          "qr_failed": "Não foi possível gerar o código QR. Use a chave de configuração.",
+          "secret_label": "Ou digite esta chave de configuração manualmente",
+          "copy_secret": "Copiar chave de configuração",
+          "secret_hint": "Útil para aplicativos autenticadores de computador que não conseguem escanear um código QR.",
+          "step_verify_title": "Confirme o código do seu aplicativo",
+          "back": "Voltar",
+          "wait_seconds": "Aguarde {{seconds}}s",
+          "verify_and_enable": "Verificar e ativar",
+          "enabled": "Ativada",
+          "enabled_since": "Desde {{date}}",
+          "enabled_hint": "É necessário um código do seu aplicativo autenticador para entrar.",
+          "regenerate": "Gerar novos códigos de recuperação",
+          "disable": "Desativar",
+          "codes_remaining": "{{remaining}} códigos de recuperação restantes",
+          "codes_low": "gere um novo conjunto para não perder o acesso.",
+          "regenerate_body": "Gerar um novo conjunto invalida imediatamente todos os seus códigos de recuperação atuais.",
+          "regenerate_confirm": "Gerar novos códigos",
+          "disable_warning": "Desativar remove a segunda etapa de acesso e exclui seus códigos de recuperação.",
+          "disable_confirm": "Desativar dois fatores",
+          "not_enabled": "Desativada",
+          "not_enabled_hint": "Proteja sua conta exigindo também um código de uso único do aplicativo autenticador ao entrar.",
+          "enable": "Ativar"
+        }
       }
     },
     "sign_out": "Sair",
@@ -1947,7 +2090,9 @@
             "saving": "Salvando configurações de moderação...",
             "save_success": "Configurações de moderação salvas",
             "save_error": "Falha ao salvar configurações de moderação"
-          }
+          },
+          "allow_rich_content_label": "Permitir conteúdo enriquecido",
+          "allow_rich_content_description": "Permita que os membros incorporem vídeos do YouTube nas discussões. Apenas o YouTube é compatível, e todas as publicações são verificadas no servidor. Desativado por padrão; recomendado para comunidades pequenas e de confiança, como uma turma."
         },
         "modals": {
           "create": {
@@ -2081,7 +2226,10 @@
           "publish_all_success": "Todas as atividades foram publicadas com sucesso",
           "unpublish_all": "Despublicar tudo",
           "unpublish_all_success": "Todas as atividades foram despublicadas com sucesso",
-          "publish_all_error": "Falha ao atualizar algumas atividades"
+          "publish_all_error": "Falha ao atualizar algumas atividades",
+          "back": "Voltar",
+          "save_name": "Salvar nome",
+          "rename_chapter": "Renomear capítulo"
         },
         "bulk_actions": {
           "selected": "{{count}} selecionadas",
@@ -2096,7 +2244,9 @@
           "publish_error": "Falha ao publicar algumas atividades",
           "unpublish_success": "{{count}} atividades despublicadas com sucesso",
           "unpublish_error": "Falha ao despublicar algumas atividades",
-          "partial_error": "{{failed}} de {{total}} atividades não puderam ser atualizadas"
+          "partial_error": "{{failed}} de {{total}} atividades não puderam ser atualizadas",
+          "publish_tooltip": "Publicar selecionados",
+          "unpublish_tooltip": "Despublicar selecionados"
         },
         "chapter_element": {
           "chapter_name_placeholder": "Nome do capítulo"
@@ -2271,7 +2421,8 @@
           "automations": "Automações",
           "api": "API Access",
           "menu": "Menu",
-          "danger": "Zona de Perigo"
+          "danger": "Zona de Perigo",
+          "course_end": "Conclusão do curso"
         },
         "pages": {
           "general": {
@@ -2321,6 +2472,13 @@
           "danger": {
             "title": "Zona de Perigo",
             "subtitle": "Ações irreversíveis e destrutivas para esta organização"
+          },
+          "seo": {
+            "subtitle": "Gerencie as configurações de otimização para mecanismos de busca"
+          },
+          "course_end": {
+            "title": "Conclusão do curso",
+            "subtitle": "Personalize a tela que os alunos veem ao concluir um curso"
           }
         },
         "name": "Nome da Organização",
@@ -2346,7 +2504,10 @@
         "watermark_desc": "Mostrar marca d'água Atlas Club nas páginas da organização",
         "watermark_free_plan": "A marca d'água é sempre exibida no plano gratuito",
         "watermark_label": "Marca d'água \"Made with Atlas Club\"",
-        "watermark_ee": "Oculto pela sua licença Enterprise Edition"
+        "watermark_ee": "Oculto pela sua licença Enterprise Edition",
+        "email_sender_name": "Nome do remetente dos e-mails",
+        "email_sender_name_placeholder": "Nome da sua organização",
+        "email_sender_name_desc": "O nome que os destinatários veem nos e-mails enviados por esta organização: links de acesso, redefinições de senha, convites, verificações e boas-vindas. Esses e-mails também usam seu logo, a cor da sua marca nos botões e sua configuração de marca-d'água. Apenas o nome muda aqui; o endereço de envio continua sendo o da plataforma para manter a aprovação nas verificações SPF e DKIM. Deixe em branco para usar o padrão da plataforma."
       },
       "images": {
         "title": "Imagens e Visualizações",
@@ -2407,7 +2568,98 @@
           "images": "Imagens e Visualizações",
           "social": "Links Sociais",
           "theme": "Tema",
-          "auth": "Autenticação"
+          "auth": "Autenticação",
+          "logos": "Logos",
+          "previews": "Prévias"
+        },
+        "where_it_appears": "Onde aparece",
+        "specs": {
+          "formats": "PNG ou JPG",
+          "max_size": "Até 5 MB",
+          "wide_size": "Cerca de 400×200 px",
+          "square_size": "512×512 px, sem cantos arredondados",
+          "favicon_size": "64×64 px",
+          "thumbnail_size": "1200×600 px",
+          "transparent_png": "PNG transparente funciona melhor"
+        },
+        "logos": {
+          "wide": {
+            "title": "Logo horizontal",
+            "description": "Seu logo principal. Aparece no cabeçalho público, nos certificados e onde houver espaço para uma marca horizontal.",
+            "add": "Adicionar logo horizontal",
+            "replace": "Substituir logo horizontal"
+          },
+          "square": {
+            "title": "Logo quadrado",
+            "description": "Uma marca compacta para espaços quadrados: o painel de acesso, o seletor de organizações e a barra lateral do painel. Enquanto você não adicionar um, o logo horizontal será ajustado a esses espaços.",
+            "add": "Adicionar logo quadrado",
+            "replace": "Substituir logo quadrado",
+            "inherited": "Usando o logo horizontal por enquanto. Adicione uma versão quadrada para preencher o espaço."
+          },
+          "favicon": {
+            "title": "Favicon",
+            "description": "O pequeno ícone na aba do navegador e nos favoritos.",
+            "add": "Adicionar favicon",
+            "replace": "Substituir favicon"
+          },
+          "toasts": {
+            "uploading": "Enviando…",
+            "wide_success": "Logo horizontal atualizado",
+            "wide_error": "Não foi possível enviar o logo horizontal",
+            "square_success": "Logo quadrado atualizado",
+            "square_error": "Não foi possível enviar o logo quadrado",
+            "favicon_success": "Favicon atualizado",
+            "favicon_error": "Não foi possível enviar o favicon"
+          }
+        },
+        "vignettes": {
+          "public_header": "Cabeçalho público",
+          "sign_in": "Página de acesso",
+          "org_switcher": "Seletor de organizações",
+          "sidebar": "Barra lateral do painel",
+          "browser_tab": "Aba do navegador",
+          "certificate": "Certificado",
+          "explore_card": "Listagem de organizações",
+          "link_preview": "Prévia do link",
+          "gallery": "Galeria de organizações",
+          "footer": "Rodapé público"
+        },
+        "theme": {
+          "color_title": "Cor principal",
+          "color_desc": "Aplica cor ao cabeçalho público e ao fundo da página atrás dele. Deixe em branco para usar o cabeçalho branco padrão.",
+          "no_color": "Sem cor",
+          "clear": "Limpar",
+          "font_title": "Fonte",
+          "font_desc": "Usada em todas as páginas públicas. Escolha na lista selecionada ou pesquise no Google Fonts.",
+          "search_fonts": "Buscar fontes…",
+          "no_fonts": "Nenhuma fonte encontrada",
+          "all_fonts": "Exibindo resultados de todo o Google Fonts",
+          "default": "padrão",
+          "preview": "Prévia em tempo real",
+          "note": "As alterações serão aplicadas às suas páginas públicas após salvar."
+        },
+        "auth": {
+          "message_title": "Mensagem de boas-vindas",
+          "message_desc": "Exibida abaixo do seu nome nas páginas de acesso e cadastro. Deixe em branco para usar o padrão.",
+          "background_title": "Fundo",
+          "background_desc": "O que aparece atrás do seu logo no painel de acesso: o gradiente padrão ou uma foto enviada ou gerada por você.",
+          "text_title": "Cor do texto",
+          "text_desc": "Texto claro para fundos escuros e texto escuro para fundos claros.",
+          "preview_note": "O espaço do logo usa seu logo quadrado ou ajusta o horizontal se você ainda não adicionou um quadrado."
+        },
+        "social": {
+          "title": "Perfis sociais",
+          "description": "Links exibidos no rodapé de todas as páginas públicas.",
+          "links_title": "Links personalizados",
+          "links_desc": "Até três links extras no rodapé, como seu site principal ou uma central de ajuda."
+        },
+        "previews": {
+          "thumbnail_title": "Miniatura",
+          "thumbnail_desc": "A imagem de capa da sua organização quando ela é listada ou compartilhada: na página de descoberta do Atlas Club e nas prévias de links.",
+          "thumbnail_add": "Adicionar miniatura",
+          "thumbnail_replace": "Substituir miniatura",
+          "gallery_title": "Galeria de prévias",
+          "gallery_desc": "Até quatro imagens ou vídeos exibidos na listagem da sua organização. Arraste para reordenar."
         }
       },
       "auth_branding": {
@@ -2488,7 +2740,8 @@
         "ai_copilot_description": "Let learners ask questions about course content. Uses indexed material to provide grounded answers with source citations.",
         "feature_editor_description": "AI-powered content editing assistance for course creators.",
         "feature_activity_description": "AI assistant available within activities to help learners.",
-        "always_on": "Always on"
+        "always_on": "Always on",
+        "currently_disabled": "Os recursos de IA estão desativados para esta organização. Ative a opção abaixo para restaurá-los."
       },
       "features": {
         "title": "Configurações de Funcionalidades",
@@ -2617,6 +2870,70 @@
           "featured_courses": {
             "label": "Cursos",
             "description": "Adicione uma seção para exibir cursos selecionados"
+          },
+          "video": {
+            "label": "Vídeo",
+            "description": "Incorpore um vídeo do YouTube, Vimeo ou Loom, ou envie o seu"
+          },
+          "rich_text": {
+            "label": "Texto",
+            "description": "Um título e texto formatado, escrito em Markdown"
+          },
+          "features": {
+            "label": "Recursos",
+            "description": "Uma grade de cartões com ícone, título e descrição"
+          },
+          "stats": {
+            "label": "Estatísticas",
+            "description": "Números em destaque com um rótulo, como alunos ou cursos"
+          },
+          "testimonials": {
+            "label": "Depoimentos",
+            "description": "Comentários de alunos ou clientes"
+          },
+          "faq": {
+            "label": "Perguntas frequentes",
+            "description": "Perguntas que se expandem para mostrar a resposta"
+          },
+          "cta": {
+            "label": "Chamada para ação",
+            "description": "Um banner em destaque com título e botões"
+          },
+          "gallery": {
+            "label": "Galeria",
+            "description": "Uma grade de imagens"
+          },
+          "spacer": {
+            "label": "Espaçador",
+            "description": "Espaço vazio, com uma linha divisória opcional"
+          },
+          "pricing": {
+            "label": "Preços",
+            "description": "Cartões de planos com preço, lista de recursos e botão"
+          },
+          "steps": {
+            "label": "Etapas",
+            "description": "Uma sequência numerada, lado a lado ou empilhada"
+          },
+          "columns": {
+            "label": "Colunas",
+            "description": "De duas a quatro colunas de texto em Markdown"
+          },
+          "image": {
+            "label": "Imagem",
+            "description": "Uma imagem grande com legenda e link opcionais"
+          },
+          "embed": {
+            "label": "Conteúdo incorporado",
+            "description": "Um formulário, calendário, mapa ou quadro de um serviço compatível"
+          },
+          "banner": {
+            "label": "Comunicado",
+            "description": "Uma barra estreita para notícias ou promoções"
+          },
+          "countdown": {
+            "label": "Contagem regressiva",
+            "description": "Um contador em tempo real até um lançamento ou prazo"
           }
         },
         "add_section": "Adicionar Seção",
@@ -2734,10 +3051,241 @@
           "select_courses": "Selecionar Cursos",
           "loading_courses": "Carregando cursos...",
           "selected": "Selecionado",
-          "select": "Selecionar"
+          "select": "Selecionar",
+          "private_badge": "Somente usuários",
+          "private_badge_hint": "Visitantes que não estiverem conectados não verão este curso na página inicial.",
+          "private_selected_warning": "Alguns cursos selecionados estão definidos como Somente usuários, por isso visitantes que não estiverem conectados não os verão. Torne esses cursos públicos para exibi-los a todos."
         },
         "org_id_not_found": "ID da organização não encontrado",
-        "unknown_section_type": "Unknown section type"
+        "unknown_section_type": "Unknown section type",
+        "video_editor": {
+          "title": "Seção de vídeo",
+          "title_label": "Título",
+          "title_placeholder": "Veja a apresentação",
+          "description_label": "Descrição",
+          "description_placeholder": "Texto opcional exibido acima do vídeo",
+          "url_label": "Vídeo",
+          "url_help": "Cole um link do YouTube, Vimeo ou Loom, uma URL direta de arquivo de vídeo, ou envie um arquivo MP4/WebM.",
+          "upload_video": "Enviar vídeo"
+        },
+        "visibility": {
+          "title": "Visibilidade",
+          "description": "Escolha quem vê esta seção na página inicial",
+          "everyone": "Todos",
+          "logged_in": "Somente usuários conectados",
+          "logged_out": "Somente visitantes desconectados"
+        },
+        "templates": {
+          "title": "Começar com um modelo",
+          "description": "Escolha um ponto de partida e edite cada seção. Ou adicione as seções uma a uma.",
+          "sections_count_one": "{{count}} seção",
+          "sections_count_other": "{{count}} seções",
+          "academy": {
+            "name": "Academia",
+            "description": "Destaques separados para visitantes e membros, estatísticas, como funciona, cursos, depoimentos, perguntas frequentes e um banner de cadastro."
+          },
+          "product": {
+            "name": "Treinamento de produto",
+            "description": "Destaque, vídeo de apresentação, tópicos, cursos recentes e um banner de contato."
+          },
+          "minimal": {
+            "name": "Minimalista",
+            "description": "Uma breve introdução e seus cursos mais recentes."
+          },
+          "launch": {
+            "name": "Lançamento",
+            "description": "Barra de comunicados, destaque alto, contagem regressiva, etapas, colunas, planos e perguntas frequentes, com animações de entrada."
+          }
+        },
+        "blocks": {
+          "title_label": "Título",
+          "subtitle_label": "Subtítulo",
+          "description_label": "Descrição",
+          "columns": "Colunas",
+          "align": "Alinhamento",
+          "align_start": "Início",
+          "align_center": "Centro",
+          "move_up": "Mover para cima",
+          "move_down": "Mover para baixo",
+          "remove": "Remover",
+          "duplicate": "Duplicar seção",
+          "upload_image": "Enviar imagem",
+          "hidden": "Ocultar esta seção",
+          "hidden_help": "Mantenha no editor sem exibir na página inicial.",
+          "style": "Fundo, cores e espaçamento",
+          "background": "Fundo",
+          "background_none": "Nenhum",
+          "background_solid": "Cor sólida",
+          "background_gradient": "Gradiente",
+          "background_image": "Imagem",
+          "color": "Cor",
+          "gradient_from": "De",
+          "gradient_to": "Para",
+          "text_color": "Cor do texto",
+          "spacing": "Espaçamento vertical",
+          "spacing_none": "Nenhum",
+          "spacing_small": "Pequeno",
+          "spacing_medium": "Médio",
+          "spacing_large": "Grande",
+          "anchor": "Âncora",
+          "anchor_help": "Permite que um botão leve a esta seção.",
+          "buttons": "Botões",
+          "add_button": "Adicionar botão",
+          "button_text": "Texto do botão",
+          "button_text_default": "Explorar cursos",
+          "button_background": "Fundo",
+          "button_color": "Texto",
+          "rich_text": {
+            "title": "Seção de texto",
+            "content": "Conteúdo",
+            "markdown_help": "Markdown: **negrito**, *itálico*, [link](https://...), listas e ## títulos.",
+            "default_title": "Sobre nós",
+            "default_content": "Escreva algo sobre sua escola. Aceita **Markdown**."
+          },
+          "features": {
+            "title": "Seção de recursos",
+            "add": "Adicionar recurso",
+            "icon": "Ícone (emoji)",
+            "default_title": "Por que aprender conosco",
+            "default_item_title": "Recurso",
+            "default_item_description": "Descreva este recurso em uma frase."
+          },
+          "stats": {
+            "title": "Seção de estatísticas",
+            "add": "Adicionar estatística",
+            "value": "Valor",
+            "label": "Rótulo",
+            "default_label": "Alunos"
+          },
+          "testimonials": {
+            "title": "Seção de depoimentos",
+            "add": "Adicionar depoimento",
+            "quote": "Depoimento",
+            "author": "Nome",
+            "role": "Cargo ou empresa",
+            "photo_url": "URL da foto",
+            "default_title": "O que os alunos dizem"
+          },
+          "faq": {
+            "title": "Seção de perguntas frequentes",
+            "add": "Adicionar pergunta",
+            "question": "Pergunta",
+            "answer": "Resposta",
+            "default_title": "Perguntas frequentes"
+          },
+          "cta": {
+            "title": "Seção de chamada para ação",
+            "heading": "Título",
+            "default_heading": "Pronto para começar?"
+          },
+          "gallery": {
+            "title": "Seção de galeria",
+            "add": "Adicionar imagem",
+            "alt": "Texto alternativo"
+          },
+          "spacer": {
+            "title": "Espaçador",
+            "size": "Tamanho",
+            "divider": "Mostrar uma linha divisória"
+          },
+          "courses": {
+            "mode": "Cursos para exibir",
+            "mode_selected": "Cursos que eu selecionar",
+            "mode_latest": "Cursos mais recentes",
+            "limit": "Quantidade"
+          },
+          "device": "Dispositivos",
+          "device_all": "Todos os dispositivos",
+          "device_desktop": "Somente computador",
+          "device_mobile": "Somente celular",
+          "show_from": "Exibir a partir de",
+          "show_until": "Exibir até",
+          "width": "Largura",
+          "width_normal": "Normal",
+          "width_narrow": "Estreita",
+          "title_align": "Alinhamento do título",
+          "animation": "Animação de entrada",
+          "animation_none": "Nenhuma",
+          "animation_fade": "Aparecer gradualmente",
+          "animation_slide_up": "Deslizar para cima",
+          "export": "Exportar",
+          "import": "Importar",
+          "import_invalid": "Este arquivo não é uma exportação válida da página inicial",
+          "import_done": "Página inicial importada ({{count}} seções). Salve para publicar.",
+          "hero": {
+            "title": "Tamanho e sobreposição do destaque",
+            "height": "Altura",
+            "height_screen": "Tela inteira",
+            "overlay": "Sobreposição escura",
+            "overlay_help": "Escurece o fundo para manter o texto legível sobre uma foto."
+          },
+          "pricing": {
+            "title": "Seção de preços",
+            "add": "Adicionar plano",
+            "name": "Nome do plano",
+            "price": "Preço",
+            "period": "/ mês",
+            "features": "Recursos, um por linha",
+            "highlighted": "Destacar este plano",
+            "button_default": "Começar",
+            "default_title": "Preços simples",
+            "default_plan": "Gratuito",
+            "linked_offer": "Produto da loja vinculado",
+            "linked_none": "Nenhum (digite o preço manualmente)",
+            "linked_missing": "Produto indisponível",
+            "linked_help": "O preço e o link de pagamento vêm da loja e ficam sincronizados. O nome, a descrição e os recursos usam os dados do produto, a menos que você escreva os seus.",
+            "linked_missing_help": "Este produto está arquivado ou não está listado publicamente, por isso este plano fica oculto na página inicial.",
+            "store_hint": "Sua loja tem produtos que você pode transformar em planos.",
+            "add_from_store": "Adicionar planos da loja",
+            "store_empty": "Nenhum produto da loja listado publicamente. Crie um em Pagamentos para vincular planos ao pagamento.",
+            "buy_default": "Comprar agora"
+          },
+          "steps": {
+            "title": "Seção de etapas",
+            "layout": "Disposição",
+            "horizontal": "Lado a lado",
+            "vertical": "Empilhadas",
+            "add": "Adicionar etapa",
+            "default_title": "Como funciona"
+          },
+          "columns_block": {
+            "title": "Seção de colunas",
+            "add": "Adicionar coluna"
+          },
+          "image": {
+            "title": "Seção de imagem",
+            "caption": "Legenda",
+            "link": "Link",
+            "rounded": "Cantos arredondados e sombra"
+          },
+          "embed": {
+            "title": "Seção de conteúdo incorporado",
+            "url": "URL",
+            "help": "Compatíveis: Calendly, Typeform, Tally, Airtable, incorporações do Google Docs, Forms e Maps, Figma, Loom, Canva, Miro, YouTube e Vimeo.",
+            "not_allowed": "Este serviço não é compatível, por isso nada será exibido.",
+            "height": "Altura (px)"
+          },
+          "banner": {
+            "title": "Comunicado",
+            "text": "Texto",
+            "link_text": "Texto do link",
+            "schedule_tip": "Dica: use \"Exibir a partir de\" e \"Exibir até\" acima para mostrar este comunicado por tempo limitado.",
+            "default_text": "Novo curso lançado"
+          },
+          "countdown": {
+            "title": "Seção de contagem regressiva",
+            "target": "Contagem regressiva até",
+            "done_text": "Texto após o término",
+            "default_heading": "Lançamento em breve"
+          },
+          "page": {
+            "title": "Configurações da página",
+            "description": "Configurações para toda a página inicial.",
+            "width": "Largura do conteúdo",
+            "width_wide": "Ampla",
+            "gap": "Espaço entre seções"
+          }
+        }
       },
       "theme": {
         "primary_color": "Cor primária",
@@ -2895,7 +3443,14 @@
         "base_credits": "Creditos base",
         "purchased": "Comprados",
         "used": "Usados",
-        "remaining": "Restantes"
+        "remaining": "Restantes",
+        "upsell": {
+          "title": "Mais recursos em outros planos",
+          "subtitle": "Mude de plano para ampliar os limites e acessar mais recursos.",
+          "popular": "Popular",
+          "compare": "Comparar todos os planos",
+          "upgrade_to": "Mudar para {{plan}}"
+        }
       },
       "api_access": {
         "title": "API Access",
@@ -2949,6 +3504,91 @@
         "custom_required": "A label and a URL are required",
         "plan_locked": "Requires {{plan}} plan",
         "feature_off": "Feature is off"
+      },
+      "danger_zone": {
+        "delete_org_tooltip": "Excluir organização permanentemente"
+      },
+      "security": {
+        "saving": "Salvando política de segurança…",
+        "save_error": "Não foi possível salvar a política de segurança.",
+        "save_success": "Política de segurança atualizada",
+        "admin_mfa_first": "Ative a autenticação de dois fatores na sua conta antes de exigi-la para a organização.",
+        "admin_mfa_first_why": "Caso contrário, a política bloquearia seu acesso à própria organização assim que fosse salva, e não restaria nenhum administrador para desativá-la.",
+        "admin_mfa_first_cta": "Configurar dois fatores na sua conta",
+        "not_admin_title": "Você não tem acesso a esta configuração",
+        "not_admin_body": "Somente administradores da organização podem visualizar ou alterar a exigência de dois fatores.",
+        "read_only": "Você pode consultar esta página, mas somente um administrador da organização pode alterar a política.",
+        "methods_title": "Métodos de acesso permitidos",
+        "methods_description": "Escolha como os membros podem entrar nesta organização. Deixe todos os métodos marcados para manter o acesso sem restrições.",
+        "methods_empty_warning": "Sem nenhum método selecionado, ninguém poderá entrar nesta organização. Escolha pelo menos um.",
+        "methods_effect": "Os métodos desmarcados deixam de aparecer na página de acesso desta organização, e os membros que já entraram com um deles precisam entrar novamente com um método permitido.",
+        "session_sharing_label": "Permitir compartilhar sessões com learnhouse.io",
+        "session_sharing_hint": "Quando desativado, entrar em learnhouse.io não dá acesso a esta organização; os membros precisam entrar novamente pela página de acesso da organização usando um método permitido.",
+        "saving_short": "Salvando…",
+        "save": "Salvar alterações",
+        "cancel": "Cancelar",
+        "load_error": "Não foi possível carregar o status de dois fatores da sua organização.",
+        "reset_error": "Não foi possível redefinir os dois fatores deste membro.",
+        "load_error_title": "Algo deu errado",
+        "retry": "Tentar novamente",
+        "subtitle": "Exija autenticação de dois fatores para todos nesta organização.",
+        "compliance_title": "Adoção de dois fatores",
+        "compliance_count": "{{enabled}} de {{total}} membros têm dois fatores ativados",
+        "refresh": "Atualizar",
+        "stat_enrolled": "Configurados",
+        "stat_exempt": "Isentos (acesso externo)",
+        "stat_blocked": "Seriam bloqueados",
+        "blocked_hint_active": "Estes membros perderão o acesso a esta organização quando o prazo de adequação terminar, a menos que configurem dois fatores.",
+        "members_title": "Membros",
+        "members_sorted": "não configurados primeiro",
+        "members_empty": "Esta organização ainda não tem membros.",
+        "you": "você",
+        "badge_enrolled": "Configurado",
+        "badge_exempt": "Isento: {{method}}",
+        "badge_not_enrolled": "Não configurado",
+        "reset_hint": "Remova os dois fatores deste membro para que ele possa configurá-los novamente",
+        "resetting": "Redefinindo…",
+        "reset_confirm": "Confirmar redefinição?",
+        "reset_2fa": "Redefinir 2FA",
+        "show_less": "Mostrar menos",
+        "show_all": "Mostrar todos os {{count}} membros",
+        "policy_title": "Exigir autenticação de dois fatores",
+        "policy_description": "Membros sem um segundo fator são bloqueados nesta organização após o prazo de adequação. Eles mantêm a conta e o acesso às outras organizações e recuperam o acesso assim que configuram dois fatores.",
+        "active_since": "Política ativa desde {{date}}",
+        "active_no_date": "A política está ativa",
+        "no_restart_note": "Salvar alterações em uma política já ativa não reinicia a contagem regressiva de ninguém; os prazos existentes continuam vinculados à data acima. A contagem só reinicia se você desativar e reativar a exigência.",
+        "grace_label": "Prazo de adequação",
+        "grace_immediately": "Imediatamente",
+        "grace_days": "{{count}} dias",
+        "grace_hint_immediate": "Membros sem dois fatores são bloqueados assim que a política é salva.",
+        "grace_hint_days": "Os membros têm {{count}} dias para configurar antes do bloqueio. Novos membros têm o mesmo prazo a partir do dia em que entram.",
+        "exempt_label": "Isentar usuários que entram pelo Google ou SSO",
+        "exempt_hint": "O provedor de identidade deles já cuida da autenticação multifator, então solicitar um segundo fator aqui não acrescenta proteção.",
+        "self_blocking": "Seu prazo terminou. Configure agora para manter o acesso a esta organização.",
+        "self_days_left": "Você tem {{count}} dias para configurar dois fatores na sua conta.",
+        "confirm_title": "Exigir dois fatores para todos?",
+        "confirm_none": "Todos nesta organização já têm dois fatores ativados ou são isentos. Ninguém perderá o acesso.",
+        "confirm_immediate": "{{count}} de {{total}} membros perderão o acesso a esta organização imediatamente após você salvar.",
+        "confirm_deadline": "{{count}} de {{total}} membros perderão o acesso a esta organização em {{date}}, a menos que ativem dois fatores antes disso.",
+        "confirm_list_title": "Quem será afetado",
+        "confirm_exempt_note": "{{count}} membros são isentos porque entram por um provedor de identidade externo.",
+        "confirm_reversible": "Esta ação é reversível: desativar a exigência restaura o acesso imediatamente.",
+        "confirm_button": "Sim, exigir dois fatores"
+      },
+      "course_end": {
+        "title": "Tela de conclusão do curso",
+        "subtitle": "Exibida aos alunos após concluírem um curso",
+        "save": "Salvar",
+        "saving": "Salvando...",
+        "saved": "Tela de conclusão do curso salva",
+        "error": "Não foi possível salvar a tela de conclusão do curso",
+        "message_label": "Mensagem",
+        "message_help": "Substitui a frase padrão abaixo do título de parabéns. Deixe em branco para manter o padrão.",
+        "button_text_label": "Texto do botão",
+        "button_link_label": "Link do botão",
+        "button_link_help": "Um caminho interno como /courses ou uma URL https:// completa. Deixe em branco para direcionar ao catálogo de cursos.",
+        "link_invalid": "Use um caminho interno começando com / ou uma URL http(s) completa",
+        "preview": "Prévia"
       }
     },
     "users": {
@@ -2959,7 +3599,10 @@
           "roles": "Funções",
           "signups": "Cadastros e Códigos de Convite",
           "add": "Convidar Membros",
-          "audit_logs": "Logs de Auditoria"
+          "audit_logs": "Logs de Auditoria",
+          "analytics": "Análises",
+          "sign_in": "Acesso",
+          "two_factor": "Dois fatores"
         },
         "pages": {
           "users": {
@@ -2985,6 +3628,18 @@
           "audit_logs": {
             "title": "Logs de Auditoria",
             "subtitle": "Rastreie e monitore todas as atividades dentro da sua organização"
+          },
+          "analytics": {
+            "title": "Análises dos alunos",
+            "subtitle": "Um registro completo e exportável da atividade de aprendizagem de cada aluno"
+          },
+          "two_factor": {
+            "title": "Dois fatores",
+            "subtitle": "Exija autenticação de dois fatores para os membros desta organização"
+          },
+          "sign_in": {
+            "title": "Acesso",
+            "subtitle": "Escolha como os membros podem entrar nesta organização"
           }
         },
         "mobile": {
@@ -3037,7 +3692,10 @@
         },
         "connections": {
           "title": "Conexões",
-          "empty": "Nenhuma conexão registrada ainda."
+          "empty": "Nenhuma conexão registrada ainda.",
+          "device": "Dispositivo",
+          "raw_agent": "User agent original",
+          "unknown_device": "Dispositivo desconhecido"
         },
         "courses": {
           "title": "Progresso do curso",
@@ -3049,7 +3707,9 @@
           "title": "Tarefas",
           "empty": "Nenhuma entrega de tarefa.",
           "attempt": "tentativa {{number}}",
-          "feedback": "Feedback:"
+          "feedback": "Feedback:",
+          "tasks": "{{done}}/{{total}} tarefas enviadas",
+          "no_tasks": "Esta atividade não tem tarefas."
         },
         "code": {
           "title": "Exercícios de código",
@@ -3060,22 +3720,30 @@
           "time": "Tempo",
           "when": "Quando",
           "passed": "Aprovado",
-          "failed": "Reprovado"
+          "failed": "Reprovado",
+          "language": "Linguagem",
+          "course": "Curso",
+          "untitled_activity": "Atividade sem título"
         },
         "community": {
           "title": "Participação na comunidade",
           "empty": "Nenhuma atividade na comunidade.",
           "discussions": "Discussões",
-          "comments": "Comentários"
+          "comments": "Comentários",
+          "in_discussion": "Em \"{{title}}\"",
+          "community": "Comunidade"
         },
         "certificates": {
           "title": "Certificados obtidos",
-          "empty": "Nenhum certificado obtido."
+          "empty": "Nenhum certificado obtido.",
+          "credential_id": "ID da credencial"
         },
         "behavior": {
           "title": "Análises comportamentais",
           "time_by_course": "Tempo gasto por curso",
-          "searches": "Pesquisas"
+          "searches": "Pesquisas",
+          "views": "Visualizações de páginas e conteúdos",
+          "untitled_course": "Curso sem título"
         },
         "status": {
           "completed": "concluído",
@@ -3095,6 +3763,39 @@
           "certificates": "Certificados",
           "last_connection": "Última conexão",
           "view": "Ver"
+        },
+        "export_include_raw": "Incluir dados brutos das entregas",
+        "answer": {
+          "question": "Questão",
+          "answered": "Respondida",
+          "expected": "Resposta esperada",
+          "no_answer": "Nenhuma resposta fornecida",
+          "correct": "Correta",
+          "incorrect": "Incorreta",
+          "correct_answer": "Resposta correta",
+          "not_graded": "Sem correção automática",
+          "score": "{{correct}}/{{total}} corretas",
+          "explanation": "Explicação",
+          "raw_note": "Tarefa personalizada (exibida como campos brutos)",
+          "not_submitted": "Não enviado",
+          "manual": "corrigido manualmente",
+          "source_code": "Código enviado",
+          "test_cases": "Casos de teste",
+          "hidden_test": "Teste oculto {{number}}",
+          "test_passed": "Aprovado",
+          "test_failed": "Reprovado",
+          "actual": "Saída",
+          "download_file": "Baixar arquivo"
+        },
+        "task_types": {
+          "QUIZ": "Questionário",
+          "FORM": "Preencher as lacunas",
+          "SHORT_ANSWER": "Resposta curta",
+          "NUMBER_ANSWER": "Resposta numérica",
+          "FILE_SUBMISSION": "Envio de arquivo",
+          "CODE": "Exercício de código",
+          "CUSTOM": "Tarefa personalizada",
+          "OTHER": "Outro"
         }
       },
       "active_users": {
@@ -3114,7 +3815,8 @@
           "remove_error": "Erro ao remover usuário",
           "updating_role": "Atualizando função...",
           "role_update_success": "Função atualizada com sucesso",
-          "role_update_error": "Erro ao atualizar função"
+          "role_update_error": "Erro ao atualizar função",
+          "export_csv": "Exportar usuários (CSV)"
         },
         "modals": {
           "update_role": {
@@ -3132,8 +3834,12 @@
         "no_users": "Ainda não há usuários nesta organização",
         "pagination": {
           "showing": "Mostrando {{start}}-{{end}} de {{total}}",
-          "page": "Página {{current}} de {{total}}"
-        }
+          "page": "Página {{current}} de {{total}}",
+          "previous": "Página anterior",
+          "next": "Próxima página"
+        },
+        "beyond_included": "{{count}} além do seu plano",
+        "beyond_included_tooltip": "Estes membros excedem a quantidade incluída no seu plano. Apenas os ativos neste mês são contabilizados. Consulte o faturamento para mais detalhes."
       },
       "signups": {
         "title": "Método de participação",
@@ -3463,7 +4169,9 @@
                 "coursechapters": "Capítulos do Curso",
                 "activities": "Atividades",
                 "roles": "Funções",
-                "dashboard": "Painel"
+                "dashboard": "Painel",
+                "folders": "Pastas",
+                "media": "Mídia"
               },
               "actions": {
                 "create": "criar",
@@ -3526,7 +4234,9 @@
                 "organizations": "Organizações",
                 "roles": "Funções",
                 "usergroups": "Grupos de Usuários",
-                "users": "Usuários"
+                "users": "Usuários",
+                "folders": "Pastas",
+                "media": "Mídia"
               },
               "select": "Selecionar",
               "select_all": "Selecionar Todos",
@@ -3557,9 +4267,43 @@
             "organizations": "Organizações",
             "roles": "Papéis",
             "usergroups": "Grupos de usuários",
-            "users": "Usuários"
+            "users": "Usuários",
+            "folders": "Pastas",
+            "media": "Mídia"
           }
         }
+      },
+      "security": {
+        "two_factor_title": "Dois fatores"
+      },
+      "signup_fields": {
+        "no_rights": "Você não tem permissão para alterar os campos de cadastro.",
+        "label_required": "Todo campo precisa de um rótulo.",
+        "duplicate_key": "Dois campos têm a mesma chave. Use rótulos diferentes.",
+        "options_required": "Campos de lista suspensa precisam de pelo menos uma opção.",
+        "saving": "Salvando campos de cadastro…",
+        "saved": "Campos de cadastro atualizados.",
+        "save_error": "Não foi possível salvar os campos de cadastro. Tente novamente.",
+        "title": "Campos de cadastro personalizados",
+        "subtitle": "Perguntas adicionais feitas ao entrar. As respostas ficam salvas no perfil de cada membro.",
+        "public_notice": "Rótulos, textos de ajuda e opções aparecem na página pública de cadastro, onde qualquer pessoa pode lê-los. Não inclua informações confidenciais aqui.",
+        "empty": "Nenhum campo personalizado. Seu formulário de cadastro solicita apenas as informações padrão.",
+        "label_placeholder": "Rótulo da pergunta",
+        "badge_saved": "em uso",
+        "badge_new": "novo",
+        "type": "Tipo de campo",
+        "required": "Obrigatório",
+        "delete_confirm": "Remover este campo desvincula as respostas já coletadas sob sua chave. Clique na lixeira novamente para confirmar.",
+        "key": "Chave",
+        "key_locked": "Bloqueada: alterá-la desvincularia as respostas já coletadas.",
+        "key_hint": "Definida automaticamente a partir do rótulo.",
+        "help_text": "Texto de ajuda",
+        "max_length": "Comprimento máximo",
+        "min_value": "Mín.",
+        "max_value": "Máx.",
+        "add": "Adicionar campo",
+        "options": "Opções (uma por linha)",
+        "options_placeholder": "Primeira opção\\nSegunda opção"
       }
     },
     "assignments": {
@@ -3668,7 +4412,8 @@
           "task_updated": "Atividade atualizada com sucesso",
           "task_update_error": "Erro ao atualizar atividade, tente novamente mais tarde.",
           "reminder": "Ao editar/adicionar suas atividades, certifique-se de Despublicar sua Tarefa para evitar problemas com os estudantes, você pode Publicá-la novamente quando estiver pronto.",
-          "no_submission_to_grade": "Este aluno ainda não enviou nada para esta tarefa; não há nada para avaliar."
+          "no_submission_to_grade": "Este aluno ainda não enviou nada para esta tarefa; não há nada para avaliar.",
+          "reorder_failed": "Não foi possível reordenar as tarefas"
         },
         "task_editor": {
           "general": {
@@ -3757,7 +4502,8 @@
         "generate_ai_modal": {
           "description": "Descreva o que você quer e visualize tarefas baseadas no conteúdo do curso antes de adicioná-las.",
           "title": "Gerar tarefas com AI"
-        }
+        },
+        "drag_to_reorder": "Arraste para reordenar"
       },
       "submissions": {
         "status": {
@@ -3821,7 +4567,11 @@
           "placeholder": "Escreva um comentário sobre a submissão como um todo. O aluno verá isso ao lado da sua nota.",
           "hint": "Deixe em branco para manter qualquer comentário anterior inalterado."
         },
-        "truncated_warning": "Apenas os primeiros {{max}} envios são exibidos. Alguns envios não estão listados aqui."
+        "truncated_warning": "Apenas os primeiros {{max}} envios são exibidos. Alguns envios não estão listados aqui.",
+        "ungraded_title": "Formativa (sem nota)",
+        "ungraded_description": "Esta atividade é entregue apenas para revisão. Nenhuma nota é registrada.",
+        "download_to_grade": "Baixe o arquivo e corrija-o manualmente. Depois, insira a nota acima",
+        "download_to_review": "Baixe o arquivo para revisar o que o aluno entregou."
       },
       "analytics": {
         "loading": "A carregar análises...",
@@ -3919,13 +4669,35 @@
             "allow_retries_description": "Permita que os alunos resetem e tentem novamente a tarefa após ser avaliada. Cada nova tentativa limpa suas respostas anteriores e é contada como uma nova tentativa.",
             "max_retries_label": "Tentativas máximas",
             "max_retries_unlimited": "0 significa tentativas ilimitadas",
-            "max_retries_bounded": "Total de tentativas avaliadas (envio inicial + novas tentativas)"
+            "max_retries_bounded": "Total de tentativas avaliadas (envio inicial + novas tentativas)",
+            "due_date_hint": "Opcional: deixe em branco para um curso no ritmo do aluno, sem prazo.",
+            "due_date_clear": "Sem prazo",
+            "pass_threshold_label": "Nota mínima para aprovação",
+            "pass_threshold_description": "Pontuação mínima para aprovação. Deixe em branco para usar o padrão (50%, ou 60% para notas por conceito).",
+            "pass_threshold_placeholder": "Automático",
+            "ungraded_label": "Formativa (sem correção)",
+            "ungraded_description": "Os alunos entregam o trabalho sem receber nota, aprovação ou reprovação. Adicione uma resposta modelo abaixo para permitir a autoavaliação.",
+            "solution_label": "Resposta modelo",
+            "solution_hint": "Exibida aos alunos somente após o desbloqueio",
+            "solution_placeholder": "Escreva a resolução que os alunos devem usar para comparar seus trabalhos…",
+            "solution_no_file": "Nenhum documento anexado",
+            "solution_remove_file": "Remover",
+            "solution_upload_file": "Anexar",
+            "solution_reveal_label": "Desbloquear a resposta modelo",
+            "solution_reveal_never": "Nunca",
+            "solution_reveal_never_hint": "Visível apenas para você",
+            "solution_reveal_on_submission": "Na entrega",
+            "solution_reveal_on_submission_hint": "Desbloqueia no momento da entrega",
+            "solution_reveal_after_grading": "Após a correção",
+            "solution_reveal_after_grading_hint": "Desbloqueia após a correção",
+            "allow_retries_description_ungraded": "Permita que os alunos reiniciem e entreguem a atividade novamente. Cada tentativa apaga o trabalho anterior e bloqueia novamente a resposta modelo."
           },
           "toasts": {
             "updating": "Atualizando tarefa...",
             "success": "Tarefa atualizada com sucesso",
             "error": "Falha ao atualizar tarefa",
-            "error_detail": "Ocorreu um erro ao atualizar a tarefa"
+            "error_detail": "Ocorreu um erro ao atualizar a tarefa",
+            "solution_file_error": "Não foi possível enviar o documento da resposta modelo."
           }
         },
         "create": {
@@ -3961,7 +4733,10 @@
             "grading_type_hint": "Como as notas são mostradas aos alunos",
             "grading_options_hint": "Comportamento ao enviar",
             "show_correct_answers_description": "Após a correção, os alunos veem as respostas corretas ao lado das suas.",
-            "show_correct_answers_label": "Mostrar respostas corretas após a correção"
+            "show_correct_answers_label": "Mostrar respostas corretas após a correção",
+            "due_date_hint": "Opcional: deixe em branco para um curso no ritmo do aluno, sem prazo.",
+            "due_date_clear": "Sem prazo",
+            "ungraded_description": "Os alunos entregam o trabalho sem receber nota. Adicione uma resposta modelo no editor da atividade para desbloquear na entrega."
           },
           "toasts": {
             "creating": "Criando tarefa...",
@@ -4149,11 +4924,31 @@
         "org_api": {
           "description": "Tokens de API e acesso programático",
           "keywords": "api, tokens, acesso, programático, chaves"
+        },
+        "users_analytics": {
+          "description": "Atividade de aprendizagem e auditoria por aluno",
+          "keywords": "análises, auditoria, aluno, progresso, atividade, exportar, jurídico, conformidade"
         }
       }
     },
     "developers": {
       "breadcrumb": "Desenvolvedores"
+    },
+    "nav": {
+      "sidebar_navigation": "Navegação lateral do painel",
+      "mobile_navigation": "Navegação móvel do painel",
+      "top_navigation": "Navegação superior",
+      "collapse_sidebar": "Recolher barra lateral",
+      "expand_sidebar": "Expandir barra lateral",
+      "open_courses_menu": "Abrir menu de cursos",
+      "open_assignments_menu": "Abrir menu de tarefas",
+      "open_users_menu": "Abrir menu de usuários",
+      "open_organization_menu": "Abrir menu da organização",
+      "open_organizations_menu": "Abrir menu de organizações",
+      "open_developers_menu": "Abrir menu de desenvolvedores",
+      "open_language_menu": "Abrir menu de idiomas",
+      "open_help_menu": "Abrir menu de ajuda",
+      "other": "Outros"
     }
   },
   "editor": {
@@ -4307,7 +5102,8 @@
         "upload_pdf": "Enviar PDF",
         "document_title": "Documento PDF",
         "expand_pdf": "Expandir PDF",
-        "download_pdf": "Baixar PDF"
+        "download_pdf": "Baixar PDF",
+        "resize_pdf": "Arraste para redimensionar"
       },
       "quiz_block": {
         "all_correct": "Todas as respostas estão corretas!",
@@ -4320,7 +5116,17 @@
         "reset_answers": "Redefinir respostas",
         "mark_correct": "Marcar como correta",
         "mark_incorrect": "Marcar como incorreta",
-        "delete_answer": "Excluir resposta"
+        "delete_answer": "Excluir resposta",
+        "question_label": "Questão",
+        "delete_question": "Excluir questão",
+        "empty_editable": "Ainda não há questões. Adicione a primeira para começar.",
+        "empty_readonly": "Este questionário ainda não tem questões.",
+        "select_one": "Selecione uma resposta",
+        "select_all_that_apply": "Selecione todas as opções que se aplicam",
+        "response_type_single": "Resposta única",
+        "response_type_multiple": "Múltiplas respostas",
+        "no_correct_answer_warning": "Nenhuma resposta correta: esta questão é ignorada",
+        "generate_with_ai": "Gerar com IA"
       },
       "math_block": {
         "templates": "Modelos",
@@ -4347,7 +5153,8 @@
         "paste_directly": "Cole qualquer URL de incorporação diretamente",
         "how_to_embed": "Como incorporar {{name}}",
         "paste_code": "Cole o código de incorporação (iframe, script de incorporação, etc.)",
-        "paste_iframe": "Cole iframe ou código de incorporação de qualquer plataforma"
+        "paste_iframe": "Cole iframe ou código de incorporação de qualquer plataforma",
+        "remove_embed": "Remover conteúdo incorporado"
       },
       "web_preview_block": {
         "website_preview": "Visualização do site",
@@ -4411,7 +5218,45 @@
       },
       "button_block": {
         "enter_link_url": "Insira a URL do link"
-      }
+      },
+      "h5p": "Conteúdo interativo H5P",
+      "h5p_block": {
+        "default_title": "Conteúdo interativo H5P",
+        "description": "Cole a URL de incorporação de uma atividade H5P para exibi-la aqui.",
+        "hosted_hint": "O conteúdo permanece no seu próprio servidor H5P (H5P.com, Lumi ou um site Drupal, Moodle ou WordPress com hospedagem própria). Você pode colar a URL de incorporação ou o código iframe completo fornecido pelo serviço.",
+        "url_label": "URL de incorporação H5P",
+        "url_placeholder": "https://your-team.h5p.com/content/123456/embed",
+        "title_label": "Título",
+        "title_placeholder": "Título (usado para acessibilidade e busca)",
+        "edit_content": "Editar conteúdo H5P",
+        "remove_content": "Remover conteúdo H5P",
+        "errors": {
+          "empty": "Digite uma URL de incorporação H5P.",
+          "unparseable": "Isso não parece uma URL válida. Cole a URL de incorporação ou o código iframe do seu servidor H5P.",
+          "unsupported_protocol": "Somente URLs http e https podem ser incorporadas."
+        },
+        "size_label": "Tamanho",
+        "sizes": {
+          "auto": "Automático",
+          "auto_hint": "Permite que a atividade informe sua própria altura.",
+          "widescreen": "16:9",
+          "widescreen_hint": "Formato amplo, ideal para vídeos interativos.",
+          "classic": "4:3",
+          "classic_hint": "Formato clássico, ideal para apresentações de slides.",
+          "short": "Baixo",
+          "short_hint": "Um quadro fixo de 320 pixels.",
+          "medium": "Médio",
+          "medium_hint": "Um quadro fixo de 520 pixels.",
+          "tall": "Alto",
+          "tall_hint": "Um quadro fixo de 760 pixels.",
+          "custom": "Personalizado ({{height}}px)",
+          "custom_hint": "Altura ajustada por arraste."
+        },
+        "resize_handle": "Redimensionar o quadro H5P"
+      },
+      "library": "Biblioteca",
+      "flipcard_grid": "Grade de cartões de estudo",
+      "divider": "Divisor"
     },
     "ai_panel": {
       "add_definition": "Adicionar definição",
@@ -4433,7 +5278,8 @@
       "simplify": "Simplificar",
       "title": "Editor IA",
       "translate": "Traduzir"
-    }
+    },
+    "unsaved_changes_warning": "Você tem alterações não salvas. Sair sem salvar?"
   },
   "analytics": {
     "title": "Análises",
@@ -5208,7 +6054,14 @@
       "zoom_out": "Reduzir"
     },
     "no_boards": "Ainda não há quadros",
-    "no_search_results": "Nenhum quadro encontrado"
+    "no_search_results": "Nenhum quadro encontrado",
+    "connection": {
+      "access_revoked_title": "Você não tem mais acesso a este quadro",
+      "access_revoked_description": "Seu acesso foi removido enquanto o quadro estava aberto. Recarregue para verificar novamente.",
+      "too_large_title": "Este quadro é grande demais para continuar sincronizando",
+      "too_large_description": "O limite de tamanho foi excedido e a edição em tempo real foi interrompida. Suas alterações mais recentes podem não ter sido salvas.",
+      "reload": "Recarregar"
+    }
   },
   "embed": {
     "not_supported_description": "Este tipo de atividade requer autenticação e não pode ser incorporado.",
@@ -5333,7 +6186,10 @@
     "backToCourses": "Voltar aos Cursos",
     "loadError": "Não foi possível encontrar este curso ou ocorreu um erro ao carregá-lo.",
     "noPermission": "Você não tem permissão para visualizar este curso.",
-    "finish_course": "Concluir curso"
+    "finish_course": "Concluir curso",
+    "signInRequired": "Entre para visualizar este curso",
+    "signInRequiredDescription": "Este curso é exclusivo para membros. Entre e você voltará diretamente para cá.",
+    "signInToContinue": "Entre para continuar"
   },
   "pagination": {
     "next": "Próxima",
@@ -5462,7 +6318,19 @@
       "drag_to_reorder": "Arraste para reordenar",
       "sort_error": "Não foi possível atualizar a ordem",
       "reorder_error": "Não foi possível salvar a nova ordem"
-    }
+    },
+    "preview": "Prévia",
+    "no_access": "Você não tem acesso a este arquivo.",
+    "choose_from_library": "Escolher da biblioteca",
+    "upload_to_library": "Enviar",
+    "upload_to_library_hint": "Os arquivos enviados são adicionados à sua biblioteca para você reutilizá-los em outros lugares.",
+    "no_resource_selected": "Nenhum item da biblioteca selecionado.",
+    "private_media_warning": "Privado: alunos sem acesso não verão este conteúdo.",
+    "replace_resource": "Substituir",
+    "remove_resource": "Remover",
+    "show_as_card": "Mostrar como cartão",
+    "show_inline": "Mostrar no texto",
+    "delete_folder_title": "Excluir a pasta \"{{name}}\"?"
   },
   "media": {
     "media": "Media",
@@ -5493,7 +6361,8 @@
     "url_required": "A URL is required",
     "upload_hint": "Images, video, audio, PDF, Office docs & ZIP",
     "remove": "Remove",
-    "open_pdf": "Open PDF"
+    "open_pdf": "Open PDF",
+    "delete_media_title": "Excluir a mídia \"{{name}}\"?"
   },
   "access": {
     "public": {
@@ -5646,7 +6515,35 @@
     "scheduled_desc": "Seu plano será alterado para {{plan}} no final do seu ciclo de faturamento atual. Você manterá acesso total ao seu plano atual até então.",
     "plan_plus_purchased": "Plano: {{plan}} + Comprado: {{purchased}}",
     "base_plus_purchased": "Base: {{base}} + Comprado: {{purchased}}",
-    "pack_ai_desc": "{{quantity}} créditos AI adicionais adicionados à sua organização"
+    "pack_ai_desc": "{{quantity}} créditos AI adicionais adicionados à sua organização",
+    "addons_subtitle": "Compre créditos adicionais de IA por meio de assinaturas mensais.",
+    "unlimited_lower": "ilimitado",
+    "limit_reached_upgrade": "Limite atingido: mude de plano para continuar",
+    "remaining": "{{n}} restantes",
+    "remaining_nearing": "{{n}} restantes, próximo do limite",
+    "usage_subtitle_free": "Planos gratuitos têm limites fixos. Mude de plano para ultrapassar um limite.",
+    "usage_subtitle_paid": "Seu plano inclui estas quantidades. É permitido ultrapassar o limite de membros, com cobrança adicional; nada é bloqueado.",
+    "members_hint": "Todos que entraram na sua organização.",
+    "members_beyond_plan": "{{included}} incluídos · {{beyond}} além do seu plano",
+    "members_within_plan": "{{included}} incluídos no seu plano",
+    "active_members": "Membros ativos",
+    "active_members_short": "Membros ativos",
+    "active_members_hint": "Contabilizados quando um membro está ativo em 2 ou mais dias neste mês. As {{included}} vagas incluídas no plano não têm custo adicional; cada membro ativo além delas custa US$ 1/mês.",
+    "overage_this_month": "${{amount}} neste mês até agora",
+    "no_extra_charges": "Nenhuma cobrança adicional neste mês",
+    "admin_seats_hint": "Membros que podem acessar o painel. Um subconjunto dos seus membros.",
+    "credits_reset_on": "Renova em {{date}}",
+    "next_invoice": "Próxima fatura",
+    "due_on": "vencimento em {{date}}",
+    "line_subscription": "Assinatura",
+    "accruing_this_month": "Membros ativos neste mês (cobrados na próxima renovação)",
+    "packs_billed_separately": "Os adicionais são assinaturas separadas, com faturamento em suas próprias datas.",
+    "invoice_history": "Histórico de faturas",
+    "view": "Ver",
+    "checkout_settling": "Pagamento recebido. Seu novo plano está sendo aplicado e aparecerá em breve.",
+    "checkout_settling_delayed": "Pagamento recebido, mas seu plano ainda não foi atualizado. Atualize a página em instantes e entre em contato com o suporte se o problema persistir.",
+    "cancels_on": "Sua assinatura será cancelada em {{periodEnd}}. O acesso continua até essa data.",
+    "add_pack": "Adicionar {{pack}}"
   },
   "hub_new": {
     "useType": {
@@ -5808,5 +6705,47 @@
     "folder_count_one": "{{count}} pasta",
     "item_count": "{{count}} itens",
     "item_count_one": "{{count}} item"
+  },
+  "mfa": {
+    "policy": {
+      "banner_message_overdue": "{{org}} exige autenticação de dois fatores e o prazo terminou. Ative abaixo para recuperar o acesso.",
+      "banner_message_today": "{{org}} exige autenticação de dois fatores. Você precisa configurar hoje.",
+      "banner_message_one_day": "{{org}} exige autenticação de dois fatores. Falta 1 dia para você configurar.",
+      "banner_message": "{{org}} exige autenticação de dois fatores. Você tem {{days}} dias para configurar.",
+      "set_up_now": "Configurar agora",
+      "blocked_title": "A autenticação de dois fatores é obrigatória",
+      "blocked_description": "O prazo definido por {{org}} para ativar a autenticação de dois fatores terminou. Para continuar usando {{org}}, adicione um segundo fator à sua conta; leva cerca de um minuto.",
+      "blocked_scope_note": "Isso afeta apenas {{org}}. Suas outras organizações não são afetadas.",
+      "set_up_2fa": "Configurar autenticação de dois fatores",
+      "signed_in_as": "Conectado como {{email}}",
+      "sign_in_to_org": "Entrar nesta organização"
+    }
+  },
+  "landing": {
+    "countdown": {
+      "days": "Dias",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos"
+    },
+    "pricing": {
+      "from": "a partir de",
+      "subscription": "assinatura",
+      "per_month": "/ mês",
+      "per_year": "/ ano"
+    }
+  },
+  "demo": {
+    "badge": "Demonstração",
+    "reset_imminent": "a qualquer momento",
+    "banner_title": "Você está na demonstração compartilhada.",
+    "banner_body_countdown": "Todos os dados aqui são exemplos, e suas alterações serão restauradas em {{countdown}}.",
+    "banner_body": "Todos os dados aqui são exemplos, e suas alterações são restauradas periodicamente.",
+    "create_your_own": "Criar sua própria organização",
+    "entry_busy": "A demonstração está sendo restaurada. Tente novamente em instantes.",
+    "entry_opening": "Abrindo a demonstração…",
+    "entry_title": "Explore uma demonstração",
+    "entry_body": "Uma academia completa com cursos, alunos, progresso e notas já preenchidos. Compartilhada com todos e restaurada a cada {{interval}}.",
+    "entry_preparing": "Em preparação. Tente novamente em instantes."
   }
 }
