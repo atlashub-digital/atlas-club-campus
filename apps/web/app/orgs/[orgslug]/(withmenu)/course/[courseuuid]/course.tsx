@@ -533,7 +533,7 @@ const CourseClient = (props: any) => {
                               rel="noopener noreferrer"
                               className="text-blue-500 hover:underline text-sm"
                             >
-                              <span className="sr-only">Link to {learningText}</span>
+                              <span className="sr-only">{learningText}</span>
                               <ArrowRight size={14} />
                             </a>
                           )}
@@ -553,7 +553,17 @@ const CourseClient = (props: any) => {
                   return (
                     <div key={chapter.chapter_uuid || `chapter-${chapter.name}`} className="">
                       <div 
-                        className="flex items-start py-4 px-4 outline outline-1 outline-neutral-200/40 font-bold bg-neutral-50 text-neutral-600 cursor-pointer hover:bg-neutral-100 transition-colors"
+                        className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.chapterToggle : "flex items-start py-4 px-4 outline outline-1 outline-neutral-200/40 font-bold bg-neutral-50 text-neutral-600 cursor-pointer hover:bg-neutral-100 transition-colors"}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={isExpanded}
+                        aria-label={chapter.name}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault()
+                            setExpandedChapters(prev => ({ ...prev, [chapter.chapter_uuid]: !isExpanded }))
+                          }
+                        }}
                         onClick={() => setExpandedChapters(prev => ({
                           ...prev,
                           [chapter.chapter_uuid]: !isExpanded
@@ -585,7 +595,7 @@ const CourseClient = (props: any) => {
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center space-x-1 text-sm text-neutral-400 font-normal">
+                          <div className="flex items-center space-x-1 text-sm text-[#526174] font-normal">
                             <Layers size={16} className="me-1" />
                             <span>{chapter.activities.length} {t('activities.activities')}</span>
                           </div>
@@ -628,7 +638,7 @@ const CourseClient = (props: any) => {
                                       </div>
                                     )}
                                   </div>
-                                  <div className="flex items-center space-x-1.5 mt-0.5 text-neutral-400">
+                                  <div className="flex items-center space-x-1.5 mt-0.5 text-[#526174]">
                                     {getActivityTypeIcon(activity.activity_type, activity.activity_sub_type, 10)}
                                     <span className="text-xs font-medium">{getActivityTypeLabel(activity.activity_type, activity.activity_sub_type)}</span>
                                   </div>

@@ -80,7 +80,7 @@ function SignUpClient(props: SignUpClientProps) {
       {session.status !== 'loading' && joinMethod == 'open' &&
         (isAuthenticated ? (
           hasOrgToJoin ? (
-            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
+            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} />
           ) : (
             // Signed in on the org-less apex; the effect above redirects to /home.
             <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
@@ -95,7 +95,7 @@ function SignUpClient(props: SignUpClientProps) {
       {session.status !== 'loading' && joinMethod == 'inviteOnly' &&
         (inviteCode ? (
           session.status == 'authenticated' ? (
-            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
+            <LoggedInJoinScreen inviteCode={inviteCode} org={props.org} />
           ) : (
             <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20">
               <InviteOnlySignUpComponent inviteCode={inviteCode} org={props.org} googleConfigured={props.googleConfigured} />
