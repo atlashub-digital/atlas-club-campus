@@ -1,0 +1,82 @@
+# Atlas ClubOS P1 — instância de homologação ISOLADA (projeto atlas-clubos-p1)
+# Independente de atlas-learnhouse-clean (piloto), club.atlashub.si, ARO, Master.
+name: atlas-clubos-p1
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: p1-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: clubos
+      POSTGRES_PASSWORD: ${P1_DB_PASSWORD}
+      POSTGRES_DB: clubos
+    volumes:
+      - p1_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clubos -d clubos"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [p1_internal]
+
+  redis:
+    image: redis:7-alpine
+    container_name: p1-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - p1_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [p1_internal]
+
+  app:
+    image: atlas/clubos-p1:${P1_IMAGE_TAG}
+    container_name: p1-app
+    restart: unless-stopped
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    environment:
+      LEARNHOUSE_SQL_CONNECTION_STRING: postgresql://clubos:${P1_DB_PASSWORD}@db:5432/clubos
+      LEARNHOUSE_REDIS_CONNECTION_STRING: redis://redis:6379/0
+      LEARNHOUSE_AUTH_JWT_SECRET_KEY: ${P1_JWT_SECRET}
+      COLLAB_INTERNAL_KEY: ${P1_COLLAB_KEY}
+      LEARNHOUSE_SITE_NAME: "Atlas ClubOS"
+      LEARNHOUSE_PUBLIC_URL: ${P1_PUBLIC_URL}
+      LEARNHOUSE_DOMAIN: ${P1_DOMAIN}
+      LEARNHOUSE_FRONTEND_DOMAIN: ${P1_DOMAIN}
+      LEARNHOUSE_SSL: "true"
+      LEARNHOUSE_TENANCY: single
+      LEARNHOUSE_ALLOWED_ORIGINS: ${P1_PUBLIC_URL}
+      LEARNHOUSE_OSS: "true"
+      NEXT_PUBLIC_LEARNHOUSE_OSS: "true"
+      NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL: ${P1_PUBLIC_URL}
+      NEXT_PUBLIC_LEARNHOUSE_DOMAIN: ${P1_DOMAIN}
+      NEXT_PUBLIC_LEARNHOUSE_HTTPS: "true"
+      NEXT_PUBLIC_ATLAS_CLUBOS_BRAND: "true"
+    ports:
+      - "127.0.0.1:3020:80"
+    volumes:
+      - p1_media:/app/api/content
+    extra_hosts:
+      - "${P1_DOMAIN}:host-gateway"
+    networks:
+      p1_internal: {}
+      platform_edge:
+        aliases: [p1-app]
+
+volumes:
+  p1_pgdata:
+  p1_redis:
+  p1_media:
+
+networks:
+  p1_internal:
+    driver: bridge
+  platform_edge:
+    external: true

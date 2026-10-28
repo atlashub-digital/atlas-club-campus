@@ -27,6 +27,22 @@ RUN rm -f .env*
 ARG LEARNHOUSE_PUBLIC=false
 RUN if [ "$LEARNHOUSE_PUBLIC" = "true" ] || { [ -L /app/ee ] && [ ! -e /app/ee ]; }; then rm -rf /app/ee; fi
 
+# Atlas ClubOS brand flag — must be baked at build time: the flag is read as
+# process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND inside client components, and
+# Next.js inlines NEXT_PUBLIC_* literals into the client bundle at build time.
+ARG NEXT_PUBLIC_ATLAS_CLUBOS_BRAND=false
+ENV NEXT_PUBLIC_ATLAS_CLUBOS_BRAND=${NEXT_PUBLIC_ATLAS_CLUBOS_BRAND}
+
+# Canonical public identity for this build. Next.js inlines NEXT_PUBLIC_* into
+# the client bundle, so a runtime-only env leaves the built bundle pointing at
+# the wrong host (canonical URLs, cookie domain and magic-link callbacks).
+ARG NEXT_PUBLIC_LEARNHOUSE_DOMAIN=""
+ARG NEXT_PUBLIC_LEARNHOUSE_HTTPS=""
+ARG NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL=""
+ENV NEXT_PUBLIC_LEARNHOUSE_DOMAIN=${NEXT_PUBLIC_LEARNHOUSE_DOMAIN}
+ENV NEXT_PUBLIC_LEARNHOUSE_HTTPS=${NEXT_PUBLIC_LEARNHOUSE_HTTPS}
+ENV NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL=${NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL}
+
 RUN bun run build
 
 # ───────────────────────────────────────────────
