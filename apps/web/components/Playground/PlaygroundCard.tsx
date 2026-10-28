@@ -22,6 +22,7 @@ const accessConfig = {
 }
 
 export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit }: PlaygroundCardProps) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { track } = useLHAnalytics('learner')
   const access = accessConfig[playground.access_type as keyof typeof accessConfig] || accessConfig.authenticated
   const AccessIcon = access.icon
@@ -47,7 +48,7 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
   const editLink = `/editor/playground/${playground.playground_uuid}/edit`
 
   return (
-    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.card : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"}>
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `group ${styles.card}` : "group relative flex flex-col bg-white rounded-xl nice-shadow overflow-hidden w-full transition-all duration-300 hover:scale-[1.01]"}>
       {/* Edit button: top right, appears on hover */}
       {canEdit && (
         <div className="absolute top-2 end-2 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
@@ -90,22 +91,22 @@ export default function PlaygroundCard({ playground, orgslug: _orgslug, canEdit 
       </Link>
 
       {/* Content */}
-      <div className="p-3 flex flex-col space-y-1.5">
+      <div className={atlasBrand ? styles.cardBody : "p-3 flex flex-col space-y-1.5"}>
         <Link
           href={playgroundLink}
           onClick={handleOpen}
-          className="text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"
+          className={atlasBrand ? styles.cardTitle : "text-base font-bold text-gray-900 leading-tight hover:text-black transition-colors line-clamp-1"}
         >
           {playground.name}
         </Link>
 
         {playground.description && (
-          <p className="text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]">
+          <p className={atlasBrand ? styles.cardDescription : "text-[11px] text-gray-500 line-clamp-2 min-h-[1.5rem]"}>
             {playground.description}
           </p>
         )}
 
-        <div className="pt-1.5 flex items-center justify-end border-t border-gray-100">
+        <div className={atlasBrand ? styles.cardFooter : "pt-1.5 flex items-center justify-end border-t border-gray-100"}>
           <Link
             href={playgroundLink}
             onClick={handleOpen}
