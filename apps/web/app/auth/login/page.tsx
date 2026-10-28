@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (!orgslug) {
     // Apex (org-less) login.
-    return { title: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Entrar | Atlas ClubOS' : 'Login | LearnHouse', robots: { index: false, follow: false } }
+    return { title: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Entrar | Atlas Club' : 'Entrar | Atlas Club', robots: { index: false, follow: false } }
   }
 
   let org: any = null
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: 'Login' + ` | ${org?.name || (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas ClubOS' : 'LearnHouse')}`,
+    title: 'Entrar' + ` | ${org?.name || (process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas Club' : 'Atlas Club')}`,
     robots: { index: false, follow: false },
   }
 }

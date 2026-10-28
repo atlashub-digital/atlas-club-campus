@@ -3,7 +3,7 @@ import React from 'react'
 import ClientAdminLayout from './ClientAdminLayout'
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas ClubOS · Administração' : 'LearnHouse Dashboard',
+  title: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'Atlas Club · Administração' : 'Atlas Club Dashboard',
 }
 
 async function DashboardLayout(

@@ -27,7 +27,7 @@ export function AuthFooter({ className = '' }: { className?: string }) {
     return (
       <div className={`pb-7 pt-5 text-center px-6 ${className}`}>
         <p className="mx-auto max-w-lg text-[12px] leading-relaxed font-medium text-[#536986]">
-          Atlas ClubOS em beta por convite. O aviso de privacidade ainda está em revisão.{' '}
+          Atlas Club em beta por convite. O aviso de privacidade ainda está em revisão.{' '}
           <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-[#075bb2] hover:text-[#003e89]">
             Consultar minuta informativa
           </Link>{' '}
@@ -82,7 +82,7 @@ export function CopyrightFooter({
     return (
       <footer className={`w-full py-6 px-6 ${className}`}>
         <div className="flex flex-col items-center gap-2 text-center text-[12px] text-[#a8bdd8]">
-          <p>© {year} Atlas ClubOS · AtlasHub</p>
+          <p>© {year} Atlas Club · AtlasHub</p>
           <nav aria-label="Informação legal" className="flex flex-wrap items-center justify-center gap-4">
             <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Privacidade (minuta)</Link>
             <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Licenças e atribuições do software</Link>

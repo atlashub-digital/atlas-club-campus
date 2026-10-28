@@ -25,9 +25,6 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
   const withUtm = (url: string) => (url ? `${url}${UNSPLASH_UTM}` : '')
 
   const getBackgroundStyle = (): React.CSSProperties => {
-    if (atlasBrand && (background_type === 'gradient' || !background_image)) {
-      return { background: 'radial-gradient(circle at 85% 10%, rgba(0,212,255,.25), transparent 60%), linear-gradient(115deg, #14355e, #061428)' }
-    }
     if (background_type === 'gradient' || !background_image) {
       return {
         background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
@@ -68,7 +65,7 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
           {atlasBrand ? (
             <Image
               src="/atlas/atlas-clubos-mark.svg"
-              alt="Atlas ClubOS"
+              alt="Atlas Club"
               width={40}
               height={40}
               className="object-contain p-1"
@@ -78,14 +75,14 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
             <OrgSquareLogo
               org={org}
               wideInsetClassName="p-1.5"
-              fallback={<Image quality={100} width={40} height={40} src={learnhouseIcon} alt="LearnHouse" className="object-contain" />}
+              fallback={<Image quality={100} width={40} height={40} src={learnhouseIcon} alt="Atlas Club" className="object-contain" />}
             />
           )}
         </div>
       </Link>
 
       <span className="relative z-10 font-semibold text-white text-lg truncate">
-        {atlasBrand ? 'Atlas ClubOS' : (org?.name || 'LearnHouse')}
+        {atlasBrand ? 'Atlas Club' : (org?.name || 'Atlas Club')}
       </span>
 
       {/* Unsplash attribution (required by Unsplash API guidelines) */}

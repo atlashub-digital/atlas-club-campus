@@ -158,9 +158,9 @@ export const OrgMenu = (props: any) => {
               <Link href={getUriWithOrg(orgslug, '/')}>
                 <div className="flex w-auto h-9 rounded-md items-center m-auto py-1 justify-center">
                   {atlasBrand ? (
-                    <span className="inline-flex items-center gap-2.5 whitespace-nowrap" aria-label="Atlas ClubOS">
+                    <span className="inline-flex items-center gap-2.5 whitespace-nowrap" aria-label="Atlas Club">
                       <Image src="/atlas/atlas-clubos-mark.svg" alt="" width={34} height={34} unoptimized className="h-8 w-8 object-contain" />
-                      <span className="text-[12px] font-black tracking-[.13em] text-[#edf7ff]">ATLAS <span className="text-[#00d4ff]">CLUBOS</span></span>
+                      <span className="text-[12px] font-black tracking-[.13em] text-current">ATLAS <span className="text-[#00d4ff]">CLUB</span></span>
                     </span>
                   ) : org?.logo_image ? (
                     <img
@@ -170,7 +170,7 @@ export const OrgMenu = (props: any) => {
                       className="rounded-md"
                     />
                   ) : (
-                    <LearnHouseLogo logoFilter={colors.logoFilter} />
+                    <LearnHouseLogo />
                   )}
                 </div>
               </Link>
@@ -571,14 +571,14 @@ const CopilotMenuButton = ({
   )
 }
 
-const LearnHouseLogo = ({ logoFilter }: { logoFilter: string }) => {
+const LearnHouseLogo = () => {
   return (
     <Image
       src="/lrn-text.svg"
-      alt="LearnHouse logo"
+      alt="Atlas Club logo"
       width={133}
       height={40}
-      style={{ height: 'auto', filter: logoFilter }}
+      style={{ height: 'auto' }}
     />
   )
 }
