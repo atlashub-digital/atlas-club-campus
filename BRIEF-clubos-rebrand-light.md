@@ -71,3 +71,13 @@ Commits na branch `feat/clubos-rebrand-light-v1`, PR em DRAFT contra `main`, `BR
 - Se a flag de marca impedir a coerência total: aplica o novo design sob a flag e nota o que fica fora.
 - Se uma string pt-BR não existir na locale: adiciona-a em `apps/web/locales/pt.json` (não inventes textos de produto nem promessas comerciais).
 - Se encontrares bloqueio real de contrato (ex.: interface contraditória), **pára e escreve a pergunta** no relatório final — não inventes.
+
+## 9. ADENDA CRÍTICA (após duas mortes por OOM)
+
+O *OOM killer* do kernel está a matar os teus processos `chrome-headless`: a máquina tem ~15 GB e o Chrome a 3 larguras + axe esgota o cgroup. **É isso que interrompe as execuções.**
+
+- **NÃO corras Playwright, Chrome, Puppeteer, Lighthouse nem qualquer browser.** Nem para screenshots nem para auditoria de acessibilidade. A **Helena captura as evidências visuais** com o harness dela, fora desta pressão de memória.
+- Para contraste e acessibilidade, usa análise estática: lê os tokens e as classes e calcula os rácios a partir dos valores hex/rgb definidos. Escreve as conclusões em texto/markdown em vez de gerar relatórios de browser.
+- Evita comandos que levantem servidores de desenvolvimento longos (`next dev`); se precisares de validar, usa `tsc --noEmit` e o lint, que são leves.
+- Se `npm`/`bun install` for necessário, fá-lo uma vez e não voltes a instalar.
+- Trabalha em incrementos pequenos e **commita cedo e com frequência** — cada commit sobrevive a uma interrupção, o resto não.
