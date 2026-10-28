@@ -154,6 +154,15 @@ footer, footer a { color: var(--ca-text-3) !important; }
 }
 .atlas-auth-shell [class*="bg-white"] { background-color: transparent; }
 .atlas-auth-form [class*="bg-white"] { background-color: #fff !important; }
+.atlas-auth-form [class*="rounded"][class*="bg-white"] {
+  background: #fff !important;
+  color: #122943 !important;
+  border-color: #c6d7ea !important;
+  box-shadow: 0 4px 18px rgba(16,42,79,.08);
+}
+.atlas-auth-form [class*="text-white"] { color: #122943; }
+.atlas-auth-form button[type="submit"] [class*="text-white"] { color: #fff; }
+
 @media (max-width: 1023px) {
   .atlas-auth-shell { background: #f3f8ff !important; }
 }
