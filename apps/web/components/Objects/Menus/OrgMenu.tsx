@@ -54,6 +54,7 @@ export const OrgMenu = (props: any) => {
   const session = useLHSession() as any;
   const _access_token = session?.data?.tokens?.access_token;
   const org = useOrg() as any;
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [isFocusMode, setIsFocusMode] = useState(false)
   const pathname = usePathname()
@@ -156,10 +157,15 @@ export const OrgMenu = (props: any) => {
             <div className="logo flex md:w-auto w-full justify-center">
               <Link href={getUriWithOrg(orgslug, '/')}>
                 <div className="flex w-auto h-9 rounded-md items-center m-auto py-1 justify-center">
-                  {org?.logo_image ? (
+                  {atlasBrand ? (
+                    <span className="inline-flex items-center gap-2.5 whitespace-nowrap" aria-label="Atlas ClubOS">
+                      <Image src="/atlas/atlas-clubos-mark.svg" alt="" width={34} height={34} unoptimized className="h-8 w-8 object-contain" />
+                      <span className="text-[12px] font-black tracking-[.13em] text-[#edf7ff]">ATLAS <span className="text-[#00d4ff]">CLUBOS</span></span>
+                    </span>
+                  ) : org?.logo_image ? (
                     <img
                       src={`${getOrgLogoMediaDirectory(org.org_uuid, org?.logo_image)}`}
-                      alt="Learnhouse"
+                      alt={org?.name || "Organization logo"}
                       style={{ width: 'auto', height: '100%' }}
                       className="rounded-md"
                     />
@@ -313,7 +319,15 @@ export const OrgMenu = (props: any) => {
                       <span>{t('common.help')}</span>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
+                    {atlasBrand && (
+                      <DropdownMenuItem asChild>
+                        <a href="https://club.atlashub.si" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                          <Globe size={16} weight="fill" />
+                          <span>Portal Club Atlas</span>
+                        </a>
+                      </DropdownMenuItem>
+                    )}
+                    {!atlasBrand && <DropdownMenuItem asChild>
                       <a
                         href="https://docs.learnhouse.app"
                         target="_blank"
@@ -323,8 +337,8 @@ export const OrgMenu = (props: any) => {
                         <Book size={16} weight="fill" />
                         <span>{t('common.help_menu.documentation')}</span>
                       </a>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
+                    </DropdownMenuItem>}
+                    {!atlasBrand && <DropdownMenuItem asChild>
                       <a
                         href="https://learnhouse.app"
                         target="_blank"
@@ -334,8 +348,8 @@ export const OrgMenu = (props: any) => {
                         <Globe size={16} weight="fill" />
                         <span>{t('common.help_menu.website')}</span>
                       </a>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
+                    </DropdownMenuItem>}
+                    {!atlasBrand && <DropdownMenuItem asChild>
                       <a
                         href="http://learnhouse.to/discord"
                         target="_blank"
@@ -345,7 +359,7 @@ export const OrgMenu = (props: any) => {
                         <DiscordIcon size={16} />
                         <span>{t('common.help_menu.discord')}</span>
                       </a>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem>}
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => setFeedbackModalOpen(true)}
