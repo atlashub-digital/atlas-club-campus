@@ -172,7 +172,7 @@ export default function PlaygroundsClient({
                   <div className="p-4 bg-white rounded-full nice-shadow mb-4">
                     <Cube className="w-8 h-8 text-gray-300" />
                   </div>
-                  <h1 className="text-xl font-bold text-gray-600 mb-2">{t('playgrounds.no_playgrounds_yet')}</h1>
+                  <h2 className="text-xl font-bold text-gray-600 mb-2">{t('playgrounds.no_playgrounds_yet')}</h2>
                   <p className="text-md text-gray-600 mb-6 max-w-xs text-center">
                     {t('playgrounds.playgrounds_description')}
                   </p>
@@ -224,7 +224,7 @@ export default function PlaygroundsClient({
             onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); if (e.key === 'Escape') setShowNameModal(false) }}
             aria-label={t('playgrounds.new_playground_modal_title')}
             placeholder={t('playgrounds.new_playground_modal_title')}
-            className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-black focus:border-transparent mb-4"
+            className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `${styles.field} mb-4` : "w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-black focus:border-transparent mb-4"}
           />
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowNameModal(false)} className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">

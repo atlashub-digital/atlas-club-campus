@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@components/Clubos/Surfaces.module.css'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
@@ -74,7 +75,7 @@ function LibraryClient({ orgslug }: { orgslug: string }) {
     <FeatureGate feature="folders" orgslug={orgslug} context="public">
       <div className="w-full">
         <GeneralWrapperStyled>
-          <div className="flex flex-col space-y-2 mb-2">
+          <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.catalog : "flex flex-col space-y-2 mb-2"}>
             <div className="flex items-center justify-between">
               <TypeOfContentTitle title={t('library.library')} type="cou" />
             </div>
@@ -89,7 +90,7 @@ function LibraryClient({ orgslug }: { orgslug: string }) {
               )}
 
               {rootItems.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-start">
+                <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.grid : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-start"}>
                   {rootItems.map((item: any) => (
                     <LibraryItemCard key={item.resource_uuid} item={item} orgslug={orgslug} />
                   ))}

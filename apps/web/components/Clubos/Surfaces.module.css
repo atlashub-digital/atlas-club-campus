@@ -107,3 +107,34 @@
 .secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid #7c8898; border-radius: 10px; background: #fff; color: #172335; font-weight: 600; }
 .secondary:hover { background: #f5f6f8; }
 .secondary:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+
+.coverCard { aspect-ratio: 16/9; }
+.trailBody, .libraryBody { display: flex; flex-direction: column; gap: 16px; padding: 24px; }
+.trailBody > div > span, .trailBody > div > div, .trailBody > div > a { color: #526174; }
+.trailBody > a { color: #172335; font-size: 20px; line-height: 1.4; white-space: normal; -webkit-line-clamp: 2; }
+.libraryBody h3 { font-size: 20px; line-height: 1.4; -webkit-line-clamp: 2; }
+.libraryBody span { color: #526174; font-size: 12px; }
+.quiz > div { background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; padding: 24px; box-shadow: none; }
+.quiz button { min-height: 44px; }
+.quiz button:focus-visible, .quiz [role=button]:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.quiz label { color: #172335; line-height: 1.6; }
+.profile { background: #fff; color: #172335; border: 1px solid #e3e7ec; border-radius: 16px; }
+.profileGrid { display: grid; grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr); gap: 24px; }
+.profileGrid > div { min-width: 0; grid-column: auto; }
+.profile button { min-height: 44px; }
+.profile button:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.readerNav { display: flex; align-items: center; gap: 8px; }
+.readerNav button { min-width: 44px; min-height: 44px; }
+.readerNav button:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.course { overflow-wrap: anywhere; }
+.course a:focus-visible, .course button:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.pdfControls { flex-wrap: wrap; }
+.table td, .table th { line-height: 1.6; }
+.table button:focus-visible, .table a:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+@media (max-width: 767px) { .profileGrid { grid-template-columns: minmax(0, 1fr); } .profileGrid > div { border-inline-end: 0; padding-inline-end: 0; } .profile > div > div:first-child { flex-wrap: wrap; gap: 16px; } }
+.folder { position: relative; background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; padding: 24px; }
+.folder > a { display: block; padding-inline-end: 16px; }
+.folder span { color: #526174; }
+.folder > button { min-height: 44px; min-width: 44px; }
+.folder a:focus-visible, .folder button:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
+.pdfButton { min-width: 44px; min-height: 44px; }

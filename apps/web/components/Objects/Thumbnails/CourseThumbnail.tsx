@@ -153,7 +153,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
 
   const thumbnailImage = course.thumbnail_image
     ? getCourseThumbnailMediaDirectory(org?.org_uuid, course.course_uuid, course.thumbnail_image)
-    : atlasBrand ? '/atlas/brand/01-portico/course-cover.svg' : '/empty_thumbnail.png'
+    : '/empty_thumbnail.png'
 
   const courseLink = customLink ? customLink : getUriWithOrg(orgslug, `/course/${removeCoursePrefix(course.course_uuid)}`)
 

@@ -156,6 +156,7 @@ export function CourseOverviewTop({
         <div className="flex py-2 grow min-w-0 items-center">
           <Link
             href={getUriWithOrg(org?.slug, '') + `/course/${params.courseuuid}`}
+            aria-label={courseStructure.name}
             className="shrink-0"
           >
             {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? <CourseCover title={courseStructure.name} variant="mini" image={courseStructure.thumbnail_image ? getCourseThumbnailMediaDirectory(org?.org_uuid, courseStructure.course_uuid, courseStructure.thumbnail_image) : undefined} /> : courseStructure?.thumbnail_image ? (

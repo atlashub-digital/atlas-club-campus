@@ -1,3 +1,4 @@
+import styles from '@components/Clubos/Surfaces.module.css'
 import { NodeViewWrapper } from '@tiptap/react'
 import { v4 as uuidv4 } from 'uuid'
 import { cn } from '@/lib/utils'
@@ -289,7 +290,7 @@ function QuizBlockComponent(props: any) {
   const hasAnyAnswer = userAnswers.length > 0
 
   return (
-    <NodeViewWrapper className="block-quiz">
+    <NodeViewWrapper className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? `block-quiz ${styles.quiz}` : "block-quiz"}>
       <div className="bg-neutral-50 rounded-xl px-4 py-3 nice-shadow transition-all ease-linear">
         {submitted && submissionMessage === 'correct' && (
           <ReactConfetti

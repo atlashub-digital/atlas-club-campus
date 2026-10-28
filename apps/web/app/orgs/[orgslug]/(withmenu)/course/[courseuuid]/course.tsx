@@ -401,7 +401,7 @@ const CourseClient = (props: any) => {
                     );
                   } else if (showImage && course.thumbnail_image) {
                     return (
-                      <div className="relative inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl w-full h-[200px] md:h-[400px] bg-cover bg-center"
+                      <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? "relative w-full aspect-video rounded-2xl overflow-hidden border border-[#e3e7ec]" : "relative inset-0 ring-1 ring-inset ring-black/10 rounded-lg shadow-xl w-full h-[200px] md:h-[400px] bg-cover bg-center"}
                         style={{
                           backgroundImage: `url(${getCourseThumbnailMediaDirectory(
                             org?.org_uuid,
@@ -410,6 +410,7 @@ const CourseClient = (props: any) => {
                           )})`,
                         }}
                       >
+                        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && <CourseCover title={course.name} image={getCourseThumbnailMediaDirectory(org?.org_uuid, course.course_uuid, course.thumbnail_image)} priority />}
                         {/* Hidden img with fetchpriority="high" so the browser fetches this LCP image immediately */}
                         { }
                         <img

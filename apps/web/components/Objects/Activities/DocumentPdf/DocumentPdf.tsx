@@ -123,8 +123,8 @@ function DocumentPdfActivity({
           type="button"
           onClick={handleFullscreen}
           className={controlClass}
-          title={t('editor.blocks.pdf_block.expand_pdf')}
-          aria-label={t('editor.blocks.pdf_block.expand_pdf')}
+          title={isFullscreen && atlasBrand ? 'Sair da tela cheia' : t('editor.blocks.pdf_block.expand_pdf')}
+          aria-label={isFullscreen && atlasBrand ? 'Sair da tela cheia' : t('editor.blocks.pdf_block.expand_pdf')}
         >
           {isFullscreen ? (
             <ArrowsIn weight="duotone" className="w-4 h-4 text-white" />
