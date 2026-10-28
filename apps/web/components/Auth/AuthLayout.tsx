@@ -19,7 +19,7 @@ export default function AuthLayout({ org, welcomeText, title, subtitle, children
   return (
     <div className={`min-h-screen lg:h-screen bg-white flex flex-col lg:flex-row relative overflow-hidden ${atlasBrand ? 'atlas-auth-shell' : ''}`}>
       {/* Page-level blueprint grid, bottom-anchored */}
-      <div
+      {!atlasBrand && <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `
@@ -31,7 +31,7 @@ export default function AuthLayout({ org, welcomeText, title, subtitle, children
           maskImage: 'linear-gradient(to top, black 0%, transparent 60%)',
           WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 60%)',
         }}
-      />
+      />}
 
       {/* Language switcher: must sit ABOVE the right-hand branding panel
           (z-10), otherwise the panel intercepts its clicks. `z-dropdown`

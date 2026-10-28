@@ -87,7 +87,7 @@ export const OrgMenu = (props: any) => {
 
   // Get primary color from org config (v2: customization.general.color, v1: general.color)
   const config = org?.config?.config
-  const primaryColor = config?.customization?.general?.color || config?.general?.color || ''
+  const primaryColor = atlasBrand ? '' : config?.customization?.general?.color || config?.general?.color || ''
   const colors = getMenuColorClasses(primaryColor)
 
   // Filter dashboard menu items by resolved_features from API
@@ -144,8 +144,8 @@ export const OrgMenu = (props: any) => {
     <>
       <div className="backdrop-blur-lg h-[60px] blur-3xl" style={{ zIndex: 'var(--z-behind)', marginTop: topOffset }}></div>
       <nav
-        aria-label="Top navigation"
-        className={`backdrop-blur-lg fixed start-0 end-0 h-[60px] ${!primaryColor ? 'bg-white/90 nice-shadow' : ''}`}
+        aria-label={atlasBrand ? "Navegação principal" : "Top navigation"}
+        className={`backdrop-blur-lg fixed start-0 end-0 h-[60px] ${atlasBrand ? 'atlas-nav' : ''} ${!primaryColor ? 'bg-white/90 nice-shadow' : ''}`}
         style={{
           zIndex: 'var(--z-nav)',
           backgroundColor: primaryColor || undefined,
@@ -160,7 +160,7 @@ export const OrgMenu = (props: any) => {
                   {atlasBrand ? (
                     <span className="inline-flex items-center gap-2.5 whitespace-nowrap" aria-label="Atlas ClubOS">
                       <Image src="/atlas/atlas-clubos-mark.svg" alt="" width={34} height={34} unoptimized className="h-8 w-8 object-contain" />
-                      <span className="text-[12px] font-black tracking-[.13em] text-[#edf7ff]">ATLAS <span className="text-[#00d4ff]">CLUBOS</span></span>
+                      <span className="text-[12px] font-black tracking-[.13em] text-[#172335]">ATLAS <span className="text-[#3268d6]">CLUBOS</span></span>
                     </span>
                   ) : org?.logo_image ? (
                     <img
@@ -175,7 +175,7 @@ export const OrgMenu = (props: any) => {
                 </div>
               </Link>
             </div>
-            <div className="hidden md:flex">
+            <div className="hidden xl:flex">
               <MenuLinks orgslug={orgslug} primaryColor={primaryColor} />
             </div>
           </div>
@@ -377,7 +377,10 @@ export const OrgMenu = (props: any) => {
               <HeaderProfileBox primaryColor={primaryColor} />
             </div>
             <button
-              className={`md:hidden focus:outline-hidden ${colors.text}`}
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="campus-mobile-menu"
+              className={`xl:hidden ${colors.text}`}
               onClick={toggleMenu}
             >
               {isMenuOpen ? (
@@ -394,7 +397,11 @@ export const OrgMenu = (props: any) => {
         </div>
       </nav>
       <div
-        className={`fixed inset-x-0 bg-white/80 backdrop-blur-lg md:hidden shadow-lg transition-all duration-300 ease-in-out ${
+        id="campus-mobile-menu"
+        hidden={!isMenuOpen}
+        onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setIsMenuOpen(false) }}
+        onKeyDown={(event) => { if (event.key === "Escape") setIsMenuOpen(false) }}
+        className={`fixed inset-x-0 bg-white xl:hidden shadow-lg transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'opacity-100' : '-top-full opacity-0'
         }`}
         style={{

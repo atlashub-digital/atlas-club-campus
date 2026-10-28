@@ -38,14 +38,14 @@ function OrgFooter() {
     // Visible upstream attribution stays available as legal information rather
     // than repeating the vendor's promotional logo in the Club Atlas experience.
     return (
-      <footer className="w-full mt-12 border-t border-[#406182] py-8 px-5 text-center">
+      <footer className="w-full mt-12 border-t border-[#e3e7ec] py-8 px-5 text-center">
         <div className="mx-auto max-w-4xl flex flex-col items-center gap-2">
-          <p className="text-sm font-semibold text-[#d6e7fa]">© {new Date().getFullYear()} Atlas ClubOS · AtlasHub</p>
-          {footerText && <p className="text-sm text-[#b2cbe5]">{footerText}</p>}
-          <p className="text-[11px] leading-relaxed text-[#9bb5d1]">
+          <p className="text-sm font-semibold text-[#172335]">© {new Date().getFullYear()} Atlas ClubOS · AtlasHub</p>
+          {footerText && <p className="text-sm text-[#526174]">{footerText}</p>}
+          <p className="text-[11px] leading-relaxed text-[#526174]">
             Tecnologia baseada em LearnHouse, distribuída sob AGPL-3.0.{' '}
-            <Link href="https://github.com/atlashub-digital/atlas-club-campus" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white">
-              Código-fonte, licença e créditos
+            <Link href="https://github.com/atlashub-digital/atlas-club-campus" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#172335]">
+              Licenças de terceiros · código-fonte
             </Link>
           </p>
         </div>
@@ -132,7 +132,7 @@ function LayoutContent({ children, orgslug }: { children: ReactNode; orgslug: st
       // target this element specifically.
       className="lh-org-font-root flex flex-col min-h-screen"
       style={{
-        backgroundColor: primaryColor ? hexToRgba(primaryColor, 0.05) : 'transparent',
+        backgroundColor: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? '#f5f6f8' : primaryColor ? hexToRgba(primaryColor, 0.05) : 'transparent',
         ...(customFont ? { fontFamily: `'${customFont}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif` } : {}),
       }}
     >

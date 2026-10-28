@@ -81,19 +81,19 @@ export function CopyrightFooter({
   if (atlasBrand) {
     return (
       <footer className={`w-full py-6 px-6 ${className}`}>
-        <div className="flex flex-col items-center gap-2 text-center text-[12px] text-[#a8bdd8]">
+        <div className="flex flex-col items-center gap-2 text-center text-[12px] text-[#526174]">
           <p>© {year} Atlas ClubOS · AtlasHub</p>
           <nav aria-label="Informação legal" className="flex flex-wrap items-center justify-center gap-4">
-            <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Privacidade (minuta)</Link>
-            <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Licenças e atribuições do software</Link>
+            <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#172335] underline underline-offset-2">Privacidade (minuta)</Link>
+            <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#172335] underline underline-offset-2">Licenças de terceiros</Link>
           </nav>
-          <p className="text-[#8199ba]">Motor de código aberto com atribuição ao projeto LearnHouse (AGPL-3.0).</p>
+          <p className="text-[#526174]">Motor de código aberto com atribuição ao projeto LearnHouse (AGPL-3.0).</p>
         </div>
       </footer>
     )
   }
   const base = tone === 'dark' ? 'text-white/40' : 'text-black/35'
-  const link = tone === 'dark' ? 'text-white/60 hover:text-white/80' : 'text-black/55 hover:text-black/75'
+  const link = tone === 'dark' ? 'text-white/60 hover:text-[#172335]/80' : 'text-black/55 hover:text-black/75'
   return (
     <footer className={`w-full py-6 px-6 ${className}`}>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-x-5 gap-y-2 text-[13px] font-medium">
