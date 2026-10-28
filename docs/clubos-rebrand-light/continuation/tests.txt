@@ -1,0 +1,38 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/video-source.test.mjs:
+(pass) resolveActivityCaptions > returns only ready tracks with built URLs [3.74ms]
+(pass) resolveActivityCaptions > empty when disabled, absent, or ids missing [13.08ms]
+(pass) isActivityHlsReady > true only when hls status is 'ready' [0.11ms]
+(pass) isActivityHlsReady > false for processing/failed/missing metadata [0.07ms]
+(pass) resolveActivityVideoSource > empty when there is no filename [0.08ms]
+(pass) resolveActivityVideoSource > empty for whitespace-only filename [1.58ms]
+(pass) resolveActivityVideoSource > empty when any id is missing (never emits 'undefined' in the URL) [0.05ms]
+(pass) resolveActivityVideoSource > no double slash regardless of backend trailing slash [0.31ms]
+(pass) resolveActivityVideoSource > uses the MP4 stream endpoint when HLS is not ready [0.05ms]
+(pass) resolveActivityVideoSource > uses the HLS master playlist when ready [0.04ms]
+(pass) resolveHlsThumbnails > builds an absolute sprite URL and passes config through [0.13ms]
+(pass) resolveHlsThumbnails > null when thumbnails metadata is missing or incomplete [0.02ms]
+(pass) resolveHlsThumbnails > null for negative/zero/NaN numeric fields [0.39ms]
+(pass) resolveHlsThumbnails > null when an id is missing [0.02ms]
+(pass) resolveHlsThumbnails > defaults rows to 1 when omitted or non-positive [0.07ms]
+(pass) shouldSendHlsCredentials > credentials only for our API playlist endpoint [0.03ms]
+(pass) shouldSendHlsCredentials > no credentials for presigned R2 segment URLs
+(pass) shouldSendHlsCredentials > never sends credentials to a presigned URL even if it contains the API path
+(pass) buildThumbnailsVtt > emits one cropped cue per sprite cell with an absolute URL [1.97ms]
+(pass) buildThumbnailsVtt > formats hours in cue timestamps [0.07ms]
+(pass) buildThumbnailsVtt > rejects a broken grid [0.04ms]
+(pass) buildThumbnailsVtt > defaults missing rows to a single row [0.17ms]
+(pass) resolveAdjacentActivities > flattens chapters and skips unpublished neighbours [0.66ms]
+(pass) resolveAdjacentActivities > returns nulls at the edges and for unknown ids [0.06ms]
+(pass) sprite frames > spriteFrameStyle picks a frame by fraction in percent units [0.48ms]
+(pass) sprite frames > spriteFrameAt maps seconds to the frame grid and clamps [0.15ms]
+(pass) chapters > resolveActivityChapters keeps valid ready chapters, sorted [1.00ms]
+(pass) chapters > buildChaptersVtt chains cue ends and escapes titles [4.75ms]
+(pass) chapters > chapterIndexAt finds the playing chapter [0.10ms]
+(pass) chapters > formatClock and parseClock round-trip [0.26ms]
+
+ 30 pass
+ 0 fail
+ 85 expect() calls
+Ran 30 tests across 1 file. [140.00ms]

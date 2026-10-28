@@ -307,7 +307,7 @@ const AdminEditOptions = ({ course, orgSlug, deleteCourse, cloneCourse, exportCo
       orgId={course.org_id}
     >
       <div className={`absolute top-2 end-2 z-20 transition-opacity ${
-        isDashboard && !isOpen ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100' : 'opacity-100'
+        isDashboard && !isOpen ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100' : 'opacity-100'
       }`}>
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
