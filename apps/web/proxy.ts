@@ -217,6 +217,7 @@ export const config = {
      * 1. /api routes
      * 2. /_next (Next.js internals)
      * 3. /fonts (inside /public)
+     * 3b. /atlas/ (Atlas ClubOS brand assets in /public/atlas; no tenancy rewrite)
      * 4. Umami Analytics
      * 5. /examples (inside /public)
      * 6. all root files inside /public (e.g. /favicon.ico)
@@ -227,7 +228,7 @@ export const config = {
      * /ingest and /monitoring are matched again below on their own, only so
      * the credentials can be stripped before the rewrite forwards them.
      */
-    '/((?!api|_next|fonts|umami|ingest|examples|embed|monitoring|[\\w-]+\\.\\w+).*)',
+    '/((?!api|_next|fonts|atlas/|umami|ingest|examples|embed|monitoring|[\\w-]+\\.\\w+).*)',
     '/ingest/:path*',
     '/monitoring/:path*',
     '/sitemap.xml',
