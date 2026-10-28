@@ -52,6 +52,12 @@ export default function RootLayout({
             Next.js <Script strategy="beforeInteractive"> is not truly blocking in all browsers (Safari). */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/runtime-config.js" />
+        {/* Atlas ClubOS design tokens (opt-in per build). Loaded only when the
+            brand flag is on, so other LearnHouse tenants keep the stock theme. */}
+        {process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' && (
+          // eslint-disable-next-line @next/next/no-css-tags
+          <link rel="stylesheet" href="/atlas/atlas-clubos-theme.css" />
+        )}
         {/* Prevent white flash on embed routes: set html+body bg before body is painted.
             Reads the optional ?bgcolor param (hex-validated) or defaults to dark. */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
