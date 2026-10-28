@@ -53,14 +53,14 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'pt' : 'en',
     ns: ['common'],
     defaultNS: 'common',
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
     detection: {
-      order: ['localStorage', 'cookie', 'querystring', 'navigator', 'path', 'subdomain'],
+      order: process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? ['localStorage', 'cookie', 'querystring'] : ['localStorage', 'cookie', 'querystring', 'navigator', 'path', 'subdomain'],
       caches: ['localStorage', 'cookie'],
       lookupLocalStorage: 'i18nextLng',
       lookupCookie: 'i18next',

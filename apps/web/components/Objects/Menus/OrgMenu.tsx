@@ -55,6 +55,7 @@ export const OrgMenu = (props: any) => {
   const _access_token = session?.data?.tokens?.access_token;
   const org = useOrg() as any;
   const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [isFocusMode, setIsFocusMode] = useState(false)
   const pathname = usePathname()
@@ -377,6 +378,7 @@ export const OrgMenu = (props: any) => {
               <HeaderProfileBox primaryColor={primaryColor} />
             </div>
             <button
+              ref={menuButtonRef}
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={isMenuOpen}
               aria-controls="campus-mobile-menu"
@@ -400,8 +402,8 @@ export const OrgMenu = (props: any) => {
         id="campus-mobile-menu"
         hidden={!isMenuOpen}
         onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setIsMenuOpen(false) }}
-        onKeyDown={(event) => { if (event.key === "Escape") setIsMenuOpen(false) }}
-        className={`fixed inset-x-0 bg-white xl:hidden shadow-lg transition-all duration-300 ease-in-out ${
+        onKeyDown={(event) => { if (event.key === "Escape") { setIsMenuOpen(false); menuButtonRef.current?.focus() } }}
+        className={`fixed inset-x-0 max-h-[calc(100dvh-60px)] overflow-y-auto bg-white xl:hidden shadow-lg transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'opacity-100' : '-top-full opacity-0'
         }`}
         style={{
@@ -417,6 +419,11 @@ export const OrgMenu = (props: any) => {
           <div className='py-4'>
             <MenuLinks orgslug={orgslug} />
           </div>
+          {session?.status === 'authenticated' && rights?.dashboard?.action_access && (
+            <nav aria-label="Administração" className="w-full border-t border-[#e3e7ec] pt-4">
+              <ul className="atlas-menu">{visibleDashboardItems.map(item => <li key={item.id}><Link href={item.href}>{t(item.labelKey)}</Link></li>)}</ul>
+            </nav>
+          )}
           <div className="border-t border-gray-200">
             <HeaderProfileBox />
           </div>

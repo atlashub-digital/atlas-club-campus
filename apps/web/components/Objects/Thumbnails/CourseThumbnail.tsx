@@ -64,6 +64,7 @@ type PropsType = {
 export const removeCoursePrefix = (course_uuid: string) => course_uuid.replace('course_', '')
 
 function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isSelected = false, onToggleSelect, isPriority = false }: PropsType) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const { t, i18n } = useTranslation()
   const org = useOrg() as any
   const session = useLHSession() as any
@@ -150,7 +151,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
 
   const thumbnailImage = course.thumbnail_image
     ? getCourseThumbnailMediaDirectory(org?.org_uuid, course.course_uuid, course.thumbnail_image)
-    : '/empty_thumbnail.png'
+    : atlasBrand ? '/atlas/brand/01-portico/course-cover.svg' : '/empty_thumbnail.png'
 
   const courseLink = customLink ? customLink : getUriWithOrg(orgslug, `/course/${removeCoursePrefix(course.course_uuid)}`)
 
@@ -237,7 +238,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
           <div className="flex items-center gap-2">
             {displayedAuthors.length > 0 && (
               <div className="flex -space-x-2 items-center">
-                {displayedAuthors.map((author, index) => (
+                {displayedAuthors.filter(author => !atlasBrand || author.user.avatar_image).map((author, index) => (
                   <div 
                     key={author.user.user_uuid} 
                     className="relative"
@@ -277,7 +278,7 @@ function CourseThumbnail({ course, orgslug, customLink, isDashboard = false, isS
             onClick={handleCardOpen}
             className="text-[10px] font-bold text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider"
           >
-            {t('courses.start_learning')}
+            {atlasBrand ? (course.public ? 'Acesso público' : 'Acesso restrito') : t('courses.start_learning')}
           </Link>
         </div>
       </div>

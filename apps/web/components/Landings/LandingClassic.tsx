@@ -29,7 +29,7 @@ function LandingClassic({ courses, orgslug, org_id }: LandingClassicProps) {
   const hasMoreCourses = courses.length > 12
 
   return (
-    <div className="w-full">
+    <div className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? 'w-full max-w-[1280px] mx-auto' : 'w-full'}>
       <GeneralWrapperStyled>
         {/* Courses */}
         <div className="flex flex-col space-y-2">

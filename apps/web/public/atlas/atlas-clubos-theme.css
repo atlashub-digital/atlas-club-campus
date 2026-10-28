@@ -1,6 +1,11 @@
 /* Atlas ClubOS Light — loaded only with NEXT_PUBLIC_ATLAS_CLUBOS_BRAND. */
 :root {
   color-scheme: light;
+  --atlas-reader-ink: #172335; --atlas-reader-muted: #526174;
+  --atlas-reader-border: #e3e7ec; --atlas-reader-surface: #ffffff;
+  --atlas-nav-marker: #3268d6;
+  --atlas-nav-ink: #172335; --atlas-nav-muted: #526174;
+  --atlas-nav-hover: #edf2fc; --atlas-nav-surface: #ffffff;
   --background: 220 18% 97%; --foreground: 216 39% 15%;
   --card: 0 0% 100%; --card-foreground: 216 39% 15%;
   --popover: 0 0% 100%; --popover-foreground: 216 39% 15%;

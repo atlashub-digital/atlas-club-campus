@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic'
 const PodcastPlayer = dynamic(() => import('@components/Objects/Podcasts/PodcastPlayer'), { ssr: false })
 import Image from 'next/image'
 import Link from 'next/link'
+import { getUriWithOrg } from '@services/config/config'
 import { PageViewTracker } from '@components/Analytics/PageViewTracker'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { usePlan } from '@components/Hooks/usePlan'
@@ -44,7 +45,7 @@ function OrgFooter() {
           {footerText && <p className="text-sm text-[#526174]">{footerText}</p>}
           <p className="text-[11px] leading-relaxed text-[#526174]">
             Tecnologia baseada em LearnHouse, distribuída sob AGPL-3.0.{' '}
-            <Link href="https://github.com/atlashub-digital/atlas-club-campus" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#172335]">
+            <Link href={getUriWithOrg(org?.slug, '/licenses')} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#172335]">
               Licenças de terceiros · código-fonte
             </Link>
           </p>

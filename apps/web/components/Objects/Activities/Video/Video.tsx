@@ -253,14 +253,14 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
                 />
               </div>
               {embedBlocked && (
-                <div className="mt-4 rounded-[16px] border border-white/10 bg-white/5 p-4 text-sm">
-                  <p className="font-semibold text-white">
+                <div className="mt-4 rounded-[16px] border border-[var(--atlas-reader-border,rgba(255,255,255,.1))] bg-[var(--atlas-reader-surface,rgba(255,255,255,.05))] p-4 text-sm">
+                  <p className="font-semibold text-[color:var(--atlas-reader-ink,white)]">
                     {t(
                       'activities.video_embed_blocked',
                       'Este vídeo não permite ser reproduzido aqui'
                     )}
                   </p>
-                  <p className="mt-1 text-white/70">
+                  <p className="mt-1 text-[color:var(--atlas-reader-muted,rgba(255,255,255,.7))]">
                     {t(
                       'activities.video_embed_blocked_hint',
                       'O YouTube recusou a incorporação para esta conta ou região. Podes abrir o vídeo diretamente.'
@@ -279,12 +279,12 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
                 </div>
               )}
               {!embedBlocked && activity.content?.uri && (
-                <p className="mt-3 text-xs text-white/50">
+                <p className="mt-3 text-xs text-[color:var(--atlas-reader-muted,rgba(255,255,255,.5))]">
                   <a
                     href={activity.content.uri}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-white/80"
+                    className="underline hover:text-[color:var(--atlas-reader-ink,rgba(255,255,255,.8))]"
                   >
                     {t('activities.open_in_youtube', 'Abrir no YouTube')}
                   </a>

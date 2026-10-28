@@ -108,7 +108,7 @@ function DocumentPdfActivity({
   return (
     <div
       ref={containerRef}
-      className={`group relative ${className ?? 'm-0 sm:m-8 bg-zinc-900 sm:rounded-md mt-0 sm:mt-14'} ${isFullscreen ? 'bg-zinc-900' : ''}`}
+      className={`group relative ${className ?? 'm-0 sm:m-8 bg-[var(--atlas-reader-surface,#18181b)] sm:rounded-md mt-0 sm:mt-14'} ${isFullscreen ? 'bg-[var(--atlas-reader-surface,#18181b)]' : ''}`}
     >
       <iframe
         className={className || isFullscreen ? 'w-full h-full' : 'sm:rounded-lg w-full h-[85vh] sm:h-[900px]'}
