@@ -186,7 +186,7 @@ export const OrgMenu = (props: any) => {
                 </div>
               </Link>
             </div>
-            <div className="hidden xl:flex">
+            <div className={atlasBrand ? "hidden" : "hidden xl:flex"}>
               <MenuLinks orgslug={orgslug} primaryColor={primaryColor} />
             </div>
           </div>
@@ -408,6 +408,7 @@ export const OrgMenu = (props: any) => {
           </div>
         </div>
       </nav>
+      {atlasBrand && <div className="atlas-desktop-nav hidden xl:block"><nav aria-label="Seções do Campus"><MenuLinks orgslug={orgslug} /></nav></div>}
       <div
         ref={mobileMenuRef}
         id="campus-mobile-menu"

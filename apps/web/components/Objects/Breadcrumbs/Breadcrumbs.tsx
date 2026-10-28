@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import styles from '@components/Clubos/Surfaces.module.css'
 import React, { ReactNode } from 'react'
 
 export interface BreadcrumbItem {
@@ -29,7 +30,7 @@ const ChevronDivider = () => (
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav className="flex items-center">
+    <nav aria-label="Caminho de navegação" className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.breadcrumbs : "flex items-center"}>
       <ol className="flex items-center text-[13px] font-medium rounded-lg bg-white overflow-hidden nice-shadow">
         {items.map((item, index) => {
           const isLast = index === items.length - 1
@@ -54,7 +55,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                     <span className="truncate max-w-[150px]">{item.label}</span>
                   </Link>
                 ) : (
-                  <span className={`flex items-center h-full text-gray-900 ${
+                  <span aria-current={isLast ? 'page' : undefined} className={`flex items-center h-full text-gray-900 ${
                     isFirst && item.icon ? 'gap-1.5 px-2.5' : 'px-2.5'
                   }`}>
                     {item.icon}

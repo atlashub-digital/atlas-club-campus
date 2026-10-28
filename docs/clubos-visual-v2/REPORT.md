@@ -15,3 +15,13 @@ Lint web completo executado diretamente (o script `lint` mascara o exit code): 2
 CourseCover reutilizável com título real e desenho geométrico em CSS, sem assets novos de marca. Imagem existente tem prioridade. Card em homepage/catálogo/admin, hero de fallback no curso e miniatura no admin. Não altera vídeo promocional nem upload/edição. TypeScript passou; lint dos arquivos alterados: zero erros, quatro avisos preexistentes. Testes rápidos de 404/inscrições: 4 passaram.
 
 Contrastes calculados pela luminância relativa WCAG: #172335/branco 15,81:1; #526174/branco 6,32:1; branco/#3268d6 5,14:1; #172335/#edf0f4 (capa) 13,83:1; #526174/#f5f6f8 5,85:1. Todos excedem 4,5:1. Capa decorativa não repete o nome acessível do link.
+
+## Incremento 3 — Navegação e erros
+
+A 1440px, navegação de seções em linha própria, sem competir com marca/pesquisa/perfil. A 390/768px, menu expansível existente com pesquisa e fechamento por Escape; links de itens adicionais configurados também são preservados. Estados ativos incluem descendentes. Breadcrumbs têm nome, página atual e rolagem horizontal em espaços estreitos. Pesquisa mantém o componente/serviço existente. 404 com marca existente e PT-BR; erros genéricos e erro de raiz com textos PT-BR por categoria, preservando classificação e ações.
+
+Removido CSS antigo da homepage. Nenhum seletor `[class*=]` ou `!important` nas superfícies Atlas. Regras globais legadas encontradas no editor/boards/tipografia árabe não foram removidas: atendem mecânicas específicas fora do rebrand, e a remoção exigiria validação funcional própria.
+
+Acessibilidade estática: links de menu com mínimo de 44px, breadcrumb rolável e foco interno; 404 com h1 e CTA nomeado. Erros mantêm retry/reset/logout existentes. Os layouts por largura foram revisados no código; sobreposição real, busca e foco em execução dependem da revisão visual da Helena. TypeScript passou; 4 testes de 404/inscrições passaram.
+
+Lint dos arquivos do incremento 3: zero erros, seis avisos legados. O lint web completo mantém os 24 erros preexistentes. Nenhuma alteração de permissões, contratos ou rotas de API.

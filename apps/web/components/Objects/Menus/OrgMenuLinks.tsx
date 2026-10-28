@@ -75,9 +75,10 @@ function MenuLinks(props: { orgslug: string; primaryColor?: string }) {
     const links = [
       { key: 'home', label: 'Início', href: getUriWithOrg(props.orgslug, '/') },
       ...['courses', 'library', 'communities', 'playgrounds'].flatMap(key => rendered.filter(it => it.key === key).map(it => ({ ...it, label: labels[key] }))),
-      ...(session?.status === 'authenticated' ? [{ key: 'trail', label: 'Minha aprendizagem', href: getUriWithOrg(props.orgslug, '/trail') }] : []),
+      ...rendered.filter(it => !['courses', 'library', 'communities', 'playgrounds'].includes(it.key)),
+      ...(session?.status === 'authenticated' && isEnabled('courses') ? [{ key: 'trail', label: 'Minha aprendizagem', href: getUriWithOrg(props.orgslug, '/trail') }] : []),
     ]
-    return <ul className="atlas-menu">{links.map(it => <li key={it.key}><Link href={it.href} aria-current={pathname === new URL(it.href, 'https://campus.local').pathname ? 'page' : undefined}>{it.label}</Link></li>)}</ul>
+    return <ul className="atlas-menu">{links.map(it => <li key={it.key}><Link href={it.href} aria-current={(pathname === new URL(it.href, 'https://campus.local').pathname || (it.key !== 'home' && pathname?.startsWith(new URL(it.href, 'https://campus.local').pathname + '/'))) ? 'page' : undefined}>{it.label}</Link></li>)}</ul>
   }
 
   return (

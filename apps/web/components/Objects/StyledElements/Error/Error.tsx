@@ -1,4 +1,5 @@
 'use client'
+import { campusErrorCopy } from '@components/Clubos/errorCopy'
 import { classifyError } from '@lib/errors/classify'
 import type { ResolutionKind } from '@lib/errors/types'
 import { AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react'
@@ -49,9 +50,12 @@ function ErrorUI({
 
   // Headline + body: explicit props win, else the classified category, else a
   // meaningful default (never a bare "Something went wrong").
-  const title = message || classified?.category.title || 'Something unexpected happened'
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const [campusTitle, campusDescription] = campusErrorCopy(classified?.category.kind)
+  const title = message || (atlasBrand ? campusTitle : undefined) || classified?.category.title || 'Something unexpected happened'
   const description =
     submessage ||
+    (atlasBrand ? campusDescription : undefined) ||
     classified?.category.description ||
     "We ran into an error. It's been logged automatically; retrying or heading home usually helps."
 
@@ -80,7 +84,7 @@ function ErrorUI({
           <p className={`font-bold text-rose-700 ${compact ? 'text-xl' : 'text-2xl md:text-3xl'}`}>
             {title}
           </p>
-          {classified?.category.kind && (
+          {!atlasBrand && classified?.category.kind && (
             <span className="text-[11px] uppercase tracking-wide font-semibold text-rose-400">
               {classified.category.kind.replace(/_/g, ' ')}
             </span>
@@ -98,10 +102,10 @@ function ErrorUI({
         <div className="w-full max-w-lg">
           <button
             onClick={() => setShowDetails((s) => !s)}
-            className="flex items-center gap-1 mx-auto text-xs font-semibold text-gray-400 hover:text-gray-600 transition-colors"
+            className="flex items-center gap-1 mx-auto text-xs font-semibold text-[#526174] hover:text-gray-900 transition-colors"
           >
             {showDetails ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-            <span>{showDetails ? 'Hide technical details' : 'Show technical details'}</span>
+            <span>{atlasBrand ? (showDetails ? 'Ocultar detalhes técnicos' : 'Mostrar detalhes técnicos') : (showDetails ? 'Hide technical details' : 'Show technical details')}</span>
           </button>
           {showDetails && (
             <div className="mt-3 bg-gray-50 border border-gray-200 rounded-xl p-4 text-start">

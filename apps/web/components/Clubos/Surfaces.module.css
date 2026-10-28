@@ -94,3 +94,16 @@
 .coverMini.cover { aspect-ratio: 16/9; width: 100px; height: auto; padding: 8px; gap: 4px; border-radius: 10px; }
 .coverMini .coverTitle { font-size: 12px; -webkit-line-clamp: 2; }
 .coverMini .coverKicker, .coverMini .coverFooter { display: none; }
+
+.errorPage { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: #f5f6f8; color: #172335; }
+.errorPanel { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; max-width: 640px; padding: clamp(24px, 5vw, 48px); background: #fff; border: 1px solid #e3e7ec; border-radius: 16px; }
+.errorPanel h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.2; font-weight: 650; }
+.errorPanel p { color: #526174; line-height: 1.65; }
+.breadcrumbs { min-width: 0; max-width: 100%; overflow-x: auto; }
+.breadcrumbs ol { box-shadow: none; border: 1px solid #e3e7ec; flex-shrink: 0; }
+.breadcrumbs a { min-height: 44px; color: #526174; }
+.breadcrumbs li { min-height: 44px; }
+.breadcrumbs a:focus-visible { outline: 3px solid #3268d6; outline-offset: -3px; }
+.secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid #7c8898; border-radius: 10px; background: #fff; color: #172335; font-weight: 600; }
+.secondary:hover { background: #f5f6f8; }
+.secondary:focus-visible { outline: 3px solid #3268d6; outline-offset: 3px; }
