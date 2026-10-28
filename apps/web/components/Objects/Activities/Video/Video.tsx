@@ -264,7 +264,7 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
                   <p className="mt-1 text-[color:var(--atlas-reader-muted,rgba(255,255,255,.7))]">
                     {t(
                       'activities.video_embed_blocked_hint',
-                      'O YouTube recusou a incorporação para esta conta ou região. Podes abrir o vídeo diretamente.'
+                      'O YouTube recusou a incorporação para esta conta ou região. Você pode abrir o vídeo diretamente.'
                     )}
                   </p>
                   {activity.content?.uri && (
@@ -272,7 +272,7 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
                       href={activity.content.uri}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-2 rounded-[10px] bg-[--ca-electric-ui,#0066ee] px-4 py-2 font-medium text-white transition hover:brightness-110"
+                      className={process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true' ? styles.primary : "mt-3 inline-flex items-center gap-2 rounded-[10px] bg-[--ca-electric-ui,#0066ee] px-4 py-2 font-medium text-white transition hover:brightness-110"}
                     >
                       {t('activities.open_in_youtube', 'Abrir no YouTube')}
                     </a>

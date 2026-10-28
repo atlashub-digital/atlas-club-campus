@@ -55,6 +55,7 @@ export const OrgMenu = (props: any) => {
   const _access_token = session?.data?.tokens?.access_token;
   const org = useOrg() as any;
   const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
+  const mobileMenuRef = React.useRef<HTMLDivElement>(null)
   const menuButtonRef = React.useRef<HTMLButtonElement>(null)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [isFocusMode, setIsFocusMode] = useState(false)
@@ -131,6 +132,15 @@ export const OrgMenu = (props: any) => {
       window.removeEventListener('focusModeChange', handleFocusModeChange as EventListener);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+    mobileMenuRef.current?.querySelector<HTMLElement>('input, a, button')?.focus()
+    const desktop = window.matchMedia('(min-width: 1280px)')
+    const closeOnDesktop = () => { if (desktop.matches) setIsMenuOpen(false) }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [isMenuOpen])
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen)
@@ -382,7 +392,7 @@ export const OrgMenu = (props: any) => {
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={isMenuOpen}
               aria-controls="campus-mobile-menu"
-              className={`xl:hidden ${colors.text}`}
+              className={`xl:hidden min-h-11 min-w-11 flex items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3268d6] ${colors.text}`}
               onClick={toggleMenu}
             >
               {isMenuOpen ? (
@@ -399,7 +409,10 @@ export const OrgMenu = (props: any) => {
         </div>
       </nav>
       <div
+        ref={mobileMenuRef}
         id="campus-mobile-menu"
+        role="navigation"
+        aria-label="Navegação do Campus"
         hidden={!isMenuOpen}
         onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setIsMenuOpen(false) }}
         onKeyDown={(event) => { if (event.key === "Escape") { setIsMenuOpen(false); menuButtonRef.current?.focus() } }}
@@ -521,13 +534,13 @@ const CopilotMenuButton = ({
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <ChatCircleDots size={14} weight="fill" className="shrink-0 text-neutral-400" />
-                  <span className="truncate text-sm">{s.title || 'Untitled'}</span>
+                  <span className="truncate text-sm">{s.title || 'Sem título'}</span>
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem key={s.aichat_uuid} asChild>
                   <Link href={getUriWithOrg(orgslug, `/copilot?chat=${s.aichat_uuid}`)} className="flex items-center gap-2">
                     <ChatCircleDots size={14} weight="fill" className="shrink-0 text-neutral-400" />
-                    <span className="truncate text-sm">{s.title || 'Untitled'}</span>
+                    <span className="truncate text-sm">{s.title || 'Sem título'}</span>
                   </Link>
                 </DropdownMenuItem>
               )
@@ -536,7 +549,7 @@ const CopilotMenuButton = ({
           </>
         ) : (
           <div className="px-2 py-3 text-center">
-            <p className="text-xs text-neutral-400">No conversations yet</p>
+            <p className="text-xs text-neutral-400">Nenhuma conversa ainda</p>
           </div>
         )}
 
@@ -547,13 +560,13 @@ const CopilotMenuButton = ({
             className="flex items-center gap-2 font-medium cursor-pointer"
           >
             <ChatCircle size={14} weight="fill" className="text-violet-500" />
-            <span>{recentSessions.length > 0 ? 'New conversation' : 'Start a conversation'}</span>
+            <span>{recentSessions.length > 0 ? 'Nova conversa' : 'Iniciar conversa'}</span>
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem asChild>
             <Link href={getUriWithOrg(orgslug, '/copilot')} className="flex items-center gap-2 font-medium">
               <ChatCircle size={14} weight="fill" className="text-violet-500" />
-              <span>{recentSessions.length > 0 ? 'View all conversations' : 'Start a conversation'}</span>
+              <span>{recentSessions.length > 0 ? 'Ver todas as conversas' : 'Iniciar conversa'}</span>
             </Link>
           </DropdownMenuItem>
         )}
@@ -566,7 +579,7 @@ const CopilotMenuButton = ({
           className="w-full flex items-center justify-between px-2 py-2 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
         >
           <span className="text-xs text-neutral-500 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
-            Open in bubble
+            Abrir em janela flutuante
           </span>
           <span
             className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors flex-shrink-0 ${
