@@ -44,7 +44,29 @@ jobs:
         )
       )
     steps:
+      - name: Check optional infrastructure dispatch configuration
+        id: config
+        env:
+          GH_TOKEN: ${{ secrets.INFRA_REPO_PAT }}
+          INFRA_REPO: ${{ vars.INFRA_REPO }}
+        run: |
+          if [[ -z "$GH_TOKEN" && -z "$INFRA_REPO" ]]; then
+            echo "::notice::Infrastructure dispatch skipped: neither INFRA_REPO nor INFRA_REPO_PAT is configured."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ -z "$GH_TOKEN" || -z "$INFRA_REPO" ]]; then
+            echo "::error::Configure BOTH INFRA_REPO and INFRA_REPO_PAT, or unset both."
+            exit 1
+          fi
+          if [[ ! "$INFRA_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "::error::INFRA_REPO must be owner/repository."
+            exit 1
+          fi
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+
       - name: Send repository dispatch
+        if: steps.config.outputs.enabled == 'true'
         env:
           GH_TOKEN: ${{ secrets.INFRA_REPO_PAT }}
           INFRA_REPO: ${{ vars.INFRA_REPO }}

@@ -12,6 +12,7 @@ interface AuthMobileHeaderProps {
 }
 
 export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
+  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   const authBranding = org?.config?.config?.customization?.auth_branding || org?.config?.config?.general?.auth_branding || {}
   const {
     background_type = 'gradient',
@@ -24,6 +25,9 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
   const withUtm = (url: string) => (url ? `${url}${UNSPLASH_UTM}` : '')
 
   const getBackgroundStyle = (): React.CSSProperties => {
+    if (atlasBrand && (background_type === 'gradient' || !background_image)) {
+      return { background: 'radial-gradient(circle at 85% 10%, rgba(0,212,255,.25), transparent 60%), linear-gradient(115deg, #14355e, #061428)' }
+    }
     if (background_type === 'gradient' || !background_image) {
       return {
         background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
@@ -61,25 +65,27 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
 
       <Link prefetch href={getUriWithOrg(org?.slug, '/')} className="relative z-10">
         <div className="w-10 h-10 rounded-lg ring-1 ring-inset ring-white/10 bg-white flex items-center justify-center overflow-hidden shrink-0">
-          <OrgSquareLogo
-            org={org}
-            wideInsetClassName="p-1.5"
-            fallback={
-              <Image
-                quality={100}
-                width={40}
-                height={40}
-                src={learnhouseIcon}
-                alt="LearnHouse"
-                className="object-contain"
-              />
-            }
-          />
+          {atlasBrand ? (
+            <Image
+              src="/atlas/atlas-clubos-mark.svg"
+              alt="Atlas ClubOS"
+              width={40}
+              height={40}
+              className="object-contain p-1"
+              unoptimized
+            />
+          ) : (
+            <OrgSquareLogo
+              org={org}
+              wideInsetClassName="p-1.5"
+              fallback={<Image quality={100} width={40} height={40} src={learnhouseIcon} alt="LearnHouse" className="object-contain" />}
+            />
+          )}
         </div>
       </Link>
 
       <span className="relative z-10 font-semibold text-white text-lg truncate">
-        {org?.name || 'LearnHouse'}
+        {atlasBrand ? 'Atlas ClubOS' : (org?.name || 'LearnHouse')}
       </span>
 
       {/* Unsplash attribution (required by Unsplash API guidelines) */}
