@@ -7,9 +7,9 @@ import { getPlatformUrl } from '@services/config/config'
 
 export async function sendWelcomeAccountMail(args: { email: string; username?: string }): Promise<void> {
   const { email, username } = args
-  await send(email, 'Welcome to LearnHouse 👋', {
+  await send(email, 'Welcome to Atlas Club 👋', {
     accentColor: '#171717',
-    heading: 'Welcome to LearnHouse!',
+    heading: 'Welcome to Atlas Club!',
     subtitle: username
       ? `Hey ${username}, we're thrilled to have you on board.`
       : "We're thrilled to have you on board.",

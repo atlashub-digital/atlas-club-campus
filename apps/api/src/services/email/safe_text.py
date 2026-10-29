@@ -17,12 +17,12 @@ _WHITESPACE_RUN = re.compile(r"\s+")
 
 def email_org_name(value: Optional[str]) -> str:
     """Link-free org name for email copy and subjects."""
-    return sanitize_display_name(value, fallback="A LearnHouse organization")
+    return sanitize_display_name(value, fallback="An Atlas Club organization")
 
 
 def email_user_name(value: Optional[str]) -> str:
     """Link-free user display name for email copy and subjects."""
-    return sanitize_display_name(value)
+    return sanitize_display_name(value, fallback="An Atlas Club user")
 
 
 def header_safe(value: Optional[str]) -> str:

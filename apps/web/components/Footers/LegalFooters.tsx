@@ -3,7 +3,7 @@
 //
 // AuthFooter:    the "By continuing, you agree to … Terms of Service and
 //                Privacy Policy." line shown under the auth forms.
-// CopyrightFooter: the "© {year} LearnHouse, Inc." line for app surfaces
+// CopyrightFooter: the "© {year} Atlas Club" line for app surfaces
 //                (the apex /home hub, the onboarding page, …).
 //
 // Legal pages live on the marketing/platform site, so links resolve via
@@ -16,7 +16,6 @@ import { getPlatformUrl } from '@services/config/config'
 const TERMS_URL = getPlatformUrl('/terms') || 'https://www.learnhouse.io/terms'
 const PRIVACY_URL = getPlatformUrl('/privacy') || 'https://www.learnhouse.io/privacy'
 const ATLAS_PRIVACY_DRAFT_URL = 'https://club.atlashub.si/privacidade'
-const ATLAS_LICENSE_URL = 'https://github.com/atlashub-digital/atlas-club-campus/blob/main/LICENSE'
 
 export function AuthFooter({ className = '' }: { className?: string }) {
   const { t } = useTranslation()
@@ -30,10 +29,6 @@ export function AuthFooter({ className = '' }: { className?: string }) {
           Atlas Club em beta por convite. O aviso de privacidade ainda está em revisão.{' '}
           <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-[#075bb2] hover:text-[#003e89]">
             Consultar minuta informativa
-          </Link>{' '}
-          ·{' '}
-          <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-[#075bb2] hover:text-[#003e89]">
-            Licença e código-fonte
           </Link>
         </p>
       </div>
@@ -42,7 +37,7 @@ export function AuthFooter({ className = '' }: { className?: string }) {
   return (
     <div className={`pb-8 pt-6 text-center px-6 ${className}`}>
       <p className="text-[13px] text-black/30 font-medium">
-        {t('auth.terms_text', { defaultValue: "By continuing, you agree to LearnHouse's" })}{' '}
+        {t('auth.terms_text', { defaultValue: "By continuing, you agree to Atlas Club's" })}{' '}
         <Link
           href={TERMS_URL}
           target="_blank"
@@ -85,9 +80,7 @@ export function CopyrightFooter({
           <p>© {year} Atlas Club · AtlasHub</p>
           <nav aria-label="Informação legal" className="flex flex-wrap items-center justify-center gap-4">
             <Link href={ATLAS_PRIVACY_DRAFT_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Privacidade (minuta)</Link>
-            <Link href={ATLAS_LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2">Licenças e atribuições do software</Link>
           </nav>
-          <p className="text-[#8199ba]">Motor de código aberto com atribuição ao projeto LearnHouse (AGPL-3.0).</p>
         </div>
       </footer>
     )
@@ -98,7 +91,7 @@ export function CopyrightFooter({
     <footer className={`w-full py-6 px-6 ${className}`}>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-x-5 gap-y-2 text-[13px] font-medium">
         <p className={base}>
-          {t('common.copyright', { defaultValue: '© {{year}} LearnHouse, Inc.', year })}
+          {t('common.copyright', { defaultValue: '© {{year}} Atlas Club', year })}
         </p>
         <nav className="flex items-center gap-x-5">
           <Link

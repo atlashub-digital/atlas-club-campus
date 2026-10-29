@@ -122,6 +122,11 @@ class TestWhiteLabelTranslations:
                 actual = set(re.findall(r"\{(\w+)\}", value))
                 assert actual == expected, f"{lang}:{key} has {actual}, en has {expected}"
 
+    def test_no_upstream_brand_in_email_copy(self):
+        for lang, bundle in EMAIL_TRANSLATIONS.items():
+            for key, value in bundle.items():
+                assert "LearnHouse" not in value, f"{lang}:{key}"
+
     def test_powered_by_line_exists_everywhere(self):
         for lang in SUPPORTED_LANGUAGES:
-            assert "LearnHouse" in EMAIL_TRANSLATIONS[lang]["common.powered_by"]
+            assert "Atlas Club" in EMAIL_TRANSLATIONS[lang]["common.powered_by"]
