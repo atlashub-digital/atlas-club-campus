@@ -41,7 +41,7 @@ def _config(**overrides):
         smtp_password=overrides.pop("smtp_password", "pass"),
         smtp_use_tls=overrides.pop("smtp_use_tls", True),
         system_email_sender_name=overrides.pop(
-            "system_email_sender_name", "LearnHouse"
+            "system_email_sender_name", "Atlas Club"
         ),
     )
     return SimpleNamespace(
@@ -300,7 +300,7 @@ class TestEmailUtilsService:
         assert result == {"id": "msg-1"}
         assert send_email.__module__ == "src.services.email.utils"
         assert mock_resend_send.call_args.args[0] == {
-            "from": "LearnHouse <system@test.com>",
+            "from": "Atlas Club <system@test.com>",
             "to": ["to@test.com"],
             "subject": "Hello",
             "html": "<p>Body</p>",
@@ -757,7 +757,7 @@ class TestFormatSender:
         from src.services.email.sender import format_sender
 
         assert format_sender(display_name, "system@test.com") == (
-            "LearnHouse <system@test.com>"
+            "Atlas Club <system@test.com>"
         )
         assert format_sender(display_name, "system@test.com", "Acme Platform") == (
             "Acme Platform <system@test.com>"
@@ -815,7 +815,7 @@ class TestSendEmailSenderName:
 
         assert (
             mock_resend_send.call_args.args[0]["from"]
-            == "LearnHouse <system@test.com>"
+            == "Atlas Club <system@test.com>"
         )
 
     def test_deployment_default_is_configurable(self):
@@ -901,5 +901,5 @@ class TestSendEmailSenderName:
 
         assert (
             mock_resend_send.call_args.args[0]["from"]
-            == "LearnHouse <system@test.com>"
+            == "Atlas Club <system@test.com>"
         )

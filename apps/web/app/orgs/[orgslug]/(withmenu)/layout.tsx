@@ -35,19 +35,11 @@ function OrgFooter() {
   const showWatermark = isFree || watermarkConfig !== false
   const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   if (atlasBrand) {
-    // Visible upstream attribution stays available as legal information rather
-    // than repeating the vendor's promotional logo in the Club Atlas experience.
     return (
       <footer className="w-full mt-12 border-t border-[#406182] py-8 px-5 text-center">
         <div className="mx-auto max-w-4xl flex flex-col items-center gap-2">
-          <p className="text-sm font-semibold text-[#d6e7fa]">© {new Date().getFullYear()} Atlas ClubOS · AtlasHub</p>
+          <p className="text-sm font-semibold text-[#d6e7fa]">© {new Date().getFullYear()} Atlas Club · AtlasHub</p>
           {footerText && <p className="text-sm text-[#b2cbe5]">{footerText}</p>}
-          <p className="text-[11px] leading-relaxed text-[#9bb5d1]">
-            Tecnologia baseada em LearnHouse, distribuída sob AGPL-3.0.{' '}
-            <Link href="https://github.com/atlashub-digital/atlas-club-campus" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white">
-              Código-fonte, licença e créditos
-            </Link>
-          </p>
         </div>
       </footer>
     )
@@ -61,7 +53,7 @@ function OrgFooter() {
           <Link href="https://learnhouse.app" target="_blank" rel="noopener noreferrer">
             <Image
               src="/lrn.svg"
-              alt="LearnHouse"
+              alt="Atlas Club"
               width={24}
               height={24}
               style={{ height: 'auto' }}

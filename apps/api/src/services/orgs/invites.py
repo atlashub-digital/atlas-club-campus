@@ -422,8 +422,8 @@ async def send_invite_email(
 
         result = send_invitation_email(
             email=email,
-            org_name=sanitize_display_name(org.name, fallback="A LearnHouse organization"),
-            inviter_username=sanitize_display_name(user.username),
+            org_name=sanitize_display_name(org.name, fallback="An Atlas Club organization"),
+            inviter_username=sanitize_display_name(user.username, fallback="An Atlas Club user"),
             invite_code=invite_code,
             signup_url=signup_url,
             **branding.as_kwargs(),

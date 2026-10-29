@@ -36,8 +36,8 @@ def _send_notification_email(**kwargs):
 ACADEMY_URL = "https://university.learnhouse.io"
 
 
-# Inline SVG logo (LearnHouse icon mark + wordmark, scaled down)
-LOGO_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" viewBox="250 280 740 620" fill="none" role="img" aria-label="LearnHouse">
+# Inline SVG logo (Atlas Club icon mark + wordmark, scaled down)
+LOGO_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" viewBox="250 280 740 620" fill="none" role="img" aria-label="Atlas Club">
 <defs><linearGradient id="a" x1="560" y1="300" x2="960" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#1ec8ff"/><stop offset=".55" stop-color="#1677ff"/><stop offset="1" stop-color="#0b3bff"/></linearGradient><linearGradient id="b" x1="520" y1="470" x2="300" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#a9e6ff"/><stop offset=".5" stop-color="#f2fbff"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="c" x1="610" y1="752" x2="610" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#cfeaff"/></linearGradient></defs>
 <path d="M540 410 L598 307 Q624 286 652 307 L968 852 Q980 880 950 880 L818 880 Q800 880 790 864 Z" fill="url(#a)"/>
 <path d="M512 474 Q524 456 538 474 L588 570 L402 870 Q396 880 382 880 L284 880 Q258 880 270 860 Z" fill="url(#b)"/>
@@ -72,10 +72,10 @@ def _org_logo_img(logo_url: str, alt: str) -> str:
 
     A square logo (uploaded on the branding page, served from
     ``square_logos/``) sits in a 56px rounded box; a wide logo is letterboxed
-    into the same footprint as the LearnHouse wordmark. Raster logos (PNG/JPG)
+    into the same footprint as the Atlas Club wordmark. Raster logos (PNG/JPG)
     render in every mail client; an SVG logo may be stripped by some (e.g.
     Gmail), in which case the ``alt`` (the org name) shows instead: still
-    org-branded, never a broken LearnHouse mark.
+    org-branded, never a broken Atlas Club mark.
 
     The ``height``/``width`` attributes are for desktop Outlook, whose
     Word-based renderer ignores ``max-width``/``max-height`` and would
@@ -100,7 +100,7 @@ def _org_logo_img(logo_url: str, alt: str) -> str:
 def _org_wordmark(org_name: str) -> str:
     """The org's name set as a wordmark, for orgs that have not uploaded a logo.
 
-    An org-scoped email must never open with the LearnHouse mark. The
+    An org-scoped email must never open with the Atlas Club mark. The
     recipient has a relationship with the academy, not the platform, and a
     foreign logo above "Reset your Acme Academy password" reads as phishing.
     """
@@ -138,7 +138,7 @@ def _button_style(brand_color: str | None) -> str:
 
 
 def _powered_by_html(lang: str) -> str:
-    """The small "Powered by LearnHouse" line under an org-branded footer."""
+    """The small "Powered by Atlas Club" line under an org-branded footer."""
     from src.services.email.branding import POWERED_BY_URL
 
     return (
@@ -247,12 +247,12 @@ def _email_layout(
 ) -> str:
     """Wrap content in the standard email layout.
 
-    ``logo_html`` defaults to the LearnHouse mark; white-labeled emails pass the
+    ``logo_html`` defaults to the Atlas Club mark; white-labeled emails pass the
     org's logo <img> (or its name as a wordmark) instead.
 
-    ``powered_by`` adds the "Powered by LearnHouse" line to the footer. Only
+    ``powered_by`` adds the "Powered by Atlas Club" line to the footer. Only
     org-branded mail sets it, and only when the org's watermark is on; a
-    platform email already carries the LearnHouse mark up top.
+    platform email already carries the Atlas Club mark up top.
 
     ``unsubscribe_url`` is set only by bulk lifecycle mail. Transactional email
     (password reset, invitation, verification) leaves it empty and renders
@@ -326,11 +326,11 @@ def send_account_creation_email(
     signups. Falls back to the public academy when no URL is supplied.
 
     When ``org_name`` is set the email is WHITE-LABELED to that organization:
-    the subject and body name the org (not LearnHouse), the org's ``logo_url``
-    (or its name) replaces the LearnHouse mark, the button takes the org's
-    ``brand_color``, and the footer is reduced to a "Powered by LearnHouse"
+    the subject and body name the org (not Atlas Club), the org's ``logo_url``
+    (or its name) replaces the Atlas Club mark, the button takes the org's
+    ``brand_color``, and the footer is reduced to a "Powered by Atlas Club"
     line that ``powered_by=False`` removes. Org-less signups keep the
-    LearnHouse-branded variant with the Academy footer link.
+    Atlas Club-branded variant with the Academy footer link.
     """
     safe_username = html.escape(email_user_name(user.username))
     white_label = bool(org_name)
@@ -665,7 +665,7 @@ def send_org_join_email(
     mail at all and had to find their way to the org on their own.
 
     Always white-labeled to the org (the user is being welcomed into that
-    academy, not onto LearnHouse), with the org's logo (or name) up top.
+    academy, not onto Atlas Club), with the org's logo (or name) up top.
     """
     safe_username = html.escape(email_user_name(username))
     safe_org_name = html.escape(email_org_name(org_name))
@@ -780,7 +780,7 @@ def send_email_verification_email(
 
     With an ``organization`` the mail is branded to it (its name in the copy,
     its logo or name in the header, its color on the button). Without one it
-    is a platform email under the LearnHouse mark.
+    is a platform email under the Atlas Club mark.
 
     Args:
         token: Verification token
@@ -794,7 +794,7 @@ def send_email_verification_email(
         Boolean indicating if email was sent successfully
     """
     safe_username = html.escape(email_user_name(user.username))
-    brand = html.escape(email_org_name(organization.name)) if organization else "LearnHouse"
+    brand = html.escape(email_org_name(organization.name)) if organization else "Atlas Club"
     safe_token = quote(token, safe='')
     safe_user_uuid = quote(user.user_uuid, safe='')
     org_uuid = organization.org_uuid if organization else "none"
