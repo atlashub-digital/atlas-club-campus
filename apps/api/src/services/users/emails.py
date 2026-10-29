@@ -37,7 +37,7 @@ ACADEMY_URL = "https://university.learnhouse.io"
 
 
 # Inline SVG logo (LearnHouse icon mark + wordmark, scaled down)
-LOGO_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" viewBox="250 280 740 620" fill="none" role="img" aria-label="Atlas Club">
+LOGO_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="140" height="20" viewBox="250 280 740 620" fill="none" role="img" aria-label="LearnHouse">
 <defs><linearGradient id="a" x1="560" y1="300" x2="960" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#1ec8ff"/><stop offset=".55" stop-color="#1677ff"/><stop offset="1" stop-color="#0b3bff"/></linearGradient><linearGradient id="b" x1="520" y1="470" x2="300" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#a9e6ff"/><stop offset=".5" stop-color="#f2fbff"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="c" x1="610" y1="752" x2="610" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#cfeaff"/></linearGradient></defs>
 <path d="M540 410 L598 307 Q624 286 652 307 L968 852 Q980 880 950 880 L818 880 Q800 880 790 864 Z" fill="url(#a)"/>
 <path d="M512 474 Q524 456 538 474 L588 570 L402 870 Q396 880 382 880 L284 880 Q258 880 270 860 Z" fill="url(#b)"/>
@@ -794,7 +794,7 @@ def send_email_verification_email(
         Boolean indicating if email was sent successfully
     """
     safe_username = html.escape(email_user_name(user.username))
-    brand = html.escape(email_org_name(organization.name)) if organization else "Atlas Club"
+    brand = html.escape(email_org_name(organization.name)) if organization else "LearnHouse"
     safe_token = quote(token, safe='')
     safe_user_uuid = quote(user.user_uuid, safe='')
     org_uuid = organization.org_uuid if organization else "none"
