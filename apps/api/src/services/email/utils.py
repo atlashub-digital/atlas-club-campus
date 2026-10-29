@@ -528,8 +528,8 @@ def send_email(
 
     ``headers`` carries extra SMTP headers through to the provider. Bulk
     lifecycle mail needs ``List-Unsubscribe`` / ``List-Unsubscribe-Post``;
-    Gmail and Outlook penalise bulk senders that omit them. Transactional
-    callers pass nothing and are unaffected.
+    Gmail and Outlook penalise bulk senders that omit them. The deployment's
+    contact email supplies Reply-To unless the caller already sets it.
 
     ``sender_name`` is the DISPLAY NAME only: an organization's own name on
     org-scoped mail, ``None`` on platform mail so it falls back to the
@@ -549,6 +549,11 @@ def send_email(
 
     lh_config = get_learnhouse_config()
     mailing = lh_config.mailing_config
+    contact_email = (getattr(lh_config, "contact_email", None) or "").strip()
+    if contact_email and not any(
+        name.lower() == "reply-to" for name in (headers or {})
+    ):
+        headers = {**(headers or {}), "Reply-To": contact_email}
     sender = format_sender(
         sender_name,
         mailing.system_email_address,
