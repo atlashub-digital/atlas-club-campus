@@ -211,7 +211,7 @@ function PlayerLogo() {
       alt=""
       aria-hidden="true"
       draggable={false}
-      className={`pointer-events-none absolute top-5 end-6 z-[25] h-3.5 w-auto select-none brightness-0 invert drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] transition-opacity duration-300 sm:top-6 sm:end-8 sm:h-4 ${
+      className={`pointer-events-none absolute top-5 end-6 z-[25] h-3.5 w-auto select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] transition-opacity duration-300 sm:top-6 sm:end-8 sm:h-4 ${
         visible ? 'opacity-80' : 'opacity-0'
       }`}
     />

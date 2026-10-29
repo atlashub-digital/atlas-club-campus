@@ -15,9 +15,8 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ org, welcomeText, title, subtitle, children }: AuthLayoutProps) {
-  const atlasBrand = process.env.NEXT_PUBLIC_ATLAS_CLUBOS_BRAND === 'true'
   return (
-    <div className={`min-h-screen lg:h-screen bg-white flex flex-col lg:flex-row relative overflow-hidden ${atlasBrand ? 'atlas-auth-shell' : ''}`}>
+    <div className="min-h-screen lg:h-screen bg-white flex flex-col lg:flex-row relative overflow-hidden">
       {/* Page-level blueprint grid, bottom-anchored */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -46,7 +45,7 @@ export default function AuthLayout({ org, welcomeText, title, subtitle, children
       </div>
 
       {/* Left Panel - Content / form */}
-      <div className={`relative z-10 flex flex-col flex-1 lg:h-full overflow-auto bg-transparent ${atlasBrand ? 'atlas-auth-form' : ''}`}>
+      <div className="relative z-10 flex flex-col flex-1 lg:h-full overflow-auto bg-transparent">
         <div className="flex-1 flex flex-col">{children}</div>
         {/* Terms footer (platform-style) */}
         <AuthFooter className="shrink-0" />

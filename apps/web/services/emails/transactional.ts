@@ -1,5 +1,6 @@
 import 'server-only'
 import { send } from './resend'
+import { getPlatformUrl } from '@services/config/config'
 
 // Non-billing transactional emails (welcome, contact). Same never-throw contract
 // as the billing mails: fire-and-forget, no-op without RESEND_API_KEY.
@@ -18,7 +19,7 @@ export async function sendWelcomeAccountMail(args: { email: string; username?: s
       'Invite learners and track their progress.',
       'Brand your school and share it with the world.',
     ],
-    cta: { label: 'Get started', href: 'https://www.learnhouse.io/home' },
+    cta: { label: 'Get started', href: getPlatformUrl('/home') || 'https://app.club.atlashub.si/home' },
   })
 }
 

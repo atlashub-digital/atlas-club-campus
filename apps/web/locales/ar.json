@@ -46,11 +46,11 @@
     "help": "مساعدة",
     "help_menu": {
       "documentation": "الوثائق",
-      "website": "موقع LearnHouse",
+      "website": "موقع Atlas Club",
       "discord": "Discord",
       "report_feedback": "الإبلاغ عن مشكلة أو ملاحظات",
       "feedback_title": "إرسال ملاحظات",
-      "feedback_description": "ساعدنا في تحسين LearnHouse من خلال مشاركة أفكارك أو الإبلاغ عن الأخطاء أو اقتراح ميزات جديدة.",
+      "feedback_description": "ساعدنا في تحسين Atlas Club من خلال مشاركة أفكارك أو الإبلاغ عن الأخطاء أو اقتراح ميزات جديدة.",
       "feedback_placeholder": "أخبرنا بما يدور في ذهنك...",
       "feedback_success": "شكراً لملاحظاتك!",
       "send_feedback": "إرسال ملاحظات",
@@ -236,7 +236,8 @@
     "move_up": "تحريك لأعلى",
     "move_down": "تحريك لأسفل",
     "less": "أقل",
-    "more": "المزيد"
+    "more": "المزيد",
+    "remove": "إزالة"
   },
   "banner": {
     "viewing_as_guest": "أنت تتصفح {{name}} كضيف.",
@@ -366,11 +367,11 @@
     "privacy_policy": "سياسة الخصوصية",
     "image_title_forgot": "أعد تعيين كلمة مرورك.",
     "image_subtitle_forgot": "سنساعدك على العودة إلى حسابك في لمح البصر.",
-    "image_title_login": "مرحبًا بعودتك إلى LearnHouse.",
+    "image_title_login": "مرحبًا بعودتك إلى Atlas Club.",
     "image_subtitle_login": "تابِع من حيث توقفت: دوراتك وطلابك وأدواتك في انتظارك.",
     "image_title_reset": "أوشكت على الانتهاء.",
     "image_subtitle_reset": "أنشئ كلمة مرور قوية للحفاظ على أمان حسابك.",
-    "image_title_signup": "ابدأ التدريس مع LearnHouse.",
+    "image_title_signup": "ابدأ التدريس مع Atlas Club.",
     "image_subtitle_signup": "أنشئ حسابك وأطلق دورتك الأولى في دقائق.",
     "image_title_verify": "تحقّق من بريدك الإلكتروني.",
     "image_subtitle_verify": "خطوة سريعة واحدة لتأمين حسابك والبدء.",
@@ -398,7 +399,8 @@
     "choose_sign_in_method": "اختر طريقة تسجيل الدخول التي تفضّلها.",
     "no_sign_in_method_available": "قيّدت هذه المؤسسة طرق تسجيل الدخول، ولا تتوفر أي من الطرق المسموح بها هنا. تواصل مع أحد المسؤولين.",
     "complete_profile": {
-      "title": "أكمل ملفك الشخصي"
+      "title": "أكمل ملفك الشخصي",
+      "subtitle": "يحتاج {{org}} إلى مزيد قليل من المعلومات قبل المتابعة."
     }
   },
   "verify_email": {
@@ -419,7 +421,10 @@
     "title_required": "العنوان مطلوب",
     "content_required": "المحتوى مطلوب",
     "invalid_number": "يجب أن يكون رقمًا",
-    "invalid_option": "اختر أحد الخيارات المتاحة"
+    "invalid_option": "اختر أحد الخيارات المتاحة",
+    "min_value": "يجب ألا يقل عن {{value}}",
+    "max_value": "يجب ألا يزيد عن {{value}}",
+    "too_long": "يجب ألا يتجاوز {{max}} حرفًا"
   },
   "courses": {
     "my_courses": "دوراتي",
@@ -600,14 +605,14 @@
     "import": {
       "scorm_package": "حزمة SCORM",
       "scorm_description": "استيراد حزم SCORM 1.2 أو SCORM 2004",
-      "learnhouse_courses": "دورات LearnHouse",
-      "learnhouse_description": "استيراد الدورات المصدرة من LearnHouse",
+      "learnhouse_courses": "دورات Atlas Club",
+      "learnhouse_description": "استيراد الدورات المصدرة من Atlas Club",
       "upload_package": "رفع الحزمة",
       "configure": "تكوين",
       "complete": "مكتمل",
       "click_to_upload": "انقر للرفع أو اسحب وأفلت",
-      "learnhouse_format": "تصدير دورة LearnHouse (.zip)",
-      "learnhouse_info": "ارفع حزمة تصدير دورات LearnHouse (.zip). ستتمكن من اختيار الدورات للاستيراد وتكوين خيارات الاستيراد.",
+      "learnhouse_format": "تصدير دورة Atlas Club (.zip)",
+      "learnhouse_info": "ارفع حزمة تصدير دورات Atlas Club (.zip). ستتمكن من اختيار الدورات للاستيراد وتكوين خيارات الاستيراد.",
       "analyze_package": "تحليل الحزمة",
       "ready_to_analyze": "جاهز للتحليل",
       "invalid_file_format": "يرجى رفع ملف .zip",
@@ -1043,7 +1048,10 @@
     "grid_columns_4": "4 أعمدة",
     "add_card": "إضافة بطاقة",
     "ungroup_cards": "إلغاء تجميع البطاقات",
-    "group_into_grid": "تجميع في شبكة"
+    "group_into_grid": "تجميع في شبكة",
+    "video_embed_blocked": "لا يمكن تشغيل هذا الفيديو هنا",
+    "video_embed_blocked_hint": "حظر YouTube التضمين لهذا الحساب أو المنطقة. يمكنك فتح الفيديو مباشرة.",
+    "open_in_youtube": "فتح على YouTube"
   },
   "assignments": {
     "submit_assignment": "تسليم الواجب",
@@ -1206,7 +1214,7 @@
     "stripe_wait": "يرجى الانتظار بينما نكمل إعداد تكامل Stripe الخاص بك...",
     "stripe_return": "يمكنك الآن العودة إلى لوحة التحكم للبدء في استخدام المدفوعات.",
     "stripe_retry": "يرجى المحاولة مرة أخرى أو الاتصال بالدعم إذا استمرت المشكلة.",
-    "stripe_login_required": "لم تقم بتسجيل الدخول إلى LearnHouse في هذا المتصفح. سجّل الدخول، ثم ابدأ الربط من جديد من إعدادات المدفوعات.",
+    "stripe_login_required": "لم تقم بتسجيل الدخول إلى Atlas Club في هذا المتصفح. سجّل الدخول، ثم ابدأ الربط من جديد من إعدادات المدفوعات.",
     "subscription": "اشتراك",
     "benefits": "المزايا:",
     "min_price": "السعر الأدنى:",
@@ -1477,7 +1485,7 @@
           "rate_limited": "محاولات كثيرة جدًا. يرجى الانتظار قليلًا ثم المحاولة مرة أخرى.",
           "status_error": "تعذّر تحميل إعدادات التحقق بخطوتين.",
           "copy_failed": "تعذّر النسخ. يرجى تحديد النص ونسخه يدويًا.",
-          "codes_file_header": "رموز النسخ الاحتياطي للتحقق بخطوتين في LearnHouse. يمكن استخدام كل رمز مرة واحدة.",
+          "codes_file_header": "رموز النسخ الاحتياطي للتحقق بخطوتين في Atlas Club. يمكن استخدام كل رمز مرة واحدة.",
           "already_enabled": "التحقق بخطوتين مفعّل بالفعل على هذا الحساب.",
           "setup_failed": "تعذّر بدء إعداد التحقق بخطوتين. يرجى المحاولة مرة أخرى.",
           "enabled_toast": "تم تفعيل التحقق بخطوتين.",
@@ -1653,8 +1661,8 @@
       "import_course": "استيراد دورة",
       "import_scorm": "استيراد حزمة SCORM",
       "import_scorm_description": "استيراد حزمة SCORM لإنشاء دورة جديدة",
-      "import_learnhouse": "استيراد دورات LearnHouse",
-      "import_learnhouse_description": "استيراد الدورات من حزمة تصدير LearnHouse",
+      "import_learnhouse": "استيراد دورات Atlas Club",
+      "import_learnhouse_description": "استيراد الدورات من حزمة تصدير Atlas Club",
       "import_select_type": "اختر نوع الحزمة التي تريد استيرادها",
       "no_courses": "لا توجد دورات بعد",
       "create_course_placeholder": "أنشئ دورة لإضافة محتوى",
@@ -2520,9 +2528,9 @@
         "email_sender_name_desc": "الاسم الذي يراه المستلمون في رسائل البريد الإلكتروني المُرسَلة لهذه المنظمة: روابط تسجيل الدخول، وإعادة تعيين كلمة المرور، والدعوات، ورسائل التحقق والترحيب. تحمل هذه الرسائل أيضًا شعارك ولون علامتك التجارية على الأزرار وإعداد العلامة المائية. الاسم وحده هو ما يتغير هنا، أما عنوان الإرسال فيبقى عنوان المنصة، وهذا ما يُبقي هذه الرسائل مجتازة لفحوصات SPF و DKIM. اتركه فارغًا لاستخدام الاسم الافتراضي للمنصة.",
         "default_language": "اللغة الافتراضية",
         "default_language_desc": "اللغة التي يراها الزوار الجدد افتراضيًا واللغة المستخدمة للرسائل المُرسَلة باسم هذه المؤسسة. لا يزال بإمكان الأعضاء تغيير لغة واجهتهم.",
-        "watermark_desc": "إظهار علامة LearnHouse المائية على صفحات منظمتك",
+        "watermark_desc": "إظهار علامة Atlas Club المائية على صفحات منظمتك",
         "watermark_free_plan": "يتم عرض العلامة المائية دائمًا في الخطة المجانية",
-        "watermark_label": "علامة \"صنع بواسطة LearnHouse\" المائية",
+        "watermark_label": "علامة \"صنع بواسطة Atlas Club\" المائية",
         "watermark_ee": "مخفي بترخيص الإصدار المؤسسي"
       },
       "images": {
@@ -2671,7 +2679,7 @@
         },
         "previews": {
           "thumbnail_title": "الصورة المصغّرة",
-          "thumbnail_desc": "صورة الغلاف لمؤسستك عند إدراجها أو مشاركتها: في صفحة الاستكشاف على LearnHouse وفي معاينات الروابط.",
+          "thumbnail_desc": "صورة الغلاف لمؤسستك عند إدراجها أو مشاركتها: في صفحة الاستكشاف على Atlas Club وفي معاينات الروابط.",
           "thumbnail_add": "إضافة صورة مصغّرة",
           "thumbnail_replace": "استبدال الصورة المصغّرة",
           "gallery_title": "معرض المعاينة",
@@ -3499,7 +3507,8 @@
           "title": "أنجز المزيد مع خطة أعلى",
           "subtitle": "قم بالترقية لرفع حدودك وفتح المزيد من الميزات.",
           "popular": "الأكثر شيوعًا",
-          "compare": "قارن جميع الخطط"
+          "compare": "قارن جميع الخطط",
+          "upgrade_to": "الترقية إلى {{plan}}"
         }
       },
       "general": {
@@ -5195,7 +5204,8 @@
         "select_all_that_apply": "اختر كل ما ينطبق",
         "response_type_single": "إجابة واحدة",
         "response_type_multiple": "إجابات متعددة",
-        "no_correct_answer_warning": "لا توجد إجابة صحيحة، سيتم تخطي هذا السؤال"
+        "no_correct_answer_warning": "لا توجد إجابة صحيحة، سيتم تخطي هذا السؤال",
+        "generate_with_ai": "إنشاء بالذكاء الاصطناعي"
       },
       "math_block": {
         "templates": "القوالب",
@@ -5280,12 +5290,13 @@
       "simplify": "تبسيط",
       "title": "محرر الذكاء الاصطناعي",
       "translate": "ترجمة"
-    }
+    },
+    "unsaved_changes_warning": "لديك تغييرات غير محفوظة. المغادرة دون حفظ؟"
   },
   "embed": {
     "not_supported_description": "هذا النوع من النشاط يتطلب المصادقة ولا يمكن تضمينه.",
     "not_supported_title": "هذا النشاط غير مدعوم",
-    "powered_by": "مدعوم من LearnHouse",
+    "powered_by": "مدعوم من Atlas Club",
     "visit_activity": "زيارة صفحة النشاط"
   },
   "analytics": {
@@ -5996,10 +6007,10 @@
       },
       "teach_the_world": {
         "title": "تعلّم وانمُ",
-        "description": "موارد لمساعدتك في الاستفادة القصوى من LearnHouse.",
+        "description": "موارد لمساعدتك في الاستفادة القصوى من Atlas Club.",
         "classroom": "الفصل الدراسي",
         "classroom_desc": "تعلم كيفية تنمية وإدارة دوراتك",
-        "university": "جامعة LearnHouse",
+        "university": "جامعة Atlas Club",
         "university_desc": "أدلة ونصائح وأفضل الممارسات"
       },
       "add_content": {
@@ -6029,7 +6040,7 @@
       }
     },
     "welcome": {
-      "title": "مرحبًا بك في LearnHouse",
+      "title": "مرحبًا بك في Atlas Club",
       "subtitle": "أنشئ دورات، وادعُ المتعلمين، وشارك المعرفة مع العالم.",
       "get_started": "ابدأ الآن",
       "features_title": "كل ما تحتاجه",
@@ -6330,7 +6341,8 @@
     "replace_resource": "استبدال",
     "remove_resource": "إزالة",
     "show_as_card": "عرض كبطاقة",
-    "show_inline": "عرض ضمن النص"
+    "show_inline": "عرض ضمن النص",
+    "delete_folder_title": "حذف المجلد \"{{name}}\"؟"
   },
   "media": {
     "media": "الوسائط",
@@ -6361,7 +6373,8 @@
     "url_required": "الرابط مطلوب",
     "upload_hint": "صور وفيديو وصوت وملفات PDF ومستندات Office وملفات ZIP",
     "remove": "إزالة",
-    "open_pdf": "فتح ملف PDF"
+    "open_pdf": "فتح ملف PDF",
+    "delete_media_title": "حذف الوسيط \"{{name}}\"؟"
   },
   "access": {
     "public": {
@@ -6540,7 +6553,9 @@
     "invoice_history": "سجل الفواتير",
     "view": "عرض",
     "checkout_settling": "تم استلام الدفعة، يجري تطبيق خطتك الجديدة وستظهر قريبًا.",
-    "checkout_settling_delayed": "تم استلام الدفعة، لكن لم يتم تحديث خطتك بعد. حدّث الصفحة بعد لحظات، وتواصل مع الدعم إذا استمرت المشكلة."
+    "checkout_settling_delayed": "تم استلام الدفعة، لكن لم يتم تحديث خطتك بعد. حدّث الصفحة بعد لحظات، وتواصل مع الدعم إذا استمرت المشكلة.",
+    "cancels_on": "سيُلغى اشتراكك في {{periodEnd}}. يستمر الوصول حتى ذلك الحين.",
+    "add_pack": "إضافة {{pack}}"
   },
   "hub_new": {
     "useType": {
@@ -6612,7 +6627,7 @@
         "title": "تريد التجربة؟",
         "body": "توجّه إلى",
         "link": "صفحة المطوّرين",
-        "suffix": "لتجربة LearnHouse بدلًا من ذلك."
+        "suffix": "لتجربة Atlas Club بدلًا من ذلك."
       },
       "validation": {
         "required": "مطلوب",
@@ -6731,5 +6746,18 @@
       "per_month": "/ شهر",
       "per_year": "/ سنة"
     }
+  },
+  "demo": {
+    "badge": "تجريبي",
+    "reset_imminent": "في أي لحظة",
+    "banner_title": "أنت في العرض التجريبي المشترك.",
+    "banner_body_countdown": "كل ما هنا بيانات أمثلة، وأي تغييرات تجريها يُعاد ضبطها خلال {{countdown}}.",
+    "banner_body": "كل ما هنا بيانات أمثلة، وأي تغييرات تجريها يُعاد ضبطها بانتظام.",
+    "create_your_own": "أنشئ مؤسستك الخاصة",
+    "entry_busy": "يُعاد ضبط العرض التجريبي الآن. حاول بعد قليل.",
+    "entry_opening": "جارٍ فتح العرض التجريبي…",
+    "entry_title": "استكشف عرضًا تجريبيًا مباشرًا",
+    "entry_body": "أكاديمية كاملة بمقررات ومتعلمين وتقدم وتقييم، معبأة مسبقًا. مشتركة مع الجميع، وتُعاد إلى الحالة الأصلية كل {{interval}}.",
+    "entry_preparing": "قيد التحضير. حاول بعد قليل."
   }
 }

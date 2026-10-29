@@ -1,7 +1,7 @@
 /*
  * Atlas ClubOS — tema do Campus (tokens do portal canónico).
  * Fonte: atlashub-digital/atlashub-club · src/styles/tokens.css (v1.0)
- * Opt-in por build (NEXT_PUBLIC_ATLAS_CLUBOS_BRAND). Não altera o núcleo:
+ * Opt-in por build (NEXT_PUBLIC_ATLAS_CLUBOS_THEME). Não altera o núcleo:
  * só variáveis e apresentação. Licença e atribuição LearnHouse/AGPL preservadas.
  */
 :root {

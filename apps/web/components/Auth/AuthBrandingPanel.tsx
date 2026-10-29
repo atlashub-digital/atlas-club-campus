@@ -45,12 +45,6 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
   const getBackgroundStyle = (): React.CSSProperties => {
     if (noOrg) {
-      if (atlasBrand) {
-        return {
-          background:
-            'radial-gradient(ellipse at 75% 22%, rgba(0,212,255,.33), transparent 54%), radial-gradient(ellipse at 18% 78%, rgba(0,123,255,.38), transparent 60%), linear-gradient(135deg, #102c54, #050b17)',
-        }
-      }
       return {
         backgroundImage: 'url(/auth-default.png)',
         backgroundSize: 'cover',
@@ -59,9 +53,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
     }
     if (background_type === 'gradient' || !background_image) {
       return {
-        background: atlasBrand
-          ? 'radial-gradient(circle at 75% 25%, rgba(0,212,255,.32), transparent 52%), linear-gradient(135deg, #173a65, #071429 85%)'
-          : 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+        background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
       }
     }
     if (background_type === 'custom' && background_image) {
@@ -85,9 +77,9 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
   const displayMessage = welcome_message || welcomeText || ''
   // No-org platform copy (defaults mirror the platform login illustration).
-  const noOrgTitle = atlasBrand ? 'Bem-vindo ao Atlas ClubOS.' : (title || 'Welcome back to LearnHouse.')
+  const noOrgTitle = atlasBrand ? 'Bem-vindo ao Atlas Club.' : (title || 'Welcome back to Atlas Club.')
   const noOrgSubtitle =
-    subtitle || (atlasBrand ? 'Aprende, cria e partilha na comunidade Atlas.' : 'Pick up where you left off. Your courses, students, and tools are waiting.')
+    subtitle || (atlasBrand ? 'Aprenda, crie e compartilhe na comunidade Atlas.' : 'Pick up where you left off. Your courses, students, and tools are waiting.')
   // Treat the no-org illustration like a photo background: dark scrim, no
   // blueprint-grid overlay.
   const hasCustomBackground = noOrg || (background_type !== 'gradient' && background_image)
@@ -158,12 +150,12 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
               <Link prefetch href={atlasBrand ? getUriWithOrg(org?.slug, '/') : "https://learnhouse.app"} target={atlasBrand ? "_self" : "_blank"}>
                 <img
                   src={atlasBrand ? "/atlas/atlas-clubos-mark.svg" : "/lrn.svg"}
-                  alt={atlasBrand ? "Atlas ClubOS" : "LearnHouse"}
+                  alt="Atlas Club"
                   width={30}
                   height={30}
                   className={cn(
                     "transition-opacity hover:opacity-100",
-                    text_color === 'light' ? "opacity-60 invert" : "opacity-40"
+                    text_color === 'light' ? "opacity-60" : "opacity-40"
                   )}
                 />
               </Link>
@@ -174,13 +166,6 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
             /* No-org apex panel, platform layout: heading at the TOP, no logo
                box, platform copy. */
             <div className="max-w-md text-white">
-              {atlasBrand && (
-                <div className="mb-7 flex items-center gap-3">
-                  <Image src="/atlas/atlas-clubos-mark.svg" width={52} height={52} alt="Símbolo Atlas ClubOS" unoptimized />
-                  <span className="text-white text-lg font-semibold tracking-wide">ATLAS CLUBOS</span>
-                  <Image src="/atlas/atlas-avatar.webp" width={64} height={64} alt="Atlas, mascote do Club Atlas" unoptimized className="ms-auto" />
-                </div>
-              )}
               <h1 className="font-black text-[28px] leading-tight tracking-tight">
                 {noOrgTitle}
               </h1>
@@ -202,7 +187,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
                       {atlasBrand ? (
                         <Image
                           src="/atlas/atlas-clubos-mark.svg"
-                          alt="Atlas ClubOS"
+                          alt="Atlas Club"
                           width={96}
                           height={96}
                           className="object-contain p-3"
@@ -212,7 +197,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
                         <OrgSquareLogo
                           org={org}
                           wideInsetClassName="p-3"
-                          fallback={<Image quality={100} width={96} height={96} src={learnhouseIcon} alt="LearnHouse" className="object-contain" />}
+                          fallback={<Image quality={100} width={96} height={96} src={learnhouseIcon} alt="Atlas Club" className="object-contain" />}
                         />
                       )}
                     </div>
@@ -220,7 +205,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
                   {/* Text content */}
                   <div className="space-y-1">
-                    <h1 className="font-black text-3xl tracking-tight">{atlasBrand ? 'Atlas ClubOS' : (org?.name || 'LearnHouse')}</h1>
+                    <h1 className="font-black text-3xl tracking-tight">{atlasBrand ? 'Atlas Club' : (org?.name || 'Atlas Club')}</h1>
                     {displayMessage && (
                       <p className={cn(
                         "text-lg max-w-sm leading-relaxed",
@@ -234,11 +219,6 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
               </div>
 
               {/* Bottom spacer for visual balance */}
-              {atlasBrand && (
-                <div className="absolute end-6 bottom-5 pointer-events-none">
-                  <Image src="/atlas/atlas-avatar.webp" alt="Atlas, mascote do Club Atlas" width={104} height={104} unoptimized />
-                </div>
-              )}
               <div className="h-10" />
             </>
           )}

@@ -58,7 +58,10 @@ jobs:
           files: apps/api/coverage.xml
           flags: api
           name: api-coverage
-          fail_ci_if_error: true
+          # Tokenless uploads are now rejected by Codecov; coverage stays
+          # available as the GitHub artifact below, so telemetry is
+          # best-effort and must never block the green build.
+          fail_ci_if_error: false
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v7.0.2

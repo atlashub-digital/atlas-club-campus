@@ -102,7 +102,8 @@ class TestWhiteLabelTranslations:
         for lang, bundle in EMAIL_TRANSLATIONS.items():
             for key, value in bundle.items():
                 if key.startswith(self.ORG_SCOPED_PREFIXES):
-                    assert "LearnHouse" not in value, f"{lang}:{key}"
+                    assert "LearnHouse" not in value
+                    assert "Atlas Club" not in value, f"{lang}:{key}"
 
     def test_every_locale_ships_magic_login_copy(self):
         for lang in SUPPORTED_LANGUAGES:

@@ -528,8 +528,8 @@ def send_email(
 
     ``headers`` carries extra SMTP headers through to the provider. Bulk
     lifecycle mail needs ``List-Unsubscribe`` / ``List-Unsubscribe-Post``;
-    Gmail and Outlook penalise bulk senders that omit them. Transactional
-    callers pass nothing and are unaffected.
+    Gmail and Outlook penalise bulk senders that omit them. The deployment's
+    contact email supplies Reply-To unless the caller already sets it.
 
     ``sender_name`` is the DISPLAY NAME only: an organization's own name on
     org-scoped mail, ``None`` on platform mail so it falls back to the
@@ -623,6 +623,24 @@ def _is_recipient_rejected(exc: BaseException) -> bool:
     return "`to`" in message or "to field" in message
 
 
+def _default_reply_to(headers: Optional[dict[str, str]]) -> Optional[str]:
+    """Deployment contact address, unless the caller already set Reply-To.
+
+    A reply invitation from a no-reply sender is a lie; when
+    ``contact_email`` is configured, every mail without an explicit Reply-To
+    answers to a real inbox instead. ``headers`` are the caller's verbatim
+    contract with the provider, so a caller-set Reply-To always wins.
+    """
+    if any(str(name).lower() == "reply-to" for name in (headers or {})):
+        return None
+    try:
+        # Module-level lookup so tests that patch utils.get_learnhouse_config
+        # see the same deployment config this helper does.
+        return (getattr(get_learnhouse_config(), "contact_email", None) or "").strip() or None
+    except Exception:  # pragma: no cover - config is always present in practice
+        return None
+
+
 def _send_email_resend(
     sender: str,
     to: str,
@@ -641,6 +659,9 @@ def _send_email_resend(
     }
     if headers:
         payload["headers"] = dict(headers)
+    reply_to = _default_reply_to(headers)
+    if reply_to:
+        payload["reply_to"] = reply_to
     for attempt in range(_RESEND_RETRIES + 1):
         try:
             return resend.Emails.send(payload)
@@ -702,6 +723,9 @@ def _send_email_smtp(
     msg["Subject"] = subject
     for header_name, header_value in (headers or {}).items():
         msg[header_name] = header_value
+    reply_to = _default_reply_to(headers)
+    if reply_to and not msg.get("Reply-To"):
+        msg["Reply-To"] = reply_to
     msg.attach(MIMEText(body, "html"))
 
     server = None
