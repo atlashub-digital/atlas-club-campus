@@ -1,7 +1,8 @@
 # RELEASE CANDIDATE — Atlas ClubOS (PR #15)
 
-SHA candidata: **33e0f4db** (`feat/atlas-brand-minimal` → PR #15, DRAFT→ready após GO do CI)
-Base: `origin/main` (produção na versão anterior).
+SHA candidata: **dc7f462e** (`feat/atlas-brand-minimal` → PR #15)
+Imagem: `atlas/clubos-uiv:dc7f462e` · ID `564ca45acb08` · digest `sha256:564ca45acb082687a9745ce08446ced2ff08d922fb7e25121e7ceb5b045b7c9e`
+CI no SHA: Web Lint, Web Tests, API Lint, API Tests, Build linux/amd64+arm64, Service images (api/web/collab) — **todos SUCCESS** (29/10).
 
 ## 1. Portão de entrada (verificar antes de tudo)
 - CI no SHA alvo: Web Lint, Web Tests, API Lint, API Tests (`test`), Build linux/amd64+arm64, Service images (api/web/collab) — TODOS SUCCESS.
@@ -9,9 +10,9 @@ Base: `origin/main` (produção na versão anterior).
 
 ## 2. Build da imagem local (GHCR inacessível a partir do VPS)
 ```
-cd /root/atlas-club-campus && git checkout 33e0f4db
+cd /root/atlas-club-campus && git checkout dc7f462e
 docker build --build-arg NEXT_PUBLIC_ATLAS_CLUBOS_BRAND=true \
-  -f Dockerfile -t atlas/clubos-uiv:33e0f4db .   # background, ~10-15 min
+  -f Dockerfile -t atlas/clubos-uiv:dc7f462e .   # background, ~10-15 min
 ```
 Nota: a flag de marca é assada no build (--build-arg); env runtime não substitui.
 
@@ -25,12 +26,12 @@ docker inspect uiv-app --format '{{index .RepoTags 0}}' >> /srv/atlas/backups/ui
 
 ## 4. Promoção da preview (após GO)
 ```
-sed -i 's/UIV_IMAGE_TAG=.*/UIV_IMAGE_TAG=33e0f4db/' /srv/atlas/clubos-uiv/.env
+sed -i 's/UIV_IMAGE_TAG=.*/UIV_IMAGE_TAG=dc7f462e/' /srv/atlas/clubos-uiv/.env
 docker compose --project-directory /srv/atlas/clubos-uiv up -d app
 ```
 Smoke (repetir o 1º pedido se der error boundary de arranque):
 - `curl -s -o /dev/null -w '%{http_code}' https://uiv-preview.atlashub.si/` → 200
-- `docker ps | grep uiv-app` → imagem `atlas/clubos-uiv:33e0f4db`, Up
+- `docker ps | grep uiv-app` → imagem `atlas/clubos-uiv:dc7f462e`, Up
 - magic-link request (admin@clubos.atlashub.si) → e-mail em Resend com `last_event=sent/delivered` e header `Reply-To: contact@atlashub.si`
 
 ## 5. Homologação autenticada (P0.2, só preview)
