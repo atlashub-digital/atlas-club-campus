@@ -166,3 +166,108 @@ footer, footer a { color: var(--ca-text-3) !important; }
 @media (max-width: 1023px) {
   .atlas-auth-shell { background: #f3f8ff !important; }
 }
+
+/* =====================================================================
+ * Superfícies 5–8 (ciclo UI-01, segundo incremento)
+ * Só apresentação. Sem alterar layout, lógica, endpoints, permissões nem
+ * qualquer comportamento do motor. Tudo ancorado nos tokens --ca-*.
+ * ===================================================================== */
+
+/* ---------- 5. Página de curso e VideoReader ---------- */
+/* Cabeçalho do curso: separação real do fundo, sem sobreposição de conteúdo */
+[class*="course"] > header,
+main > div > header {
+  border-bottom: 1px solid var(--ca-border) !important;
+}
+/* Barra de progresso e etapas */
+[role="progressbar"] { background-color: var(--ca-surface-2) !important; border-radius: var(--ca-radius-pill); }
+[role="progressbar"]::-webkit-progress-bar { background-color: var(--ca-surface-2); }
+/* Lista de aulas: estado ativo legível, hover discreto */
+[class*="activity"]:hover, [class*="lesson"]:hover { background-color: var(--ca-surface-2) !important; }
+/* Invólucro do player (16:9) — moldura Atlas, sem mexer nas dimensões */
+iframe[src*="youtube.com/embed"],
+video { background-color: #000 !important; border-radius: var(--ca-radius) !important; }
+/* Blocos de conteúdo da aula */
+[class*="prose"], .tiptap { color: var(--ca-text-2) !important; }
+[class*="prose"] h1, [class*="prose"] h2, [class*="prose"] h3 { color: var(--ca-text) !important; }
+[class*="prose"] blockquote {
+  border-left: 3px solid var(--ca-cyan) !important;
+  background: var(--ca-surface-2); padding-left: var(--ca-space-3, 16px);
+}
+[class*="prose"] code, pre {
+  background-color: var(--ca-bg-deep) !important;
+  border: 1px solid var(--ca-border) !important;
+  border-radius: var(--ca-radius-sm, 8px) !important;
+  color: var(--ca-text) !important;
+}
+
+/* ---------- 6. Library e visualizador de PDF ---------- */
+/* Painel do leitor: fundo profundo para o documento se destacar */
+[class*="pdf"], [class*="reader"], [class*="viewer"] {
+  background-color: var(--ca-bg-deep) !important;
+  border-color: var(--ca-border) !important;
+}
+/* Grealha da biblioteca: cartões com hierarquia (o defeito apontado na auditoria) */
+[class*="library"] article, [class*="library"] a[class*="rounded"] {
+  background-color: var(--ca-surface) !important;
+  border: 1px solid var(--ca-border) !important;
+  border-radius: var(--ca-radius-lg, 18px) !important;
+}
+[class*="library"] article:hover { border-color: var(--ca-cyan) !important; }
+/* Controlos do leitor (zoom, página, descarregar) */
+[class*="pdf"] button, [class*="reader"] button {
+  background-color: var(--ca-surface-2) !important;
+  border: 1px solid var(--ca-border) !important; color: var(--ca-text) !important;
+}
+
+/* ---------- 7. Comunidades e Playgrounds ---------- */
+[class*="communit"] article, [class*="playground"] article {
+  background-color: var(--ca-surface) !important;
+  border: 1px solid var(--ca-border) !important;
+  border-radius: var(--ca-radius-lg, 18px) !important;
+}
+/* Feed / publicações */
+[class*="communit"] [class*="post"], [class*="feed"] li {
+  background-color: var(--ca-surface) !important;
+  border: 1px solid var(--ca-border) !important; border-radius: var(--ca-radius) !important;
+}
+/* Estado vazio legível (sem prometer funcionalidades inexistentes) */
+[class*="empty"], [class*="no-results"] { color: var(--ca-text-3) !important; }
+
+/* ---------- 8. Painel administrativo ---------- */
+/* Sidebar/menu lateral */
+aside, [role="navigation"][aria-orientation="vertical"] {
+  background-color: var(--ca-bg-deep) !important;
+  border-right: 1px solid var(--ca-border) !important;
+}
+aside a:hover, [role="navigation"][aria-orientation="vertical"] a:hover {
+  background-color: var(--ca-surface-2) !important; color: var(--ca-cyan) !important;
+}
+/* Tabelas de gestão: cabeçalho e linhas com separação clara */
+table thead th {
+  background-color: var(--ca-surface-2) !important;
+  color: var(--ca-text) !important; border-bottom: 1px solid var(--ca-border) !important;
+}
+table tbody tr { border-bottom: 1px solid var(--ca-border) !important; }
+table tbody tr:hover { background-color: var(--ca-surface-2) !important; }
+/* Barras de ferramentas e cartões de métricas */
+[class*="toolbar"], [class*="metrics"] > div {
+  background-color: var(--ca-surface) !important; border: 1px solid var(--ca-border) !important;
+}
+/* Modais e overlays: superfície destacada, fundo escurecido */
+[role="dialog"], [class*="modal"] > div {
+  background-color: var(--ca-surface) !important;
+  border: 1px solid var(--ca-border) !important;
+  border-radius: var(--ca-radius-lg, 18px) !important;
+  box-shadow: var(--ca-shadow) !important;
+}
+/* Avisos e estados */
+[role="alert"] { border-left: 3px solid var(--ca-gold) !important; }
+
+/* ---------- Reforço de hierarquia em qualquer superfície ---------- */
+/* O cartão tem de se destacar do fundo: mínimo perceptível de separação. */
+article, [class*="card"] {
+  background-color: var(--ca-surface) !important;
+  border: 1px solid var(--ca-border) !important;
+}
+article:hover, [class*="card"]:hover { border-color: color-mix(in srgb, var(--ca-cyan) 40%, var(--ca-border)) !important; }
