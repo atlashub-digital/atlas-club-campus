@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import AuthenticatedClientElement from '@components/Security/AuthenticatedClientElement'
 import TypeOfContentTitle from '@components/Objects/StyledElements/Titles/TypeOfContentTitle'
@@ -24,6 +25,11 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
   const { t } = useTranslation()
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [editingCommunity, setEditingCommunity] = useState<Community | null>(null)
+  // Only promote a real, accessible Genesis community returned by the API.
+  // No fictitious join button is shown before the community exists.
+  const genesisCommunity = communities.find((community) =>
+    community.name.trim().toLocaleLowerCase('pt-BR').startsWith('atlasclub | genesis')
+  )
 
   useTrackView(AnalyticsEvent.CommunitiesListViewed, {
     communities_count: communities.length,
@@ -32,6 +38,32 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
   return (
     <FeatureGate feature="communities" orgslug={orgslug} context="public">
     <GeneralWrapperStyled>
+      {genesisCommunity && (
+        <section
+          aria-labelledby="genesis-community-heading"
+          className="relative mb-8 overflow-hidden rounded-2xl bg-slate-950 px-6 py-8 text-white shadow-lg sm:px-10"
+        >
+          <div className="pointer-events-none absolute -right-14 -top-24 h-64 w-64 rounded-full bg-sky-500/20 blur-3xl" aria-hidden="true" />
+          <div className="relative z-10 max-w-3xl">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-300">
+              AtlasClub | Genesis
+            </p>
+            <h1 id="genesis-community-heading" className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">
+              A comunidade de quem constrói o futuro com IA.
+            </h1>
+            <p className="mb-6 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
+              Aprenda. Construa. Colabore. Transforme ideias em projetos AI-First e AI-Native.
+              Apresente-se, participe na Missão 001 e partilhe o seu primeiro projeto.
+            </p>
+            <Link
+              href={`/orgs/${orgslug}/community/${genesisCommunity.community_uuid}`}
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400"
+            >
+              Entrar na comunidade Genesis
+            </Link>
+          </div>
+        </section>
+      )}
       <div className="flex flex-col space-y-2 mb-6">
         <div className="flex items-center justify-between">
           <TypeOfContentTitle title={t('communities.title')} type="col" />
