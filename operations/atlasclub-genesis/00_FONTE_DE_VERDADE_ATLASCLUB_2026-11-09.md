@@ -78,4 +78,4 @@ Partilhar resultados, métricas públicas autorizadas, desafios, demos e boas pr
 - [ ] CI e QA em browser aprovados; produção só depois de deploy autorizado.
 
 ## 10. Estado e fonte de verdade
-Este documento prevalece sobre propostas anteriores quando houver divergência de nomenclatura, âmbito, preço ou papel de Genesis. **Não substitui requisitos técnicos de segurança e licença.** Não confirma que as comunidades France/Genesis já estão em produção, nem que Hotmart/ARO já concedem direitos automaticamente.
+Este documento prevalece sobre propostas anteriores quando houver divergência de nomenclatura, âmbito, preço ou papel de Genesis. **Não substitui requisitos técnicos de segurança, licença e direitos já adquiridos pelos compradores de produtos anteriores.** Não confirma que as comunidades France/Genesis já estão em produção, nem que Hotmart/ARO já concedem direitos automaticamente.
