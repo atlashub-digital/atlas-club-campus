@@ -27,9 +27,17 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
   const [editingCommunity, setEditingCommunity] = useState<Community | null>(null)
   // Only promote a real, accessible Genesis community returned by the API.
   // No fictitious join button is shown before the community exists.
-  const genesisCommunity = communities.find((community) =>
-    community.name.trim().toLocaleLowerCase('pt-BR').startsWith('atlasclub | genesis')
-  )
+  const genesisCommunity = communities.find((community) => {
+    // Accept the approved community name and the previous brand styling,
+    // without accidentally matching unrelated Genesis-named communities.
+    const normalized = community.name
+      .trim()
+      .toLocaleLowerCase('pt-BR')
+      .replace(/\s*\|\s*/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+    return normalized === 'atlasclub genesis'
+  })
 
   useTrackView(AnalyticsEvent.CommunitiesListViewed, {
     communities_count: communities.length,
@@ -46,7 +54,7 @@ const CommunitiesClient = ({ communities, orgslug, org_id }: CommunitiesClientPr
           <div className="pointer-events-none absolute -right-14 -top-24 h-64 w-64 rounded-full bg-sky-500/20 blur-3xl" aria-hidden="true" />
           <div className="relative z-10 max-w-3xl">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-300">
-              AtlasClub | Genesis
+              AtlasClub Genesis
             </p>
             <h1 id="genesis-community-heading" className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">
               A comunidade de quem constrói o futuro com IA.
