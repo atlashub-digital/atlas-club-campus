@@ -1,3 +1,5 @@
+> **GATE DE SEGURANÇA — 09/11/2026:** O Discord AtlasHub existente funciona também como escritório OPERACIONAL de agentes. Os relatórios `atlas-ops/decisions/ATL-D23` e `ATL-D24` documentam isolamento parcial e permissões legadas. O inventário de 09/10 indica visibilidade @everyone em certas áreas e bots/cargos administrativos. **NÃO distribuir convite público do servidor interno.** Preferir um servidor público "AtlasClub | Genesis" separado, criado por humano, ou apenas reutilizar o atual após reauditoria completa de TODOS os canais, cargos e permissões com conta convidada. Nunca criar bots com ADMINISTRATOR. A presente documentação é proposta, não prova de comunidade pública criada.
+
 # Discord — Servidor AtlasClub | Genesis (configuração inicial)
 
 ## Nome
