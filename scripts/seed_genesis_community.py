@@ -11,7 +11,9 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
-NAME = "ATLASCLUB | GENESIS"
+NAME = "AtlasClub Genesis"
+# Existing early branding is recognized, never renamed or duplicated automatically.
+NAME_ALIASES = {"atlasclub genesis", "atlasclub | genesis"}
 DESCRIPTION = ("A comunidade de quem constrói o futuro com IA. "
                "Aprenda. Construa. Colabore. Transforme ideias em projetos AI-First e AI-Native.")
 TOPICS = [
@@ -77,7 +79,7 @@ def main():
         if not candidate:
             raise RuntimeError("Requested community not in this organization's first page; review manually")
     else:
-        candidate = [x for x in listing if x.get("name","").strip().casefold()==NAME.casefold()]
+        candidate = [x for x in listing if x.get("name","").strip().casefold() in NAME_ALIASES]
     if len(candidate)>1:
         raise RuntimeError("Duplicate communities; select --community-uuid explicitly")
     if candidate:
