@@ -1,3 +1,5 @@
+> **NOTA DE SUPERAÇÃO (09/11/2026):** este ADR é histórico, anterior à ratificação de **AtlasClub Genesis** e **AtlasClub France** como comunidades distintas da plataforma **ATLASCLUB**. Em caso de divergência de nomes, escopo, estratégia e direitos, seguir **[`00_FONTE_DE_VERDADE_ATLASCLUB_2026-11-09.md`](./00_FONTE_DE_VERDADE_ATLASCLUB_2026-11-09.md)**. Os direitos já contratados dos compradores continuam preservados.
+
 # ADR proposto — AtlasClub como plataforma multi-programa/multi-país
 
 **Data:** 2026-11-09  
