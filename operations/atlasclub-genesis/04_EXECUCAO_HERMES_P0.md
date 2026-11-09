@@ -1,3 +1,5 @@
+> **GATE DE SEGURANÇA — 09/11/2026:** A auditoria `atlas-ops` demonstra Discord AtlasHub utilizado para operações internas. Antes de onboarding público, criar servidor separado (preferível) ou auditar integralmente ACL/cargos como convidado. NÃO divulgar convite interno. O Campus `app.club.atlashub.si` não foi verificável por acesso público nesta sessão; consultar admin/VPS. Hotmart MCP não está exposto neste conjunto de ferramentas: inventário da conta ainda pendente; não alterar produtos por suposição.
+
 # AtlasClub | Genesis — execução P0 pelos agentes Hermes
 
 ## Objetivo operacional
